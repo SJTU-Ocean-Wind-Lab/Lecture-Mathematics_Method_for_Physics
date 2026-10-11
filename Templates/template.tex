@@ -1,0 +1,73 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Page margins and paragraphs ---
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+
+% --- Basic math and typesetting ---
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor} % 
+
+% --- Theorem and definition environments ---
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+% ==================================================
+% Title and author information
+% ==================================================
+\begin{center}
+    {\LARGE \textbf{Mathematics Method for Physics--Lecture x}} \\[0.6em]
+    {\large Preliminaries of complex numbers}
+\end{center}
+
+\vspace{-0.5em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.8em}
+% Blue hint/explanation text
+\noindent { Start up saying}
+
+\vspace{1.5em}
+
+% ==================================================
+% Main content
+% ==================================================
+\section{Linear spaces}
+
+The objects in functional analysis often form a set that has a structure called the linear space, or vector space.
+
+Let $\mathbb{K}$ be the scalar field, which throughout our course will be $\mathbb{R}$ or $\mathbb{C}$.
+
+\begin{definition}
+A linear space $X$ over $\mathbb{K}$ is a set together with an operation $+: X \times X \to X$ called ``addition'' and scalar multiplication $\alpha u \in X$, $\forall \alpha \in \mathbb{K}$, $u \in X$.
+\end{definition}
+
+\section{Complex numbers}
+
+\begin{definition}
+The set of complex numbers, denoted by $\mathbb{C}$, is defined as
+\[
+\mathbb{C} = \{ a + bi \mid a, b \in \mathbb{R}, i^2 = -1 \}.
+\]
+\end{definition}
+
+\end{document}

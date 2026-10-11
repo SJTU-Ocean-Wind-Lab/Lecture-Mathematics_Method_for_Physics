@@ -1,0 +1,382 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Page margins and paragraphs ---
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+
+% --- Basic math and typesetting ---
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools} % provides \coloneqq
+\usepackage{xcolor} % 
+
+% --- Theorem and definition environments ---
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+% ==================================================
+% Title and author information
+% ==================================================
+\begin{center}
+    {\LARGE \textbf{Mathematics Method for Physics--Lecture 1}} \\[0.6em]
+    {\large Complex Numbers and the Complex Plane}
+\end{center}
+
+\vspace{-0.5em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.8em}
+% Blue hint/explanation text
+\noindent { Start up saying}
+
+\vspace{1.5em}
+
+% ==================================================
+% Main content
+% ==================================================
+\section{Fundamentals and Representations of Complex Numbers}
+
+\subsection{Algebraic (Cartesian) Form}
+
+\begin{definition}[Complex number]
+A \textbf{complex number} $z$ is defined as an ordered pair of real numbers $(x, y) \in \mathbb{R}^2$, expressed in the algebraic form
+\begin{equation}
+z \coloneqq x + \mathrm{i} y, \quad x, y \in \mathbb{R},
+\end{equation}
+where
+\begin{itemize}
+    \item $\mathrm{i}$ denotes the imaginary unit defined by $\mathrm{i}^2 \coloneqq -1$;
+    \item $x \coloneqq \operatorname{Re}(z)$ is the \textbf{real part} of $z$;
+    \item $y \coloneqq \operatorname{Im}(z)$ is the \textbf{imaginary part} of $z$.
+\end{itemize}
+\end{definition}
+
+\subsubsection{Geometric Correspondence (The Complex Plane / Argand Plane)}
+
+There exists a canonical bijective correspondence among three entities:
+\begin{enumerate}
+    \item The complex number $z = x + \mathrm{i} y \in \mathbb{C}$.
+    \item The point $P(x, y)$ in the Cartesian plane $\mathbb{R}^2$.
+    \item The position vector $\vec{OP} \coloneqq \begin{bmatrix} x \\ y \end{bmatrix} \in \mathbb{R}^2$.
+\end{enumerate}
+
+The horizontal axis represents the \textbf{real axis} ($\operatorname{Re}$), and the vertical axis represents the \textbf{imaginary axis} ($\operatorname{Im}$).
+
+\subsection{Polar Form, Euler's Formula, and Exponential Representation}
+
+\subsubsection{Polar Coordinates and Polar Form}
+
+Transforming the Cartesian coordinates $(x, y)$ into plane polar coordinates $(r, \theta)$ via
+\begin{equation}
+\begin{cases} x = r \cos\theta \\ y = r \sin\theta \end{cases}
+\end{equation}
+allows $z$ to be written in \textbf{trigonometric (polar) form}:
+\begin{equation}
+z = r(\cos\theta + \mathrm{i}\sin\theta).
+\end{equation}
+
+\subsubsection{Modulus (Absolute Value)}
+
+\begin{definition}[Modulus]
+The \textbf{modulus} $r \coloneqq |z|$ represents the Euclidean distance from the origin to $P(x, y)$:
+\begin{equation}
+|z| \coloneqq \sqrt{x^2 + y^2} \ge 0.
+\end{equation}
+\end{definition}
+
+\subsubsection{Argument and Principal Argument}
+
+The angle $\theta$ is defined as an \textbf{argument} of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\pi$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
+\begin{equation}
+\operatorname{Arg}(z) \coloneqq \arg(z) + 2k\pi, \quad k \in \mathbb{Z}.
+\end{equation}
+
+The unique representative in the interval $(-\pi, \pi]$ is defined as the \textbf{principal argument}, denoted by $\arg(z) \in (-\pi, \pi]$:
+\begin{equation}
+\arg(z) \coloneqq \begin{cases}  \arctan\left(\frac{y}{x}\right), & x > 0 \\  \arctan\left(\frac{y}{x}\right) + \pi, & x < 0, \, y \ge 0 \\  \arctan\left(\frac{y}{x}\right) - \pi, & x < 0, \, y < 0 \\  \frac{\pi}{2}, & x = 0, \, y > 0 \\  -\frac{\pi}{2}, & x = 0, \, y < 0  \end{cases}
+\end{equation}
+
+\noindent\textit{(For $z = 0$, the modulus is $|0| = 0$, and the argument $\operatorname{Arg}(0)$ is undefined.)}
+
+\subsubsection{Physical Meaning and Introduction of the Exponential Form}
+
+In physics and engineering (such as wave mechanics, alternating-current circuits, and quantum mechanics), complex exponentials are the natural language for describing \textbf{rotation}, \textbf{phase}, and \textbf{harmonic oscillation (phasors)}:
+\begin{itemize}
+    \item \textbf{Rotation Operator:} The factor $\mathrm{e}^{\mathrm{i}\theta}$ acts as a unit rotator ($|\mathrm{e}^{\mathrm{i}\theta}| = 1$). Multiplying any vector by $\mathrm{e}^{\mathrm{i}\theta}$ preserves its magnitude while rotating it counterclockwise by an angle $\theta$.
+    \item \textbf{Harmonic Motion:} When the phase evolves uniformly with time, $\theta(t) = \omega t$, the term $\mathrm{e}^{\mathrm{i}\omega t}$ describes uniform circular motion on the complex plane. Its projection onto the real axis yields the standard harmonic oscillator $\cos(\omega t)$.
+\end{itemize}
+
+This bridge between circular rotation and trigonometry is codified as \textbf{Euler's Formula}:
+\begin{equation}
+\mathrm{e}^{\mathrm{i}\theta} \coloneqq \cos\theta + \mathrm{i}\sin\theta.
+\end{equation}
+
+Substituting Euler's formula into the polar representation yields the \textbf{exponential form} of a complex number:
+\begin{equation}
+z \coloneqq r \mathrm{e}^{\mathrm{i}\theta},
+\end{equation}
+where $r = |z|$ represents the \textbf{amplitude} (magnitude) and $\theta$ represents the \textbf{phase} (orientation).
+
+\section{Operations and Geometric Transformations}
+
+\subsection{Addition and Subtraction}
+
+For $z_1 = x_1 + \mathrm{i} y_1$ and $z_2 = x_2 + \mathrm{i} y_2$:
+\begin{equation}
+z_1 \pm z_2 \coloneqq (x_1 \pm x_2) + \mathrm{i}(y_1 \pm y_2).
+\end{equation}
+
+\textbf{Geometric Meaning:} Addition and subtraction correspond to vector addition and subtraction of $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$ according to the parallelogram law or triangle rule.
+
+\subsection{Complex Conjugation}
+
+\begin{definition}[Complex conjugate]
+The \textbf{complex conjugate} of $z = x + \mathrm{i} y = r \mathrm{e}^{\mathrm{i}\theta}$ is defined by
+\begin{equation}
+\bar{z} \coloneqq x - \mathrm{i} y = r \mathrm{e}^{-\mathrm{i}\theta}.
+\end{equation}
+\end{definition}
+
+Fundamental properties:
+\begin{itemize}
+    \item $\overline{z_1 \pm z_2} = \bar{z}_1 \pm \bar{z}_2$
+    \item $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$
+    \item $z \bar{z} = |z|^2 = x^2 + y^2$
+    \item $\operatorname{Re}(z) = \frac{z + \bar{z}}{2}, \quad \operatorname{Im}(z) = \frac{z - \bar{z}}{2\mathrm{i}}$
+\end{itemize}
+
+\subsection{Multiplication and Division}
+
+Let $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$ and $z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$.
+
+\subsubsection{Multiplication}
+
+\begin{equation}
+z_1 z_2 = (r_1 r_2) \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}.
+\end{equation}
+\begin{itemize}
+    \item \textbf{Modulus:} $|z_1 z_2| = |z_1| |z_2|$
+    \item \textbf{Argument:} $\operatorname{Arg}(z_1 z_2) = \operatorname{Arg}(z_1) + \operatorname{Arg}(z_2) \pmod{2\pi}$
+\end{itemize}
+
+\textbf{Geometric Meaning:} Multiplying a vector $z$ by $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$ dilates its length by factor $r_1$ and rotates it counterclockwise by an angle of $\theta_1$.
+
+\subsubsection{Division}
+
+\begin{equation}
+\frac{z_1}{z_2} \coloneqq \frac{z_1 \bar{z}_2}{|z_2|^2} = \left(\frac{r_1}{r_2}\right) \mathrm{e}^{\mathrm{i}(\theta_1 - \theta_2)}, \quad (z_2 \ne 0).
+\end{equation}
+\begin{itemize}
+    \item \textbf{Modulus:} $\left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}$
+    \item \textbf{Argument:} $\operatorname{Arg}\left(\frac{z_1}{z_2}\right) = \operatorname{Arg}(z_1) - \operatorname{Arg}(z_2) \pmod{2\pi}$
+\end{itemize}
+
+\begin{example}[Division by $\mathrm{i}$]
+\begin{equation}
+\frac{z}{\mathrm{i}} = \frac{z(-\mathrm{i})}{\mathrm{i}(-\mathrm{i})} = -\mathrm{i} z = z \cdot \mathrm{e}^{-\mathrm{i}\frac{\pi}{2}}.
+\end{equation}
+\textbf{Geometric Meaning:} Multiplying by $-\mathrm{i}$ (or dividing by $\mathrm{i}$) rotates the vector clockwise by $\frac{\pi}{2}$.
+\end{example}
+
+\subsection{Powers, Binomial Expansion, and de Moivre's Theorem}
+
+For any positive integer $n \in \mathbb{N}^+$:
+\begin{equation}
+z^n = (r \mathrm{e}^{\mathrm{i}\theta})^n = r^n \mathrm{e}^{\mathrm{i} n\theta} = r^n (\cos(n\theta) + \mathrm{i}\sin(n\theta)).
+\end{equation}
+
+Setting $r = 1$ gives \textbf{de Moivre's Theorem}:
+\begin{equation}
+(\cos\theta + \mathrm{i}\sin\theta)^n = \cos(n\theta) + \mathrm{i}\sin(n\theta).
+\end{equation}
+
+In Cartesian form, $z^n$ can be expanded using the binomial theorem:
+\begin{equation}
+z^n = (x + \mathrm{i} y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} (\mathrm{i} y)^k,
+\end{equation}
+where the \textbf{binomial coefficient} $\binom{n}{k}$ is defined by
+\begin{equation}
+\binom{n}{k} \coloneqq \frac{n!}{k!(n-k)!} = \frac{n(n-1)\cdots(n-k+1)}{k!},
+\end{equation}
+with $0! \coloneqq 1$.
+
+\subsection{Roots of Complex Numbers}
+
+If $w^n = z$ for $n \in \mathbb{N}^+$, $w$ is an $n$-th root of $z$, denoted by $\sqrt[n]{z}$.
+
+Let $z = r \mathrm{e}^{\mathrm{i}\theta}$. There are exactly $n$ distinct complex roots given by
+\begin{equation}
+w_k \coloneqq \sqrt[n]{r} \exp\left(\mathrm{i} \frac{\theta + 2k\pi}{n}\right) = \sqrt[n]{r}\left[\cos\left(\frac{\theta + 2k\pi}{n}\right) + \mathrm{i}\sin\left(\frac{\theta + 2k\pi}{n}\right)\right]
+\end{equation}
+for $k = 0, 1, 2, \dots, n-1$.
+
+\subsubsection{Special Case: Roots of Unity ($\sqrt[n]{1}$)}
+
+When $z = 1 = 1 \cdot \mathrm{e}^{\mathrm{i} 0}$, the solutions to $w^n = 1$ are
+\begin{equation}
+\omega_k \coloneqq \mathrm{e}^{\mathrm{i}\frac{2k\pi}{n}} = \cos\left(\frac{2k\pi}{n}\right) + \mathrm{i}\sin\left(\frac{2k\pi}{n}\right), \quad k = 0, 1, \dots, n-1.
+\end{equation}
+
+\textbf{Geometric Meaning:} The $n$ roots of unity form the vertices of a regular $n$-sided polygon inscribed in the unit circle $|w| = 1$, with one vertex located at $w = 1$.
+
+\section{Geometric Applications in the Complex Plane}
+
+\subsection{Distance and Modulus Identities}
+
+The Euclidean distance between two points represented by $z_1$ and $z_2$ is
+\begin{equation}
+\operatorname{dist}(z_1, z_2) \coloneqq |z_1 - z_2|.
+\end{equation}
+
+\subsubsection{Key Identities and Inequalities}
+
+\begin{enumerate}
+    \item \textbf{Modulus--Conjugate Relation:}
+    \begin{equation}
+    |z|^2 = z \bar{z}.
+    \end{equation}
+    \item \textbf{Parallelogram Identity:}
+    \begin{equation}
+    |z_1 + z_2|^2 + |z_1 - z_2|^2 = 2(|z_1|^2 + |z_2|^2).
+    \end{equation}
+    \item \textbf{Modulus Expansion:}
+    \begin{equation}
+    |z_1 \pm z_2|^2 = |z_1|^2 + |z_2|^2 \pm 2\operatorname{Re}(z_1 \bar{z}_2).
+    \end{equation}
+    \item \textbf{Triangle Inequality:}
+    \begin{equation}
+    \bigl| |z_1| - |z_2| \bigr| \le |z_1 \pm z_2| \le |z_1| + |z_2|.
+    \end{equation}
+\end{enumerate}
+
+\subsection{Standard Curves and Lines}
+
+\subsubsection{Circle}
+
+A circle $C$ centered at $z_0$ with radius $r > 0$:
+\begin{itemize}
+    \item \textbf{Implicit Form:}
+    \begin{equation}
+    |z - z_0| = r.
+    \end{equation}
+    \item \textbf{Parametric Form:}
+    \begin{equation}
+    z(t) \coloneqq z_0 + r \mathrm{e}^{\mathrm{i} t}, \quad t \in [0, 2\pi).
+    \end{equation}
+\end{itemize}
+
+\subsubsection{Straight Line}
+
+A straight line passing through two distinct points $z_1$ and $z_2$:
+\begin{equation}
+z(t) \coloneqq z_1 + t(z_2 - z_1), \quad t \in \mathbb{R}.
+\end{equation}
+
+\subsection{Angle Between Vectors and Angles in a Triangle}
+
+\subsubsection{Directed Angle}
+
+The directed angle $\theta$ from vector $(z_3 - z_1)$ to vector $(z_2 - z_1)$ is
+\begin{equation}
+\theta \coloneqq \operatorname{Arg}\left(\frac{z_2 - z_1}{z_3 - z_1}\right).
+\end{equation}
+
+\subsubsection{Interior Angles of a Triangle}
+
+For a positively oriented (counterclockwise) triangle $\triangle ABC$ with vertices $z_1, z_2, z_3$:
+\begin{equation}
+\begin{cases}  \angle z_1 \coloneqq \arg\left(\dfrac{z_3 - z_1}{z_2 - z_1}\right) \\  \angle z_2 \coloneqq \arg\left(\dfrac{z_1 - z_2}{z_3 - z_2}\right) \\  \angle z_3 \coloneqq \arg\left(\dfrac{z_2 - z_3}{z_1 - z_3}\right)  \end{cases}
+\end{equation}
+
+\begin{theorem}[Sum of interior angles]
+The sum of the interior angles of a nondegenerate triangle equals $\pi$.
+\end{theorem}
+\begin{proof}
+Consider the cyclic product
+\begin{equation}
+P \coloneqq \left(\frac{z_3 - z_1}{z_2 - z_1}\right) \cdot \left(\frac{z_1 - z_2}{z_3 - z_2}\right) \cdot \left(\frac{z_2 - z_3}{z_1 - z_3}\right) = -1.
+\end{equation}
+Taking arguments on both sides,
+\begin{equation}
+\operatorname{Arg}(P) = \operatorname{Arg}\left(\frac{z_3 - z_1}{z_2 - z_1}\right) + \operatorname{Arg}\left(\frac{z_1 - z_2}{z_3 - z_2}\right) + \operatorname{Arg}\left(\frac{z_2 - z_3}{z_1 - z_3}\right) = \operatorname{Arg}(-1) = \pi + 2k\pi, \quad k \in \mathbb{Z}.
+\end{equation}
+For interior angles of a nondegenerate triangle, each angle satisfies $0 < \angle z_i < \pi$, so
+\begin{equation}
+0 < \angle z_1 + \angle z_2 + \angle z_3 < 3\pi.
+\end{equation}
+Thus, $k$ must be $0$, which proves
+\begin{equation}
+\angle z_1 + \angle z_2 + \angle z_3 = \pi.
+\end{equation}
+\end{proof}
+
+\subsection{Geometric Characterization of Circles (Thales's Theorem)}
+
+\begin{theorem}[Thales's Theorem]
+A point $z$ lies on the circle with diameter endpoints $z_1$ and $z_2$ (with $z \ne z_1$) if and only if
+\begin{equation}
+\operatorname{Re}\left(\frac{z_2 - z_1}{z - z_1}\right) = 1.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Rearranging the algebraic fraction,
+\begin{equation}
+\frac{z_2 - z_1}{z - z_1} - 1 = \frac{(z_2 - z_1) - (z - z_1)}{z - z_1} = \frac{z_2 - z}{z - z_1}.
+\end{equation}
+Taking the real part of both sides yields
+\begin{equation}
+\operatorname{Re}\left(\frac{z_2 - z}{z - z_1}\right) = 0 \iff \frac{z_2 - z}{z - z_1} \text{ is purely imaginary}.
+\end{equation}
+This is equivalent to
+\begin{equation}
+\arg\left(\frac{z_2 - z}{z - z_1}\right) = \pm \frac{\pi}{2} \iff \angle(z_1, z, z_2) = \frac{\pi}{2}.
+\end{equation}
+By Thales's Theorem, the locus of points subtending a right angle across segment $[z_1, z_2]$ is the circle with diameter $[z_1, z_2]$. This also satisfies the Pythagorean theorem:
+\begin{equation}
+|z_1 - z_2|^2 = |z - z_1|^2 + |z - z_2|^2.
+\end{equation}
+\end{proof}
+
+\section{Introduction to Point Sets in the Complex Plane}
+
+\subsection{Neighborhoods}
+
+\begin{definition}[$\delta$-neighborhood]
+The $\delta$\textbf{-neighborhood} of a point $z_0 \in \mathbb{C}$ is defined as the open disk
+\begin{equation}
+U(z_0, \delta) \coloneqq \{ z \in \mathbb{C} : |z - z_0| < \delta \}.
+\end{equation}
+The \textbf{punctured (deleted) neighborhood} is defined as
+\begin{equation}
+\mathring{U}(z_0, \delta) \coloneqq \{ z \in \mathbb{C} : 0 < |z - z_0| < \delta \}.
+\end{equation}
+\end{definition}
+
+\subsection{Point Classification and Domains}
+
+Let $E \subset \mathbb{C}$ be a subset of the complex plane.
+\begin{enumerate}
+    \item \textbf{Interior Point:} A point $z_0 \in E$ is defined as an \textit{interior point} of $E$ if there exists $\delta > 0$ such that $U(z_0, \delta) \subset E$.
+    \item \textbf{Open Set:} $E$ is defined to be an \textit{open set} if every point of $E$ is an interior point of $E$.
+    \item \textbf{Domain (Region):} An open set $D \subset \mathbb{C}$ is defined as a \textbf{domain} if it is connected (i.e., any two points in $D$ can be joined by a continuous polygonal path lying entirely within $D$).
+\end{enumerate}
+
+\end{document}
