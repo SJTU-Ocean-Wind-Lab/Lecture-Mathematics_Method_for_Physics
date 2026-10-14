@@ -9,5 +9,9 @@
 !*.pdf
 !*.md
 
+# Keep the figures directory and everything inside it (including subdirs)
+!figs/
+!figs/**
+
 # Re-include directories so git can recurse into them
 !*/
