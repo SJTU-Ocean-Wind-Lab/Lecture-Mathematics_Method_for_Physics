@@ -46,6 +46,8 @@ $$
 z = r(\cos\theta + \mathrm{i}\sin\theta) \tag{3}
 $$
 
+![polar coordniate system](./figs/tmp.jpg)
+
 #### Modulus (Absolute Value)
 
 The **modulus** $r \coloneqq \vert{}z\vert{}$ represents the Euclidean distance from the origin to $P(x, y)$:
