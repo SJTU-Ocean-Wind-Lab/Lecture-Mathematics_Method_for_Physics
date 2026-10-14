@@ -1,4 +1,4 @@
-# Preliminaries of Complex Numbers
+# Point Sets in the Complex Plane
 
 > [!NOTE]
-> Haoran Yang create at 2026-10-11
+> Haoran Yang created at 2026-10-11
