@@ -1,0 +1,13 @@
+# Ignore everything by default (allowlist approach)
+*
+
+# Always keep the .gitignore itself
+!.gitignore
+
+# Keep only .tex and .pdf files
+!*.tex
+!*.pdf
+!*.md
+
+# Re-include directories so git can recurse into them
+!*/
