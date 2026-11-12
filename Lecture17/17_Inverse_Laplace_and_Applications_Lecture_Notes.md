@@ -1,15 +1,15 @@
-# Chapter 5 The Inverse Laplace Transform and Its Applications
+# Chapter 17 The Inverse Laplace Transform and Its Applications
 
 The core of integral-transform theory can be summarized in four items:
 
 1. **Definition and theorems**: the Fourier transform (on $(-\infty,+\infty)$) and the Laplace transform (on $[0,+\infty)$), together with their existence theorems;
 2. **Common transform pairs**: elementary functions;
-3. **Properties**: linearity, similarity, delay (time shift), frequency shift, differentiation, integration, periodicity — about seven or eight basic properties (here too "seven or eight" is approximate; the definitive list is the one collected in Chapter 4);
+3. **Properties**: linearity, similarity, delay (time shift), frequency shift, differentiation, integration, periodicity — about seven or eight basic properties (here too "seven or eight" is approximate; the definitive list is the one collected in Chapter 16);
 4. **Applications**: solving differential and integral equations, and evaluating certain generalized integrals.
 
-## 5.1 The Inverse Laplace Transform
+## 17.1 The Inverse Laplace Transform
 
-### 5.1.1 The Complex Inversion Integral Formula
+### 17.1.1 The Complex Inversion Integral Formula
 
 Everything rests on one observation: the Laplace transform of $f(t)$ is exactly the Fourier transform of $f(t)u(t)\mathrm{e}^{-\sigma t}$, where $\sigma$ is a real constant. Indeed, $u(t)$ pulls the lower limit from $-\infty$ to $0$,
 
@@ -22,59 +22,59 @@ Applying the Fourier integral formula to $f(t)u(t)\mathrm{e}^{-\sigma t}$ gives
 Multiply by $\mathrm{e}^{\sigma t}$ and use $u(t)=1$ for $t>0$; then substitute $p=\sigma+\mathrm{i}\omega$, so that $\mathrm{d}p=\mathrm{i}\,\mathrm{d}\omega$ and $\omega:-\infty\to+\infty$ corresponds to $p:\sigma-\mathrm{i}\infty\to\sigma+\mathrm{i}\infty$. This yields
 
 \[ f(t)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}F(\sigma+\mathrm{i}\omega)\,\mathrm{e}^{(\sigma+\mathrm{i}\omega)t}\,\mathrm{d}\omega
-=\frac{1}{2\pi\mathrm{i}}\int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty}F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p\qquad(t>0). \tag{5.1} \]
+=\frac{1}{2\pi\mathrm{i}}\int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty}F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p\qquad(t>0). \tag{17.1} \]
 
 The factor in front differs between the two forms ($1/2\pi$ versus $1/(2\pi\mathrm{i})$); the difference is precisely $\mathrm{d}p=\mathrm{i}\,\mathrm{d}\omega$. The integral on the right is called the **Bromwich integral**; its path is any line $\operatorname{Re}p=\sigma$ parallel to the imaginary axis, lying in the region of convergence.
 
-**Theorem 5.1 (complex inversion integral)**
+**Theorem 17.1 (complex inversion integral)**
 
 Let $f(t)$ be piecewise smooth on $t\ge0$ and of exponential order, $\left|f(t)\right|\le M\mathrm{e}^{\sigma_c t}$, and let $\mathcal{L}\left[f(t)\right]=F(p)$. Take $\sigma>\sigma_c$. Then for $t>0$
 
-\[ f(t)=\frac{1}{2\pi\mathrm{i}}\int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty}F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p , \tag{5.2} \]
+\[ f(t)=\frac{1}{2\pi\mathrm{i}}\int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty}F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p , \tag{17.2} \]
 
 where at a discontinuity of $f$ the left-hand side is to be replaced by the mean of the one-sided limits, $\dfrac{f(t+0)+f(t-0)}{2}$.
 
-The condition $\sigma>\sigma_c$ makes $f(t)u(t)\mathrm{e}^{-\sigma t}$ absolutely integrable on $(-\infty,+\infty)$, which is what the Fourier integral formula requires; it also puts the path inside the region of convergence $\operatorname{Re}p>\sigma_{0}$ ($\sigma_{0}$ is the abscissa of convergence, $\sigma_{0}\le\sigma_{c}$). The image function must in addition satisfy $\lim_{p\to\infty}F(p)=0$ — the necessary condition for a Laplace transform (Chapter 4, remark (1)).
+The condition $\sigma>\sigma_c$ makes $f(t)u(t)\mathrm{e}^{-\sigma t}$ absolutely integrable on $(-\infty,+\infty)$, which is what the Fourier integral formula requires; it also puts the path inside the region of convergence $\operatorname{Re}p>\sigma_{0}$ ($\sigma_{0}$ is the abscissa of convergence, $\sigma_{0}\le\sigma_{c}$). The image function must in addition satisfy $\lim_{p\to\infty}F(p)=0$ — the necessary condition for a Laplace transform (Chapter 16, remark (1)).
 
-### 5.1.2 Inversion by the Residue Theorem
+### 17.1.2 Inversion by the Residue Theorem
 
-The complex integral (5.2) is rarely evaluated directly; instead the path is closed to the left and the integral becomes a sum of residues.
+The complex integral (17.2) is rarely evaluated directly; instead the path is closed to the left and the integral becomes a sum of residues.
 
 Close the path with the left semicircle $C_{\rho}$ of radius $\rho$ centred at $\sigma+\mathrm{i}0$, which together with the vertical segment bounds a left half-disc. On $C_{\rho}$ write $p=\sigma+\rho\mathrm{e}^{\mathrm{i}\theta}$ with $\pi/2<\theta<3\pi/2$; then
 
 \[ \left|\mathrm{e}^{pt}\right|=\mathrm{e}^{\sigma t}\mathrm{e}^{\rho t\cos\theta},\qquad \cos\theta<0 . \]
 
-The exponential factor decays along the arc, and the integral over the arc is bounded by $\dfrac{\pi\mathrm{e}^{\sigma t}}{t}$ (the mechanism behind Jordan's lemma). Hence, provided $F(p)$ tends to zero uniformly on the arc — guaranteed by $\lim_{p\to\infty}F(p)=0$ — the arc integral tends to zero as $\rho\to+\infty$. For $t<0$ the exponential factor forces the path to be closed to the right, where there are no singularities, so the integral vanishes; this is why (5.2) is stated for $t>0$ only.
+The exponential factor decays along the arc, and the integral over the arc is bounded by $\dfrac{\pi\mathrm{e}^{\sigma t}}{t}$ (the mechanism behind Jordan's lemma). Hence, provided $F(p)$ tends to zero uniformly on the arc — guaranteed by $\lim_{p\to\infty}F(p)=0$ — the arc integral tends to zero as $\rho\to+\infty$. For $t<0$ the exponential factor forces the path to be closed to the right, where there are no singularities, so the integral vanishes; this is why (17.2) is stated for $t>0$ only.
 
-**Theorem 5.2 (inversion by residues)**
+**Theorem 17.2 (inversion by residues)**
 
 Let $F(p)$ have finitely many singular points $p_{1},\dots,p_{n}$, all to the left of the line $\operatorname{Re}p=\sigma$, and let $\lim_{p\to\infty}F(p)=0$. Then for $t>0$
 
-\[ f(t)=\mathcal{L}^{-1}\left[F(p)\right]=\sum_{k=1}^{n}\operatorname{Res}\left[F(p)\,\mathrm{e}^{pt},\,p_{k}\right]. \tag{5.3} \]
+\[ f(t)=\mathcal{L}^{-1}\left[F(p)\right]=\sum_{k=1}^{n}\operatorname{Res}\left[F(p)\,\mathrm{e}^{pt},\,p_{k}\right]. \tag{17.3} \]
 
 Proof.
 
-Combine the path of (5.2) with the left semicircle into a counterclockwise closed contour containing every singularity of $F(p)\mathrm{e}^{pt}$. By the residue theorem the contour integral equals $2\pi\mathrm{i}\sum_{k}\operatorname{Res}$; letting $\rho\to+\infty$, the arc integral vanishes and the vertical segment tends to the path of (5.2), which gives (5.3). $\blacksquare$
+Combine the path of (17.2) with the left semicircle into a counterclockwise closed contour containing every singularity of $F(p)\mathrm{e}^{pt}$. By the residue theorem the contour integral equals $2\pi\mathrm{i}\sum_{k}\operatorname{Res}$; letting $\rho\to+\infty$, the arc integral vanishes and the vertical segment tends to the path of (17.2), which gives (17.3). $\blacksquare$
 
 For a rational function $F(p)=\dfrac{A(p)}{B(p)}$ with $\deg B>\deg A$ all singularities are poles and $F(\infty)=0$ holds automatically, so this is the case met in practice. If every $p_{k}$ is a simple pole,
 
-\[ f(t)=\sum_{k=1}^{n}\frac{A(p_{k})}{B'(p_{k})}\,\mathrm{e}^{p_{k}t} ; \tag{5.4} \]
+\[ f(t)=\sum_{k=1}^{n}\frac{A(p_{k})}{B'(p_{k})}\,\mathrm{e}^{p_{k}t} ; \tag{17.4} \]
 
 if $p_{k}$ is a pole of order $m_{k}$,
 
-\[ f(t)=\sum_{k=1}^{n}\frac{1}{(m_{k}-1)!}\lim_{p\to p_{k}}\frac{\mathrm{d}^{m_{k}-1}}{\mathrm{d}p^{m_{k}-1}}\left[(p-p_{k})^{m_{k}}\frac{A(p)}{B(p)}\,\mathrm{e}^{pt}\right]. \tag{5.5} \]
+\[ f(t)=\sum_{k=1}^{n}\frac{1}{(m_{k}-1)!}\lim_{p\to p_{k}}\frac{\mathrm{d}^{m_{k}-1}}{\mathrm{d}p^{m_{k}-1}}\left[(p-p_{k})^{m_{k}}\frac{A(p)}{B(p)}\,\mathrm{e}^{pt}\right]. \tag{17.5} \]
 
-**Example 5.1**
+**Example 17.1**
 
 Find $\mathcal{L}^{-1}\left[\dfrac{1}{p^{2}+1}\right]$.
 
 Solution.
 
-The poles $p=\pm\mathrm{i}$ are simple; by (5.4),
+The poles $p=\pm\mathrm{i}$ are simple; by (17.4),
 
 \[ \mathcal{L}^{-1}\left[\frac{1}{p^{2}+1}\right]=\frac{\mathrm{e}^{\mathrm{i}t}}{2\mathrm{i}}+\frac{\mathrm{e}^{-\mathrm{i}t}}{2(-\mathrm{i})}=\sin t . \]
 
-**Example 5.2**
+**Example 17.2**
 
 Solve the initial-value problem
 
@@ -86,7 +86,7 @@ Transforming ($\mathcal{L}[x'']=p^{2}X$, $\mathcal{L}[x']=pX$, $\mathcal{L}\left
 
 \[ X(p)=\frac{2(p-1)}{\left[(p-1)^{2}+1\right]^{2}} . \]
 
-**Method 1 (residues).** The points $p=1\pm\mathrm{i}$ are poles of **order two**, so (5.5) applies. For $p_{0}=1+\mathrm{i}$,
+**Method 1 (residues).** The points $p=1\pm\mathrm{i}$ are poles of **order two**, so (17.5) applies. For $p_{0}=1+\mathrm{i}$,
 
 \[ \operatorname{Res}\left[X(p)\mathrm{e}^{pt},1+\mathrm{i}\right]=\lim_{p\to1+\mathrm{i}}\frac{\mathrm{d}}{\mathrm{d}p}\left[\frac{2(p-1)\mathrm{e}^{pt}}{\left(p-1+\mathrm{i}\right)^{2}}\right], \]
 
@@ -102,7 +102,7 @@ so $\mathcal{L}^{-1}\left[\dfrac{2q}{\left(q^{2}+1\right)^{2}}\right]=t\sin t$. 
 
 Both methods agree; whenever the properties suffice, the residues are not worth the work.
 
-## 5.2 Applications of the Laplace Transform
+## 17.2 Applications of the Laplace Transform
 
 Solving a linear differential (integral) equation by the Laplace transform takes three steps:
 
@@ -110,11 +110,11 @@ Solving a linear differential (integral) equation by the Laplace transform takes
 2. solve that algebraic equation for $X(p)$;
 3. invert $X(p)$ to obtain the solution.
 
-Step 3 usually splits $X(p)$ into table entries by partial fractions, or uses the residue formula of §5.1.2.
+Step 3 usually splits $X(p)$ into table entries by partial fractions, or uses the residue formula of §17.1.2.
 
-### 5.2.1 Linear Differential (and Integral) Equations
+### 17.2.1 Linear Differential (and Integral) Equations
 
-**Example 5.3**
+**Example 17.3**
 
 Solve the differential-integral equation
 
@@ -147,7 +147,7 @@ The factor $u(t-1)$ cannot be omitted: for $t<1$ both the right-hand side and th
 
 The same three steps cover systems of constant-coefficient equations (reduced to a linear algebraic system for the images), boundary-value problems with a condition at one end only (the unknown initial value at the other end is carried as a parameter and fixed afterwards), and circuit equations such as the series $RLC$ circuit (where the inductance and capacitance contribute $LpI$ and $I/(Cp)$).
 
-### 5.2.2 Generalized Integrals
+### 17.2.2 Generalized Integrals
 
 The integration and differentiation properties of the image function yield two classes of generalized integrals.
 
@@ -157,7 +157,7 @@ The integration and differentiation properties of the image function yield two c
 
 Setting $\mathrm{e}^{-pt}=1$ in the integrand is not a licence taken lightly: its legitimacy is exactly Abel's theorem.
 
-**Example 5.4**
+**Example 17.4**
 
 Evaluate the Dirichlet integral $\displaystyle\int_{0}^{+\infty}\frac{\sin t}{t}\,\mathrm{d}t$.
 
@@ -171,7 +171,7 @@ Take $f(t)=\sin t$, $F(p)=\dfrac{1}{p^{2}+1}$; by Type 1,
 
 \[ \int_{0}^{+\infty}t^{n}f(t)\,\mathrm{d}t=(-1)^{n}F^{(n)}(0). \]
 
-**Example 5.5**
+**Example 17.5**
 
 Evaluate $\displaystyle\int_{0}^{+\infty}t^{2}\mathrm{e}^{-\alpha t}\sin\beta t\,\mathrm{d}t\quad(\alpha,\beta>0)$.
 

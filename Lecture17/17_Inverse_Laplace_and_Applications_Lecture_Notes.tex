@@ -4,14 +4,9 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{parskip}
 
-% --- Fonts: scalable Latin Modern (avoids bitmap fonts at 10.95pt) ---
-\usepackage{lmodern}
-
 % --- Basic math and typesetting ---
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{mathtools} % provides \coloneqq
-\usepackage{xcolor} %
-\usepackage{enumitem}
+\usepackage{xcolor} % 
 
 % --- Theorem and definition environments ---
 \theoremstyle{definition}
@@ -29,7 +24,7 @@
 % Title and author information
 % ==================================================
 \begin{center}
-    {\LARGE \textbf{Mathematics Method for Physics---Lecture 9}} \\[0.6em]
+    {\LARGE \textbf{Mathematics Method for Physics--Lecture 17}} \\[0.6em]
     {\large The Inverse Laplace Transform and Its Applications}
 \end{center}
 
@@ -49,11 +44,11 @@
 
 \vspace{0.8em}
 \noindent\textit{Conventions: $p=\sigma+\mathrm{i}\omega$; $u(t)$ is the unit step function;
-$\mathrm{e},\mathrm{i},\mathrm{d}$ upright; formulas are numbered (5.1)--(5.5).}
+$\mathrm{e},\mathrm{i},\mathrm{d}$ upright; formulas are numbered (17.1)--(17.5).}
 
-\vspace{0.8em}
+\vspace{1.5em}
 
-\setcounter{section}{4}
+\setcounter{section}{16}
 
 % ==================================================
 % Main content
@@ -61,14 +56,14 @@ $\mathrm{e},\mathrm{i},\mathrm{d}$ upright; formulas are numbered (5.1)--(5.5).}
 \section{Inverse Laplace Transform and Applications}
 
 The core of integral-transform theory can be summarized in four items:
-\begin{enumerate}[itemsep=2pt,topsep=3pt]
+\begin{enumerate}\setlength{\itemsep}{2pt}\setlength{\topsep}{3pt}
     \item \textbf{Definition and theorems}: the Fourier transform (on $(-\infty,+\infty)$) and the
           Laplace transform (on $[0,+\infty)$), together with their existence theorems;
     \item \textbf{Common transform pairs}: elementary functions;
     \item \textbf{Properties}: linearity, similarity, delay (time shift), frequency shift,
           differentiation, integration, periodicity --- about seven or eight basic properties
           (here too ``seven or eight'' is approximate; the definitive list is the one collected in
-          Chapter 4);
+          Chapter 16);
     \item \textbf{Applications}: solving differential and integral equations, and evaluating
           certain generalized integrals.
 \end{enumerate}
@@ -101,7 +96,7 @@ $p:\sigma-\mathrm{i}\infty\to\sigma+\mathrm{i}\infty$. This yields
 f(t)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}F(\sigma+\mathrm{i}\omega)\,
 \mathrm{e}^{(\sigma+\mathrm{i}\omega)t}\,\mathrm{d}\omega
 =\frac{1}{2\pi\mathrm{i}}\int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty}
-F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p\qquad(t>0). \tag{5.1}
+F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p\qquad(t>0). \tag{17.1}
 \end{equation}
 
 The factor in front differs between the two forms ($1/2\pi$ versus $1/(2\pi\mathrm{i})$); the
@@ -115,7 +110,7 @@ $\left|f(t)\right|\le M\mathrm{e}^{\sigma_c t}$, and let
 $\mathcal{L}\left[f(t)\right]=F(p)$. Take $\sigma>\sigma_c$. Then for $t>0$
 \begin{equation}
 f(t)=\frac{1}{2\pi\mathrm{i}}\int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty}
-F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p , \tag{5.2}
+F(p)\,\mathrm{e}^{pt}\,\mathrm{d}p , \tag{17.2}
 \end{equation}
 where at a discontinuity of $f$ the left-hand side is to be replaced by the mean of the one-sided
 limits, $\frac{f(t+0)+f(t-0)}{2}$.
@@ -125,12 +120,12 @@ The condition $\sigma>\sigma_c$ makes $f(t)u(t)\,\mathrm{e}^{-\sigma t}$ absolut
 $(-\infty,+\infty)$, which is what the Fourier integral formula requires; it also puts the path
 inside the region of convergence $\operatorname{Re}p>\sigma_0$ ($\sigma_0$ is the abscissa of
 convergence, $\sigma_0\le\sigma_c$). The image function must in addition satisfy
-$\lim_{p\to\infty}F(p)=0$ --- the necessary condition for a Laplace transform (Chapter 4,
+$\lim_{p\to\infty}F(p)=0$ --- the necessary condition for a Laplace transform (Chapter 16,
 remark (1)).
 
 \subsubsection{Inversion by the residue theorem}
 
-The complex integral (5.2) is rarely evaluated directly; instead the path is closed to the left and
+The complex integral (17.2) is rarely evaluated directly; instead the path is closed to the left and
 the integral becomes a sum of residues.
 
 Close the path with the left semicircle $C_{\rho}$ of radius $\rho$ centred at
@@ -146,7 +141,7 @@ The exponential factor decays along the arc, and the integral over the arc is bo
 $\pi\mathrm{e}^{\sigma t}/t$ (the mechanism behind Jordan's lemma). Hence, provided
 $F(p)$ tends to zero uniformly on the arc --- guaranteed by $\lim_{p\to\infty}F(p)=0$ --- the arc
 integral tends to zero as $\rho\to+\infty$. For $t<0$ the exponential factor forces the path to be
-closed to the right, where there are no singularities, so the integral vanishes; this is why (5.2)
+closed to the right, where there are no singularities, so the integral vanishes; this is why (17.2)
 is stated for $t>0$ only.
 
 \begin{theorem}[Inversion by residues]
@@ -154,26 +149,26 @@ Let $F(p)$ have finitely many singular points $p_1,\dots,p_n$, all to the left o
 $\operatorname{Re}p=\sigma$, and let $\lim_{p\to\infty}F(p)=0$. Then for $t>0$
 \begin{equation}
 f(t)=\mathcal{L}^{-1}\left[F(p)\right]
-=\sum_{k=1}^{n}\operatorname{Res}\left[F(p)\,\mathrm{e}^{pt},\,p_k\right]. \tag{5.3}
+=\sum_{k=1}^{n}\operatorname{Res}\left[F(p)\,\mathrm{e}^{pt},\,p_k\right]. \tag{17.3}
 \end{equation}
 \end{theorem}
 
-Proof. Combine the path of (5.2) with the left semicircle into a counterclockwise closed
+Proof. Combine the path of (17.2) with the left semicircle into a counterclockwise closed
 contour containing every singularity of $F(p)\mathrm{e}^{pt}$. By the residue theorem the contour
 integral equals $2\pi\mathrm{i}\sum_{k}\operatorname{Res}$; letting $\rho\to+\infty$, the arc
-integral vanishes and the vertical segment tends to the path of (5.2), which gives (5.3).
+integral vanishes and the vertical segment tends to the path of (17.2), which gives (17.3).
 \hfill$\blacksquare$
 
 For a rational function $F(p)=\dfrac{A(p)}{B(p)}$ with $\deg B>\deg A$ all singularities are poles
 and $F(\infty)=0$ holds automatically, so this is the case met in practice. If every $p_k$ is a
 simple pole,
 \begin{equation}
-f(t)=\sum_{k=1}^{n}\frac{A(p_k)}{B'(p_k)}\,\mathrm{e}^{p_k t} ; \tag{5.4}
+f(t)=\sum_{k=1}^{n}\frac{A(p_k)}{B'(p_k)}\,\mathrm{e}^{p_k t} ; \tag{17.4}
 \end{equation}
 if $p_k$ is a pole of order $m_k$,
 \begin{equation}
 f(t)=\sum_{k=1}^{n}\frac{1}{(m_k-1)!}\lim_{p\to p_k}\frac{\mathrm{d}^{m_k-1}}
-{\mathrm{d}p^{m_k-1}}\left[(p-p_k)^{m_k}\frac{A(p)}{B(p)}\,\mathrm{e}^{pt}\right]. \tag{5.5}
+{\mathrm{d}p^{m_k-1}}\left[(p-p_k)^{m_k}\frac{A(p)}{B(p)}\,\mathrm{e}^{pt}\right]. \tag{17.5}
 \end{equation}
 
 \begin{samepage}
@@ -181,7 +176,7 @@ f(t)=\sum_{k=1}^{n}\frac{1}{(m_k-1)!}\lim_{p\to p_k}\frac{\mathrm{d}^{m_k-1}}
 Find $\mathcal{L}^{-1}\left[\dfrac{1}{p^2+1}\right]$.
 \end{example}
 
-Solution. The poles $p=\pm\mathrm{i}$ are simple; by (5.4),
+Solution. The poles $p=\pm\mathrm{i}$ are simple; by (17.4),
 \begin{equation*}
 \mathcal{L}^{-1}\left[\frac{1}{p^2+1}\right]
 =\frac{\mathrm{e}^{\mathrm{i}t}}{2\mathrm{i}}+\frac{\mathrm{e}^{-\mathrm{i}t}}{2(-\mathrm{i})}
@@ -203,7 +198,7 @@ X(p)=\frac{2(p-1)}{\left[(p-1)^2+1\right]^2} .
 \end{equation*}
 
 \textbf{Method 1 (residues).} The points $p=1\pm\mathrm{i}$ are poles of \textbf{order two}, so
-(5.5) applies. For $p_0=1+\mathrm{i}$,
+(17.5) applies. For $p_0=1+\mathrm{i}$,
 \begin{equation*}
 \operatorname{Res}\left[X(p)\mathrm{e}^{pt},1+\mathrm{i}\right]
 =\lim_{p\to 1+\mathrm{i}}\frac{\mathrm{d}}{\mathrm{d}p}\left[
@@ -231,10 +226,13 @@ x(t)=\mathrm{e}^{t}\,t\sin t .
 Both methods agree; whenever the properties suffice, the residues are not worth the work.
 
 \clearpage
+\setlength{\parskip}{4pt plus 1pt}
+\setlength{\abovedisplayskip}{5pt plus 1pt minus 1pt}
+\setlength{\belowdisplayskip}{5pt plus 1pt minus 1pt}
 \subsection{Applications of the Laplace Transform}
 
 Solving a linear differential (integral) equation by the Laplace transform takes three steps:
-\begin{enumerate}[itemsep=2pt,topsep=3pt]
+\begin{enumerate}\setlength{\itemsep}{2pt}\setlength{\topsep}{3pt}
     \item transform the equation, turning the differential (integral) equation into an
           \textbf{algebraic} equation for the image function;
     \item solve that algebraic equation for $X(p)$;
@@ -242,7 +240,7 @@ Solving a linear differential (integral) equation by the Laplace transform takes
 \end{enumerate}
 
 Step 3 usually splits $X(p)$ into table entries by partial fractions, or uses the residue formula
-of \S 5.1.2 (5.3).
+of \S 17.1.2 (17.3).
 
 \subsubsection{Linear differential (and integral) equations}
 
@@ -256,7 +254,7 @@ where $u(t)$ is the unit step function.
 \end{example}
 
 Solution. Transform the four terms separately:
-\begin{itemize}[itemsep=2pt,topsep=3pt]
+\begin{itemize}\setlength{\itemsep}{2pt}\setlength{\topsep}{3pt}
     \item first term: $\mathcal{L}\left[x'\right]=pX(p)-x(0)=pX$;
     \item second term: $\displaystyle\int_{0}^{t}u(s)x(t-s)\,\mathrm{d}s=u(t)*x(t)$ is a
           convolution, so by the convolution theorem
@@ -368,8 +366,9 @@ This is the standard way to evaluate generalized integrals carrying a damping fa
 $\mathrm{e}^{-\alpha t}$: evaluate the image function at a complex parameter, then take its
 imaginary or real part.
 
-This completes the integral-transform part: the definitions, common pairs and properties of the
-Fourier and Laplace transforms, and their inversion and applications. The next chapter begins the
-theory of equations of mathematical physics --- the wave, heat and potential equations.
+At this point the integral-transform part is complete: the definitions, common pairs and properties
+of the Fourier and Laplace transforms, together with the inversion and applications of this chapter.
+The next chapter begins the theory of equations of mathematical physics --- the derivation and
+solution of the wave, heat and potential equations.
 
 \end{document}
