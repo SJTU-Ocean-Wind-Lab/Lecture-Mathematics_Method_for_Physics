@@ -1,0 +1,353 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Page margins and paragraphs ---
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+
+% --- Basic math and typesetting ---
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor} % 
+
+% --- Theorem and definition environments ---
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+% ==================================================
+% Title and author information
+% ==================================================
+\begin{center}
+    {\LARGE \textbf{Mathematics Method for Physics--Lecture 10}} \\[0.6em]
+    {\large Laurent Series, Singularities, and the Residue Theorem}
+\end{center}
+
+\vspace{-0.5em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.8em}
+% Blue hint/explanation text
+\noindent { Lecture notes for November 3.}
+
+\vspace{1.5em}
+
+% ==================================================
+% Main content
+% ==================================================
+\section{Homework from November 1}
+
+p. 117: 7(3), 7(4), 8, 11, and 12 (selected parts).
+
+\section{November 3 --- Laurent Series and Singularities}
+
+\subsection{p. 117, Exercise 7}
+
+\textbf{(3)} The neighborhoods centered at $i$ are $0<|z-i|<1$ and $|z-i|>1$.
+
+\textbf{(4)} Expand $f(z)=e^{1/(1-z)}$ for $|z|>1$ as $\sum_{n=-\infty}^{\infty}C_nz^n$.
+
+\begin{equation*}
+e^{\frac1{1-z}}
+=\sum_{n=0}^{\infty}\frac1{n!}\left(\frac1{1-z}\right)^n
+=1+\frac1{1-z}+\frac1{2!}\left(\frac1{1-z}\right)^2
++\frac1{3!}\left(\frac1{1-z}\right)^3+\cdots. \tag{*}
+\end{equation*}
+
+For $|z|>1$,
+
+\[
+\frac1{1-z}=-\frac1z\frac1{1-\frac1z}
+=-\frac1z\sum_{n=0}^{\infty}\frac1{z^n}
+=-\sum_{n=0}^{\infty}\frac1{z^{n+1}}.
+\]
+
+\[
+\left(\frac1{1-z}\right)^2
+=\left(\frac1{1-z}\right)'
+=\sum_{n=0}^{\infty}\frac{n+1}{z^{n+2}}.
+\]
+
+Substitute these expressions into $(*)$ to obtain the Laurent expansion.
+
+\textbf{Another solution.} Put $\xi=1/z$. The exterior $|z|>1$ maps to the punctured disk $0<|\xi|<1$.
+
+\[
+f=e^{\frac1{1-z}}=e^{\frac1{1-\frac1\xi}}=e^{\frac{\xi}{\xi-1}}.
+\]
+
+Define the value at $\xi=0$ by $f|_{\xi=0}=e^0=1$. The singularity is removable. Treat $\xi=0$ as an ordinary point. Since $|\xi|<1$ is a disk, use Taylor coefficients $C_n=f^{(n)}(0)/n!$.
+
+\[
+\begin{aligned}
+f&=e^{\frac{\xi}{\xi-1}}\quad\Rightarrow\quad f(0)=1,\\
+f'&=e^{\frac{\xi}{\xi-1}}\left(\frac{\xi}{\xi-1}\right)'
+=e^{\frac{\xi}{\xi-1}}\frac{-1}{(\xi-1)^2}\quad\Rightarrow\quad f'(0)=-1,\\
+f''&=(f')'=e^{\frac{\xi}{\xi-1}}\left(\frac{-1}{(\xi-1)^2}\right)^2+
+e^{\frac{\xi}{\xi-1}}\frac{2}{(\xi-1)^3}
+\quad\Rightarrow\quad f''(0)=1-2=-1,\\
+f'''&=e^{\frac{\xi}{\xi-1}}\left(\frac{-1}{(\xi-1)^2}\right)^3
++e^{\frac{\xi}{\xi-1}}\frac{-4}{(\xi-1)^5}
++e^{\frac{\xi}{\xi-1}}\frac{-1}{(\xi-1)^2}\frac{2}{(\xi-1)^3}
++e^{\frac{\xi}{\xi-1}}\frac{-8}{(\xi-1)^4},\\
+f'''(0)&=-1+4+2-8=-3.
+\end{aligned}
+\]
+
+\[
+f=C_0+C_1\xi+C_2\xi^2+C_3\xi^3+\cdots,
+\qquad
+e^{\frac{\xi}{\xi-1}}=1+\frac{-1}{1!}\xi+\frac{-1}{2!}\xi^2+\frac{-3}{3!}\xi^3+\cdots
+\quad (|\xi|<1).
+\]
+
+Substituting $\xi=1/z$ gives
+
+\[
+f(z)=e^{\frac1{1-z}}=1-\frac1z-\frac12\frac1{z^2}-\frac12\frac1{z^3}+\cdots
+\qquad (|z|>1).
+\]
+
+\subsection{Exercise 8}
+
+1. In $|a|<|z|<|b|$, use $\sum_{n=-\infty}^{\infty}C_nz^n$.
+2. A neighborhood of infinity is $|z|>R=\max\{|a|,|b|\}=|b|$.
+3. A neighborhood of $a$ is $0<|z-a|<r$, where $r=|b-a|$.
+
+For (2), in the neighborhood $|z|>|b|>|a|$,
+
+\[
+\begin{aligned}
+\frac1{z-a}\frac1{z-b}
+&=\left(\frac1{z-a}-\frac1{z-b}\right)\frac1{a-b}\\
+&=\left(\frac1z\frac1{1-a/z}-\frac1z\frac1{1-b/z}\right)\frac1{a-b}\\
+&=\left(\frac1z\sum\left(\frac az\right)^n-\frac1z\sum\left(\frac bz\right)^n\right)\frac1{a-b}\\
+&=\sum_{n=0}^\infty\frac{a^n-b^n}{a-b}z^{-n-1}.
+\end{aligned}
+\]
+
+Here $C_{-1}=(1-1)/(a-b)=0$ ($n=0$).
+
+\subsection{\S{}4.5.5, p. 114 --- Behavior at Infinity}
+
+The point at infinity is a singularity. It is isolated if there exists an $R$ such that $f$ is analytic for $|z|>R$. It is non-isolated if no such $R$ exists.
+
+\textbf{Examples.} For $f(z)=e^{1/(1-z)}$, infinity is isolated and the exterior region is $|z|>1$. For $g(z)=1/[(z-a)(z-b)]$, infinity is isolated and the exterior region is $|z|>|b|$ when $|b|>|a|$. For $f(z)=1/(e^z-1)$, the points $z=2k\pi i$ ($k=0,\pm1,\pm2,\ldots$), including $z=0$, are isolated simple poles. Infinity is non-isolated.
+
+\textbf{Conclusion.} If $\{z_k\}$ is a sequence of singularities of $f(z)$ and $z_k\to\infty$ as $k\to\infty$, then infinity is non-isolated. If $z_k\to z_0$, then $z_0$ is non-isolated. For example, $z=0$ is a non-isolated singularity of $1/\sin(1/z)$ because $z_k=1/(k\pi)$ are singularities.
+
+\textbf{p. 118, Exercise 11.} For $f(z)=\tan(1/(z-1))$, can a Laurent series be obtained in a punctured neighborhood of $z=1$? No, because $z=1$ is non-isolated.
+
+\[
+\frac1{z-1}=k\pi+\frac\pi2
+\quad\Rightarrow\quad z_k=\frac1{k\pi+\frac\pi2}+1,
+\qquad z_k\to1.
+\]
+
+\textbf{Classification of an isolated singularity at infinity.} In a neighborhood $|z|>R$, write
+
+\[
+f(z)=\sum_{n=1}^{\infty}\frac{C_{-n}}{z^n}+C_0+\sum_{n=1}^{\infty}C_nz^n.
+\]
+
+The positive-power part is the principal part. If it is zero, infinity is removable (e.g., $e^{1/z}$). If it has infinitely many terms, infinity is essential (e.g., $e^z$). If it has finitely many terms $C_1z+C_2z^2+\cdots+C_nz^n$ with $C_n\ne0$, infinity is a pole of order $n$.
+
+\[
+\xi=\frac1z,\qquad
+\infty\leftrightarrow0,\qquad |z|>R\ \Longleftrightarrow\ 0<|\xi|<\frac1R.
+\]
+
+The type of isolated singularity of $f(z)$ at $z=\infty$ is the same as that of $f(1/\xi)$ at $\xi=0$.
+
+For an isolated singularity at infinity, a finite $\lim_{z\to\infty}f(z)$ corresponds to a removable singularity, a limit of $\infty$ corresponds to a pole (with no restriction on the approach), and a nonexistent limit corresponds to an essential singularity. The same three cases apply to $\lim_{z\to z_0}f(z)$ when $z_0$ is an isolated singularity.
+
+\textbf{Criterion for a pole.} The point $z_0$ is a pole of order $m$ of $f(z)$ if and only if it is a zero of order $m$ of $1/f(z)$, or equivalently,
+
+\[
+f(z)=\frac{g(z)}{(z-z_0)^m},\qquad g(z_0)\ne0.
+\]
+
+\subsection{p. 118, Exercise 12}
+
+\textbf{(2)} For $1/(z^2+i)^2$,
+
+\[
+z^2=-i,\qquad z=\sqrt{-i}=e^{i\frac{-\pi/2+2k\pi}{2}}\quad(k=0,1).
+\]
+
+The roots $z_0=e^{-i\pi/4}$ and $z_1=e^{i3\pi/4}$ are poles of order two. The notes recall $\sqrt[n]{z}=\sqrt[n]{r}\,e^{i(\theta+2k\pi)/n}$.
+
+\textbf{(6)} For $\frac1{e^z-1}e^{1/(z-1)}$, the singularities are $z=0,1,2k\pi i$. The points $z=0,2k\pi i$ are simple poles. The point $z=1$ is essential because $\lim_{z\to1}e^{1/(z-1)}$ does not exist. The expression $e^\infty$ is undefined here.
+
+\textbf{(10)} For $\frac1{1+z^2}+\cos\frac1{z+i}$, the singularities are $z=\pm i$. The point $z=-i$ is essential because $\lim_{z\to-i}\cos\frac1{z+i}$ does not exist. The point $z=i$ is a simple pole. The notes remark that $\sin(\infty)$ and $\cos(\infty)$ are undefined.
+
+\textbf{(12)} For $f(z)=1/[z\ln(1-z)]$, the singularities are $z=0$ and $z=1$. The latter is a branch point and a non-isolated singularity. For example, $\ln z$ cannot be analytic in a neighborhood of $z=0$.
+
+\[
+\begin{aligned}
+\frac1{f(z)}&=z\ln(1-z)\equiv g(z),\\
+g'(z)&=1\cdot\ln(1-z)+z\cdot\frac1{1-z},\\
+g''&=\frac1{1-z}+\left(\frac z{1-z}\right)'
+=\frac1{1-z}+\frac{1-z-(-1)z}{(1-z)^2}
+=\frac1{1-z}+\frac1{(1-z)^2},\\
+g(0)&=0,\qquad g'(0)=0,\qquad g''(0)=1+1=2\ne0.
+\end{aligned}
+\]
+
+Thus $z=0$ is a double zero of $g(z)=1/f(z)$ and a double pole of $f(z)$. The derivative signs above follow the handwritten notes.
+
+\subsection{p. 116, Example 4.28}
+
+The extended complex plane is the complex plane together with $\{\infty\}$. For $f(z)=\cot z-1/z$, the singularities are $z=0$, $z_k=k\pi$ ($k=\pm1,\pm2,\ldots$), and $z=\infty$.
+
+\[
+\begin{aligned}
+\lim_{z\to0}f(z)
+&=\lim_{z\to0}\left(\cot z-\frac1z\right)
+=\lim_{z\to0}\frac{z\cos z-\sin z}{z\sin z}
+=\lim_{z\to0}\frac{(z\cos z-\sin z)'}{(z^2)'}\\
+&=\lim_{z\to0}\frac{1\cdot\cos z+z(-\sin z)-\cos z}{2z}
+=-\frac12\lim_{z\to0}\sin z.
+\end{aligned}
+\]
+
+Thus $z=0$ is removable. For $k\ne0$,
+
+\[
+f(z)=\frac{z\cos z-\sin z}{z\sin z}=\frac{g(z)}{h(z)},\qquad
+h(k\pi)=0,\quad h'(k\pi)\ne0,\quad g(k\pi)\ne0.
+\]
+
+Hence $z=k\pi$ is a simple pole. Since $z_k=k\pi\to\infty$, infinity is a non-isolated singularity.
+
+\begin{example}
+
+\[
+\oint_{|z|=1}e^{1/z}\,dz
+=\oint_{|z|=1}\left(1+\frac1z+\frac1{2!}\frac1{z^2}+\cdots\right)dz
+=0+2\pi i+0=2\pi i.
+\]
+
+\end{example}
+The constant term integrates to zero. See p. 62, (2)--(4), for
+
+\[
+\oint_{|z|=1}\frac{dz}{z^k}=
+\begin{cases}2\pi i,& k=1,\\0,& k\ne1.\end{cases}
+\]
+
+\section{Chapter 5 --- Residues and Their Applications}
+
+\subsection{\S{}5.1.1 --- The Concept of a Residue}
+
+\begin{definition}
+If $z_0$ is an isolated singularity, define
+
+\[
+\operatorname{Res}[f,z_0]\equiv C_{-1},
+\]
+
+\end{definition}
+where $C_{-1}$ is the coefficient of $(z-z_0)^{-1}$ in the Laurent expansion of $f(z)$ in $0<|z-z_0|<r$.
+
+\begin{definition}
+If $z_0$ is an isolated singularity, define
+
+\[
+\operatorname{Res}[f,z_0]\equiv\frac1{2\pi i}\oint_C f(z)\,dz,
+\]
+
+\end{definition}
+where $C$ encloses only $z_0$.
+
+The two definitions are equivalent. Write the Laurent expansion in a neighborhood of $z_0$ as
+
+\[
+f(z)=(\cdots)+\frac{C_{-1}}{z-z_0}+(C_0+C_1(z-z_0)+\cdots).
+\]
+
+Upon integration, the earlier negative-power terms vanish by the contour integral formula and the nonnegative-power terms vanish because they are analytic.
+
+\[
+\oint_C f(z)\,dz=0+\oint_C\frac{C_{-1}}{z-z_0}\,dz+0=C_{-1}\cdot2\pi i
+\quad\Longleftrightarrow\quad
+C_{-1}=\frac1{2\pi i}\oint_C f(z)\,dz.
+\]
+
+Consequently, for a contour $C$ enclosing only $z_0$,
+
+\[
+\oint_C f(z)\,dz=2\pi i\operatorname{Res}[f,z_0].
+\]
+
+\begin{theorem}[Residue theorem]
+Suppose the closed curve $C$ contains only finitely many singularities $z_1,z_2,\ldots,z_n$ in its interior. Then
+
+\[
+\oint_C f(z)\,dz=2\pi i\sum_{k=1}^{n}\operatorname{Res}[f,z_k].
+\]
+
+\end{theorem}
+\begin{proof}
+By the multiply connected domain theorem, let each small contour $C_k$ enclose just $z_k$. Then
+
+\[
+\oint_C f(z)\,dz=\sum_{k=1}^n\left(\oint_{C_k}f(z)\,dz\right)
+=\sum_{k=1}^n2\pi i\operatorname{Res}[f,z_k].
+\]
+
+\end{proof}
+\begin{example}
+
+\[
+I=\oint_{|z|=2}\frac{e^{1/z}}{z-1}\,dz
+=2\pi i\{\operatorname{Res}[0]+\operatorname{Res}[1]\}
+=2\pi i\{-(e-1)+e\}=2\pi i.
+\]
+
+\end{example}
+1. In the punctured neighborhood $0<|z|<1$ of $z=0$, use the Laurent expansion
+
+\[
+\begin{aligned}
+\frac{e^{1/z}}{z-1}&=e^{1/z}\frac1{z-1}
+=\left(\sum_{n=0}^{\infty}\frac1{n!}\frac1{z^n}\right)
+\left(-\sum_{n=0}^{\infty}z^{n-1}\right)\\
+&=\cdots+\frac{-1}{z}(?)\cdots,\\
+C_{-1}&=\sum_{n=1}^{\infty}\frac1{n!}=-(e-1).
+\end{aligned}
+\]
+
+The series exponent and the sign in the coefficient line are transcribed as written.
+
+2. In the punctured neighborhood $0<|z-1|<1$ of $z=1$, expand as $\sum C_n(z-1)^n$. Let $g(z)=e^{1/z}$. Then
+
+\[
+\frac{e^{1/z}}{z-1}=\frac1{z-1}(g(1)+g'(1)(z-1)+\cdots)
+=\frac1{z-1}[e+\cdots]\quad\Rightarrow\quad C_{-1}=e.
+\]
+
+\section{Homework from November 3}
+
+\begin{itemize}
+\item p. 118, A: 13 (selected parts), 14. B: 7, 8.
+\item p. 143: 2(1), 2(2), 2(3).
+\end{itemize}
+
+\end{document}
