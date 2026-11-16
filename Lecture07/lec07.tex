@@ -194,9 +194,9 @@ Simple pole at $\zeta = z$:
 
 $=$${\left[\left(\frac{\mathrm{e}^{\zeta^{2}}}{\zeta - z}\right)'\right]}_{\zeta = 0} + {\left[\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}\right]}_{\zeta = z}$
 
-\begin{equation}
+\[
 = {[\frac{({2\zeta \mathrm{e}}^{\zeta^{2}}(\zeta - z) - \mathrm{e}^{\zeta^{2}})}{(\zeta - z)^{2}}]}_{\zeta = 0} + \frac{\mathrm{e}^{z^{2}}}{z^{2}}
-\end{equation}
+\]
 
 \[
 = \frac{(-1)}{z^{2}} + \frac{\mathrm{e}^{z^{2}}}{z^{2}}
@@ -218,9 +218,9 @@ f(z) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{\mathrm{e}^{
 
 When $\vert{}z\vert{} > 3$, the origin is outside $C$, so only the simple pole at $\zeta = z$ is enclosed. The generalized Cauchy formula therefore gives the numerator $\mathrm{e}^{\zeta^{2}}/\zeta^{2}$ evaluated at $\zeta = z$, which is $\mathrm{e}^{z^{2}}/z^{2}$.
 
-\begin{equation}
+\[
 = {[\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}]}_{\zeta = z}
-\end{equation}
+\]
 
 \[
 = \frac{\mathrm{e}^{z^{2}}}{z^{2}}
@@ -246,9 +246,9 @@ f'(z) = \begin{cases} ? & \vert{}z\vert{} < 3 \\ ? & \vert{}z\vert{} > 3 \end{ca
 
 For $0 < \vert{}z\vert{} < 3$:
 
-\begin{equation}
+\[
 (\mathrm{e}^{z^{2}} - 1)/z^{2}
-\end{equation}
+\]
 
 \[
 2z\mathrm{e}^{z^{2}}
@@ -276,21 +276,21 @@ f'(z) = 2[z^{2}\mathrm{e}^{z^{2}} - (\mathrm{e}^{z^{2}} - 1)]/z^{3}
 
 At $z = \mathrm{i}$:
 
-\begin{equation}
+\[
 f'(\mathrm{i}) = {\left.\frac{2[z^{2}\mathrm{e}^{z^{2}} - \mathrm{e}^{z^{2}} + 1]}{z^{3}}\right\vert{}}_{z = \mathrm{i}} = 2\mathrm{i}\left(1 - \frac{2}{\mathrm{e}}\right)
-\end{equation}
+\]
 
 Note: $At\ z = 0:$
 
-\begin{equation}
+\[
 f(0) = f(z)\vert{}_{z = 0}
-\end{equation}
+\]
 
 At $z = 0$, use the original integral because the two poles coincide. The contour is then $\vert{}\zeta\vert{} = 3$ and the integrand is $\mathrm{e}^{\zeta^{2}}/\zeta^{3}$. Cauchy's derivative formula with derivative order 2 gives $f(0) = (1/2!)(d^{2}/d\zeta^{2})\mathrm{e}^{\zeta^{2}}\vert{}\zeta = 0$. Since $(\mathrm{e}^{\zeta^{2}})'= 2\zeta \mathrm{e}^{\zeta^{2}}$ and $(\mathrm{e}^{\zeta^{2}})''= 2\mathrm{e}^{\zeta^{2}} + 4\zeta^{2}\mathrm{e}^{\zeta^{2}}$, the second derivative at 0 is 2, so $f(0) = 1$.
 
-\begin{equation}
+\[
 = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{\vert{}\zeta - 0\vert{} = 3}\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{3}}d\zeta
-\end{equation}
+\]
 
 \[
 = \left(\frac{1}{2!}\right)\left(\frac{d^{2}}{d\zeta^{2}}\right)\mathrm{e}^{\zeta^{2}}\vert{}_{\zeta = 0} = 1
@@ -360,15 +360,15 @@ Suppose that
 
 Then
 
-\begin{equation}
+\[
 \vert{}f^{(n)}(z_{0})\vert{} \le \ \frac{n!M}{R^{n}},
-\end{equation}
+\]
 
 where
 
-\begin{equation}
+\[
 M = \max_{C}\vert{}f(z)\vert{}
-\end{equation}
+\]
 
 Proof. By the generalized Cauchy integral formula:
 
@@ -386,9 +386,9 @@ f^{(n)}(z_{0}) = \frac{n!}{(2\mathrm{\pi}\mathrm{i})}\oint_{C}\frac{f(z)}{(z - z
 
 On $C$, $\vert{}z - z_{0}\vert{} = R$ and $\vert{}f(z)\vert{} \le M$. Taking absolute values in the integral formula and using $\vert{}\int g(z)dz\vert{} \le \int\vert{}g(z)\vert{}\vert{}dz\vert{}$ gives $\vert{}f^{(n)}(z_{0})\vert{} \le[n!/(2\mathrm{\pi})] \cdot[M/R^{(n + 1)}] \cdot \oint_{C}\vert{}dz\vert{}$. The contour length is $2\mathrm{\pi}R$, so the factors simplify to $n!M/R^{n}$.
 
-\begin{equation}
+\[
 \le \ \frac{n!M}{(2\mathrm{\pi}R^{(n + 1)})}\oint_{C}\vert{}dz\vert{}
-\end{equation}
+\]
 
 \[
 = \frac{n!M}{(2\mathrm{\pi}R^{(n + 1)})} \cdot 2\mathrm{\pi}R
@@ -570,9 +570,9 @@ f(z_{0}) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)
 
 Let
 
-\begin{equation}
+\[
 \zeta - z_{0} = R\mathrm{e}^{\mathrm{i}\theta}
-\end{equation}
+\]
 
 With $\zeta = z_{0} + R\mathrm{e}^{\mathrm{i}\theta}$ and $d\zeta = \mathrm{i}R\mathrm{e}^{\mathrm{i}\theta}d\theta$, the Cauchy integral formula gives $f(z_{0}) = (1/2\mathrm{\pi}\mathrm{i})\int_{0}^{2\mathrm{\pi}}f(z_{0} + R\mathrm{e}^{\mathrm{i}\theta})/(R\mathrm{e}^{\mathrm{i}\theta}) \cdot \mathrm{i}R\mathrm{e}^{\mathrm{i}\theta}d\theta$:
 
@@ -738,9 +738,9 @@ w = f(z)
 
 Since $\operatorname{Re}f(z) < M$,
 
-\begin{equation}
+\[
 \vert{}F(z)\vert{} < \mathrm{e}^{M}.
-\end{equation}
+\]
 
 Thus $F(z)$ is an entire bounded function.
 
@@ -752,9 +752,9 @@ F(z) = constant.
 
 Therefore
 
-\begin{equation}
+\[
 \mathrm{e}^{f(z)} = constant,
-\end{equation}
+\]
 
 Differentiate both sides:
 
@@ -802,9 +802,9 @@ I_{1} = \left(\frac{2\mathrm{\pi}\mathrm{i}}{1!}\right){[((z + 1)^{2}f(z)]}_{z =
 
 Set $g(z) = (z + 1)^{2}f(z)$. The generalized Cauchy integral formula gives $I_{1} = 2\mathrm{\pi}\mathrm{i}g'(0)$. By the product rule, $g'(z) = 2(z + 1)f(z) + (z + 1)^{2}f'(z)$.
 
-\begin{equation}
+\[
 = 2\mathrm{\pi}\mathrm{i}{[2(z + 1)f(z) + (z + 1)^{2}f'(z)]}_{z = 0}
-\end{equation}
+\]
 
 \[
 = 2\mathrm{\pi}\mathrm{i}[2f(0) + f'(0)]
@@ -874,9 +874,9 @@ d\theta = \frac{dz}{(\mathrm{i}z)}
 
 Substitute:
 
-\begin{equation}
+\[
 I_{2} = \int_{0}^{2\mathrm{\pi}}[\frac{(1 + \cos \theta)}{2}]f(\mathrm{e}^{\mathrm{i}\theta})d\theta
-\end{equation}
+\]
 
 \[
 = \oint_{\vert{}z\vert{} = 1}\frac{[1 + \frac{(z + z^{-1})}{2}]}{2} \cdot f(z) \cdot \ \frac{dz}{(\mathrm{i}z)}
@@ -900,9 +900,9 @@ I = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta}\cos(n\theta - \sin \theta)d
 
 Let
 
-\begin{equation}
+\[
 \mathrm{e}^{\mathrm{i}\theta} = z
-\end{equation}
+\]
 
 \textbf{Let n be a non-negative integer. We evaluate the trigonometric integral by converting it to a contour integral.}
 

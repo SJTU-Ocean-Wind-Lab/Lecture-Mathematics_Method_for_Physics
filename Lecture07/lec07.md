@@ -185,7 +185,7 @@ $$
 When $\vert{}z\vert{} > 3$, the origin is outside $C$, so only the simple pole at $\zeta = z$ is enclosed. The generalized Cauchy formula therefore gives the numerator $\mathrm{e}^{\zeta^{2}}/\zeta^{2}$ evaluated at $\zeta = z$, which is $\mathrm{e}^{z^{2}}/z^{2}$.
 
 $$
-= {[\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}]}_{\zeta = z} \tag{12}
+= {[\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}]}_{\zeta = z}
 $$
 
 $$
@@ -195,7 +195,7 @@ $$
 For the exterior case:
 
 $$
-f(z) = \begin{cases} \frac{\mathrm{e}^{z^{2}} - 1}{z^{2}} & 0 < \vert{}z\vert{} < 3 \\ 1 & z = 0 \\ \frac{\mathrm{e}^{z^{2}}}{z^{2}} & \vert{}z\vert{} > 3 \end{cases} \tag{13}
+f(z) = \begin{cases} \frac{\mathrm{e}^{z^{2}} - 1}{z^{2}} & 0 < \vert{}z\vert{} < 3 \\ 1 & z = 0 \\ \frac{\mathrm{e}^{z^{2}}}{z^{2}} & \vert{}z\vert{} > 3 \end{cases} \tag{12}
 $$
 
 [At $\vert{}z\vert{} = 3$, the point $\zeta = 0$ lies on $C$, so the contour integral is not defined.]
@@ -203,7 +203,7 @@ $$
 For (2),
 
 $$
-f'(z) = \begin{cases} ? & \vert{}z\vert{} < 3 \\ ? & \vert{}z\vert{} > 3 \end{cases} \tag{14}
+f'(z) = \begin{cases} ? & \vert{}z\vert{} < 3 \\ ? & \vert{}z\vert{} > 3 \end{cases} \tag{13}
 $$
 
 $$
@@ -213,7 +213,7 @@ $$
 For $0 < \vert{}z\vert{} < 3$:
 
 $$
-(\mathrm{e}^{z^{2}} - 1)/z^{2} \tag{15}
+(\mathrm{e}^{z^{2}} - 1)/z^{2} \tag{14}
 $$
 
 $$
@@ -243,19 +243,19 @@ $$
 At $z = \mathrm{i}$:
 
 $$
-f'(\mathrm{i}) = {\left.\frac{2[z^{2}\mathrm{e}^{z^{2}} - \mathrm{e}^{z^{2}} + 1]}{z^{3}}\right\vert{}}_{z = \mathrm{i}} = 2\mathrm{i}\left(1 - \frac{2}{\mathrm{e}}\right) \tag{16}
+f'(\mathrm{i}) = {\left.\frac{2[z^{2}\mathrm{e}^{z^{2}} - \mathrm{e}^{z^{2}} + 1]}{z^{3}}\right\vert{}}_{z = \mathrm{i}} = 2\mathrm{i}\left(1 - \frac{2}{\mathrm{e}}\right) \tag{15}
 $$
 
 Note: $At\ z = 0:$
 
 $$
-f(0) = f(z)\vert{}_{z = 0} \tag{17}
+f(0) = f(z)\vert{}_{z = 0} \tag{16}
 $$
 
 At $z = 0$, use the original integral because the two poles coincide. The contour is then $\vert{}\zeta\vert{} = 3$ and the integrand is $\mathrm{e}^{\zeta^{2}}/\zeta^{3}$. Cauchy’s derivative formula with derivative order 2 gives $f(0) = (1/2!)(d^{2}/d\zeta^{2})\mathrm{e}^{\zeta^{2}}\vert{}\zeta = 0$. Since $(\mathrm{e}^{\zeta^{2}})'= 2\zeta \mathrm{e}^{\zeta^{2}}$ and $(\mathrm{e}^{\zeta^{2}})''= 2\mathrm{e}^{\zeta^{2}} + 4\zeta^{2}\mathrm{e}^{\zeta^{2}}$, the second derivative at 0 is 2, so $f(0) = 1$.
 
 $$
-= \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{\vert{}\zeta - 0\vert{} = 3}\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{3}}d\zeta \tag{18}
+= \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{\vert{}\zeta - 0\vert{} = 3}\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{3}}d\zeta
 $$
 
 $$
@@ -265,7 +265,7 @@ $$
 The derivatives of $\mathrm{e}^{\zeta^{2}}$ are:
 
 $$
-(\mathrm{e}^{\zeta^{2}})'= ({2\zeta \mathrm{e}}^{\zeta^{2}}) \tag{19}
+(\mathrm{e}^{\zeta^{2}})'= ({2\zeta \mathrm{e}}^{\zeta^{2}}) \tag{17}
 $$
 
 $$
@@ -283,7 +283,7 @@ $$
 Power series at z = 0:
 
 $$
-\mathrm{e}^{z^{2}} = 1 + z^{2} + z^{4}/2!+z^{6}/3!+\cdots \tag{20}
+\mathrm{e}^{z^{2}} = 1 + z^{2} + z^{4}/2!+z^{6}/3!+\cdots \tag{18}
 $$
 
 $$
@@ -301,13 +301,13 @@ $$
 For the exterior region, differentiate the second branch of $f(z)$:
 
 $$
-f'(z) = \left(\frac{\mathrm{e}^{z^{2}}}{z^{2}}\right)'= \frac{2\mathrm{e}^{z^{2}}(z^{2} - 1)}{z^{3}}, \vert{}z\vert{} > 3 \tag{21}
+f'(z) = \left(\frac{\mathrm{e}^{z^{2}}}{z^{2}}\right)'= \frac{2\mathrm{e}^{z^{2}}(z^{2} - 1)}{z^{3}}, \vert{}z\vert{} > 3 \tag{19}
 $$
 
 Hence, at the requested point:
 
 $$
-f^{'(3 + \mathrm{i})} = {\left.\frac{2\mathrm{e}^{z^{2}}(z^{2} - 1)}{z^{3}}\right\vert{}}_{z = 3 + \mathrm{i}} = \frac{2\mathrm{e}^{{(3 + \mathrm{i})}^{2}}({(3 + \mathrm{i})}^{2} - 1)}{{(3 + \mathrm{i})}^{3}} \tag{22}
+f^{'(3 + \mathrm{i})} = {\left.\frac{2\mathrm{e}^{z^{2}}(z^{2} - 1)}{z^{3}}\right\vert{}}_{z = 3 + \mathrm{i}} = \frac{2\mathrm{e}^{{(3 + \mathrm{i})}^{2}}({(3 + \mathrm{i})}^{2} - 1)}{{(3 + \mathrm{i})}^{3}} \tag{20}
 $$
 
 ## 7.2 Fundamental Properties of Analytic Functions
@@ -323,25 +323,25 @@ Suppose $f(z)$ is analytic on and inside the circle $C$: $\vert{}z - z_{0}\vert{
 Suppose that
 
 $$
-\vert{}f(z)\vert{} \le M\quad on\ C \tag{23}
+\vert{}f(z)\vert{} \le M\quad on\ C \tag{21}
 $$
 
 Then
 
 $$
-\vert{}f^{(n)}(z_{0})\vert{} \le \ \frac{n!M}{R^{n}}, \tag{24}
+\vert{}f^{(n)}(z_{0})\vert{} \le \ \frac{n!M}{R^{n}}, \tag{22}
 $$
 
 where
 
 $$
-M = \max_{C}\vert{}f(z)\vert{} \tag{25}
+M = \max_{C}\vert{}f(z)\vert{} \tag{23}
 $$
 
 *Proof.* By the generalized Cauchy integral formula:
 
 $$
-f^{(n)}(z_{0}) = \frac{n!}{(2\mathrm{\pi}\mathrm{i})}\oint_{C}\frac{f(z)}{(z - z_{0})^{(n + 1)}}dz \tag{26}
+f^{(n)}(z_{0}) = \frac{n!}{(2\mathrm{\pi}\mathrm{i})}\oint_{C}\frac{f(z)}{(z - z_{0})^{(n + 1)}}dz \tag{24}
 $$
 
 $$
@@ -355,7 +355,7 @@ $$
 On $C$, $\vert{}z - z_{0}\vert{} = R$ and $\vert{}f(z)\vert{} \le M$. Taking absolute values in the integral formula and using $\vert{}\int g(z)dz\vert{} \le \int\vert{}g(z)\vert{}\vert{}dz\vert{}$ gives $\vert{}f^{(n)}(z_{0})\vert{} \le[n!/(2\mathrm{\pi})] \cdot[M/R^{(n + 1)}] \cdot \oint_{C}\vert{}dz\vert{}$. The contour length is $2\mathrm{\pi}R$, so the factors simplify to $n!M/R^{n}$.
 
 $$
-\le \ \frac{n!M}{(2\mathrm{\pi}R^{(n + 1)})}\oint_{C}\vert{}dz\vert{} \tag{27}
+\le \ \frac{n!M}{(2\mathrm{\pi}R^{(n + 1)})}\oint_{C}\vert{}dz\vert{}
 $$
 
 $$
@@ -373,25 +373,25 @@ Suppose $f(z)$ is analytic in the open disk and continuous on its closure, and l
 On the boundary $C$, assume:
 
 $$
-\vert{}f(\zeta)\vert{} \le M, \quad \zeta \in C \tag{28}
+\vert{}f(\zeta)\vert{} \le M, \quad \zeta \in C \tag{25}
 $$
 
 where
 
 $$
-M = \max_{\zeta \in C}\vert{}f(\zeta)\vert{}, \tag{29}
+M = \max_{\zeta \in C}\vert{}f(\zeta)\vert{}, \tag{26}
 $$
 
 Equivalently, the maximum-modulus conclusion is:
 
 $$
-\max_{z \in \bar{D}}\vert{}f(z)\vert{} = \max_{\zeta \in C}\vert{}f(\zeta)\vert{}. \tag{30}
+\max_{z \in \bar{D}}\vert{}f(z)\vert{} = \max_{\zeta \in C}\vert{}f(\zeta)\vert{}. \tag{27}
 $$
 
 *Proof.* By Cauchy’s integral formula:
 
 $$
-\vert{}f(z)\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{(\zeta - z)}d\zeta\right\vert{} \tag{31}
+\vert{}f(z)\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{(\zeta - z)}d\zeta\right\vert{} \tag{28}
 $$
 
 $$
@@ -417,7 +417,7 @@ Apply Cauchy’s integral formula to the function $[f(z)]^{n}$:
 For a fixed interior point $z$ at distance $d$ from the boundary, $\vert{}\zeta - z\vert{} \ge d$ on $C$, and $\vert{}f(\zeta)\vert{} \le M$ on C:
 
 $$
-\vert{}[f(z)]^{n}\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\frac{[f(\zeta)]^{n}}{(\zeta - z)}d\zeta\right\vert{} \tag{32}
+\vert{}[f(z)]^{n}\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\frac{[f(\zeta)]^{n}}{(\zeta - z)}d\zeta\right\vert{} \tag{29}
 $$
 
 $$
@@ -427,19 +427,19 @@ $$
 Take the nth root:
 
 $$
-\vert{}f(z)\vert{} \le[L/(2\mathrm{\pi}d)]^{1/n}M \tag{33}
+\vert{}f(z)\vert{} \le[L/(2\mathrm{\pi}d)]^{1/n}M \tag{30}
 $$
 
 Let $n \to \infty$. Since
 
 $$
-\\sqrt[n]{\left(\frac{L}{(2\mathrm{\pi}d)}\right)} \to 1, \tag{34}
+\\sqrt[n]{\left(\frac{L}{(2\mathrm{\pi}d)}\right)} \to 1, \tag{31}
 $$
 
 we obtain
 
 $$
-\vert{}f(z)\vert{} \le M. \tag{35}
+\vert{}f(z)\vert{} \le M. \tag{32}
 $$
 
 ### 7.2.4 Liouville’s Theorem
@@ -451,7 +451,7 @@ If $f(z)$ is analytic on the whole complex plane (entire), and $\vert{}f(z)\vert
 Consider
 
 $$
-I = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{1})(z - z_{2})]}dz. \tag{36}
+I = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{1})(z - z_{2})]}dz. \tag{33}
 $$
 
 Choose the contour $C$ to be $\vert{}z\vert{} = R$, where $R > \max(\vert{}z_{1}\vert{}, \vert{}z_{2}\vert{})$, and let $R \to \infty$.
@@ -459,7 +459,7 @@ Choose the contour $C$ to be $\vert{}z\vert{} = R$, where $R > \max(\vert{}z_{1}
 By partial fractions:
 
 $$
-I = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{1})(z - z_{2})]}dz \tag{37}
+I = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{1})(z - z_{2})]}dz \tag{34}
 $$
 
 $$
@@ -469,7 +469,7 @@ $$
 Using Cauchy’s integral formula:
 
 $$
-= f(z_{1})/(z_{1} - z_{2}) + f(z_{2})/(z_{2} - z_{1}) \tag{38}
+= f(z_{1})/(z_{1} - z_{2}) + f(z_{2})/(z_{2} - z_{1})
 $$
 
 $$
@@ -485,7 +485,7 @@ The estimate is:
 On $\vert{}z\vert{} = R$:
 
 $$
-\vert{}z - z_{1}\vert{} \ge R - \vert{}z_{1}\vert{} \tag{39}
+\vert{}z - z_{1}\vert{} \ge R - \vert{}z_{1}\vert{} \tag{35}
 $$
 
 $$
@@ -501,7 +501,7 @@ Letting $R \to \infty$ therefore gives $I = 0$.
 Hence
 
 $$
-f(z_{1}) - f(z_{2}) = 0 \tag{40}
+f(z_{1}) - f(z_{2}) = 0 \tag{36}
 $$
 
 and therefore $f(z_{1}) = f(z_{2})$
@@ -511,7 +511,7 @@ Since $z_{1}$ and $z_{2}$ are arbitrary, $f(z)$ is constant.
 By Cauchy’s integral formula:
 
 $$
-\vert{}f'(z)\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{(\zeta - z)^{2}}d\zeta\right\vert{} \tag{41}
+\vert{}f'(z)\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{(\zeta - z)^{2}}d\zeta\right\vert{} \tag{37}
 $$
 
 Taking absolute values and using $\vert{}f(\zeta)\vert{} \le M$ on the circle $\vert{}\zeta - z\vert{} = R$ gives $\vert{}f'(z)\vert{} \le (1/2\mathrm{\pi})(M/R^{2})(2\mathrm{\pi}R) = M/R$. The point $z$ is arbitrary, and $R$ can be made arbitrarily large because $f$ is entire. Therefore $\vert{}f'(z)\vert{} = 0$, so $f'(z) = 0$ everywhere and $f$ is constant.
@@ -519,13 +519,13 @@ Taking absolute values and using $\vert{}f(\zeta)\vert{} \le M$ on the circle $\
 where $C$: $\vert{}\zeta - z\vert{} = R$.
 
 $$
-\vert{}f'(z)\vert{} \le \left(\frac{1}{2\mathrm{\pi}}\right) \cdot\left(\frac{M}{R^{2}}\right) \cdot 2\mathrm{\pi}R = \frac{M}{R} \tag{42}
+\vert{}f'(z)\vert{} \le \left(\frac{1}{2\mathrm{\pi}}\right) \cdot\left(\frac{M}{R^{2}}\right) \cdot 2\mathrm{\pi}R = \frac{M}{R} \tag{38}
 $$
 
 Let $R \to \infty$. Then
 
 $$
-\frac{M}{R} \to 0 \tag{43}
+\frac{M}{R} \to 0 \tag{39}
 $$
 
 $$
@@ -539,19 +539,19 @@ Suppose $f(z)$ is analytic in the region bounded by $C$: $\vert{}z - z_{0}\vert{
 Then
 
 $$
-f(z_{0}) = \frac{1}{2\mathrm{\pi}}\int_{0}^{2\mathrm{\pi}}f(z_{0} + R\mathrm{e}^{\mathrm{i}\theta})d\theta \tag{44}
+f(z_{0}) = \frac{1}{2\mathrm{\pi}}\int_{0}^{2\mathrm{\pi}}f(z_{0} + R\mathrm{e}^{\mathrm{i}\theta})d\theta \tag{40}
 $$
 
 *Proof.* By Cauchy’s integral formula:
 
 $$
-f(z_{0}) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{\zeta - z_{0}}d\zeta \tag{45}
+f(z_{0}) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{\zeta - z_{0}}d\zeta \tag{41}
 $$
 
 Let
 
 $$
-\zeta - z_{0} = R\mathrm{e}^{\mathrm{i}\theta} \tag{46}
+\zeta - z_{0} = R\mathrm{e}^{\mathrm{i}\theta} \tag{42}
 $$
 
 With $\zeta = z_{0} + R\mathrm{e}^{\mathrm{i}\theta}$ and $d\zeta = \mathrm{i}R\mathrm{e}^{\mathrm{i}\theta}d\theta$, the Cauchy integral formula gives $f(z_{0}) = (1/2\mathrm{\pi}\mathrm{i})\int_{0}^{2\mathrm{\pi}}f(z_{0} + R\mathrm{e}^{\mathrm{i}\theta})/(R\mathrm{e}^{\mathrm{i}\theta}) \cdot \mathrm{i}R\mathrm{e}^{\mathrm{i}\theta}d\theta$:
@@ -559,7 +559,7 @@ With $\zeta = z_{0} + R\mathrm{e}^{\mathrm{i}\theta}$ and $d\zeta = \mathrm{i}R\
 then
 
 $$
-d\zeta = {\mathrm{i}R\mathrm{e}}^{\mathrm{i}\theta}d\theta \tag{47}
+d\zeta = {\mathrm{i}R\mathrm{e}}^{\mathrm{i}\theta}d\theta \tag{43}
 $$
 
 $$
@@ -577,7 +577,7 @@ Suppose $f(z)$ is analytic in $D$. The following statements are equivalent:
 1) For every closed curve $C$ in $D$:
 
 $$
-\oint_{C}f(z)dz = 0. \tag{48}
+\oint_{C}f(z)dz = 0. \tag{44}
 $$
 
 2) $f(z)$ has an antiderivative in $D$.
@@ -585,13 +585,13 @@ $$
 *Proof.* Fix $z_{0} \in D$. For $z \in D$, define
 
 $$
-F(z) = \int_{z_{0}}^{z}f(\zeta)d\zeta \tag{49}
+F(z) = \int_{z_{0}}^{z}f(\zeta)d\zeta \tag{45}
 $$
 
 The zero-integral condition makes this definition independent of the chosen path: any two paths from $z_{0}$ to $z$ form a closed curve when one is followed in reverse, and the integral around that closed curve is zero.
 
 $$
-F'(z) = f(z) \tag{50}
+F'(z) = f(z) \tag{46}
 $$
 
 To compute $F'(z)$, choose the short straight segment from $z$ to $z + \Delta z$. Path independence gives:
@@ -599,7 +599,7 @@ To compute $F'(z)$, choose the short straight segment from $z$ to $z + \Delta z$
 On $\zeta = z + t\Delta z$, $0 \le t \le 1$:
 
 $$
-[F(z + \Delta z) - F(z)]/\Delta z = \int_{0}^{1}f(z + t\Delta z)dt \tag{51}
+[F(z + \Delta z) - F(z)]/\Delta z = \int_{0}^{1}f(z + t\Delta z)dt \tag{47}
 $$
 
 $$
@@ -609,7 +609,7 @@ $$
 Conversely, with $F'= f$:
 
 $$
-\oint_{C}f(z)dz = \oint_{C}F'(z)dz = 0 \tag{52}
+\oint_{C}f(z)dz = \oint_{C}F'(z)dz = 0 \tag{48}
 $$
 
 $$
@@ -625,7 +625,7 @@ Suppose $f(z)$ is analytic in $D$, where $D$ is the region on and inside $\vert{
 On the boundary $\vert{}z\vert{} = R$, suppose
 
 $$
-\vert{}f(z)\vert{} > a > 0 \tag{53}
+\vert{}f(z)\vert{} > a > 0 \tag{49}
 $$
 
 and
@@ -635,7 +635,7 @@ $\vert{}f(0)\vert{} <$ a
 Show that there exists $\zeta$ inside the region such that
 
 $$
-f(\zeta) = 0. \tag{54}
+f(\zeta) = 0. \tag{50}
 $$
 
 *Proof.* Use proof by contradiction.
@@ -647,7 +647,7 @@ for every $z$ in the closed region $D$, $f(z) \ne 0$.
 Then
 
 $$
-F(z) = \frac{1}{f(z)} \tag{55}
+F(z) = \frac{1}{f(z)} \tag{51}
 $$
 
 is analytic in $D$.
@@ -655,7 +655,7 @@ is analytic in $D$.
 Apply the maximum modulus principle to $F(z)$, comparing its value at the origin with its values on the boundary:
 
 $$
-\vert{}F(0)\vert{} = \frac{1}{\vert{}f(0)\vert{}} > \frac{1}{a} \tag{56}
+\vert{}F(0)\vert{} = \frac{1}{\vert{}f(0)\vert{}} > \frac{1}{a} \tag{52}
 $$
 
 $$
@@ -683,7 +683,7 @@ $$
 Suppose $f(z)$ is analytic on the whole complex plane, and there exists $M > 0$ such that
 
 $$
-R\mathrm{e}\ f(z) < M. \tag{57}
+R\mathrm{e}\ f(z) < M. \tag{53}
 $$
 
 Show that $f(z)$ is constant.
@@ -691,7 +691,7 @@ Show that $f(z)$ is constant.
 *Proof.* Let
 
 $$
-F(z) = \mathrm{e}^{f(z)}. \tag{58}
+F(z) = \mathrm{e}^{f(z)}. \tag{54}
 $$
 
 $$
@@ -721,7 +721,7 @@ $$
 Since $\operatorname{Re}f(z) < M$,
 
 $$
-\vert{}F(z)\vert{} < \mathrm{e}^{M}. \tag{59}
+\vert{}F(z)\vert{} < \mathrm{e}^{M}. \tag{55}
 $$
 
 Thus $F(z)$ is an entire bounded function.
@@ -729,13 +729,13 @@ Thus $F(z)$ is an entire bounded function.
 By Liouville’s theorem,
 
 $$
-F(z) = constant. \tag{60}
+F(z) = constant. \tag{56}
 $$
 
 Therefore
 
 $$
-\mathrm{e}^{f(z)} = constant, \tag{61}
+\mathrm{e}^{f(z)} = constant, \tag{57}
 $$
 
 Differentiate both sides:
@@ -743,13 +743,13 @@ Differentiate both sides:
 The derivative of the left-hand side is $\mathrm{e}^{f(z)}f'(z)$ by the chain rule. The derivative of a constant is zero, so $\mathrm{e}^{f(z)}f'(z) = 0$. Since $\mathrm{e}^{f(z)} \ne 0$ for every $z$, division by this factor gives $f'(z) = 0$ everywhere; hence $f$ is constant.
 
 $$
-\mathrm{e}^{f(z)}f'(z) = 0 \tag{62}
+\mathrm{e}^{f(z)}f'(z) = 0 \tag{58}
 $$
 
 Since the exponential function never vanishes, we conclude that:
 
 $$
-f'(z) = 0 \tag{63}
+f'(z) = 0 \tag{59}
 $$
 
 and therefore $f(z)$ is constant.
@@ -761,31 +761,31 @@ and therefore $f(z)$ is constant.
 Suppose $f(z)$ is analytic for $\vert{}z\vert{} < 2$, and
 
 $$
-f(0) = 1\quad f'(0) = 2 \tag{64}
+f(0) = 1\quad f'(0) = 2 \tag{60}
 $$
 
 (1) Evaluate
 
 $$
-I_{1} = \oint_{\vert{}z\vert{} = 1}[\frac{{(z + 1)}^{2}}{z^{2}}]f(z)dz \tag{65}
+I_{1} = \oint_{\vert{}z\vert{} = 1}[\frac{{(z + 1)}^{2}}{z^{2}}]f(z)dz \tag{61}
 $$
 
 (2) Evaluate
 
 $$
-I_{2} = \int_{0}^{2\mathrm{\pi}}\cos^{2}\left(\frac{\theta}{2}\right)f(\mathrm{e}^{\mathrm{i}\theta}) d\theta \tag{66}
+I_{2} = \int_{0}^{2\mathrm{\pi}}\cos^{2}\left(\frac{\theta}{2}\right)f(\mathrm{e}^{\mathrm{i}\theta}) d\theta \tag{62}
 $$
 
 (1) By the generalised Cauchy integral formula:
 
 $$
-I_{1} = \left(\frac{2\mathrm{\pi}\mathrm{i}}{1!}\right){[((z + 1)^{2}f(z)]}_{z = 0} \tag{67}
+I_{1} = \left(\frac{2\mathrm{\pi}\mathrm{i}}{1!}\right){[((z + 1)^{2}f(z)]}_{z = 0} \tag{63}
 $$
 
 Set $g(z) = (z + 1)^{2}f(z)$. The generalized Cauchy integral formula gives $I_{1} = 2\mathrm{\pi}\mathrm{i}g'(0)$. By the product rule, $g'(z) = 2(z + 1)f(z) + (z + 1)^{2}f'(z)$.
 
 $$
-= 2\mathrm{\pi}\mathrm{i}{[2(z + 1)f(z) + (z + 1)^{2}f'(z)]}_{z = 0} \tag{68}
+= 2\mathrm{\pi}\mathrm{i}{[2(z + 1)f(z) + (z + 1)^{2}f'(z)]}_{z = 0}
 $$
 
 $$
@@ -799,7 +799,7 @@ $$
 (2) Let
 
 $$
-z = \mathrm{e}^{\mathrm{i}\theta} \tag{69}
+z = \mathrm{e}^{\mathrm{i}\theta} \tag{64}
 $$
 
 Then
@@ -807,7 +807,7 @@ Then
 On $\vert{}z\vert{} = 1$, with $z = \mathrm{e}^{\mathrm{i}\theta}$ and $0 \le \theta \le 2\mathrm{\pi}$:
 
 $$
-\mathrm{e}^{\mathrm{i}\theta} = z \tag{70}
+\mathrm{e}^{\mathrm{i}\theta} = z \tag{65}
 $$
 
 $$
@@ -857,7 +857,7 @@ $$
 Substitute:
 
 $$
-I_{2} = \int_{0}^{2\mathrm{\pi}}[\frac{(1 + \cos \theta)}{2}]f(\mathrm{e}^{\mathrm{i}\theta})d\theta \tag{71}
+I_{2} = \int_{0}^{2\mathrm{\pi}}[\frac{(1 + \cos \theta)}{2}]f(\mathrm{e}^{\mathrm{i}\theta})d\theta \tag{66}
 $$
 
 $$
@@ -883,7 +883,7 @@ $$
 Let
 
 $$
-\mathrm{e}^{\mathrm{i}\theta} = z \tag{72}
+\mathrm{e}^{\mathrm{i}\theta} = z \tag{67}
 $$
 
 **Let n be a non-negative integer. We evaluate the trigonometric integral by converting it to a contour integral.**
@@ -891,7 +891,7 @@ $$
 By Euler’s formula:
 
 $$
-\cos \theta + \mathrm{i}\ \sin \theta = \mathrm{e}^{\mathrm{i}\theta} \tag{73}
+\cos \theta + \mathrm{i}\ \sin \theta = \mathrm{e}^{\mathrm{i}\theta} \tag{68}
 $$
 
 $$
@@ -903,19 +903,19 @@ Taking the complex conjugate of the second Euler formula gives:
 The conjugate identity is $\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} = \cos(n\theta - \sin \theta) - \mathrm{i}\sin(n\theta - \sin \theta)$. Multiplying by $\mathrm{e}^{\cos \theta}$ and integrating gives a complex integral $J$ whose real part is the required $I$. The exponent simplifies because $-\mathrm{i}(n\theta - \sin \theta) = -\mathrm{i}n\theta + \mathrm{i}\sin \theta$, so $\cos \theta + \mathrm{i}\sin \theta$ appears together.
 
 $$
-\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} = \cos(n\theta - \sin \theta) - \mathrm{i}\sin(n\theta - \sin \theta). \tag{74}
+\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} = \cos(n\theta - \sin \theta) - \mathrm{i}\sin(n\theta - \sin \theta). \tag{69}
 $$
 
 The original integral $I$ is the real component of the corresponding complex integral $J$:
 
 $$
-J = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta}\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} d\theta = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta + \mathrm{i}\sin \theta - \mathrm{i}n\theta} d\theta . \tag{75}
+J = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta}\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} d\theta = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta + \mathrm{i}\sin \theta - \mathrm{i}n\theta} d\theta . \tag{70}
 $$
 
 Using $\cos \ \theta + \mathrm{i}\sin \ \theta = \mathrm{e}^{\mathrm{i}\theta}$, we obtain:
 
 $$
-\cos \theta + \mathrm{i}\sin \theta = \mathrm{e}^{\mathrm{i}\theta} \tag{76}
+\cos \theta + \mathrm{i}\sin \theta = \mathrm{e}^{\mathrm{i}\theta} \tag{71}
 $$
 
 $$
@@ -953,19 +953,19 @@ $$
 Let $z = \mathrm{e}^{\mathrm{i}\theta}$. Then
 
 $$
-dz = \mathrm{i}z d\theta, \quad d\theta = \frac{dz}{\mathrm{i}z}. \tag{77}
+dz = \mathrm{i}z d\theta, \quad d\theta = \frac{dz}{\mathrm{i}z}. \tag{72}
 $$
 
 As $\theta$ goes from 0 to $2\mathrm{\pi}$, $z$ traverses the unit circle $C$ once counterclockwise. Hence
 
 $$
-J = \frac{1}{\mathrm{i}}\oint_{C}\mathrm{e}^{z}z^{-n - 1} dz. \tag{78}
+J = \frac{1}{\mathrm{i}}\oint_{C}\mathrm{e}^{z}z^{-n - 1} dz. \tag{73}
 $$
 
 Expand the exponential:
 
 $$
-\mathrm{e}^{z} = \sum_{k = 0}^{\infty}z^{k}/k! \tag{79}
+\mathrm{e}^{z} = \sum_{k = 0}^{\infty}z^{k}/k! \tag{74}
 $$
 
 $$
@@ -1011,11 +1011,11 @@ $$
 Only the term with $k = n$ contributes to the contour integral. Thus
 
 $$
-J = \frac{1}{\mathrm{i}}(2\mathrm{\pi}\mathrm{i})\frac{1}{n!} = \frac{2\mathrm{\pi}}{n!}. \tag{80}
+J = \frac{1}{\mathrm{i}}(2\mathrm{\pi}\mathrm{i})\frac{1}{n!} = \frac{2\mathrm{\pi}}{n!}. \tag{75}
 $$
 
 This value is real. Since $I$ is the real component of $J$, it follows that
 
 $$
-I = \frac{2\mathrm{\pi}}{n!}, \quad n = 0, 1, 2, \dots . \tag{81}
+I = \frac{2\mathrm{\pi}}{n!}, \quad n = 0, 1, 2, \dots . \tag{76}
 $$
