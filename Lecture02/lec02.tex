@@ -8,16 +8,19 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools} % provides \coloneqq
 \usepackage{xcolor} % 
+\usepackage{graphicx} % for the included figures
 
 % --- Theorem and definition environments ---
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
+
 
 \begin{document}
 
@@ -25,8 +28,8 @@
 % Title and author information
 % ==================================================
 \begin{center}
-    {\LARGE \textbf{Mathematics Method for Physics--Lecture 1}} \\[0.6em]
-    {\large Complex Numbers and the Complex Plane}
+    {\LARGE \textbf{Mathematics Method for Physics--Lecture 2}} \\[0.6em]
+    {\large Point Sets in the Complex Plane}
 \end{center}
 
 \vspace{-0.5em}
@@ -52,331 +55,315 @@
 % ==================================================
 % Main content
 % ==================================================
-\section{Fundamentals and Representations of Complex Numbers}
+Lecture 1 treated a complex number as a single object. The present chapter instead studies \textbf{subsets} of $\mathbb{C}$: disks, open and closed sets, connected sets, and the domains on which complex functions will be defined. The properties involved --- openness, connectedness, boundary --- refer to the position of the points of a set in the plane, and are not expressed through the algebra of complex numbers.
 
-\subsection{Algebraic (Cartesian) Form}
+\section{Neighborhoods}
 
-\begin{definition}[Complex number]
-A \textbf{complex number} $z$ is defined as an ordered pair of real numbers $(x, y) \in \mathbb{R}^2$, expressed in the algebraic form
-\begin{equation}
-z \coloneqq x + \mathrm{i} y, \quad x, y \in \mathbb{R},
-\end{equation}
-where
-\begin{itemize}
-    \item $\mathrm{i}$ denotes the imaginary unit defined by $\mathrm{i}^2 \coloneqq -1$;
-    \item $x \coloneqq \operatorname{Re}(z)$ is the \textbf{real part} of $z$;
-    \item $y \coloneqq \operatorname{Im}(z)$ is the \textbf{imaginary part} of $z$.
-\end{itemize}
-\end{definition}
-
-\subsubsection{Geometric Correspondence (The Complex Plane / Argand Plane)}
-
-There exists a canonical bijective correspondence among three entities:
-\begin{enumerate}
-    \item The complex number $z = x + \mathrm{i} y \in \mathbb{C}$.
-    \item The point $P(x, y)$ in the Cartesian plane $\mathbb{R}^2$.
-    \item The position vector $\vec{OP} \coloneqq \begin{bmatrix} x \\ y \end{bmatrix} \in \mathbb{R}^2$.
-\end{enumerate}
-
-The horizontal axis represents the \textbf{real axis} ($\operatorname{Re}$), and the vertical axis represents the \textbf{imaginary axis} ($\operatorname{Im}$).
-
-\subsection{Polar Form, Euler's Formula, and Exponential Representation}
-
-\subsubsection{Polar Coordinates and Polar Form}
-
-Transforming the Cartesian coordinates $(x, y)$ into plane polar coordinates $(r, \theta)$ via
-\begin{equation}
-\begin{cases} x = r \cos\theta \\ y = r \sin\theta \end{cases}
-\end{equation}
-allows $z$ to be written in \textbf{trigonometric (polar) form}:
-\begin{equation}
-z = r(\cos\theta + \mathrm{i}\sin\theta).
-\end{equation}
-
-\subsubsection{Modulus (Absolute Value)}
-
-\begin{definition}[Modulus]
-The \textbf{modulus} $r \coloneqq |z|$ represents the Euclidean distance from the origin to $P(x, y)$:
-\begin{equation}
-|z| \coloneqq \sqrt{x^2 + y^2} \ge 0.
-\end{equation}
-\end{definition}
-
-\subsubsection{Argument and Principal Argument}
-
-The angle $\theta$ is defined as an \textbf{argument} of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\pi$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
-\begin{equation}
-\operatorname{Arg}(z) \coloneqq \arg(z) + 2k\pi, \quad k \in \mathbb{Z}.
-\end{equation}
-
-The unique representative in the interval $(-\pi, \pi]$ is defined as the \textbf{principal argument}, denoted by $\arg(z) \in (-\pi, \pi]$:
-\begin{equation}
-\arg(z) \coloneqq \begin{cases}  \arctan\left(\frac{y}{x}\right), & x > 0 \\  \arctan\left(\frac{y}{x}\right) + \pi, & x < 0, \, y \ge 0 \\  \arctan\left(\frac{y}{x}\right) - \pi, & x < 0, \, y < 0 \\  \frac{\pi}{2}, & x = 0, \, y > 0 \\  -\frac{\pi}{2}, & x = 0, \, y < 0  \end{cases}
-\end{equation}
-
-\noindent\textit{(For $z = 0$, the modulus is $|0| = 0$, and the argument $\operatorname{Arg}(0)$ is undefined.)}
-
-\subsubsection{Physical Meaning and Introduction of the Exponential Form}
-
-In physics and engineering (such as wave mechanics, alternating-current circuits, and quantum mechanics), complex exponentials are the natural language for describing \textbf{rotation}, \textbf{phase}, and \textbf{harmonic oscillation (phasors)}:
-\begin{itemize}
-    \item \textbf{Rotation Operator:} The factor $\mathrm{e}^{\mathrm{i}\theta}$ acts as a unit rotator ($|\mathrm{e}^{\mathrm{i}\theta}| = 1$). Multiplying any vector by $\mathrm{e}^{\mathrm{i}\theta}$ preserves its magnitude while rotating it counterclockwise by an angle $\theta$.
-    \item \textbf{Harmonic Motion:} When the phase evolves uniformly with time, $\theta(t) = \omega t$, the term $\mathrm{e}^{\mathrm{i}\omega t}$ describes uniform circular motion on the complex plane. Its projection onto the real axis yields the standard harmonic oscillator $\cos(\omega t)$.
-\end{itemize}
-
-This bridge between circular rotation and trigonometry is codified as \textbf{Euler's Formula}:
-\begin{equation}
-\mathrm{e}^{\mathrm{i}\theta} \coloneqq \cos\theta + \mathrm{i}\sin\theta.
-\end{equation}
-
-Substituting Euler's formula into the polar representation yields the \textbf{exponential form} of a complex number:
-\begin{equation}
-z \coloneqq r \mathrm{e}^{\mathrm{i}\theta},
-\end{equation}
-where $r = |z|$ represents the \textbf{amplitude} (magnitude) and $\theta$ represents the \textbf{phase} (orientation).
-
-\section{Operations and Geometric Transformations}
-
-\subsection{Addition and Subtraction}
-
-For $z_1 = x_1 + \mathrm{i} y_1$ and $z_2 = x_2 + \mathrm{i} y_2$:
-\begin{equation}
-z_1 \pm z_2 \coloneqq (x_1 \pm x_2) + \mathrm{i}(y_1 \pm y_2).
-\end{equation}
-
-\textbf{Geometric Meaning:} Addition and subtraction correspond to vector addition and subtraction of $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$ according to the parallelogram law or triangle rule.
-
-\subsection{Complex Conjugation}
-
-\begin{definition}[Complex conjugate]
-The \textbf{complex conjugate} of $z = x + \mathrm{i} y = r \mathrm{e}^{\mathrm{i}\theta}$ is defined by
-\begin{equation}
-\bar{z} \coloneqq x - \mathrm{i} y = r \mathrm{e}^{-\mathrm{i}\theta}.
-\end{equation}
-\end{definition}
-
-Fundamental properties:
-\begin{itemize}
-    \item $\overline{z_1 \pm z_2} = \bar{z}_1 \pm \bar{z}_2$
-    \item $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$
-    \item $z \bar{z} = |z|^2 = x^2 + y^2$
-    \item $\operatorname{Re}(z) = \frac{z + \bar{z}}{2}, \quad \operatorname{Im}(z) = \frac{z - \bar{z}}{2\mathrm{i}}$
-\end{itemize}
-
-\subsection{Multiplication and Division}
-
-Let $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$ and $z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$.
-
-\subsubsection{Multiplication}
-
-\begin{equation}
-z_1 z_2 = (r_1 r_2) \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}.
-\end{equation}
-\begin{itemize}
-    \item \textbf{Modulus:} $|z_1 z_2| = |z_1| |z_2|$
-    \item \textbf{Argument:} $\operatorname{Arg}(z_1 z_2) = \operatorname{Arg}(z_1) + \operatorname{Arg}(z_2) \pmod{2\pi}$
-\end{itemize}
-
-\textbf{Geometric Meaning:} Multiplying a vector $z$ by $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$ dilates its length by factor $r_1$ and rotates it counterclockwise by an angle of $\theta_1$.
-
-\subsubsection{Division}
-
-\begin{equation}
-\frac{z_1}{z_2} \coloneqq \frac{z_1 \bar{z}_2}{|z_2|^2} = \left(\frac{r_1}{r_2}\right) \mathrm{e}^{\mathrm{i}(\theta_1 - \theta_2)}, \quad (z_2 \ne 0).
-\end{equation}
-\begin{itemize}
-    \item \textbf{Modulus:} $\left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}$
-    \item \textbf{Argument:} $\operatorname{Arg}\left(\frac{z_1}{z_2}\right) = \operatorname{Arg}(z_1) - \operatorname{Arg}(z_2) \pmod{2\pi}$
-\end{itemize}
-
-\begin{example}[Division by $\mathrm{i}$]
-\begin{equation}
-\frac{z}{\mathrm{i}} = \frac{z(-\mathrm{i})}{\mathrm{i}(-\mathrm{i})} = -\mathrm{i} z = z \cdot \mathrm{e}^{-\mathrm{i}\frac{\pi}{2}}.
-\end{equation}
-\textbf{Geometric Meaning:} Multiplying by $-\mathrm{i}$ (or dividing by $\mathrm{i}$) rotates the vector clockwise by $\frac{\pi}{2}$.
-\end{example}
-
-\subsection{Powers, Binomial Expansion, and de Moivre's Theorem}
-
-For any positive integer $n \in \mathbb{N}^+$:
-\begin{equation}
-z^n = (r \mathrm{e}^{\mathrm{i}\theta})^n = r^n \mathrm{e}^{\mathrm{i} n\theta} = r^n (\cos(n\theta) + \mathrm{i}\sin(n\theta)).
-\end{equation}
-
-Setting $r = 1$ gives \textbf{de Moivre's Theorem}:
-\begin{equation}
-(\cos\theta + \mathrm{i}\sin\theta)^n = \cos(n\theta) + \mathrm{i}\sin(n\theta).
-\end{equation}
-
-In Cartesian form, $z^n$ can be expanded using the binomial theorem:
-\begin{equation}
-z^n = (x + \mathrm{i} y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} (\mathrm{i} y)^k,
-\end{equation}
-where the \textbf{binomial coefficient} $\binom{n}{k}$ is defined by
-\begin{equation}
-\binom{n}{k} \coloneqq \frac{n!}{k!(n-k)!} = \frac{n(n-1)\cdots(n-k+1)}{k!},
-\end{equation}
-with $0! \coloneqq 1$.
-
-\subsection{Roots of Complex Numbers}
-
-If $w^n = z$ for $n \in \mathbb{N}^+$, $w$ is an $n$-th root of $z$, denoted by $\sqrt[n]{z}$.
-
-Let $z = r \mathrm{e}^{\mathrm{i}\theta}$. There are exactly $n$ distinct complex roots given by
-\begin{equation}
-w_k \coloneqq \sqrt[n]{r} \exp\left(\mathrm{i} \frac{\theta + 2k\pi}{n}\right) = \sqrt[n]{r}\left[\cos\left(\frac{\theta + 2k\pi}{n}\right) + \mathrm{i}\sin\left(\frac{\theta + 2k\pi}{n}\right)\right]
-\end{equation}
-for $k = 0, 1, 2, \dots, n-1$.
-
-\subsubsection{Special Case: Roots of Unity ($\sqrt[n]{1}$)}
-
-When $z = 1 = 1 \cdot \mathrm{e}^{\mathrm{i} 0}$, the solutions to $w^n = 1$ are
-\begin{equation}
-\omega_k \coloneqq \mathrm{e}^{\mathrm{i}\frac{2k\pi}{n}} = \cos\left(\frac{2k\pi}{n}\right) + \mathrm{i}\sin\left(\frac{2k\pi}{n}\right), \quad k = 0, 1, \dots, n-1.
-\end{equation}
-
-\textbf{Geometric Meaning:} The $n$ roots of unity form the vertices of a regular $n$-sided polygon inscribed in the unit circle $|w| = 1$, with one vertex located at $w = 1$.
-
-\section{Geometric Applications in the Complex Plane}
-
-\subsection{Distance and Modulus Identities}
-
-The Euclidean distance between two points represented by $z_1$ and $z_2$ is
-\begin{equation}
-\operatorname{dist}(z_1, z_2) \coloneqq |z_1 - z_2|.
-\end{equation}
-
-\subsubsection{Key Identities and Inequalities}
-
-\begin{enumerate}
-    \item \textbf{Modulus--Conjugate Relation:}
-    \begin{equation}
-    |z|^2 = z \bar{z}.
-    \end{equation}
-    \item \textbf{Parallelogram Identity:}
-    \begin{equation}
-    |z_1 + z_2|^2 + |z_1 - z_2|^2 = 2(|z_1|^2 + |z_2|^2).
-    \end{equation}
-    \item \textbf{Modulus Expansion:}
-    \begin{equation}
-    |z_1 \pm z_2|^2 = |z_1|^2 + |z_2|^2 \pm 2\operatorname{Re}(z_1 \bar{z}_2).
-    \end{equation}
-    \item \textbf{Triangle Inequality:}
-    \begin{equation}
-    \bigl| |z_1| - |z_2| \bigr| \le |z_1 \pm z_2| \le |z_1| + |z_2|.
-    \end{equation}
-\end{enumerate}
-
-\subsection{Standard Curves and Lines}
-
-\subsubsection{Circle}
-
-A circle $C$ centered at $z_0$ with radius $r > 0$:
-\begin{itemize}
-    \item \textbf{Implicit Form:}
-    \begin{equation}
-    |z - z_0| = r.
-    \end{equation}
-    \item \textbf{Parametric Form:}
-    \begin{equation}
-    z(t) \coloneqq z_0 + r \mathrm{e}^{\mathrm{i} t}, \quad t \in [0, 2\pi).
-    \end{equation}
-\end{itemize}
-
-\subsubsection{Straight Line}
-
-A straight line passing through two distinct points $z_1$ and $z_2$:
-\begin{equation}
-z(t) \coloneqq z_1 + t(z_2 - z_1), \quad t \in \mathbb{R}.
-\end{equation}
-
-\subsection{Angle Between Vectors and Angles in a Triangle}
-
-\subsubsection{Directed Angle}
-
-The directed angle $\theta$ from vector $(z_3 - z_1)$ to vector $(z_2 - z_1)$ is
-\begin{equation}
-\theta \coloneqq \operatorname{Arg}\left(\frac{z_2 - z_1}{z_3 - z_1}\right).
-\end{equation}
-
-\subsubsection{Interior Angles of a Triangle}
-
-For a positively oriented (counterclockwise) triangle $\triangle ABC$ with vertices $z_1, z_2, z_3$:
-\begin{equation}
-\begin{cases}  \angle z_1 \coloneqq \arg\left(\dfrac{z_3 - z_1}{z_2 - z_1}\right) \\  \angle z_2 \coloneqq \arg\left(\dfrac{z_1 - z_2}{z_3 - z_2}\right) \\  \angle z_3 \coloneqq \arg\left(\dfrac{z_2 - z_3}{z_1 - z_3}\right)  \end{cases}
-\end{equation}
-
-\begin{theorem}[Sum of interior angles]
-The sum of the interior angles of a nondegenerate triangle equals $\pi$.
-\end{theorem}
-\begin{proof}
-Consider the cyclic product
-\begin{equation}
-P \coloneqq \left(\frac{z_3 - z_1}{z_2 - z_1}\right) \cdot \left(\frac{z_1 - z_2}{z_3 - z_2}\right) \cdot \left(\frac{z_2 - z_3}{z_1 - z_3}\right) = -1.
-\end{equation}
-Taking arguments on both sides,
-\begin{equation}
-\operatorname{Arg}(P) = \operatorname{Arg}\left(\frac{z_3 - z_1}{z_2 - z_1}\right) + \operatorname{Arg}\left(\frac{z_1 - z_2}{z_3 - z_2}\right) + \operatorname{Arg}\left(\frac{z_2 - z_3}{z_1 - z_3}\right) = \operatorname{Arg}(-1) = \pi + 2k\pi, \quad k \in \mathbb{Z}.
-\end{equation}
-For interior angles of a nondegenerate triangle, each angle satisfies $0 < \angle z_i < \pi$, so
-\begin{equation}
-0 < \angle z_1 + \angle z_2 + \angle z_3 < 3\pi.
-\end{equation}
-Thus, $k$ must be $0$, which proves
-\begin{equation}
-\angle z_1 + \angle z_2 + \angle z_3 = \pi.
-\end{equation}
-\end{proof}
-
-\subsection{Geometric Characterization of Circles (Thales's Theorem)}
-
-\begin{theorem}[Thales's Theorem]
-A point $z$ lies on the circle with diameter endpoints $z_1$ and $z_2$ (with $z \ne z_1$) if and only if
-\begin{equation}
-\operatorname{Re}\left(\frac{z_2 - z_1}{z - z_1}\right) = 1.
-\end{equation}
-\end{theorem}
-\begin{proof}
-Rearranging the algebraic fraction,
-\begin{equation}
-\frac{z_2 - z_1}{z - z_1} - 1 = \frac{(z_2 - z_1) - (z - z_1)}{z - z_1} = \frac{z_2 - z}{z - z_1}.
-\end{equation}
-Taking the real part of both sides yields
-\begin{equation}
-\operatorname{Re}\left(\frac{z_2 - z}{z - z_1}\right) = 0 \iff \frac{z_2 - z}{z - z_1} \text{ is purely imaginary}.
-\end{equation}
-This is equivalent to
-\begin{equation}
-\arg\left(\frac{z_2 - z}{z - z_1}\right) = \pm \frac{\pi}{2} \iff \angle(z_1, z, z_2) = \frac{\pi}{2}.
-\end{equation}
-By Thales's Theorem, the locus of points subtending a right angle across segment $[z_1, z_2]$ is the circle with diameter $[z_1, z_2]$. This also satisfies the Pythagorean theorem:
-\begin{equation}
-|z_1 - z_2|^2 = |z - z_1|^2 + |z - z_2|^2.
-\end{equation}
-\end{proof}
-
-\section{Introduction to Point Sets in the Complex Plane}
-
-\subsection{Neighborhoods}
+The basic measuring tool is the open disk.
 
 \begin{definition}[$\delta$-neighborhood]
-The $\delta$\textbf{-neighborhood} of a point $z_0 \in \mathbb{C}$ is defined as the open disk
+The $\delta$\textbf{-neighborhood} of a point $z_0 \in \mathbb{C}$ is the open disk
 \begin{equation}
-U(z_0, \delta) \coloneqq \{ z \in \mathbb{C} : |z - z_0| < \delta \}.
+U(z_0, \delta) \coloneqq \{ z \in \mathbb{C} : |z - z_0| < \delta \}, \quad \delta > 0.
 \end{equation}
-The \textbf{punctured (deleted) neighborhood} is defined as
+Its boundary circle $|z - z_0| = \delta$ is \textbf{not} part of $U(z_0, \delta)$. Removing the centre as well gives the \textbf{punctured (deleted) neighborhood}
 \begin{equation}
-\mathring{U}(z_0, \delta) \coloneqq \{ z \in \mathbb{C} : 0 < |z - z_0| < \delta \}.
+\mathring{U}(z_0, \delta) \coloneqq \{ z \in \mathbb{C} : 0 < |z - z_0| < \delta \},
+\end{equation}
+which is the natural setting for limits, where the value at $z_0$ itself must not influence the behaviour.
+\end{definition}
+
+Every definition in this chapter has one of two logical forms: it requires a property to hold \textit{for all sufficiently small $\delta > 0$}, or it requires the existence of \textit{at least one $\delta > 0$} with that property. Distinguishing the two forms is the main point of the definitions that follow.
+
+\section{Interior, Exterior and Boundary Points}
+
+\begin{remark}[Complement]
+The \textbf{complement} of $E$ in $\mathbb{C}$ is the set of points of the plane that do not belong to $E$:
+\begin{equation}
+\mathbb{C} \setminus E \coloneqq \{ z \in \mathbb{C} : z \notin E \}.
+\end{equation}
+The complement is defined relative to the ambient set $\mathbb{C}$, so $E \cup (\mathbb{C} \setminus E) = \mathbb{C}$ and $E \cap (\mathbb{C} \setminus E) = \varnothing$. The notation below uses it only in this sense.
+\end{remark}
+
+Let $E \subset \mathbb{C}$ be a point set and $z_0 \in \mathbb{C}$. Relative to $E$, the point $z_0$ is exactly one of the following.
+\begin{enumerate}
+    \item \textbf{Interior point:} $z_0 \in E$ and there is a $\delta > 0$ such that
+    \begin{equation}
+    U(z_0, \delta) \subset E.
+    \end{equation}
+    \item \textbf{Exterior point:} there is a $\delta > 0$ such that
+    \begin{equation}
+    U(z_0, \delta) \cap E = \varnothing.
+    \end{equation}
+    \item \textbf{Boundary point:} for \textbf{every} $\delta > 0$,
+    \begin{equation}
+    U(z_0, \delta) \cap E \ne \varnothing \quad \text{and} \quad U(z_0, \delta) \cap (\mathbb{C} \setminus E) \ne \varnothing.
+    \end{equation}
+\end{enumerate}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig01-interior-exterior-boundary.pdf}
+    \caption{Interior point $z_1$, exterior point $z_2$ and boundary point $z_3$ of a set $E$. The dashed circle is the $\delta$-neighborhood of the marked point.}
+    \label{fig:interior-exterior-boundary}
+\end{figure}
+
+As Figure~\ref{fig:interior-exterior-boundary} shows, the interior point $z_1$ has a whole disk that stays inside $E$; the exterior point $z_2$ has a whole disk that avoids $E$; the boundary point $z_3$ has no such disk, since every disk around it is split between $E$ and its complement. Note:
+\begin{itemize}
+    \item The three cases are \textbf{mutually exclusive and exhaustive}: every point of $\mathbb{C}$ is interior, exterior, or boundary.
+    \item An interior point necessarily lies in $E$, and an exterior point necessarily lies outside $E$; a boundary point may lie either in $E$ or outside it. The boundary is therefore \textit{not} required to belong to $E$ or to $\mathbb{C} \setminus E$.
+    \item An \textbf{isolated point} of $E$ (a point of $E$ with some $\mathring{U}(z_0, \delta) \cap E = \varnothing$) is always a boundary point, because $U(z_0, \delta)$ still meets $E$ at $z_0$ itself.
+\end{itemize}
+
+\section{Boundary, Interior, Open and Closed Sets}
+
+Collecting the three kinds of points gives three sets:
+\begin{equation}
+E^{\circ} \coloneqq \{ z : z \text{ is an interior point of } E \},
+\end{equation}
+\begin{equation}
+\partial E \coloneqq \{ z : z \text{ is a boundary point of } E \},
+\end{equation}
+\begin{equation}
+\operatorname{ext} E \coloneqq \{ z : z \text{ is an exterior point of } E \}.
+\end{equation}
+$E^{\circ}$ is the \textbf{interior} of $E$ and $\partial E$ is the \textbf{boundary} of $E$. By the last relation, the exterior is just the interior of the complement, $\operatorname{ext} E = (\mathbb{C} \setminus E)^{\circ}$. Adding the boundary to $E$ produces the \textbf{closure}
+\begin{equation}
+\overline{E} \coloneqq E \cup \partial E,
+\end{equation}
+which is the smallest closed set containing $E$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig02-boundary-open-closed.pdf}
+    \caption{The boundary $\partial E$ (red) and the interior $E^{\circ}$ of a set $E$, together with the definitions of an open and of a closed set.}
+    \label{fig:boundary-open-closed}
+\end{figure}
+
+A set is classified by how much of its own boundary it carries (Figure~\ref{fig:boundary-open-closed}).
+\begin{itemize}
+    \item $E$ is \textbf{open} if and only if every one of its points is interior, i.e.
+    \begin{equation}
+    E \ \text{open} \iff E = E^{\circ}.
+    \end{equation}
+    \item $E$ is \textbf{closed} if and only if it contains its whole boundary, i.e.
+    \begin{equation}
+    E \ \text{closed} \iff E = \overline{E} = E \cup \partial E.
+    \end{equation}
+    \item Equivalently, $E$ is closed exactly when its complement is open:
+    \begin{equation}
+    E \ \text{closed} \iff \mathbb{C} \setminus E \ \text{open}.
+    \end{equation}
+\end{itemize}
+
+The two notions are not opposites. Take $E = \{ z : |z| < 1 \} \cup \{ 1 \}$: the point $1$ lies in $E$ but has no neighborhood inside $E$, so $E$ is not open, while $\partial E = \{ z : |z| = 1 \}$ is not contained in $E$, so $E$ is not closed either. ``Open'' forbids boundary points, ``closed'' demands all of them, and a set may fail both tests at once. Note that a circle $\{ z : |z| = 1 \}$, taken as a set of points, \textit{is} closed --- it equals its own boundary --- although it has empty interior.
+
+Consequently, $E$ is open if and only if $\partial E \cap E = \varnothing$, and $E$ is closed if and only if $\partial E \subset E$. Moreover $\partial E = \partial(\mathbb{C} \setminus E)$, so a set and its complement have the same boundary.
+
+\section{Connected Sets}
+
+A set either is of one piece or falls apart into several. \textbf{Connectedness} is the formal expression of the first alternative: any two of its points can be joined without leaving the set.
+
+\begin{definition}[Polygonal path, connected set]
+A \textbf{polygonal path} in $E$ joining $z_1$ and $z_2$ is a union of finitely many segments whose vertices start at $z_1$ and end at $z_2$:
+\begin{equation}
+\gamma = \bigcup_{k=1}^{n} [w_{k-1}, w_k], \qquad w_0 = z_1, \quad w_n = z_2, \quad [w_{k-1}, w_k] \subset E.
+\end{equation}
+$E$ is \textbf{connected} if every two of its points can be so joined:
+\begin{equation}
+E \ \text{connected} \iff \forall\, z_1, z_2 \in E \ \ \exists\, \gamma \subset E \ \text{joining} \ z_1 \ \text{to} \ z_2.
 \end{equation}
 \end{definition}
 
-\subsection{Point Classification and Domains}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig03-connected-disconnected.pdf}
+    \caption{(a) A region with a hole is still connected: the polygonal path joins $z_1$ to $z_2$ while going around the hole. (b) $E_1 \cup E_2$ is disconnected, since no path inside the set bridges the gap.}
+    \label{fig:connected-disconnected}
+\end{figure}
 
-Let $E \subset \mathbb{C}$ be a subset of the complex plane.
-\begin{enumerate}
-    \item \textbf{Interior Point:} A point $z_0 \in E$ is defined as an \textit{interior point} of $E$ if there exists $\delta > 0$ such that $U(z_0, \delta) \subset E$.
-    \item \textbf{Open Set:} $E$ is defined to be an \textit{open set} if every point of $E$ is an interior point of $E$.
-    \item \textbf{Domain (Region):} An open set $D \subset \mathbb{C}$ is defined as a \textbf{domain} if it is connected (i.e., any two points in $D$ can be joined by a continuous polygonal path lying entirely within $D$).
-\end{enumerate}
+In Figure~\ref{fig:connected-disconnected}(a) the region is not simply shaped, yet it remains \textbf{connected}, since the polygonal path joining $z_1$ to $z_2$ avoids the hole. A hole therefore does not destroy connectedness; only a genuine separation does, as in Figure~\ref{fig:connected-disconnected}(b), where $E_1 \cup E_2$ falls into two components and no path inside the set joins them.
+
+\section{Domains and Connectivity}
+
+Combining the last two sections gives the central object of the whole course.
+
+\begin{definition}[Domain, region]
+A \textbf{domain} (or \textbf{region}) $D$ is a point set that is both open and connected:
+\begin{equation}
+D \ \text{domain} \iff D \ \text{open and connected}.
+\end{equation}
+A domain is \textbf{bounded} if $D \subset U(0, R)$ for some $R > 0$, and \textbf{unbounded} otherwise.
+\end{definition}
+
+Openness is what makes differentiation possible on a domain, while connectedness excludes a domain that falls into unrelated components. Every domain is an open set, but the converse fails: for $z_0 \ne z_1$ the set $U(z_0, \delta) \cup U(z_1, \delta)$ is open and yet is not a domain, being disconnected. Openness is a \textit{local} property, verified one neighborhood at a time; being a domain also requires the \textit{global} property that the set be of one piece.
+
+Domains are further distinguished by the number of holes they enclose. $D$ is \textbf{simply connected} if every closed curve in $D$ can be shrunk continuously to a single point without ever leaving $D$:
+\begin{equation}
+C \subset D \ \text{closed} \ \Longrightarrow \ C \ \text{contracts to a point inside} \ D.
+\end{equation}
+Otherwise $D$ is \textbf{multiply connected}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig04-simply-multiply-connected.pdf}
+    \caption{(a) In a simply connected domain every closed curve $C$ contracts within $D$ to a point $p \in D$. (b) In a multiply connected domain a closed curve $C$ may enclose a hole, and then it cannot be contracted within $D$.}
+    \label{fig:simply-multiply-connected}
+\end{figure}
+
+In Figure~\ref{fig:simply-multiply-connected}(a) the curve $C$ contracts within $D$ to a point $p \in D$. In Figure~\ref{fig:simply-multiply-connected}(b) the curve $C$ encircles a hole; contracting it to a point would require it to cross that hole, which does not belong to $D$. A simply connected domain is thus one without holes, equivalently one whose complement $\mathbb{C} \setminus D$ has no bounded component.
+
+The two notions must be kept apart. An annulus is connected, since any two of its points can be joined by a path inside it, yet it is multiply connected. Connectedness concerns the existence of paths between points; simple connectedness concerns the contractibility of closed curves.
+
+\section{Positive Orientation of the Boundary}
+
+For a domain with holes, or an unbounded domain, the boundary $\partial D$ may consist of several separate closed curves. Integration over $\partial D$ requires these curves to be traversed in a coherent order.
+
+\begin{definition}[Positively oriented boundary]
+The \textbf{positively oriented boundary} $\Gamma^{+}$ of a domain $D$ is the traversal of $\partial D$ for which the domain stays on the \textbf{left}:
+\begin{equation}
+\Gamma^{+} : \quad D \ \text{lies to the left of the direction of travel}.
+\end{equation}
+The opposite traversal is written $\Gamma^{-}$.
+\end{definition}
+
+For a disk domain there is a single boundary curve, and the rule forces it to be counterclockwise (Figure~\ref{fig:positive-boundary}):
+\begin{equation}
+\Gamma = C_0 \quad (\text{counterclockwise}).
+\end{equation}
+For a circular-ring domain the boundary has two components, and the rule forces opposite senses: the outer circle counterclockwise, the inner circle clockwise,
+\begin{equation}
+\Gamma = C_0 + C_1^{-} \quad (\text{outer ccw}, \ \text{inner cw}).
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig05-positive-boundary.pdf}
+    \caption{Positive orientation. (a) For a disk domain the boundary $C_0$ is traversed counterclockwise. (b) For a circular-ring domain the outer circle $C_0$ is traversed counterclockwise and the inner hole $C_1^{-}$ clockwise, so that $D$ stays on the left throughout.}
+    \label{fig:positive-boundary}
+\end{figure}
+
+Here the superscript minus in $C_1^{-}$ denotes traversal in the reversed, clockwise sense. This is the unique choice for which $D$ lies to the left along \textbf{every} component, so that the several curves combine into a single positively oriented boundary instead of partly cancelling each other.
+
+The same rule extends to a domain with $n$ holes, giving one outer curve and $n$ inner curves (Figure~\ref{fig:n-hole-boundary}):
+\begin{equation}
+\Gamma = C_0 + C_1^{-} + C_2^{-} + \cdots + C_n^{-}.
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.72\textwidth]{figs/fig06-n-hole-boundary.pdf}
+    \caption{The boundary of a domain with $n$ holes. The outer boundary $C_0$ is traversed counterclockwise and every hole $C_1^{-}, \dots, C_n^{-}$ clockwise, so that the domain always stays on the left.}
+    \label{fig:n-hole-boundary}
+\end{figure}
+
+\section{The Extended Complex Plane}
+
+The complex plane is not compact, and a sequence such as $z_k = k$ has no limit in $\mathbb{C}$. Adjoining a single ideal point repairs this.
+
+\begin{definition}[Extended complex plane]
+The \textbf{extended complex plane} is
+\begin{equation}
+\widehat{\mathbb{C}} \coloneqq \mathbb{C} \cup \{ \infty \}.
+\end{equation}
+\end{definition}
+
+We write $|\infty| = +\infty$, but no arithmetic is defined for $\infty$: expressions such as $\infty - \infty$ or $0 \cdot \infty$ remain meaningless. The point $\infty$ is a \textit{location}, not a number.
+
+A set of the form
+\begin{equation}
+\{ z \in \mathbb{C} : |z| > R \} \cup \{ \infty \}, \quad R > 0,
+\end{equation}
+is a \textbf{neighborhood of $\infty$}. With this definition $\infty$ behaves like any other point of $\widehat{\mathbb{C}}$: it has neighborhoods, and a sequence diverges to $\infty$ exactly when it eventually lies in every such neighborhood. A set $E \subset \mathbb{C}$ is bounded precisely when its closure in $\widehat{\mathbb{C}}$ does not contain $\infty$.
+
+The geometric model of $\widehat{\mathbb{C}}$ is the \textbf{Riemann sphere}. Take the unit sphere
+\begin{equation}
+\Sigma : \ X^2 + Y^2 + Z^2 = 1
+\end{equation}
+and identify the plane $\mathbb{C}$ with the equatorial plane $Z = 0$. \textbf{Stereographic projection} sends $z = x + \mathrm{i} y$ to the point where the line from the north pole $N = (0,0,1)$ through $(x,y,0)$ meets $\Sigma$:
+\begin{equation}
+X = \frac{2x}{1 + |z|^2}, \quad
+Y = \frac{2y}{1 + |z|^2}, \quad
+Z = \frac{|z|^2 - 1}{1 + |z|^2}.
+\end{equation}
+The map is a bijection from $\mathbb{C}$ onto $\Sigma \setminus \{ N \}$. The inverse is
+\begin{equation}
+x = \frac{X}{1 - Z}, \quad y = \frac{Y}{1 - Z},
+\end{equation}
+and completing it by $N \mapsto \infty$ extends the correspondence to all of $\widehat{\mathbb{C}}$:
+\begin{equation}
+\widehat{\mathbb{C}} \ \longleftrightarrow \ \Sigma, \qquad \infty \ \longleftrightarrow \ N.
+\end{equation}
+
+Two consequences are used later. First, a circle $|z| = R$ in the plane corresponds to a circle of latitude on the sphere,
+\begin{equation}
+|z|^2 = \frac{1 + Z}{1 - Z} \quad \Longleftrightarrow \quad Z = \frac{R^2 - 1}{R^2 + 1},
+\end{equation}
+so that $R \uparrow \infty$ drives $Z \uparrow 1$: the exterior of a large circle is exactly a small neighborhood of the north pole. Second, lines in the plane correspond to circles on $\Sigma$ passing through $N$, so on the sphere ``circle'' and ``line'' merge into a single notion --- the generalized circle.
+
+\section{Worked Examples}
+
+Two loci are examined below. In each case the defining condition is reduced to a system of inequalities between moduli, from which the boundary and the connectivity of the set can be read off.
+
+\subsection{A Lune Bounded by Two Tangent Circles}
+
+\begin{example}[Lune between two tangent circles]
+Determine the set
+\begin{equation}
+D \coloneqq \{ z = r\mathrm{e}^{\mathrm{i}\theta} : \cos\theta < r < 2\cos\theta \}
+\end{equation}
+and describe its boundary and connectivity.
+\end{example}
+
+\noindent\textit{Solution.} The constraint $\cos\theta > r \ge 0$ forces $\cos\theta > 0$, so $\theta \in (-\frac{\pi}{2}, \frac{\pi}{2})$. Multiplying the polar equations by $r > 0$ and using $r^2 = x^2 + y^2$ and $r\cos\theta = x$, the outer curve becomes
+\begin{equation}
+r = 2\cos\theta \iff r^2 = 2r\cos\theta \iff x^2 + y^2 = 2x \iff |z - 1| = 1,
+\end{equation}
+and the inner curve becomes
+\begin{equation}
+r = \cos\theta \iff r^2 = r\cos\theta \iff x^2 + y^2 = x \iff \left|z - \tfrac{1}{2}\right| = \tfrac{1}{2}.
+\end{equation}
+These are the circles of diameter $[0,2]$ and $[0,1]$, both passing through the origin, where they are internally tangent. Hence
+\begin{equation}
+D = \{ z : |z - 1| < 1 \} \cap \left\{ z : \left|z - \tfrac{1}{2}\right| > \tfrac{1}{2} \right\},
+\end{equation}
+the open lune between the two circles.
+
+\noindent\textit{Conclusion.} $D$ is a \textbf{domain}: it is open, both inequalities being strict, and connected. It is \textbf{bounded}, since $D \subset U(0,2)$. It is \textbf{simply connected}: the excluded disk $|z - \frac{1}{2}| \le \frac{1}{2}$ touches the outer circle at the single point $0$, hence it is attached to the exterior of $D$ rather than enclosed by it; the complement of $D$ is therefore connected and $D$ has no hole. The boundary $\partial D = \Gamma_1 \cup \Gamma_2$ is the union of the two circles $\Gamma_1 : |z - \frac{1}{2}| = \frac{1}{2}$ and $\Gamma_2 : |z - 1| = 1$.
+
+\subsection{An Angular Locus}
+
+\begin{example}[An angular locus]
+Determine the set
+\begin{equation}
+D \coloneqq \left\{ z : 0 < \arg\frac{z - \mathrm{i}}{z + \mathrm{i}} < \frac{\pi}{4} \right\}
+\end{equation}
+and describe its boundary and connectivity.
+\end{example}
+
+\noindent\textit{Solution.} Let $\alpha \in (0, \frac{\pi}{2})$ and consider the locus $\arg\frac{z - \mathrm{i}}{z + \mathrm{i}} = \alpha$. It consists of the points from which the segment joining $-\mathrm{i}$ to $+\mathrm{i}$ subtends the angle $\alpha$. By the inscribed-angle theorem, the same circle geometry that underlies Thales's theorem in Lecture 1, a fixed chord is seen under a fixed angle exactly on an \textbf{arc of a circle} through its endpoints, and that circle is determined by the condition that the central angle equal $2\alpha$.
+
+For $\alpha = \frac{\pi}{4}$ the chord $[-\mathrm{i}, \mathrm{i}]$ has length $2$, so the circle has radius $R$ with $2R\sin\frac{\pi}{4} = 2$, giving $R = \sqrt{2}$. Its centre lies on the real axis, and passing through $\pm\mathrm{i}$ forces the centre to be $-1$:
+\begin{equation}
+|z + 1| = \sqrt{2}.
+\end{equation}
+This circle passes through $\pm\mathrm{i}$ (since $|\pm\mathrm{i} + 1| = \sqrt{2}$) and meets the real axis at $-1 \pm \sqrt{2}$. The limiting case $\alpha = 0$ degenerates to the chord's own line, namely the imaginary axis, minus the segment between the endpoints.
+
+Collecting both pieces, the lower bound $\alpha > 0$ keeps $z$ on the side of the imaginary axis where the angle is measured positively, and the upper bound $\alpha < \frac{\pi}{4}$ keeps $z$ outside the disk:
+\begin{equation}
+D = \{ z : \operatorname{Re} z < 0 \} \cap \{ |z + 1| > \sqrt{2} \}.
+\end{equation}
+
+\noindent\textit{Conclusion.} $D$ is a \textbf{domain}: it is open, both inequalities being strict, and connected --- the disk $|z + 1| \le \sqrt{2}$ cuts a cap out of the left half-plane, but that cap is attached to the boundary line, so $D$ remains of one piece. It is \textbf{unbounded}, since it contains every $z = -R$ with $R > 1 + \sqrt{2}$. It is \textbf{simply connected}: the removed cap touches $\partial D$ along the imaginary axis, so again no hole is enclosed.
+
+The boundary $\partial D = \Gamma_1 \cup \Gamma_2$ consists of the two rays of the imaginary axis outside the chord,
+\begin{equation}
+\Gamma_1 : \ \operatorname{Re} z = 0, \ |\operatorname{Im} z| \ge 1,
+\end{equation}
+together with the major arc of the circle $|z + 1| = \sqrt{2}$ that lies in the closed left half-plane,
+\begin{equation}
+\Gamma_2 : \ |z + 1| = \sqrt{2}, \ \operatorname{Re} z \le 0,
+\end{equation}
+and the positively oriented boundary traverses both rays of $\Gamma_1$ \textbf{upwards}, then runs along $\Gamma_2$ from $-\mathrm{i}$ around $-1 - \sqrt{2}$ to $+\mathrm{i}$, keeping $D$ on the left throughout. Traversed the other way round, $D$ would fall on the right, so the orientation is forced.
 
 \end{document}

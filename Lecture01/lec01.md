@@ -1,6 +1,6 @@
-# Chapter 1: Complex Numbers and the Complex Plane
+# Lecture 1: Complex Numbers and the Complex Plane
 
-## 1. Fundamentals and Representations of Complex Numbers
+## 1 Fundamentals and Representations of Complex Numbers
 
 ### 1.1 Algebraic (Cartesian) Form
 
@@ -18,7 +18,7 @@ where:
 
 * $y \coloneqq \operatorname{Im}(z)$ is the **imaginary part** of $z$.
 
-#### Geometric Correspondence (The Complex Plane / Argand Plane)
+#### 1.1.1 Geometric Correspondence (The Complex Plane / Argand Plane)
 
 There exists a canonical bijective correspondence among three entities:
 
@@ -30,9 +30,9 @@ There exists a canonical bijective correspondence among three entities:
 
 The horizontal axis represents the **real axis** ($\operatorname{Re}$), and the vertical axis represents the **imaginary axis** ($\operatorname{Im}$).
 
-### 1.2 Polar Form, Euler's Formula, and Exponential Representation
+### 1.2 Polar and Exponential Representations
 
-#### Polar Coordinates and Polar Form
+#### 1.2.1 Polar Coordinates and Polar Form
 
 Transforming the Cartesian coordinates $(x, y)$ into plane polar coordinates $(r, \theta)$ via:
 
@@ -46,9 +46,9 @@ $$
 z = r(\cos\theta + \mathrm{i}\sin\theta) \tag{3}
 $$
 
-![polar coordniate system](./figs/tmp.jpg)
+![The complex plane: z = x + iy, the point P(x,y) and the vector OP](./figs/fig01-complex-plane-polar.png)
 
-#### Modulus (Absolute Value)
+#### 1.2.2 Modulus (Absolute Value)
 
 The **modulus** $r \coloneqq \vert{}z\vert{}$ represents the Euclidean distance from the origin to $P(x, y)$:
 
@@ -56,7 +56,7 @@ $$
 \vert{}z\vert{} \coloneqq \sqrt{x^2 + y^2} \ge 0 \tag{4}
 $$
 
-#### Argument and Principal Argument
+#### 1.2.3 Argument and Principal Argument
 
 The angle $\theta$ is defined as an **argument** of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\mathrm{\pi}$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
 
@@ -72,7 +72,9 @@ $$
 
 *(For* $z = 0$*, the modulus is* $\vert{}0\vert{} = 0$*, and the argument* $\operatorname{Arg}(0)$ *is undefined.)*
 
-#### Physical Meaning and Introduction of the Exponential Form
+![Principal argument in the four quadrants](./figs/fig02-principal-argument.png)
+
+#### 1.2.4 Physical Meaning and Introduction of the Exponential Form
 
 In physics and engineering (such as wave mechanics, alternating-current circuits, and quantum mechanics), complex exponentials are the natural language for describing **rotation**, **phase**, and **harmonic oscillation (phasors)**:
 
@@ -94,7 +96,7 @@ $$
 
 where $r = \vert{}z\vert{}$ represents the **amplitude** (magnitude) and $\theta$ represents the **phase** (orientation).
 
-## 2. Operations and Geometric Transformations
+## 2 Operations and Geometric Transformations
 
 ### 2.1 Addition and Subtraction
 
@@ -105,6 +107,8 @@ z_1 \pm z_2 \coloneqq (x_1 \pm x_2) + \mathrm{i}(y_1 \pm y_2) \tag{9}
 $$
 
 **Geometric Meaning:** Addition and subtraction correspond to vector addition and subtraction of $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$ according to the parallelogram law or triangle rule.
+
+![Parallelogram rule for the sum and triangle rule for the difference](./figs/fig03-parallelogram.png)
 
 ### 2.2 Complex Conjugation
 
@@ -128,7 +132,7 @@ Fundamental properties:
 
 Let $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$ and $z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$.
 
-#### Multiplication:
+#### 2.3.1 Multiplication
 
 $$
 z_1 z_2 = (r_1 r_2) \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)} \tag{11}
@@ -140,7 +144,7 @@ $$
 
 **Geometric Meaning:** Multiplying a vector $z$ by $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$ dilates its length by factor $r_1$ and rotates it counterclockwise by an angle of $\theta_1$.
 
-#### Division:
+#### 2.3.2 Division
 
 $$
 \frac{z_1}{z_2} \coloneqq \frac{z_1 \bar{z}_2}{\vert{}z_2\vert{}^2} = \left(\frac{r_1}{r_2}\right) \mathrm{e}^{\mathrm{i}(\theta_1 - \theta_2)}, \quad (z_2 \ne 0) \tag{12}
@@ -150,13 +154,15 @@ $$
 
 * **Argument:** $\operatorname{Arg}\left(\frac{z_1}{z_2}\right) = \operatorname{Arg}(z_1) - \operatorname{Arg}(z_2) \pmod{2\mathrm{\pi}}$
 
-#### Example: Division by $\mathrm{i}$
+**Example** (Division by $\mathrm{i}$).
 
 $$
 \frac{z}{\mathrm{i}} = \frac{z(-\mathrm{i})}{\mathrm{i}(-\mathrm{i})} = -\mathrm{i} z = z \cdot \mathrm{e}^{-\mathrm{i}\frac{\mathrm{\pi}}{2}} \tag{13}
 $$
 
 **Geometric Meaning:** Multiplying by $-\mathrm{i}$ (or dividing by $\mathrm{i}$) rotates the vector clockwise by $\frac{\mathrm{\pi}}{2}$.
+
+![Multiplication by -i: a clockwise quarter turn](./figs/fig04-multiply-by-minus-i.png)
 
 ### 2.4 Powers, Binomial Expansion, and de Moivre’s Theorem
 
@@ -198,7 +204,7 @@ $$
 
 for $k = 0, 1, 2, \dots, n-1$.
 
-#### Special Case: Roots of Unity ($\sqrt[n]{1}$)
+#### 2.5.1 Special Case: Roots of Unity ($\sqrt[n]{1}$)
 
 When $z = 1 = 1 \cdot \mathrm{e}^{\mathrm{i} 0}$, the solutions to $w^n = 1$ are:
 
@@ -208,7 +214,9 @@ $$
 
 **Geometric Meaning:** The $n$ roots of unity form the vertices of a regular $n$-sided polygon inscribed in the unit circle $\vert{}w\vert{} = 1$, with one vertex located at $w = 1$.
 
-## 3. Geometric Applications in the Complex Plane
+![The n-th roots of unity as a regular n-gon (n = 5 and n = 8)](./figs/fig08-roots-of-unity.png)
+
+## 3 Geometric Applications in the Complex Plane
 
 ### 3.1 Distance and Modulus Identities
 
@@ -218,7 +226,7 @@ $$
 \operatorname{dist} \left(z_1, \, z_2 \right) \coloneqq \vert{}z_1 - z_2\vert{} \tag{20}
 $$
 
-#### Key Identities and Inequalities:
+#### 3.1.1 Key Identities and Inequalities
 
 1. **Modulus-Conjugate Relation:**
 
@@ -246,7 +254,7 @@ $$
 
 ### 3.2 Standard Curves and Lines
 
-#### Circle
+#### 3.2.1 Circle
 
 A circle $C$ centered at $z_0$ with radius $r > 0$:
 
@@ -262,7 +270,7 @@ A circle $C$ centered at $z_0$ with radius $r > 0$:
   z(t) \coloneqq z_0 + r \mathrm{e}^{\mathrm{i} t}, \quad t \in [0, 2\mathrm{\pi}) \tag{26}
   $$
 
-#### Straight Line
+#### 3.2.2 Straight Line
 
 A straight line passing through two distinct points $z_1$ and $z_2$:
 
@@ -272,9 +280,11 @@ A straight line passing through two distinct points $z_1$ and $z_2$:
   z(t) \coloneqq z_1 + t(z_2 - z_1), \quad t \in \mathbb{R} \tag{27}
   $$
 
+![The circle and the straight line as point loci](./figs/fig05-circle-and-line.png)
+
 ### 3.3 Angle Between Vectors and Angles in a Triangle
 
-#### Directed Angle
+#### 3.3.1 Directed Angle
 
 The directed angle $\theta$ from vector $(z_3 - z_1)$ to vector $(z_2 - z_1)$ is:
 
@@ -282,7 +292,7 @@ $$
 \theta \coloneqq \operatorname{Arg}\left(\frac{z_2 - z_1}{z_3 - z_1}\right) \tag{28}
 $$
 
-#### Interior Angles of a Triangle
+#### 3.3.2 Interior Angles of a Triangle
 
 For a positively oriented (counterclockwise) triangle $\triangle ABC$ with vertices $z_1, z_2, z_3$:
 
@@ -290,7 +300,9 @@ $$
 \begin{cases}  \angle z_1 \coloneqq \arg\left(\dfrac{z_3 - z_1}{z_2 - z_1}\right) \\  \angle z_2 \coloneqq \arg\left(\dfrac{z_1 - z_2}{z_3 - z_2}\right) \\  \angle z_3 \coloneqq \arg\left(\dfrac{z_2 - z_3}{z_1 - z_3}\right)  \end{cases} \tag{29}
 $$
 
-#### Theorem: The Sum of Interior Angles of a Triangle is $\mathrm{\pi}$
+![Directed angle and the interior angles of a triangle](./figs/fig06-angles.png)
+
+**Theorem** (Sum of interior angles). *The sum of the interior angles of a nondegenerate triangle equals* $\mathrm{\pi}$.
 
 *Proof.* Consider the cyclic product:
 
@@ -347,4 +359,6 @@ By Thales's Theorem, the locus of points subtending a right angle across segment
 $$
 \vert{}z_1 - z_2\vert{}^2 = \vert{}z - z_1\vert{}^2 + \vert{}z - z_2\vert{}^2 \tag{38}
 $$
+
+![Thales's theorem as a locus condition](./figs/fig07-thales.png)
 

@@ -8,11 +8,13 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools} % provides \coloneqq
 \usepackage{xcolor} % 
+\usepackage{graphicx} % for the included figures
 
 % --- Theorem and definition environments ---
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -54,7 +56,11 @@
 % ==================================================
 \section{Fundamentals and Representations of Complex Numbers}
 
+This section fixes the objects. A complex number is first written in Cartesian form; the same number is then re-expressed in polar and exponential form, which is what makes multiplication and powers geometrically transparent.
+
 \subsection{Algebraic (Cartesian) Form}
+
+
 
 \begin{definition}[Complex number]
 A \textbf{complex number} $z$ is defined as an ordered pair of real numbers $(x, y) \in \mathbb{R}^2$, expressed in the algebraic form
@@ -71,6 +77,8 @@ where
 
 \subsubsection{Geometric Correspondence (The Complex Plane / Argand Plane)}
 
+
+
 There exists a canonical bijective correspondence among three entities:
 \begin{enumerate}
     \item The complex number $z = x + \mathrm{i} y \in \mathbb{C}$.
@@ -78,11 +86,25 @@ There exists a canonical bijective correspondence among three entities:
     \item The position vector $\vec{OP} \coloneqq \begin{bmatrix} x \\ y \end{bmatrix} \in \mathbb{R}^2$.
 \end{enumerate}
 
-The horizontal axis represents the \textbf{real axis} ($\operatorname{Re}$), and the vertical axis represents the \textbf{imaginary axis} ($\operatorname{Im}$).
+The horizontal axis represents the \textbf{real axis} ($\operatorname{Re}$), and the vertical axis represents the \textbf{imaginary axis} ($\operatorname{Im}$). Figure~\ref{fig:complex-plane-polar} displays the correspondence.
 
-\subsection{Polar Form, Euler's Formula, and Exponential Representation}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.62\textwidth]{figs/fig01-complex-plane-polar.pdf}
+    \caption{The complex plane. The number $z = x + \mathrm{i} y$, the point $P(x,y)$ and the position vector $\vec{OP}$ are three descriptions of the same object. The modulus $r = |z|$ is the length of $\vec{OP}$ and the argument $\theta$ is its inclination to the real axis.}
+    \label{fig:complex-plane-polar}
+\end{figure}
+
+\subsection{Polar and Exponential Representations}
+
+The Cartesian form is not the only way to locate a point. Replacing the
+rectangular coordinates by a distance and an inclination leads to the polar
+form, from which the modulus, the argument, Euler's formula and finally the
+exponential form follow in turn.
 
 \subsubsection{Polar Coordinates and Polar Form}
+
+
 
 Transforming the Cartesian coordinates $(x, y)$ into plane polar coordinates $(r, \theta)$ via
 \begin{equation}
@@ -95,6 +117,8 @@ z = r(\cos\theta + \mathrm{i}\sin\theta).
 
 \subsubsection{Modulus (Absolute Value)}
 
+
+
 \begin{definition}[Modulus]
 The \textbf{modulus} $r \coloneqq |z|$ represents the Euclidean distance from the origin to $P(x, y)$:
 \begin{equation}
@@ -103,6 +127,8 @@ The \textbf{modulus} $r \coloneqq |z|$ represents the Euclidean distance from th
 \end{definition}
 
 \subsubsection{Argument and Principal Argument}
+
+
 
 The angle $\theta$ is defined as an \textbf{argument} of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\pi$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
 \begin{equation}
@@ -114,9 +140,18 @@ The unique representative in the interval $(-\pi, \pi]$ is defined as the \textb
 \arg(z) \coloneqq \begin{cases}  \arctan\left(\frac{y}{x}\right), & x > 0 \\  \arctan\left(\frac{y}{x}\right) + \pi, & x < 0, \, y \ge 0 \\  \arctan\left(\frac{y}{x}\right) - \pi, & x < 0, \, y < 0 \\  \frac{\pi}{2}, & x = 0, \, y > 0 \\  -\frac{\pi}{2}, & x = 0, \, y < 0  \end{cases}
 \end{equation}
 
-\noindent\textit{(For $z = 0$, the modulus is $|0| = 0$, and the argument $\operatorname{Arg}(0)$ is undefined.)}
+\noindent\textit{(For $z = 0$, the modulus is $|0| = 0$, and the argument $\operatorname{Arg}(0)$ is undefined.)} The four cases are illustrated in Figure~\ref{fig:principal-argument}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig02-principal-argument.pdf}
+    \caption{The principal argument $\arg z \in (-\pi,\pi]$ in the four quadrants. The formula $\arctan(y/x)$ alone is valid only where $x > 0$; in the second and third quadrants it must be corrected by $\pm\pi$.}
+    \label{fig:principal-argument}
+\end{figure}
 
 \subsubsection{Physical Meaning and Introduction of the Exponential Form}
+
+
 
 In physics and engineering (such as wave mechanics, alternating-current circuits, and quantum mechanics), complex exponentials are the natural language for describing \textbf{rotation}, \textbf{phase}, and \textbf{harmonic oscillation (phasors)}:
 \begin{itemize}
@@ -137,16 +172,29 @@ where $r = |z|$ represents the \textbf{amplitude} (magnitude) and $\theta$ repre
 
 \section{Operations and Geometric Transformations}
 
+Having fixed the representation, we ask how the four operations act on it. Addition and subtraction behave like vector operations, whereas multiplication, division and powers act as a rotation together with a rescaling.
+
 \subsection{Addition and Subtraction}
+
+
 
 For $z_1 = x_1 + \mathrm{i} y_1$ and $z_2 = x_2 + \mathrm{i} y_2$:
 \begin{equation}
 z_1 \pm z_2 \coloneqq (x_1 \pm x_2) + \mathrm{i}(y_1 \pm y_2).
 \end{equation}
 
-\textbf{Geometric Meaning:} Addition and subtraction correspond to vector addition and subtraction of $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$ according to the parallelogram law or triangle rule.
+\textbf{Geometric Meaning:} Addition and subtraction correspond to vector addition and subtraction of $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$ according to the parallelogram law or triangle rule; see Figure~\ref{fig:parallelogram}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig03-parallelogram.pdf}
+    \caption{(a) The sum $z_1 + z_2$ is the diagonal of the parallelogram spanned by $z_1$ and $z_2$. (b) The difference $z_1 - z_2$ joins the tip of $z_2$ to the tip of $z_1$, so the same diagram also carries the triangle rule.}
+    \label{fig:parallelogram}
+\end{figure}
 
 \subsection{Complex Conjugation}
+
+
 
 \begin{definition}[Complex conjugate]
 The \textbf{complex conjugate} of $z = x + \mathrm{i} y = r \mathrm{e}^{\mathrm{i}\theta}$ is defined by
@@ -165,9 +213,13 @@ Fundamental properties:
 
 \subsection{Multiplication and Division}
 
+
+
 Let $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$ and $z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$.
 
 \subsubsection{Multiplication}
+
+
 
 \begin{equation}
 z_1 z_2 = (r_1 r_2) \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}.
@@ -181,6 +233,8 @@ z_1 z_2 = (r_1 r_2) \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}.
 
 \subsubsection{Division}
 
+
+
 \begin{equation}
 \frac{z_1}{z_2} \coloneqq \frac{z_1 \bar{z}_2}{|z_2|^2} = \left(\frac{r_1}{r_2}\right) \mathrm{e}^{\mathrm{i}(\theta_1 - \theta_2)}, \quad (z_2 \ne 0).
 \end{equation}
@@ -193,10 +247,19 @@ z_1 z_2 = (r_1 r_2) \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}.
 \begin{equation}
 \frac{z}{\mathrm{i}} = \frac{z(-\mathrm{i})}{\mathrm{i}(-\mathrm{i})} = -\mathrm{i} z = z \cdot \mathrm{e}^{-\mathrm{i}\frac{\pi}{2}}.
 \end{equation}
-\textbf{Geometric Meaning:} Multiplying by $-\mathrm{i}$ (or dividing by $\mathrm{i}$) rotates the vector clockwise by $\frac{\pi}{2}$.
+\textbf{Geometric Meaning:} Multiplying by $-\mathrm{i}$ (or dividing by $\mathrm{i}$) rotates the vector clockwise by $\frac{\pi}{2}$; see Figure~\ref{fig:multiply-by-minus-i}.
 \end{example}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.66\textwidth]{figs/fig04-multiply-by-minus-i.pdf}
+    \caption{Division by $\mathrm{i}$. Multiplication by $-\mathrm{i}$ leaves the modulus unchanged and subtracts $\pi/2$ from the argument, which is a clockwise quarter turn.}
+    \label{fig:multiply-by-minus-i}
+\end{figure}
+
 \subsection{Powers, Binomial Expansion, and de Moivre's Theorem}
+
+
 
 For any positive integer $n \in \mathbb{N}^+$:
 \begin{equation}
@@ -220,6 +283,8 @@ with $0! \coloneqq 1$.
 
 \subsection{Roots of Complex Numbers}
 
+
+
 If $w^n = z$ for $n \in \mathbb{N}^+$, $w$ is an $n$-th root of $z$, denoted by $\sqrt[n]{z}$.
 
 Let $z = r \mathrm{e}^{\mathrm{i}\theta}$. There are exactly $n$ distinct complex roots given by
@@ -230,16 +295,29 @@ for $k = 0, 1, 2, \dots, n-1$.
 
 \subsubsection{Special Case: Roots of Unity ($\sqrt[n]{1}$)}
 
+
+
 When $z = 1 = 1 \cdot \mathrm{e}^{\mathrm{i} 0}$, the solutions to $w^n = 1$ are
 \begin{equation}
 \omega_k \coloneqq \mathrm{e}^{\mathrm{i}\frac{2k\pi}{n}} = \cos\left(\frac{2k\pi}{n}\right) + \mathrm{i}\sin\left(\frac{2k\pi}{n}\right), \quad k = 0, 1, \dots, n-1.
 \end{equation}
 
-\textbf{Geometric Meaning:} The $n$ roots of unity form the vertices of a regular $n$-sided polygon inscribed in the unit circle $|w| = 1$, with one vertex located at $w = 1$.
+\textbf{Geometric Meaning:} The $n$ roots of unity form the vertices of a regular $n$-sided polygon inscribed in the unit circle $|w| = 1$, with one vertex located at $w = 1$; see Figure~\ref{fig:roots-of-unity}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig08-roots-of-unity.pdf}
+    \caption{The $n$-th roots of unity for $n = 5$ and $n = 8$. All lie on the unit circle, equally spaced by $2\pi/n$, and $\omega_0 = 1$ lies on the positive real axis.}
+    \label{fig:roots-of-unity}
+\end{figure}
 
 \section{Geometric Applications in the Complex Plane}
 
+The algebra of the previous sections now translates into geometry: moduli measure distances, equations in $z$ describe curves, and arguments measure angles.
+
 \subsection{Distance and Modulus Identities}
+
+
 
 The Euclidean distance between two points represented by $z_1$ and $z_2$ is
 \begin{equation}
@@ -247,6 +325,8 @@ The Euclidean distance between two points represented by $z_1$ and $z_2$ is
 \end{equation}
 
 \subsubsection{Key Identities and Inequalities}
+
+
 
 \begin{enumerate}
     \item \textbf{Modulus--Conjugate Relation:}
@@ -269,7 +349,13 @@ The Euclidean distance between two points represented by $z_1$ and $z_2$ is
 
 \subsection{Standard Curves and Lines}
 
+Two loci are used repeatedly in what follows, the circle and the straight line. Each is described both by an equation in $|z|$ and by a parametric expression.
+
+
+
 \subsubsection{Circle}
+
+
 
 A circle $C$ centered at $z_0$ with radius $r > 0$:
 \begin{itemize}
@@ -285,14 +371,30 @@ A circle $C$ centered at $z_0$ with radius $r > 0$:
 
 \subsubsection{Straight Line}
 
+
+
 A straight line passing through two distinct points $z_1$ and $z_2$:
 \begin{equation}
 z(t) \coloneqq z_1 + t(z_2 - z_1), \quad t \in \mathbb{R}.
 \end{equation}
+Both loci are drawn in Figure~\ref{fig:circle-and-line}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig05-circle-and-line.pdf}
+    \caption{The circle and the straight line as point loci. (a) $|z - z_0| = r$ is the circle with centre $z_0$ and radius $r$. (b) $z(t) = z_1 + t(z_2 - z_1)$ with $t \in \mathbb{R}$ is the whole line, while $t \in [0,1]$ traces only the segment $[z_1, z_2]$.}
+    \label{fig:circle-and-line}
+\end{figure}
 
 \subsection{Angle Between Vectors and Angles in a Triangle}
 
+Since the argument of a quotient measures an angle, the algebra of $\mathbb{C}$ also computes angles between vectors and inside triangles.
+
+
+
 \subsubsection{Directed Angle}
+
+
 
 The directed angle $\theta$ from vector $(z_3 - z_1)$ to vector $(z_2 - z_1)$ is
 \begin{equation}
@@ -301,10 +403,20 @@ The directed angle $\theta$ from vector $(z_3 - z_1)$ to vector $(z_2 - z_1)$ is
 
 \subsubsection{Interior Angles of a Triangle}
 
-For a positively oriented (counterclockwise) triangle $\triangle ABC$ with vertices $z_1, z_2, z_3$:
+
+
+For a positively oriented (counterclockwise) triangle $\triangle ABC$ with vertices $z_1, z_2, z_3$, the interior angles are
+(Figure~\ref{fig:angles}):
 \begin{equation}
 \begin{cases}  \angle z_1 \coloneqq \arg\left(\dfrac{z_3 - z_1}{z_2 - z_1}\right) \\  \angle z_2 \coloneqq \arg\left(\dfrac{z_1 - z_2}{z_3 - z_2}\right) \\  \angle z_3 \coloneqq \arg\left(\dfrac{z_2 - z_3}{z_1 - z_3}\right)  \end{cases}
 \end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figs/fig06-angles.pdf}
+    \caption{(a) The argument is the directed angle from the positive real axis to $z$. (b) The quotient $(z_2 - z_1)/(z_3 - z_1)$ gives the directed angle at $z_1$, measured from the side $z_1 z_3$ to the side $z_1 z_2$. (c) The three interior angles of a positively oriented triangle.}
+    \label{fig:angles}
+\end{figure}
 
 \begin{theorem}[Sum of interior angles]
 The sum of the interior angles of a nondegenerate triangle equals $\pi$.
@@ -330,8 +442,11 @@ Thus, $k$ must be $0$, which proves
 
 \subsection{Geometric Characterization of Circles (Thales's Theorem)}
 
+
+
 \begin{theorem}[Thales's Theorem]
 A point $z$ lies on the circle with diameter endpoints $z_1$ and $z_2$ (with $z \ne z_1$) if and only if
+(Figure~\ref{fig:thales})
 \begin{equation}
 \operatorname{Re}\left(\frac{z_2 - z_1}{z - z_1}\right) = 1.
 \end{equation}
@@ -355,5 +470,11 @@ By Thales's Theorem, the locus of points subtending a right angle across segment
 \end{equation}
 \end{proof}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.74\textwidth]{figs/fig07-thales.pdf}
+    \caption{Thales's theorem as a locus condition. The point $z$ lies on the circle with diameter $[z_1, z_2]$ exactly when the angle at $z$ is a right angle, which is equivalent to each of the three displayed conditions.}
+    \label{fig:thales}
+\end{figure}
 
 \end{document}

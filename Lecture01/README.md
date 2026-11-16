@@ -2,4 +2,5 @@
 
 > [!NOTE]
 > Haoran Yang created at 2026-10-11.
-> Added Placeholder figure for future adding schematics.
+> The schematic figures are generated from LaTeX/TikZ sources; see the
+> `figs/` directory for the PDF and PNG deliverables.

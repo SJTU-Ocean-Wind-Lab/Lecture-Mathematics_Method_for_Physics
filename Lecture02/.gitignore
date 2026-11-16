@@ -1,13 +1,32 @@
+# ---------------------------------------------------------------
 # Ignore everything by default (allowlist approach)
+# ---------------------------------------------------------------
 *
 
+# ---------------------------------------------------------------
 # Always keep the .gitignore itself
+# ---------------------------------------------------------------
 !.gitignore
 
-# Keep only .tex and .pdf files
+# ---------------------------------------------------------------
+# Keep lecture sources / notes at the repository root
+# ---------------------------------------------------------------
 !*.tex
-!*.pdf
 !*.md
+!*.pdf
 
-# Re-include directories so git can recurse into them
-!*/
+# ---------------------------------------------------------------
+# Keep the figure deliverables (PDF + PNG)
+# ---------------------------------------------------------------
+!/figs/
+!/figs/**
+
+# ---------------------------------------------------------------
+# NEVER track these (listed last so nothing above re-includes them):
+#   ref/     -> reference material (textbook scans, PDFs)
+#   scripts/ -> LaTeX/TikZ figure sources and build artifacts
+#   tmp/     -> page screenshots and other scratch files
+# ---------------------------------------------------------------
+/ref/
+/scripts/
+/tmp/
