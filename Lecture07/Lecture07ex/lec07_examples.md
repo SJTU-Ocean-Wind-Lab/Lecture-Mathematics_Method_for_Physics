@@ -25,11 +25,13 @@ $$
 
 The two cases are $\vert{}z\vert{} < 2$ and $\vert{}z\vert{} > 2$.
 
-Differentiating on the two regions gives:
-
 Differentiate each branch separately.
 
-For $\vert{}z\vert{} < 2$, $\frac{d}{dz}\left[2\mathrm{\pi}\mathrm{i}(3z^{2} + 2)\right] = 2\mathrm{\pi}\mathrm{i} \cdot 6z = 12\mathrm{\pi}\mathrm{i}z$.
+For $\vert{}z\vert{} < 2$
+
+$$
+\frac{d}{dz}\left[2\mathrm{\pi}\mathrm{i}(3z^{2} + 2)\right] = 2\mathrm{\pi}\mathrm{i} \cdot 6z = 12\mathrm{\pi}\mathrm{i}z
+$$
 
 For $\vert{}z\vert{} > 2$, the branch is the constant 0, so its derivative is 0.
 
@@ -100,7 +102,7 @@ $$
 *Theory reference: §1 Existence of Derivatives.*
 
 $$
-f(z) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{\mathrm{e}^{\zeta^{2}}}{(\zeta^{3} - z\zeta^{2})}d\zeta, \tag{5}
+f(z) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{\mathrm{e}^{\zeta^{2}}}{(\zeta^{3} - z\zeta^{2})}d\zeta \tag{5}
 $$
 
 $$
@@ -141,18 +143,18 @@ The contour $\vert{}\zeta - z\vert{} = 3$ contains $\zeta = z$ at its centre.
 
 The origin is inside the contour exactly when $\vert{}z\vert{} < 3$, and outside exactly when $\vert{}z\vert{} > 3$.
 
-Using Cauchy’s integral formula, split the contour into the small contours $C_{0}$ and $C_{1}$ around the two singular points:
+Using Cauchy’s integral formula, split the contour into the small contours $C_{0}$ and $C_{1}$ around the two singular points
 
 $$
 f(z) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C_{0}}\frac{[\frac{\mathrm{e}^{\zeta^{2}}}{(\zeta - z)}]}{(\zeta - 0)^{2}}d\zeta + \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C_{1}}\frac{[\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}]}{(\zeta - z)}d\zeta \tag{8}
 $$
 
-**Double pole at** $\zeta = 0$. Write $h(\zeta) = \frac{\mathrm{e}^{\zeta^{2}}}{\zeta - z}$, so that the integrand is $\frac{h(\zeta)}{\zeta^{2}}$:
+**Double pole at** $\zeta = 0$. Write $h(\zeta) = \frac{\mathrm{e}^{\zeta^{2}}}{\zeta - z}$, so that the integrand is $\frac{h(\zeta)}{\zeta^{2}}$
 
 
 
 $$
-h'(\zeta) = \frac{2\zeta\mathrm{e}^{\zeta^{2}}(\zeta - z) - \mathrm{e}^{\zeta^{2}}}{(\zeta - z)^{2}}, \qquad h'(0) = -\frac{1}{z^{2}} .
+h'(\zeta) = \frac{2\zeta\mathrm{e}^{\zeta^{2}}(\zeta - z) - \mathrm{e}^{\zeta^{2}}}{(\zeta - z)^{2}}, \qquad h'(0) = -\frac{1}{z^{2}}
 $$
 
 
@@ -162,12 +164,12 @@ $$
 
 
 $$
-\left.\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}\right|_{\zeta = z} = \frac{\mathrm{e}^{z^{2}}}{z^{2}} .
+\left.\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}\right|_{\zeta = z} = \frac{\mathrm{e}^{z^{2}}}{z^{2}}
 $$
 
 
 
-Combining both contributions:
+Combining both contributions
 
 $$
 f(z) = {\left[\left(\frac{\mathrm{e}^{\zeta^{2}}}{\zeta - z}\right)'\right]}_{\zeta = 0} + {\left[\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{2}}\right]}_{\zeta = z}
@@ -207,10 +209,10 @@ $$
 = \frac{\mathrm{e}^{z^{2}}}{z^{2}}
 $$
 
-For the exterior case:
+For the exterior case
 
 $$
-f(z) \coloneqq \begin{cases} \frac{\mathrm{e}^{z^{2}} - 1}{z^{2}} & 0 < \vert{}z\vert{} < 3 \\ 1 & z = 0 \\ \frac{\mathrm{e}^{z^{2}}}{z^{2}} & \vert{}z\vert{} > 3 \end{cases} \tag{10}
+f(z) = \begin{cases} \frac{\mathrm{e}^{z^{2}} - 1}{z^{2}} & 0 < \vert{}z\vert{} < 3 \\ 1 & z = 0 \\ \frac{\mathrm{e}^{z^{2}}}{z^{2}} & \vert{}z\vert{} > 3 \end{cases} \tag{10}
 $$
 
 At $\vert{}z\vert{} = 3$ the point $\zeta = 0$ lies on $C$, so the contour integral is not defined.
@@ -219,13 +221,13 @@ At $\vert{}z\vert{} = 3$ the point $\zeta = 0$ lies on $C$, so the contour integ
 
 *Find $f'(i)$.* Differentiate the branch that contains $z = \mathrm{i}$, the one for $0 < \vert{}z\vert{} < 3$:
 
-For $0 < \vert{}z\vert{} < 3$, with numerator $u = \mathrm{e}^{z^{2}} - 1$ and denominator $v = z^{2}$:
+For $0 < \vert{}z\vert{} < 3$, with numerator $u = \mathrm{e}^{z^{2}} - 1$ and denominator $v = z^{2}$
 
 
 
-$$ f'(z) = \frac{u'v - uv'}{v^{2}} = \frac{(2z\mathrm{e}^{z^{2}})z^{2} - (\mathrm{e}^{z^{2}} - 1)(2z)}{z^{4}} = \frac{2[z^{2}\mathrm{e}^{z^{2}} - (\mathrm{e}^{z^{2}} - 1)]}{z^{3}} $$
+$$ f'(z) = \frac{u'v - uv'}{v^{2}} = \frac{(2z\mathrm{e}^{z^{2}})z^{2} - (\mathrm{e}^{z^{2}} - 1)(2z)}{z^{4}} = \frac{2[z^{2}\mathrm{e}^{z^{2}} - (\mathrm{e}^{z^{2}} - 1)]}{z^{3}}$$
 
-At $z = \mathrm{i}$:
+At $z = \mathrm{i}$
 
 $$
 f'(\mathrm{i}) = {\left.\frac{2[z^{2}\mathrm{e}^{z^{2}} - \mathrm{e}^{z^{2}} + 1]}{z^{3}}\right\vert{}}_{z = \mathrm{i}} = 2\mathrm{i}\left(1 - \frac{2}{\mathrm{e}}\right) \tag{11}
@@ -249,7 +251,7 @@ $$
 = \left(\frac{1}{2!}\right)\left(\frac{d^{2}}{d\zeta^{2}}\right)\mathrm{e}^{\zeta^{2}}\vert{}_{\zeta = 0} = 1
 $$
 
-The derivatives of $\mathrm{e}^{\zeta^{2}}$ are:
+The derivatives of $\mathrm{e}^{\zeta^{2}}$ are
 
 $$
 (\mathrm{e}^{\zeta^{2}})'= ({2\zeta \mathrm{e}}^{\zeta^{2}}) \tag{12}
@@ -267,7 +269,7 @@ $$
 = {2\mathrm{e}}^{\zeta^{2}} + {4\zeta^{2}\mathrm{e}}^{\zeta^{2}} \vert{}\zeta = 0
 $$
 
-Power series at z = 0:
+Power series at z = 0
 
 $$
 \mathrm{e}^{z^{2}} = 1 + z^{2} + \frac{z^{4}}{2!} + \frac{z^{6}}{3!} + \cdots \tag{13}
@@ -286,14 +288,14 @@ $$
 $$
 f(z) = \frac{\mathrm{e}^{z^{2}}}{z^{2}}, \qquad
 f'(z) = \frac{2z\mathrm{e}^{z^{2}}z^{2} - \mathrm{e}^{z^{2}}(2z)}{z^{4}}
-= \frac{2\mathrm{e}^{z^{2}}(z^{2} - 1)}{z^{3}} .
+= \frac{2\mathrm{e}^{z^{2}}(z^{2} - 1)}{z^{3}}
 $$
 
-At $z = 3 + \mathrm{i}$, where $z^{2} = 8 + 6\mathrm{i}$, $z^{2} - 1 = 7 + 6\mathrm{i}$ and $z^{3} = 18 + 26\mathrm{i}$:
+At $z = 3 + \mathrm{i}$, where $z^{2} = 8 + 6\mathrm{i}$, $z^{2} - 1 = 7 + 6\mathrm{i}$ and $z^{3} = 18 + 26\mathrm{i}$
 
 $$
 f'(3 + \mathrm{i}) = \frac{2\mathrm{e}^{8 + 6\mathrm{i}}(7 + 6\mathrm{i})}{18 + 26\mathrm{i}}
-= \frac{\mathrm{e}^{8 + 6\mathrm{i}}(141 - 37\mathrm{i})}{250} .
+= \frac{\mathrm{e}^{8 + 6\mathrm{i}}(141 - 37\mathrm{i})}{250}
 $$
 
 ## Example 4
@@ -315,7 +317,7 @@ $\vert{}f(0)\vert{} <$ a
 Show that there exists $\zeta$ inside the region such that
 
 $$
-f(\zeta) = 0. \tag{15}
+f(\zeta) = 0 \tag{15}
 $$
 
 *Proof.* Use proof by contradiction.
@@ -332,7 +334,7 @@ $$
 
 is analytic in $D$.
 
-Apply the maximum modulus principle to $F(z)$, comparing its value at the origin with its values on the boundary:
+Apply the maximum modulus principle to $F(z)$, comparing its value at the origin with its values on the boundary
 
 $$
 \vert{}F(0)\vert{} = \frac{1}{\vert{}f(0)\vert{}} > \frac{1}{a} \tag{17}
@@ -365,7 +367,7 @@ $$
 Suppose $f(z)$ is analytic on the whole complex plane, and there exists $M > 0$ such that
 
 $$
-R\mathrm{e}\ f(z) < M. \tag{18}
+R\mathrm{e}\ f(z) < M \tag{18}
 $$
 
 Show that $f(z)$ is constant.
@@ -373,11 +375,11 @@ Show that $f(z)$ is constant.
 *Proof.* Let
 
 $$
-F(z) = \mathrm{e}^{f(z)}. \tag{19}
+F(z) = \mathrm{e}^{f(z)} \tag{19}
 $$
 
 $$
-\vert{}F(z)\vert{} = \vert{}\mathrm{e}^{f(z)}\vert{} = \mathrm{e}^{R\mathrm{e}\ f(z)}.
+\vert{}F(z)\vert{} = \vert{}\mathrm{e}^{f(z)}\vert{} = \mathrm{e}^{R\mathrm{e}\ f(z)}
 $$
 
 $$
@@ -403,7 +405,7 @@ $$
 Since $\operatorname{Re}f(z) < M$,
 
 $$
-\vert{}F(z)\vert{} < \mathrm{e}^{M}. \tag{20}
+\vert{}F(z)\vert{} < \mathrm{e}^{M} \tag{20}
 $$
 
 Thus $F(z)$ is an entire bounded function.
@@ -411,13 +413,13 @@ Thus $F(z)$ is an entire bounded function.
 By Liouville’s theorem,
 
 $$
-F(z) = constant. \tag{21}
+F(z) = constant \tag{21}
 $$
 
 Therefore
 
 $$
-\mathrm{e}^{f(z)} = constant, \tag{22}
+\mathrm{e}^{f(z)} = constant \tag{22}
 $$
 
 Differentiate both sides:
@@ -432,7 +434,7 @@ $$
 \mathrm{e}^{f(z)}f'(z) = 0 \tag{23}
 $$
 
-Since the exponential function never vanishes, we conclude that:
+Since the exponential function never vanishes, we conclude that
 
 $$
 f'(z) = 0 \tag{24}
@@ -464,13 +466,13 @@ $$
 
 (1) Find $I_{1}$.
 
-By the generalised Cauchy integral formula:
+By the generalised Cauchy integral formula
 
 $$
 I_{1} = \left(\frac{2\mathrm{\pi}\mathrm{i}}{1!}\right){[((z + 1)^{2}f(z)]}_{z = 0} \tag{28}
 $$
 
-Set $g(z) \coloneqq (z + 1)^{2}f(z)$. The generalized Cauchy integral formula gives $I_{1} = 2\mathrm{\pi}\mathrm{i}g'(0)$. By the product rule, $g'(z) = 2(z + 1)f(z) + (z + 1)^{2}f'(z)$.
+Set $g(z) = (z + 1)^{2}f(z)$. The generalized Cauchy integral formula gives $I_{1} = 2\mathrm{\pi}\mathrm{i}g'(0)$. By the product rule, $g'(z) = 2(z + 1)f(z) + (z + 1)^{2}f'(z)$.
 
 $$
 = 2\mathrm{\pi}\mathrm{i}{[2(z + 1)f(z) + (z + 1)^{2}f'(z)]}_{z = 0}
@@ -486,7 +488,7 @@ $$
 
 (2) Find $I_{2}$.
 
-Let $z = \mathrm{e}^{\mathrm{i}\theta}$:
+Let $z = \mathrm{e}^{\mathrm{i}\theta}$
 
 $$
 z = \mathrm{e}^{\mathrm{i}\theta} \tag{29}
@@ -494,7 +496,7 @@ $$
 
 Then
 
-On $\vert{}z\vert{} = 1$, with $z = \mathrm{e}^{\mathrm{i}\theta}$ and $0 \le \theta \le 2\mathrm{\pi}$:
+On $\vert{}z\vert{} = 1$, with $z = \mathrm{e}^{\mathrm{i}\theta}$ and $0 \le \theta \le 2\mathrm{\pi}$
 
 $$
 \mathrm{e}^{\mathrm{i}\theta} = z \tag{30}
@@ -544,7 +546,7 @@ $$
 d\theta = \frac{dz}{(\mathrm{i}z)}
 $$
 
-Substitute:
+Substitute
 
 $$
 I_{2} = \int_{0}^{2\mathrm{\pi}}[\frac{(1 + \cos \theta)}{2}]f(\mathrm{e}^{\mathrm{i}\theta})d\theta \tag{31}
@@ -578,7 +580,7 @@ $$
 
 **Let n be a non-negative integer. We evaluate the trigonometric integral by converting it to a contour integral.**
 
-By Euler’s formula:
+By Euler’s formula
 
 $$
 \cos \theta + \mathrm{i}\ \sin \theta = \mathrm{e}^{\mathrm{i}\theta} \tag{33}
@@ -597,16 +599,16 @@ Multiplying by $\mathrm{e}^{\cos \theta}$ and integrating gives a complex integr
 The exponent simplifies because $-\mathrm{i}(n\theta - \sin \theta) = -\mathrm{i}n\theta + \mathrm{i}\sin \theta$, so $\cos \theta + \mathrm{i}\sin \theta$ appears together.
 
 $$
-\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} = \cos(n\theta - \sin \theta) - \mathrm{i}\sin(n\theta - \sin \theta). \tag{34}
+\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} = \cos(n\theta - \sin \theta) - \mathrm{i}\sin(n\theta - \sin \theta) \tag{34}
 $$
 
-The original integral $I$ is the real component of the corresponding complex integral $J$:
+The original integral $I$ is the real component of the corresponding complex integral $J$
 
 $$
-J = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta}\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} d\theta = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta + \mathrm{i}\sin \theta - \mathrm{i}n\theta} d\theta . \tag{35}
+J = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta}\mathrm{e}^{-\mathrm{i}(n\theta - \sin \theta)} d\theta = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\cos \theta + \mathrm{i}\sin \theta - \mathrm{i}n\theta} d\theta \tag{35}
 $$
 
-Using $\cos \ \theta + \mathrm{i}\sin \ \theta = \mathrm{e}^{\mathrm{i}\theta}$, we obtain:
+Using $\cos \ \theta + \mathrm{i}\sin \ \theta = \mathrm{e}^{\mathrm{i}\theta}$, we obtain
 
 $$
 \cos \theta + \mathrm{i}\sin \theta = \mathrm{e}^{\mathrm{i}\theta} \tag{36}
@@ -621,29 +623,29 @@ J = \left(\frac{1}{\mathrm{i}}\right)\oint_{\vert{}z\vert{} = 1}\mathrm{e}^{z}z^
 $$
 
 $$
-J = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\mathrm{e}^{\mathrm{i}\theta}}\mathrm{e}^{-\mathrm{i}n\theta} d\theta .
+J = \int_{0}^{2\mathrm{\pi}}\mathrm{e}^{\mathrm{e}^{\mathrm{i}\theta}}\mathrm{e}^{-\mathrm{i}n\theta} d\theta
 $$
 
 Let $z = \mathrm{e}^{\mathrm{i}\theta}$. Then
 
 $$
-dz = \mathrm{i}z d\theta, \quad d\theta = \frac{dz}{\mathrm{i}z}. \tag{37}
+dz = \mathrm{i}z d\theta, \quad d\theta = \frac{dz}{\mathrm{i}z} \tag{37}
 $$
 
 As $\theta$ goes from 0 to $2\mathrm{\pi}$, $z$ traverses the unit circle $C$ once counterclockwise. Hence
 
 $$
-J = \frac{1}{\mathrm{i}}\oint_{C}\mathrm{e}^{z}z^{-n - 1} dz. \tag{38}
+J = \frac{1}{\mathrm{i}}\oint_{C}\mathrm{e}^{z}z^{-n - 1} dz \tag{38}
 $$
 
-Expand the exponential:
+Expand the exponential
 
 $$
 \mathrm{e}^{z} = \sum_{k = 0}^{\infty}\frac{z^{k}}{k!} \tag{39}
 $$
 
 $$
-z^{-n - 1}\sum_{k = 0}^{\infty}\frac{z^{k}}{k!} = \sum_{k = 0}^{\infty}\frac{z^{k - n - 1}}{k!} ,
+z^{-n - 1}\sum_{k = 0}^{\infty}\frac{z^{k}}{k!} = \sum_{k = 0}^{\infty}\frac{z^{k - n - 1}}{k!}
 $$
 
 
@@ -653,11 +655,11 @@ whose $z^{-1}$ term occurs at $k - n - 1 = -1$, that is $k = n$, with coefficien
 Only the term with $k = n$ contributes to the contour integral. Thus
 
 $$
-J = \frac{1}{\mathrm{i}}(2\mathrm{\pi}\mathrm{i})\frac{1}{n!} = \frac{2\mathrm{\pi}}{n!}. \tag{40}
+J = \frac{1}{\mathrm{i}}(2\mathrm{\pi}\mathrm{i})\frac{1}{n!} = \frac{2\mathrm{\pi}}{n!} \tag{40}
 $$
 
 This value is real. Since $I$ is the real component of $J$, it follows that
 
 $$
-I = \frac{2\mathrm{\pi}}{n!}, \quad n = 0, 1, 2, \dots . \tag{41}
+I = \frac{2\mathrm{\pi}}{n!}, \quad n = 0, 1, 2, \dots \tag{41}
 $$
