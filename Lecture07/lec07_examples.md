@@ -1,7 +1,7 @@
 # Lecture 07: Applications of Cauchy's Integral Formula
 ## Example 1
 
-*Theory reference: §7.1 Existence of Derivatives.*
+*Theory reference: §1 Existence of Derivatives.*
 
 $$
 f(z) = \oint_{\vert{}\zeta\vert{} = 2}\frac{(\zeta^{3} + 2\zeta + 1)}{(\zeta - z)^{2}}d\zeta \tag{1}
@@ -45,7 +45,7 @@ Given on the boundary $C$:
 
 ## Example 2
 
-*Theory reference: §7.2 Cauchy's Inequality.*
+*Theory reference: §2 Cauchy's Inequality.*
 
 When $\vert{}z\vert{} = 2$, $\vert{}f(z) - z\vert{} \le \vert{}z\vert{}$.
 
@@ -97,7 +97,7 @@ $$
 
 ## Example 3
 
-*Theory reference: §7.1 Existence of Derivatives.*
+*Theory reference: §1 Existence of Derivatives.*
 
 $$
 f(z) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{\mathrm{e}^{\zeta^{2}}}{(\zeta^{3} - z\zeta^{2})}d\zeta, \tag{5}
@@ -210,7 +210,7 @@ $$
 For the exterior case:
 
 $$
-f(z) = \begin{cases} \frac{\mathrm{e}^{z^{2}} - 1}{z^{2}} & 0 < \vert{}z\vert{} < 3 \\ 1 & z = 0 \\ \frac{\mathrm{e}^{z^{2}}}{z^{2}} & \vert{}z\vert{} > 3 \end{cases} \tag{10}
+f(z) \coloneqq \begin{cases} \frac{\mathrm{e}^{z^{2}} - 1}{z^{2}} & 0 < \vert{}z\vert{} < 3 \\ 1 & z = 0 \\ \frac{\mathrm{e}^{z^{2}}}{z^{2}} & \vert{}z\vert{} > 3 \end{cases} \tag{10}
 $$
 
 At $\vert{}z\vert{} = 3$ the point $\zeta = 0$ lies on $C$, so the contour integral is not defined.
@@ -239,7 +239,7 @@ The contour is then $\vert{}\zeta\vert{} = 3$ and the integrand is $\frac{\mathr
 
 Cauchy’s derivative formula with derivative order 2 gives $f(0) = \left(\frac{1}{2!}\right)\left(\frac{d^{2}}{d\zeta^{2}}\right)\mathrm{e}^{\zeta^{2}}\vert{}\zeta = 0$.
 
-Since $(\mathrm{e}^{\zeta^{2}})'= 2\zeta \mathrm{e}^{\zeta^{2}}$ and $(\mathrm{e}^{\zeta^{2}})''= 2\mathrm{e}^{\zeta^{2}} + 4\zeta^{2}\mathrm{e}^{\zeta^{2}}$, the second derivative at 0 is 2, so $f(0) = 1$.
+Since $(\mathrm{e}^{\zeta^{2}})'= 2\zeta \mathrm{e}^{\zeta^{2}}$ and $(\mathrm{e}^{\zeta^{2}})''= 2\mathrm{e}^{\zeta^{2}} + 4\zeta^{2}\mathrm{e}^{\zeta^{2}}$, the second derivative at 0 is 2, so $f(0) = 1$. This agrees with the limit of the interior branch, $\lim_{z \to 0}(\mathrm{e}^{z^{2}} - 1)/z^{2} = 1$, so $f$ is continuous at the origin.
 
 $$
 = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{\vert{}\zeta - 0\vert{} = 3}\frac{\mathrm{e}^{\zeta^{2}}}{\zeta^{3}}d\zeta
@@ -298,7 +298,7 @@ $$
 
 ## Example 4
 
-*Theory reference: §7.3 Maximum Modulus Principle.*
+*Theory reference: §3 Maximum Modulus Principle.*
 
 Suppose $f(z)$ is analytic in $D$, where $D$ is the region on and inside $\vert{}z\vert{} = R$.
 
@@ -360,7 +360,7 @@ $$
 
 ## Example 5
 
-*Theory reference: §7.4 Liouville's Theorem.*
+*Theory reference: §4 Liouville's Theorem.*
 
 Suppose $f(z)$ is analytic on the whole complex plane, and there exists $M > 0$ such that
 
@@ -442,7 +442,7 @@ and therefore $f(z)$ is constant.
 
 ## Example 6
 
-*Theory reference: §7.1 Existence of Derivatives.*
+*Theory reference: §1 Existence of Derivatives.*
 
 Suppose $f(z)$ is analytic for $\vert{}z\vert{} < 2$, and
 
@@ -470,7 +470,7 @@ $$
 I_{1} = \left(\frac{2\mathrm{\pi}\mathrm{i}}{1!}\right){[((z + 1)^{2}f(z)]}_{z = 0} \tag{28}
 $$
 
-Set $g(z) = (z + 1)^{2}f(z)$. The generalized Cauchy integral formula gives $I_{1} = 2\mathrm{\pi}\mathrm{i}g'(0)$. By the product rule, $g'(z) = 2(z + 1)f(z) + (z + 1)^{2}f'(z)$.
+Set $g(z) \coloneqq (z + 1)^{2}f(z)$. The generalized Cauchy integral formula gives $I_{1} = 2\mathrm{\pi}\mathrm{i}g'(0)$. By the product rule, $g'(z) = 2(z + 1)f(z) + (z + 1)^{2}f'(z)$.
 
 $$
 = 2\mathrm{\pi}\mathrm{i}{[2(z + 1)f(z) + (z + 1)^{2}f'(z)]}_{z = 0}
@@ -649,18 +649,6 @@ $$
 
 
 whose $z^{-1}$ term occurs at $k - n - 1 = -1$, that is $k = n$, with coefficient $\frac{1}{n!}$.
-
-$$
-J = \left(\frac{1}{\mathrm{i}}\right)(2\mathrm{\pi}\mathrm{i})(\frac{1}{n!}) = \frac{2\mathrm{\pi}}{n!}
-$$
-
-$$
-I = \frac{2\mathrm{\pi}}{n!}
-$$
-
-$$
-\mathrm{e}^{z}z^{-n - 1} = \left(\sum_{k = 0}^{\infty}\frac{z^{k}}{k!}\right)z^{-n - 1} = \sum_{k = 0}^{\infty}\frac{z^{k - n - 1}}{k!}, \quad n = 0, 1, 2, \dots .
-$$
 
 Only the term with $k = n$ contributes to the contour integral. Thus
 
