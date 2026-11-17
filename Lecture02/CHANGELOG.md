@@ -9,11 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Six schematic figures under `figs/`, each as a vector PDF and a 300 dpi PNG:
+- Seven schematic figures under `figs/`, each as a vector PDF and a 300 dpi PNG:
   interior, exterior and boundary points; boundary, interior, open and closed
   sets; connected versus disconnected sets; simply versus multiply connected
-  domains; positive orientation of the boundary; and the boundary of a domain
-  with `n` holes.
+  domains; positive orientation of the boundary; the boundary of a domain with
+  `n` holes; and the Riemann sphere with its stereographic projection.
 - `scripts/`: TikZ sources for those figures and `build-figs.ps1`, which
   compiles each of them to `figs/` as both PDF and PNG.
 - Two worked examples, reduced to systems of inequalities between moduli and
@@ -29,6 +29,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `CHANGELOG.md` to track changes to this lecture.
 - `lec02.pdf`, the compiled version of `lec02.tex` (9 pages), now kept under
   version control alongside the source, as `lec01.pdf` already is.
+- A definition of **closed domain**, `D` together with `\partial D`, which was
+  missing even though the course later works with closed regions.
 
 ### Changed
 
@@ -67,6 +69,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   correct boundary, the two rays of the imaginary axis outside `[-i, i]`
   together with the major arc of `|z + 1| = sqrt(2)` in the closed left
   half-plane, traversed in the direction that keeps the domain on the left.
+- `lec02.tex`: several passages used a notion before defining it. The closure
+  was described as "the smallest closed set" before closed sets had been
+  introduced; "compact" was used although it is never defined in this lecture;
+  and differentiation and integration were referred to in sections that precede
+  them. Each passage now uses only the notions already available.
+- `lec02.tex`: the curve in the definition of simple connectedness was labelled
+  `C \subset D \text{ closed}`, where "closed" collided with the term for a
+  closed set; it now reads "a closed curve".
+- `fig01-interior-exterior-boundary`: the boundary point `z_3` was placed at a
+  hand-tuned coordinate and could drift off the outline. Its position is now
+  computed with the `intersections` library, so it lies exactly on `\partial E`.
+- `fig05-positive-boundary`: orientation arrows are marked twice per curve, and
+  the clockwise sense uses reversed arrow heads, so the inner hole no longer
+  needs a re-parameterised arc and the direction of travel is legible at a
+  glance.
 
 ## [2026-10-11]
 

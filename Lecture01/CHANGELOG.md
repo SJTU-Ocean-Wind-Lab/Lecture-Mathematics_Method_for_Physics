@@ -9,22 +9,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Eight schematic figures under `figs/`, each as a vector PDF and a 300 dpi
-  PNG: the complex plane and polar coordinates, the principal argument in the
-  four quadrants, the parallelogram rule for addition and subtraction,
-  multiplication by `-i`, the circle and the line as point loci, directed and
-  interior angles, Thales's theorem, and the `n`-th roots of unity.
+- Nine schematic figures under `figs/`, each as a vector PDF and a 300 dpi PNG:
+  the complex plane and its three equivalent descriptions, the modulus and
+  argument, the principal argument in the four quadrants, the parallelogram
+  rule for addition and subtraction, multiplication by `-i`, the `n`-th roots
+  of unity, the circle and the line as point loci, directed and interior
+  angles, and Thales's theorem.
 - `scripts/`: TikZ sources and `build-figs.ps1`, which compiles every figure to
   `figs/` as both PDF and PNG.
 - Figure cross-references (`\ref`) in the text, plus captions and labels.
 
 ### Changed
 
-- `lec01.tex`: inserted the eight figures and switched the numbering to the
-  chapter scheme `1.1` / `1.1.1` / equations `(1.1.n)`, matching Chapter 1.2.
-  The three former `\section`s are now subsections `1.1.1`-`1.1.3`; deeper
-  headings became unnumbered bold lead-ins.
-- `lec01.md`: same heading scheme, all eight figures embedded, and the
+- `lec01.tex`: the three former top-level sections are now numbered `1`-`3`,
+  with their subtopics as `1.1`, `1.1.1`, ... Deeper headings that had been
+  flattened into bold lead-ins are standard `\subsection` and `\subsubsection`
+  commands again; the custom `\leadin` macro was removed.
+- `lec01.tex`: the polar section was reordered to `modulus`, `argument`,
+  `polar form`, `exponential form`, so that no quantity is used before it is
+  defined.
+- `lec01.md`: same heading scheme, all nine figures embedded, and the
   placeholder screenshot replaced by the generated figure.
 - `.gitignore`: `ref/`, `scripts/` and `tmp/` are now excluded, listed after the
   allowlist so that `!*/` can no longer re-include them.
@@ -33,6 +37,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - `figs/tmp.jpg`: the handwritten placeholder photograph, 1.8 MB, superseded by
   the generated figures and no longer referenced anywhere.
+
+### Fixed
+
+- `fig01-complex-plane-polar`: the legend used the modulus and the argument,
+  neither of which had been defined at that point in the text. Those two
+  quantities were moved into a separate figure placed after their definitions.
+- `lec01.tex`: the proof of Thales's theorem cited the theorem itself; the
+  passage now states that the converse direction is part of the theorem.
+- `lec01.tex`: the section openings announced concepts from later sections
+  ("multiplication and powers", "Euler's formula") before they occur.
 
 ## [2026-10-14]
 

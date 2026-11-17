@@ -56,7 +56,7 @@
 % ==================================================
 \section{Fundamentals and Representations of Complex Numbers}
 
-This section fixes the objects. A complex number is first written in Cartesian form; the same number is then re-expressed in polar and exponential form, which is what makes multiplication and powers geometrically transparent.
+This section fixes the objects. A complex number is first written in algebraic form and identified with a point of the plane. The same point is then located by two numbers of a different kind, which leads to a second description of a complex number.
 
 \subsection{Algebraic (Cartesian) Form}
 
@@ -91,33 +91,15 @@ The horizontal axis represents the \textbf{real axis} ($\operatorname{Re}$), and
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.62\textwidth]{figs/fig01-complex-plane-polar.pdf}
-    \caption{The complex plane. The number $z = x + \mathrm{i} y$, the point $P(x,y)$ and the position vector $\vec{OP}$ are three descriptions of the same object. The modulus $r = |z|$ is the length of $\vec{OP}$ and the argument $\theta$ is its inclination to the real axis.}
+    \caption{The complex plane. The number $z = x + \mathrm{i} y$, the point $P(x,y)$ and the position vector $\vec{OP}$ are three descriptions of the same object, namely the arrow drawn from the origin to $P$.}
     \label{fig:complex-plane-polar}
 \end{figure}
 
 \subsection{Polar and Exponential Representations}
 
-The Cartesian form is not the only way to locate a point. Replacing the
-rectangular coordinates by a distance and an inclination leads to the polar
-form, from which the modulus, the argument, Euler's formula and finally the
-exponential form follow in turn.
-
-\subsubsection{Polar Coordinates and Polar Form}
-
-
-
-Transforming the Cartesian coordinates $(x, y)$ into plane polar coordinates $(r, \theta)$ via
-\begin{equation}
-\begin{cases} x = r \cos\theta \\ y = r \sin\theta \end{cases}
-\end{equation}
-allows $z$ to be written in \textbf{trigonometric (polar) form}:
-\begin{equation}
-z = r(\cos\theta + \mathrm{i}\sin\theta).
-\end{equation}
+The Cartesian form specifies a point by two perpendicular displacements. The same point is equally well located by its distance from the origin together with an inclination, and this second description is the one that makes rotation and oscillation visible. We therefore define the two quantities first, and only then combine them into the polar form.
 
 \subsubsection{Modulus (Absolute Value)}
-
-
 
 \begin{definition}[Modulus]
 The \textbf{modulus} $r \coloneqq |z|$ represents the Euclidean distance from the origin to $P(x, y)$:
@@ -128,12 +110,17 @@ The \textbf{modulus} $r \coloneqq |z|$ represents the Euclidean distance from th
 
 \subsubsection{Argument and Principal Argument}
 
-
-
-The angle $\theta$ is defined as an \textbf{argument} of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\pi$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
+The inclination of $\vec{OP}$ to the real axis is the second quantity. The angle $\theta$ is defined as an \textbf{argument} of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\pi$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
 \begin{equation}
 \operatorname{Arg}(z) \coloneqq \arg(z) + 2k\pi, \quad k \in \mathbb{Z}.
 \end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.62\textwidth]{figs/fig02-polar-modulus-argument.pdf}
+    \caption{The two quantities that replace the Cartesian coordinates: the modulus $r = |z|$, which is the length of $\vec{OP}$, and the argument $\theta$, which is its inclination to the real axis.}
+    \label{fig:polar-modulus-argument}
+\end{figure}
 
 The unique representative in the interval $(-\pi, \pi]$ is defined as the \textbf{principal argument}, denoted by $\arg(z) \in (-\pi, \pi]$:
 \begin{equation}
@@ -144,10 +131,21 @@ The unique representative in the interval $(-\pi, \pi]$ is defined as the \textb
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{figs/fig02-principal-argument.pdf}
+    \includegraphics[width=\textwidth]{figs/fig03-principal-argument.pdf}
     \caption{The principal argument $\arg z \in (-\pi,\pi]$ in the four quadrants. The formula $\arctan(y/x)$ alone is valid only where $x > 0$; in the second and third quadrants it must be corrected by $\pm\pi$.}
     \label{fig:principal-argument}
 \end{figure}
+
+\subsubsection{Polar Coordinates and Polar Form}
+
+With the modulus and an argument both available, the Cartesian coordinates $(x, y)$ can be replaced by plane polar coordinates $(r, \theta)$ via
+\begin{equation}
+\begin{cases} x = r \cos\theta \\ y = r \sin\theta \end{cases}
+\end{equation}
+which allows $z$ to be written in \textbf{trigonometric (polar) form}:
+\begin{equation}
+z = r(\cos\theta + \mathrm{i}\sin\theta).
+\end{equation}
 
 \subsubsection{Physical Meaning and Introduction of the Exponential Form}
 
@@ -187,7 +185,7 @@ z_1 \pm z_2 \coloneqq (x_1 \pm x_2) + \mathrm{i}(y_1 \pm y_2).
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{figs/fig03-parallelogram.pdf}
+    \includegraphics[width=\textwidth]{figs/fig04-parallelogram.pdf}
     \caption{(a) The sum $z_1 + z_2$ is the diagonal of the parallelogram spanned by $z_1$ and $z_2$. (b) The difference $z_1 - z_2$ joins the tip of $z_2$ to the tip of $z_1$, so the same diagram also carries the triangle rule.}
     \label{fig:parallelogram}
 \end{figure}
@@ -252,7 +250,7 @@ z_1 z_2 = (r_1 r_2) \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.66\textwidth]{figs/fig04-multiply-by-minus-i.pdf}
+    \includegraphics[width=0.66\textwidth]{figs/fig05-multiply-by-minus-i.pdf}
     \caption{Division by $\mathrm{i}$. Multiplication by $-\mathrm{i}$ leaves the modulus unchanged and subtracts $\pi/2$ from the argument, which is a clockwise quarter turn.}
     \label{fig:multiply-by-minus-i}
 \end{figure}
@@ -306,7 +304,7 @@ When $z = 1 = 1 \cdot \mathrm{e}^{\mathrm{i} 0}$, the solutions to $w^n = 1$ are
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{figs/fig08-roots-of-unity.pdf}
+    \includegraphics[width=\textwidth]{figs/fig06-roots-of-unity.pdf}
     \caption{The $n$-th roots of unity for $n = 5$ and $n = 8$. All lie on the unit circle, equally spaced by $2\pi/n$, and $\omega_0 = 1$ lies on the positive real axis.}
     \label{fig:roots-of-unity}
 \end{figure}
@@ -381,7 +379,7 @@ Both loci are drawn in Figure~\ref{fig:circle-and-line}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{figs/fig05-circle-and-line.pdf}
+    \includegraphics[width=\textwidth]{figs/fig07-circle-and-line.pdf}
     \caption{The circle and the straight line as point loci. (a) $|z - z_0| = r$ is the circle with centre $z_0$ and radius $r$. (b) $z(t) = z_1 + t(z_2 - z_1)$ with $t \in \mathbb{R}$ is the whole line, while $t \in [0,1]$ traces only the segment $[z_1, z_2]$.}
     \label{fig:circle-and-line}
 \end{figure}
@@ -413,7 +411,7 @@ For a positively oriented (counterclockwise) triangle $\triangle ABC$ with verti
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{figs/fig06-angles.pdf}
+    \includegraphics[width=\textwidth]{figs/fig08-angles.pdf}
     \caption{(a) The argument is the directed angle from the positive real axis to $z$. (b) The quotient $(z_2 - z_1)/(z_3 - z_1)$ gives the directed angle at $z_1$, measured from the side $z_1 z_3$ to the side $z_1 z_2$. (c) The three interior angles of a positively oriented triangle.}
     \label{fig:angles}
 \end{figure}
@@ -464,7 +462,7 @@ This is equivalent to
 \begin{equation}
 \arg\left(\frac{z_2 - z}{z - z_1}\right) = \pm \frac{\pi}{2} \iff \angle(z_1, z, z_2) = \frac{\pi}{2}.
 \end{equation}
-By Thales's Theorem, the locus of points subtending a right angle across segment $[z_1, z_2]$ is the circle with diameter $[z_1, z_2]$. This also satisfies the Pythagorean theorem:
+By Thales's Theorem the locus of points subtending a right angle across the segment $[z_1, z_2]$ is the circle with diameter $[z_1, z_2]$, which is the converse direction included in the statement above. This locus also satisfies the Pythagorean relation
 \begin{equation}
 |z_1 - z_2|^2 = |z - z_1|^2 + |z - z_2|^2.
 \end{equation}
@@ -472,7 +470,7 @@ By Thales's Theorem, the locus of points subtending a right angle across segment
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.74\textwidth]{figs/fig07-thales.pdf}
+    \includegraphics[width=0.74\textwidth]{figs/fig09-thales.pdf}
     \caption{Thales's theorem as a locus condition. The point $z$ lies on the circle with diameter $[z_1, z_2]$ exactly when the angle at $z$ is a right angle, which is equivalent to each of the three displayed conditions.}
     \label{fig:thales}
 \end{figure}

@@ -30,49 +30,53 @@ There exists a canonical bijective correspondence among three entities:
 
 The horizontal axis represents the **real axis** ($\operatorname{Re}$), and the vertical axis represents the **imaginary axis** ($\operatorname{Im}$).
 
-### 1.2 Polar and Exponential Representations
-
-#### 1.2.1 Polar Coordinates and Polar Form
-
-Transforming the Cartesian coordinates $(x, y)$ into plane polar coordinates $(r, \theta)$ via:
-
-$$
-\begin{cases} x = r \cos\theta \\ y = r \sin\theta \end{cases} \tag{2}
-$$
-
-allows $z$ to be written in **trigonometric (polar) form**:
-
-$$
-z = r(\cos\theta + \mathrm{i}\sin\theta) \tag{3}
-$$
-
 ![The complex plane: z = x + iy, the point P(x,y) and the vector OP](./figs/fig01-complex-plane-polar.png)
 
-#### 1.2.2 Modulus (Absolute Value)
+### 1.2 Polar and Exponential Representations
+
+The Cartesian form specifies a point by two perpendicular displacements. The same point is equally well located by its distance from the origin together with an inclination, and this second description is the one that makes rotation and oscillation visible. We therefore define the two quantities first, and only then combine them into the polar form.
+
+#### 1.2.1 Modulus (Absolute Value)
 
 The **modulus** $r \coloneqq \vert{}z\vert{}$ represents the Euclidean distance from the origin to $P(x, y)$:
 
 $$
-\vert{}z\vert{} \coloneqq \sqrt{x^2 + y^2} \ge 0 \tag{4}
+\vert{}z\vert{} \coloneqq \sqrt{x^2 + y^2} \ge 0 \tag{2}
 $$
 
-#### 1.2.3 Argument and Principal Argument
+#### 1.2.2 Argument and Principal Argument
 
-The angle $\theta$ is defined as an **argument** of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\mathrm{\pi}$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
+The inclination of $\vec{OP}$ to the real axis is the second quantity. The angle $\theta$ is defined as an **argument** of $z$, denoted by $\operatorname{Arg}(z)$. Since the trigonometric functions are $2\mathrm{\pi}$-periodic, $\operatorname{Arg}(z)$ is a multi-valued set:
 
 $$
-\operatorname{Arg}(z) \coloneqq \arg(z) + 2k\mathrm{\pi}, \quad k \in \mathbb{Z} \tag{5}
+\operatorname{Arg}(z) \coloneqq \arg(z) + 2k\mathrm{\pi}, \quad k \in \mathbb{Z} \tag{3}
 $$
+
+![The modulus r = |z| and the argument theta of a complex number](./figs/fig02-polar-modulus-argument.png)
 
 The unique representative in the interval $(-\mathrm{\pi}, \mathrm{\pi}]$ is defined as the **principal argument**, denoted by $\arg(z) \in (-\mathrm{\pi}, \mathrm{\pi}]$:
 
 $$
-\arg(z) \coloneqq \begin{cases}  \arctan\left(\frac{y}{x}\right), & x > 0 \\  \arctan\left(\frac{y}{x}\right) + \mathrm{\pi}, & x < 0, \, y \ge 0 \\  \arctan\left(\frac{y}{x}\right) - \mathrm{\pi}, & x < 0, \, y < 0 \\  \frac{\mathrm{\pi}}{2}, & x = 0, \, y > 0 \\  -\frac{\mathrm{\pi}}{2}, & x = 0, \, y < 0  \end{cases} \tag{6}
+\arg(z) \coloneqq \begin{cases}  \arctan\left(\frac{y}{x}\right), & x > 0 \\  \arctan\left(\frac{y}{x}\right) + \mathrm{\pi}, & x < 0, \, y \ge 0 \\  \arctan\left(\frac{y}{x}\right) - \mathrm{\pi}, & x < 0, \, y < 0 \\  \frac{\mathrm{\pi}}{2}, & x = 0, \, y > 0 \\  -\frac{\mathrm{\pi}}{2}, & x = 0, \, y < 0  \end{cases} \tag{4}
 $$
 
 *(For* $z = 0$*, the modulus is* $\vert{}0\vert{} = 0$*, and the argument* $\operatorname{Arg}(0)$ *is undefined.)*
 
-![Principal argument in the four quadrants](./figs/fig02-principal-argument.png)
+![Principal argument in the four quadrants](./figs/fig03-principal-argument.png)
+
+#### 1.2.3 Polar Coordinates and Polar Form
+
+With the modulus and an argument both available, the Cartesian coordinates $(x, y)$ can be replaced by plane polar coordinates $(r, \theta)$ via:
+
+$$
+\begin{cases} x = r \cos\theta \\ y = r \sin\theta \end{cases} \tag{5}
+$$
+
+which allows $z$ to be written in **trigonometric (polar) form**:
+
+$$
+z = r(\cos\theta + \mathrm{i}\sin\theta) \tag{6}
+$$
 
 #### 1.2.4 Physical Meaning and Introduction of the Exponential Form
 
@@ -108,7 +112,7 @@ $$
 
 **Geometric Meaning:** Addition and subtraction correspond to vector addition and subtraction of $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$ and $\begin{bmatrix} x_2 \\ y_2 \end{bmatrix}$ according to the parallelogram law or triangle rule.
 
-![Parallelogram rule for the sum and triangle rule for the difference](./figs/fig03-parallelogram.png)
+![Parallelogram rule for the sum and triangle rule for the difference](./figs/fig04-parallelogram.png)
 
 ### 2.2 Complex Conjugation
 
@@ -162,7 +166,7 @@ $$
 
 **Geometric Meaning:** Multiplying by $-\mathrm{i}$ (or dividing by $\mathrm{i}$) rotates the vector clockwise by $\frac{\mathrm{\pi}}{2}$.
 
-![Multiplication by -i: a clockwise quarter turn](./figs/fig04-multiply-by-minus-i.png)
+![Multiplication by -i: a clockwise quarter turn](./figs/fig05-multiply-by-minus-i.png)
 
 ### 2.4 Powers, Binomial Expansion, and de Moivre’s Theorem
 
@@ -214,7 +218,7 @@ $$
 
 **Geometric Meaning:** The $n$ roots of unity form the vertices of a regular $n$-sided polygon inscribed in the unit circle $\vert{}w\vert{} = 1$, with one vertex located at $w = 1$.
 
-![The n-th roots of unity as a regular n-gon (n = 5 and n = 8)](./figs/fig08-roots-of-unity.png)
+![The n-th roots of unity as a regular n-gon (n = 5 and n = 8)](./figs/fig06-roots-of-unity.png)
 
 ## 3 Geometric Applications in the Complex Plane
 
@@ -280,7 +284,7 @@ A straight line passing through two distinct points $z_1$ and $z_2$:
   z(t) \coloneqq z_1 + t(z_2 - z_1), \quad t \in \mathbb{R} \tag{27}
   $$
 
-![The circle and the straight line as point loci](./figs/fig05-circle-and-line.png)
+![The circle and the straight line as point loci](./figs/fig07-circle-and-line.png)
 
 ### 3.3 Angle Between Vectors and Angles in a Triangle
 
@@ -300,7 +304,7 @@ $$
 \begin{cases}  \angle z_1 \coloneqq \arg\left(\dfrac{z_3 - z_1}{z_2 - z_1}\right) \\  \angle z_2 \coloneqq \arg\left(\dfrac{z_1 - z_2}{z_3 - z_2}\right) \\  \angle z_3 \coloneqq \arg\left(\dfrac{z_2 - z_3}{z_1 - z_3}\right)  \end{cases} \tag{29}
 $$
 
-![Directed angle and the interior angles of a triangle](./figs/fig06-angles.png)
+![Directed angle and the interior angles of a triangle](./figs/fig08-angles.png)
 
 **Theorem** (Sum of interior angles). *The sum of the interior angles of a nondegenerate triangle equals* $\mathrm{\pi}$.
 
@@ -360,5 +364,5 @@ $$
 \vert{}z_1 - z_2\vert{}^2 = \vert{}z - z_1\vert{}^2 + \vert{}z - z_2\vert{}^2 \tag{38}
 $$
 
-![Thales's theorem as a locus condition](./figs/fig07-thales.png)
+![Thales's theorem as a locus condition](./figs/fig09-thales.png)
 
