@@ -55,7 +55,7 @@
 % ==================================================
 % Main content
 % ==================================================
-Lecture 1 treated a complex number as a single object. The present chapter instead studies \textbf{subsets} of $\mathbb{C}$: disks, open and closed sets, connected sets, and the domains on which complex functions will be defined. The properties involved --- openness, connectedness, boundary --- refer to the position of the points of a set in the plane, and are not expressed through the algebra of complex numbers.
+Lecture 1 treated a complex number as a single object. The present chapter instead studies \textbf{subsets} of $\mathbb{C}$, that is, collections of points of the plane rather than individual points. The properties examined below all refer to the position of the points of such a set, not to the algebra of the complex numbers themselves, and they are what will later allow a function to be studied on a region rather than at a single point.
 
 \section{Neighborhoods}
 
@@ -131,7 +131,7 @@ $E^{\circ}$ is the \textbf{interior} of $E$ and $\partial E$ is the \textbf{boun
 \begin{equation}
 \overline{E} \coloneqq E \cup \partial E,
 \end{equation}
-which is the smallest closed set containing $E$.
+which is the smallest set that contains $E$ and all of its boundary points. It is called the closure because of the next property: a set is closed exactly when it already contains its boundary, and then $\overline{E} = E$.
 
 \begin{figure}[htbp]
     \centering
@@ -188,19 +188,19 @@ In Figure~\ref{fig:connected-disconnected}(a) the region is not simply shaped, y
 
 Combining the last two sections gives the central object of the whole course.
 
-\begin{definition}[Domain, region]
+\begin{definition}[Domain, region, closed domain]
 A \textbf{domain} (or \textbf{region}) $D$ is a point set that is both open and connected:
 \begin{equation}
 D \ \text{domain} \iff D \ \text{open and connected}.
 \end{equation}
-A domain is \textbf{bounded} if $D \subset U(0, R)$ for some $R > 0$, and \textbf{unbounded} otherwise.
+A domain is \textbf{bounded} if $D \subset U(0, R)$ for some $R > 0$, and \textbf{unbounded} otherwise. A domain together with its boundary, $\overline{D} = D \cup \partial D$, is called a \textbf{closed domain}.
 \end{definition}
 
-Openness is what makes differentiation possible on a domain, while connectedness excludes a domain that falls into unrelated components. Every domain is an open set, but the converse fails: for $z_0 \ne z_1$ the set $U(z_0, \delta) \cup U(z_1, \delta)$ is open and yet is not a domain, being disconnected. Openness is a \textit{local} property, verified one neighborhood at a time; being a domain also requires the \textit{global} property that the set be of one piece.
+Openness is what distinguishes a domain from an arbitrary set: it is the property that lets a neighbourhood be placed around every one of its points, and it is exactly what will later be needed to speak about a limit taken at a point of the set. Connectedness is the separate requirement that the set not fall into unrelated components. Every domain is an open set, but the converse fails: for $z_0 \ne z_1$ the set $U(z_0, \delta) \cup U(z_1, \delta)$ is open and yet is not a domain, being disconnected. Openness is a \textit{local} property, verified one neighborhood at a time; being a domain also requires the \textit{global} property that the set be of one piece.
 
-Domains are further distinguished by the number of holes they enclose. $D$ is \textbf{simply connected} if every closed curve in $D$ can be shrunk continuously to a single point without ever leaving $D$:
+Domains are further distinguished by the number of holes they enclose. $D$ is \textbf{simply connected} if every closed curve lying in $D$ can be shrunk continuously to a single point without ever leaving $D$:
 \begin{equation}
-C \subset D \ \text{closed} \ \Longrightarrow \ C \ \text{contracts to a point inside} \ D.
+C \subset D, \ C \ \text{a closed curve} \ \Longrightarrow \ C \ \text{contracts to a point inside} \ D.
 \end{equation}
 Otherwise $D$ is \textbf{multiply connected}.
 
@@ -217,7 +217,7 @@ The two notions must be kept apart. An annulus is connected, since any two of it
 
 \section{Positive Orientation of the Boundary}
 
-For a domain with holes, or an unbounded domain, the boundary $\partial D$ may consist of several separate closed curves. Integration over $\partial D$ requires these curves to be traversed in a coherent order.
+For a domain with holes, or an unbounded domain, the boundary $\partial D$ may consist of several separate closed curves. To treat $\partial D$ as a single object, these curves have to be traversed in a coherent order.
 
 \begin{definition}[Positively oriented boundary]
 The \textbf{positively oriented boundary} $\Gamma^{+}$ of a domain $D$ is the traversal of $\partial D$ for which the domain stays on the \textbf{left}:
@@ -259,7 +259,7 @@ The same rule extends to a domain with $n$ holes, giving one outer curve and $n$
 
 \section{The Extended Complex Plane}
 
-The complex plane is not compact, and a sequence such as $z_k = k$ has no limit in $\mathbb{C}$. Adjoining a single ideal point repairs this.
+The complex plane is not large enough to give every sequence a limit: the sequence $z_k = k$ has no limit in $\mathbb{C}$, since its terms leave every disk $U(0, R)$. Adjoining a single ideal point repairs this.
 
 \begin{definition}[Extended complex plane]
 The \textbf{extended complex plane} is
@@ -294,6 +294,15 @@ and completing it by $N \mapsto \infty$ extends the correspondence to all of $\w
 \begin{equation}
 \widehat{\mathbb{C}} \ \longleftrightarrow \ \Sigma, \qquad \infty \ \longleftrightarrow \ N.
 \end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.58\textwidth]{figs/fig07-riemann-sphere.pdf}
+    \caption{Stereographic projection. The line from the north pole $N$ through a point $z$ of the plane meets the sphere at $P$, and $N$ itself corresponds to $\infty$. The dashed half of the equator is the part of the sphere behind the plane.}
+    \label{fig:riemann-sphere}
+\end{figure}
+
+Since the map is continuous in both directions, $\widehat{\mathbb{C}}$ may be read as $\Sigma$ and questions about $\infty$ become questions about the north pole. This is what makes it possible to treat $\infty$ as an ordinary point of the plane's compactification rather than as a separate exception.
 
 Two consequences are used later. First, a circle $|z| = R$ in the plane corresponds to a circle of latitude on the sphere,
 \begin{equation}

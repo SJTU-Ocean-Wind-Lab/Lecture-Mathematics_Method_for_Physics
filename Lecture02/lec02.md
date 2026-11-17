@@ -140,14 +140,14 @@ $$
 D \ \text{domain} \iff D \ \text{open and connected} \tag{16}
 $$
 
-Openness is what makes differentiation possible on a domain, while connectedness excludes a domain that falls into unrelated components. A domain is **bounded** if $D \subset U(0, R)$ for some $R > 0$, and **unbounded** otherwise.
+Openness is what makes differentiation possible on a domain, while connectedness excludes a domain that falls into unrelated components. A domain is **bounded** if $D \subset U(0, R)$ for some $R > 0$, and **unbounded** otherwise. A domain together with its boundary, $\overline{D} = D \cup \partial D$, is called a **closed domain**.
 
 Every domain is an open set, but the converse fails: for $z_0 \ne z_1$ the set $U(z_0, \delta) \cup U(z_1, \delta)$ is open and yet is not a domain, being disconnected. Openness is a *local* property, verified one neighborhood at a time; being a domain also requires the *global* property that the set be of one piece.
 
 Domains are further distinguished by the number of holes they enclose. $D$ is **simply connected** if every closed curve in $D$ can be shrunk continuously to a single point without ever leaving $D$:
 
 $$
-C \subset D \ \text{closed} \ \Longrightarrow \ C \ \text{contracts to a point inside} \ D \tag{17}
+C \subset D, \ C \ \text{a closed curve} \ \Longrightarrow \ C \ \text{contracts to a point inside} \ D \tag{17}
 $$
 
 Otherwise $D$ is **multiply connected**.
@@ -239,6 +239,10 @@ and completing it by $N \mapsto \infty$ extends the correspondence to all of $\w
 $$
 \widehat{\mathbb{C}} \ \longleftrightarrow \ \Sigma, \qquad \infty \ \longleftrightarrow \ N \tag{27}
 $$
+
+![Stereographic projection from the plane to the Riemann sphere](./figs/fig07-riemann-sphere.png)
+
+Since the map is continuous in both directions, $\widehat{\mathbb{C}}$ may be read as $\Sigma$ and questions about $\infty$ become questions about the north pole. This is what makes it possible to treat $\infty$ as an ordinary point of the plane's compactification rather than as a separate exception.
 
 Two consequences are used later. First, a circle $\vert{}z\vert{} = R$ in the plane corresponds to a circle of latitude on the sphere,
 
