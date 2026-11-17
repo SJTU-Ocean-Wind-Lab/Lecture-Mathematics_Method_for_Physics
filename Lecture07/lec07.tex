@@ -18,6 +18,18 @@
 \end{center}
 \vspace{-0.5em}
 \noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
 \vspace{0.8em}
 
 \section{Existence of Derivatives}
@@ -28,7 +40,7 @@ all orders exist, and each of them is again analytic in that region.
 For a point $z_{0}$ inside a simple closed contour $C$ on which $f$ is analytic,
 
 \[
-f^{(n)}(z_{0}) = \frac{n!}{2\mathrm{\pi}\mathrm{i}}\oint_{C}\frac{f(z)}{(z - z_{0})^{n + 1}}dz .
+f^{(n)}(z_{0}) = \frac{n!}{2\mathrm{\pi}\mathrm{i}}\oint_{C}\frac{f(z)}{(z - z_{0})^{n + 1}}dz
 \]
 
 The formula comes from Cauchy's integral formula by differentiating under the
@@ -49,16 +61,16 @@ Suppose that
 Then
 
 \begin{equation}
-\vert{}f^{(n)}(z_{0})\vert{} \le \ \frac{n!M}{R^{n}},
+\vert{}f^{(n)}(z_{0})\vert{} \le \ \frac{n!M}{R^{n}}
 \end{equation}
 
 where
 
 \begin{equation}
-M \coloneqq \max_{C}\vert{}f(z)\vert{}
+M = \max_{C}\vert{}f(z)\vert{}
 \end{equation}
 
-\textit{Proof.} By the generalized Cauchy integral formula:
+\textit{Proof.} By the generalized Cauchy integral formula
 
 \[
 \vert{}f^{(n)}(z_{0})\vert{} = \left\vert{}\frac{n!}{(2\mathrm{\pi}\mathrm{i})}\oint_{C}\frac{f(z)}{(z - z_{0})^{(n + 1)}}dz\right\vert{}
@@ -70,7 +82,7 @@ M \coloneqq \max_{C}\vert{}f(z)\vert{}
 
 On $C$, $\vert{}z - z_{0}\vert{} = R$ and $\vert{}f(z)\vert{} \le M$.
 
-Taking absolute values in the integral formula, and using $\vert{}\int g(z)dz\vert{} \le \int\vert{}g(z)\vert{}\vert{}dz\vert{}$:
+Taking absolute values in the integral formula, and using $\vert{}\int g(z)dz\vert{} \le \int\vert{}g(z)\vert{}\vert{}dz\vert{}$
 
 \[
 \vert{}f^{(n)}(z_{0})\vert{} \le \frac{n!}{2\mathrm{\pi}} \cdot \frac{M}{R^{(n + 1)}} \cdot \oint_{C}\vert{}dz\vert{}
@@ -89,17 +101,17 @@ Suppose $f(z)$ is analytic in the open disk and continuous on its closure, and l
 Write
 
 \begin{equation}
-M \coloneqq \max_{\zeta \in C}\vert{}f(\zeta)\vert{},
+M = \max_{\zeta \in C}\vert{}f(\zeta)\vert{}
 \end{equation}
 
 so that $\vert{}f(\zeta)\vert{} \le M$ for every $\zeta$ on $C$. The maximum-modulus
-principle says that no interior point exceeds this boundary maximum:
+principle says that no interior point exceeds this boundary maximum
 
 \begin{equation}
-\max_{z \in \bar{D}}\vert{}f(z)\vert{} = \max_{\zeta \in C}\vert{}f(\zeta)\vert{}.
+\max_{z \in \bar{D}}\vert{}f(z)\vert{} = \max_{\zeta \in C}\vert{}f(\zeta)\vert{}
 \end{equation}
 
-\textit{Proof.} By Cauchy’s integral formula:
+\textit{Proof.} By Cauchy’s integral formula
 
 \begin{equation}
 \vert{}f(z)\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{(\zeta - z)}d\zeta\right\vert{}
@@ -125,17 +137,17 @@ Here $d$ is the distance from $z$ to the contour $C$ and $L$ is its length; for 
 
 Apply Cauchy’s integral formula to the function $[f(z)]^{n}$:
 
-For a fixed interior point $z$ at distance $d$ from the boundary, $\vert{}\zeta - z\vert{} \ge d$ on $C$, and $\vert{}f(\zeta)\vert{} \le M$ on C:
+For a fixed interior point $z$ at distance $d$ from the boundary, $\vert{}\zeta - z\vert{} \ge d$ on $C$, and $\vert{}f(\zeta)\vert{} \le M$ on C
 
 \begin{equation}
 \vert{}[f(z)]^{n}\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\frac{[f(\zeta)]^{n}}{(\zeta - z)}d\zeta\right\vert{}
 \end{equation}
 
 \[
-\le \left(\frac{L}{(2\mathrm{\pi}d)}\right)M^{n}.
+\le \left(\frac{L}{(2\mathrm{\pi}d)}\right)M^{n}
 \]
 
-Take the nth root:
+Take the nth root
 
 \begin{equation}
 \vert{}f(z)\vert{} \le \sqrt[n]{\frac{L}{2\mathrm{\pi}d}}\,M
@@ -144,13 +156,13 @@ Take the nth root:
 Let $n \to \infty$. Since
 
 \begin{equation}
-\sqrt[n]{\left(\frac{L}{(2\mathrm{\pi}d)}\right)} \to 1,
+\sqrt[n]{\left(\frac{L}{(2\mathrm{\pi}d)}\right)} \to 1
 \end{equation}
 
 we obtain
 
 \begin{equation}
-\vert{}f(z)\vert{} \le M.
+\vert{}f(z)\vert{} \le M
 \end{equation}
 
 \section{Liouville's Theorem}
@@ -162,12 +174,12 @@ If $f(z)$ is analytic on the whole complex plane (entire), and $\vert{}f(z)\vert
 Consider
 
 \begin{equation}
-I \coloneqq \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{1})(z - z_{2})]}dz.
+I = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{1})(z - z_{2})]}dz
 \end{equation}
 
 Choose the contour $C$ to be $\vert{}z\vert{} = R$, where $R > \max(\vert{}z_{1}\vert{}, \vert{}z_{2}\vert{})$, and let $R \to \infty$.
 
-By partial fractions:
+By partial fractions
 
 \begin{equation}
 I = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{1})(z - z_{2})]}dz
@@ -177,11 +189,11 @@ I = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(z)}{[(z - z_{
 = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C_{1}}\frac{[\frac{f(z)}{(z - z_{2})}]}{(z - z_{1})}dz + \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C_{2}}\frac{[\frac{f(z)}{(z - z_{1})}]}{(z - z_{2})}dz
 \]
 
-By Cauchy's integral formula:
+By Cauchy's integral formula
 
 \begin{equation}
 I = \frac{f(z_{1})}{z_{1} - z_{2}} + \frac{f(z_{2})}{z_{2} - z_{1}}
-= \frac{f(z_{1}) - f(z_{2})}{z_{1} - z_{2}} ,
+= \frac{f(z_{1}) - f(z_{2})}{z_{1} - z_{2}}
 \end{equation}
 
 an expression independent of $R$.
@@ -190,7 +202,7 @@ On $\vert{}z\vert{} = R$ the distances to the two points satisfy
 
 \begin{equation}
 \vert{}z - z_{1}\vert{} \ge R - \vert{}z_{1}\vert{}, \qquad
-\vert{}z - z_{2}\vert{} \ge R - \vert{}z_{2}\vert{} .
+\vert{}z - z_{2}\vert{} \ge R - \vert{}z_{2}\vert{}
 \end{equation}
 
 With $\vert{}f\vert{} \le M$ on $C$ and contour length $2\mathrm{\pi}R$, the same integral is
@@ -198,24 +210,24 @@ bounded by
 
 \begin{equation}
 \vert{}I\vert{} \le \frac{1}{2\mathrm{\pi}}\oint_{C}\frac{M}{\vert{}z - z_{1}\vert{}\vert{}z - z_{2}\vert{}}\vert{}dz\vert{}
-\le \frac{MR}{(R - \vert{}z_{1}\vert{})(R - \vert{}z_{2}\vert{})},
+\le \frac{MR}{(R - \vert{}z_{1}\vert{})(R - \vert{}z_{2}\vert{})}
 \end{equation}
 
 and the right-hand side tends to $0$ as $R \to \infty$. Hence $I = 0$ for every
 pair $z_{1} \ne z_{2}$, so
 
 \begin{equation}
-f(z_{1}) - f(z_{2}) = 0 .
+f(z_{1}) - f(z_{2}) = 0
 \end{equation}
 
 Since $z_{1}$ and $z_{2}$ are arbitrary, $f$ is constant.
 
 \textit{Alternatively}, differentiating Cauchy's formula for $f'$ and letting
-$R \to \infty$ gives the same conclusion directly:
+$R \to \infty$ gives the same conclusion directly
 
 \begin{equation}
 \vert{}f'(z)\vert{} = \left\vert{}\left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{\vert{}\zeta - z\vert{} = R}\frac{f(\zeta)}{(\zeta - z)^{2}}d\zeta\right\vert{}
-\le \left(\frac{1}{2\mathrm{\pi}}\right)\cdot\left(\frac{M}{R^{2}}\right)\cdot 2\mathrm{\pi}R = \frac{M}{R} \to 0 ,
+\le \left(\frac{1}{2\mathrm{\pi}}\right)\cdot\left(\frac{M}{R^{2}}\right)\cdot 2\mathrm{\pi}R = \frac{M}{R} \to 0
 \end{equation}
 
 so $f'(z) \equiv 0$ everywhere, and $f$ is constant.
@@ -232,7 +244,7 @@ f(z_{0}) = \frac{1}{2\mathrm{\pi}}\int_{0}^{2\mathrm{\pi}}f(z_{0} + R\mathrm{e}^
 
 so $f(z_{0})$ is the average of $f$ over the circle $\vert{}z - z_{0}\vert{} = R$.
 
-\textit{Proof.} By Cauchy’s integral formula:
+\textit{Proof.} By Cauchy’s integral formula
 
 \begin{equation}
 f(z_{0}) = \left(\frac{1}{2\mathrm{\pi}\mathrm{i}}\right)\oint_{C}\frac{f(\zeta)}{\zeta - z_{0}}d\zeta
@@ -242,7 +254,7 @@ With
 
 \begin{equation}
 \zeta = z_{0} + R\mathrm{e}^{\mathrm{i}\theta}, \qquad
-d\zeta = \mathrm{i}R\mathrm{e}^{\mathrm{i}\theta} d\theta ,
+d\zeta = \mathrm{i}R\mathrm{e}^{\mathrm{i}\theta} d\theta
 \end{equation}
 
 the integral becomes
@@ -251,17 +263,17 @@ the integral becomes
 f(z_{0}) = \frac{1}{2\mathrm{\pi}\mathrm{i}} \int_{0}^{2\mathrm{\pi}}
 \frac{f(z_{0} + R\mathrm{e}^{\mathrm{i}\theta})}{R\mathrm{e}^{\mathrm{i}\theta}}
 \cdot \mathrm{i}R\mathrm{e}^{\mathrm{i}\theta} d\theta
-= \frac{1}{2\mathrm{\pi}} \int_{0}^{2\mathrm{\pi}} f(z_{0} + R\mathrm{e}^{\mathrm{i}\theta}) d\theta .
+= \frac{1}{2\mathrm{\pi}} \int_{0}^{2\mathrm{\pi}} f(z_{0} + R\mathrm{e}^{\mathrm{i}\theta}) d\theta
 \end{equation}
 
 \section{Converse of Cauchy's Theorem}
 
 Suppose $f(z)$ is analytic in $D$. The following statements are equivalent:
 
-1) For every closed curve $C$ in $D$:
+1) For every closed curve $C$ in $D$
 
 \begin{equation}
-\oint_{C}f(z)dz = 0.
+\oint_{C}f(z)dz = 0
 \end{equation}
 
 2) $f(z)$ has an antiderivative in $D$.
@@ -269,7 +281,7 @@ Suppose $f(z)$ is analytic in $D$. The following statements are equivalent:
 \textit{Proof.} Fix $z_{0} \in D$. For $z \in D$, define
 
 \begin{equation}
-F(z) \coloneqq \int_{z_{0}}^{z}f(\zeta)d\zeta
+F(z) = \int_{z_{0}}^{z}f(\zeta)d\zeta
 \end{equation}
 
 The zero-integral condition makes this definition independent of the chosen path: any two paths from $z_{0}$ to $z$ form a closed curve when one is followed in reverse, and the integral around that closed curve is zero.
@@ -280,7 +292,7 @@ F'(z) = f(z)
 
 To compute $F'(z)$, choose the short straight segment from $z$ to $z + \Delta z$. Path independence gives:
 
-On $\zeta = z + t\Delta z$, $0 \le t \le 1$:
+On $\zeta = z + t\Delta z$, $0 \le t \le 1$
 
 \begin{equation}
 \frac{F(z + \Delta z) - F(z)}{\Delta z} = \int_{0}^{1}f(z + t\Delta z)dt
@@ -290,7 +302,7 @@ On $\zeta = z + t\Delta z$, $0 \le t \le 1$:
 F'(z) = f(z)
 \]
 
-Conversely, with $F'= f$:
+Conversely, with $F'= f$
 
 \begin{equation}
 \oint_{C}f(z)dz = \oint_{C}F'(z)dz = 0
