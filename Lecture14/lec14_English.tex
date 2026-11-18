@@ -1,0 +1,778 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\usepackage{mathtools,longtable,booktabs,array}
+\setlength{\emergencystretch}{2em}
+\allowdisplaybreaks[1]
+\raggedbottom
+\begin{document}
+
+
+\begin{center}
+    {\LARGE \textbf{Mathematical Methods for Physics--Lecture 14}} \\[0.6em]
+    {\large The Delta Function and Fourier Transform Properties}
+\end{center}
+
+\vspace{-0.5em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.8em}
+
+\section{The Delta Function and Generalized Fourier Transforms}
+
+\subsection{The Delta Function and Its Rectangular-Pulse Approximation}
+
+The \(\delta\) function is also called the unit impulse. It is a distribution,
+formally represented by
+\[
+\delta(x)=
+\begin{cases}
+0,&x\ne0,\\
+\infty,&x=0,
+\end{cases}
+\qquad
+\int_{-\infty}^{+\infty}\delta(x)\,\mathrm dx=1.
+\]
+
+\begin{definition}[Rectangular-pulse representation]
+\[
+\delta(x)=\lim_{\tau\to0}\delta_\tau(x),
+\]
+
+where \(\tau>0\) and
+\[
+\delta_\tau(x)=
+\begin{cases}
+\dfrac1{\tau},&|x|\le\dfrac{\tau}{2},\\[4pt]
+0,&|x|>\dfrac{\tau}{2}.
+\end{cases}
+\]
+
+\end{definition}
+
+The limit is understood in the distributional sense. The rectangular pulse is
+centered at the origin, has width \(\tau\) and height \(1/\tau\), and
+has unit area. As \(\tau\to0\), it becomes narrower and taller. A vertical arrow at the origin labeled ``1'' represents the unit impulse.
+
+\subsection{The Delta Function as a Functional}
+
+\begin{definition}[The Dirac delta distribution]
+
+The delta function \(\delta(t)\) is a functional satisfying
+\[
+\int_{-\infty}^{+\infty}
+\delta(t-t_0)\varphi(t)\,\mathrm dt
+=\varphi(t_0),
+\qquad \forall\varphi\in C(\mathbb R).
+\]
+
+\end{definition}
+
+Its derivative satisfies
+\[
+\int_{-\infty}^{+\infty}
+\delta'(t-t_0)\varphi(t)\,\mathrm dt
+=-\varphi'(t_0),
+\qquad \forall\varphi\in C^1(\mathbb R).
+\]
+
+Its \(n\)th derivative satisfies
+\[
+\int_{-\infty}^{+\infty}
+\delta^{(n)}(t-t_0)\varphi(t)\,\mathrm dt
+=(-1)^n\varphi^{(n)}(t_0),
+\qquad \forall\varphi\in C^n(\mathbb R).
+\]
+
+\subsection{Fourier Transform and Integral Representation of the Delta Function}
+
+\textbf{Example 1.} The Fourier transform of \(\delta(t)\) is understood
+as a generalized Fourier transform.
+\[
+\mathcal F[\delta(t)]
+=\int_{-\infty}^{+\infty}\delta(t)e^{-i\omega t}\,\mathrm dt
+=\left.e^{-i\omega t}\right|_{t=0}
+=1.
+\]
+
+Thus \(\{\delta(t),1\}\) is a Fourier transform pair. By the inverse
+transform,
+\[
+\delta(t)=\frac1{2\pi}
+\int_{-\infty}^{+\infty}1\cdot e^{i\omega t}\,\mathrm d\omega.
+\]
+
+Consequently,
+\[
+\int_{-\infty}^{+\infty}e^{\pm i\omega t}\,\mathrm dt
+=2\pi\delta(\omega).
+\tag{*}
+\]
+
+\subsection{Transforms of Complex Exponentials, Cosines, and Sines}
+
+\textbf{Example.} Prove that
+\[
+e^{i\omega_0t}
+\ \xleftrightarrow{\mathcal F}\
+2\pi\delta(\omega-\omega_0).
+\]
+
+Using identity \((*)\),
+\[
+\begin{aligned}
+\mathcal F[e^{i\omega_0t}]
+&=\int_{-\infty}^{+\infty}
+e^{i\omega_0t}e^{-i\omega t}\,\mathrm dt\\
+&=\int_{-\infty}^{+\infty}
+e^{-i(\omega-\omega_0)t}\,\mathrm dt\\
+&=2\pi\delta(\omega-\omega_0).
+\end{aligned}
+\]
+
+Similarly,
+\[
+\begin{aligned}
+\mathcal F[\cos\omega_0t]
+&=\mathcal F\!\left[
+\frac{e^{i\omega_0t}+e^{-i\omega_0t}}2
+\right]\\
+&=\frac12\mathcal F[e^{i\omega_0t}]
++\frac12\mathcal F[e^{-i\omega_0t}]\\
+&=\frac12\cdot2\pi\delta(\omega-\omega_0)
++\frac12\cdot2\pi\delta(\omega+\omega_0)\\
+&=\pi\bigl[\delta(\omega+\omega_0)+\delta(\omega-\omega_0)\bigr].
+\end{aligned}
+\]
+\[
+\mathcal F[\sin\omega_0t]
+=i\pi\bigl[\delta(\omega+\omega_0)-\delta(\omega-\omega_0)\bigr].
+\]
+
+\subsection{Transform of the Unit Step Function}
+\[
+u(t)=
+\begin{cases}
+1,&t>0,\\
+0,&t<0.
+\end{cases}
+\]
+
+Its Fourier transform is
+\[
+u(t)
+\ \xleftrightarrow{\mathcal F}\
+\frac1{i\omega}+\pi\delta(\omega).
+\]
+
+Here \(1/(i\omega)\) is interpreted as a Cauchy principal-value distribution.
+The forward transform can formally be written as
+\[
+\mathcal F[u(t)]
+=\int_{-\infty}^{+\infty}u(t)e^{-i\omega t}\,\mathrm dt
+=\int_0^{+\infty}e^{-i\omega t}\,\mathrm dt.
+\]
+
+Verify the result using the inverse transform.
+\[
+\begin{aligned}
+\mathcal F^{-1}\!\left[
+\frac1{i\omega}+\pi\delta(\omega)
+\right]
+&=\frac1{2\pi}\int_{-\infty}^{+\infty}
+\left[\frac1{i\omega}+\pi\delta(\omega)\right]
+e^{i\omega t}\,\mathrm d\omega\\
+&=\frac1{2\pi}\left[
+\int_{-\infty}^{+\infty}
+\frac{e^{i\omega t}}{i\omega}\,\mathrm d\omega
++\int_{-\infty}^{+\infty}
+\pi\delta(\omega)e^{i\omega t}\,\mathrm d\omega
+\right]\\
+&=\frac1{2\pi}\left[
+\int_{-\infty}^{+\infty}
+\frac{e^{i\omega t}}{i\omega}\,\mathrm d\omega+\pi
+\right].
+\end{aligned}
+\]
+
+where
+\[
+\begin{aligned}
+\int_{-\infty}^{+\infty}
+\frac{e^{i\omega t}}{i\omega}\,\mathrm d\omega
+&=\int_{-\infty}^{+\infty}
+\frac{\cos\omega t+i\sin\omega t}{i\omega}\,\mathrm d\omega\\
+&=0+\int_{-\infty}^{+\infty}
+\frac{\sin\omega t}{\omega}\,\mathrm d\omega\\
+&=
+\begin{cases}
+\pi,&t>0,\\
+-\pi,&t<0.
+\end{cases}
+\end{aligned}
+\]
+
+From
+\[
+\int_{-\infty}^{+\infty}\frac{\sin x}{x}\,\mathrm dx=\pi
+\]
+
+we obtain
+\[
+\int_{-\infty}^{+\infty}\frac{\sin kx}{x}\,\mathrm dx
+=
+\begin{cases}
+\pi,&k>0,\\
+-\pi,&k<0.
+\end{cases}
+\]
+
+Substituting into the preceding expression gives
+\[
+\mathcal F^{-1}\!\left[
+\frac1{i\omega}+\pi\delta(\omega)
+\right]
+=
+\begin{cases}
+\dfrac1{2\pi}(\pi+\pi)=1,&t>0,\\[4pt]
+\dfrac1{2\pi}(-\pi+\pi)=0,&t<0,
+\end{cases}
+=u(t).
+\]
+
+\subsection{A Constant (DC) Signal}
+
+The transform pair for a constant (DC) signal \(E\) is
+\[
+E\ \xleftrightarrow{\mathcal F}\ 2\pi E\delta(\omega).
+\]
+\[
+\mathcal F[E]
+=\int_{-\infty}^{+\infty}Ee^{-i\omega t}\,\mathrm dt
+=2\pi E\delta(\omega).
+\]
+
+\section{Properties of Fourier Transform Pairs}
+
+We use the notation
+\[
+f(t)\ \xleftrightarrow{\mathcal F}\ F(\omega),
+\qquad
+g(t)\ \xleftrightarrow{\mathcal F}\ G(\omega).
+\]
+
+The transform convention is
+\[
+F(\omega)=\int_{-\infty}^{+\infty}f(t)e^{-i\omega t}\,\mathrm dt,
+\qquad
+f(t)=\frac1{2\pi}\int_{-\infty}^{+\infty}F(\omega)e^{i\omega t}\,\mathrm d\omega.
+\]
+
+\subsection{Linearity}
+\[
+\begin{aligned}
+\mathcal F[af(t)+bg(t)]
+&=a\mathcal F[f]+b\mathcal F[g]\\
+&=aF(\omega)+bG(\omega).
+\end{aligned}
+\]
+
+Alternatively,
+\[
+\mathcal F^{-1}[aF(\omega)+bG(\omega)]
+=a\mathcal F^{-1}[F]+b\mathcal F^{-1}[G].
+\]
+
+\subsubsection*{Example 7.10}
+\[
+\begin{aligned}
+\mathcal F[\sin^2t]
+&=\mathcal F\!\left[\frac{1-\cos2t}{2}\right]\\
+&=\frac12\left\{\mathcal F[1]-\mathcal F[\cos2t]\right\}\\
+&=\frac12\left\{
+2\pi\delta(\omega)
+-\pi[\delta(\omega+2)+\delta(\omega-2)]
+\right\}.
+\end{aligned}
+\]
+
+\subsubsection*{Example 7.11}
+
+Let
+\[
+F(\omega)=\pi\delta(\omega+1)-\frac{i}{\omega+1},
+\]
+
+Find \(\mathcal F^{-1}[F(\omega)]\).
+
+\textbf{Solution}\par\nopagebreak[4]
+\[
+\begin{aligned}
+\mathcal F^{-1}[F(\omega)]
+&=\frac1{2\pi}\int_{-\infty}^{+\infty}
+\left[\pi\delta(\omega+1)-\frac{i}{\omega+1}\right]
+e^{i\omega t}\,\mathrm d\omega\\
+&=\frac1{2\pi}\left[
+\int_{-\infty}^{+\infty}
+\pi\delta(\omega+1)e^{i\omega t}\,\mathrm d\omega
++\int_{-\infty}^{+\infty}
+\frac{-ie^{i\omega t}}{\omega+1}\,\mathrm d\omega
+\right]\\
+&=\frac1{2\pi}\left[
+\pi e^{-it}
++\int_{-\infty}^{+\infty}
+\frac{-ie^{i\omega t}}{\omega+1}\,\mathrm d\omega
+\right].
+\end{aligned}
+\]
+
+Let \(\omega+1=\xi\). Then
+\[
+\begin{aligned}
+\int_{-\infty}^{+\infty}
+\frac{-ie^{i\omega t}}{\omega+1}\,\mathrm d\omega
+&=\int_{-\infty}^{+\infty}
+\frac{-ie^{i(\xi-1)t}}{\xi}\,\mathrm d\xi\\
+&=e^{-it}\int_{-\infty}^{+\infty}
+\frac{-ie^{i\xi t}}{\xi}\,\mathrm d\xi\\
+&=e^{-it}
+\begin{cases}
+\pi,&t>0,\\
+-\pi,&t<0.
+\end{cases}
+\end{aligned}
+\]
+
+Substitution gives
+\[
+\begin{aligned}
+\mathcal F^{-1}[F(\omega)]
+&=
+\begin{cases}
+\dfrac1{2\pi}(\pi e^{-it}+\pi e^{-it}),&t>0,\\[4pt]
+\dfrac1{2\pi}(\pi e^{-it}-\pi e^{-it}),&t<0
+\end{cases}\\
+&=
+\begin{cases}
+e^{-it},&t>0,\\
+0,&t<0
+\end{cases}\\
+&=u(t)e^{-it}.
+\end{aligned}
+\]
+
+That is,
+\[
+u(t)e^{-it}
+\ \xleftrightarrow{\mathcal F}\
+\pi\delta(\omega+1)-\frac{i}{\omega+1}.
+\]
+
+Compare this with
+\[
+u(t)\ \xleftrightarrow{\mathcal F}\
+\pi\delta(\omega)+\frac1{i\omega}
+\]
+
+The comparison shows a shift in the frequency domain.
+
+\subsection{Shifting}
+\[
+f(t-t_0)
+\ \xleftrightarrow{\mathcal F}\
+e^{-it_0\omega}F(\omega).
+\]
+
+Alternatively,
+\[
+e^{i\omega_0t}f(t)
+\ \xleftrightarrow{\mathcal F}\
+F(\omega-\omega_0).
+\]
+
+\textbf{Example.} Starting from
+\[
+u(t)\ \xleftrightarrow{\mathcal F}\
+\frac1{i\omega}+\pi\delta(\omega),
+\]
+
+Hence,
+\[
+u(t-c)\ \xleftrightarrow{\mathcal F}\
+\left[\frac1{i\omega}+\pi\delta(\omega)\right]e^{-ic\omega}.
+\]
+
+This can be simplified to
+\[
+\frac{e^{-ic\omega}}{i\omega}+\pi\delta(\omega).
+\]
+
+Here we use the delta-function identity
+\[
+\delta(x-x_0)\varphi(x)
+=\delta(x-x_0)\varphi(x_0).
+\]
+
+In addition,
+\[
+e^{-it}u(t)\ \xleftrightarrow{\mathcal F}\
+\pi\delta(\omega+1)+\frac1{i(\omega+1)},
+\]
+
+and
+\[
+\mathcal F^{-1}\!\left[
+\pi\delta(\omega-1)+\frac1{i(\omega-1)}
+\right]
+=u(t)e^{it}.
+\]
+
+\subsection{Scaling}
+
+If \(f(t)\xleftrightarrow{\mathcal F}F(\omega)\), then
+\[
+f(at)\ \xleftrightarrow{\mathcal F}\
+\frac1{|a|}F\!\left(\frac{\omega}{a}\right),
+\qquad a\ne0.
+\]
+
+and
+\[
+\frac1{|a|}f\!\left(\frac{t}{a}\right)
+\ \xleftrightarrow{\mathcal F}\
+F(a\omega).
+\]
+
+\subsubsection*{Example: Find \(\mathcal F[u(5t-2)]\)}
+
+\textbf{Solution (using the definition)}\par\nopagebreak[4]
+\[
+\mathcal F[u(5t-2)]
+=\int_{-\infty}^{+\infty}
+u(5t-2)e^{-i\omega t}\,\mathrm dt.
+\]
+
+Let \(5t-2=\tau\), so that \(t=(\tau+2)/5\). We obtain
+\[
+\begin{aligned}
+\mathcal F[u(5t-2)]
+&=\int_{-\infty}^{+\infty}
+u(\tau)e^{-i\omega(\tau+2)/5}\frac15\,\mathrm d\tau\\
+&=\frac15e^{-2i\omega/5}
+\int_{-\infty}^{+\infty}
+u(\tau)e^{-i(\omega/5)\tau}\,\mathrm d\tau\\
+&=\frac15e^{-2i\omega/5}
+\left[
+\frac1{i(\omega/5)}+\pi\delta\!\left(\frac{\omega}{5}\right)
+\right]\\
+&=\frac{e^{-2i\omega/5}}{i\omega}
++\frac{\pi}{5}\delta\!\left(\frac{\omega}{5}\right).
+\end{aligned}
+\]
+
+\subsection{Duality}
+
+If
+\[
+f(t)\ \xleftrightarrow{\mathcal F}\ F(\omega),
+\]
+
+then
+\[
+F(t)\ \xleftrightarrow{\mathcal F}\ 2\pi f(-\omega).
+\]
+
+\textbf{Proof}\par\nopagebreak[4]
+\[
+F(\omega)
+=\int_{-\infty}^{+\infty}f(t)e^{-i\omega t}\,\mathrm dt.
+\]
+
+A definite integral does not depend on the name of its dummy variable.
+Interchanging \(\omega\) and \(t\) in the notation gives
+\[
+F(t)=\int_{-\infty}^{+\infty}f(\omega)e^{-it\omega}\,\mathrm d\omega.
+\]
+
+Let \(\omega=-\xi\).
+\[
+\begin{aligned}
+F(t)
+&=\int_{+\infty}^{-\infty}
+f(-\xi)e^{it\xi}\,\mathrm d(-\xi)\\
+&=\int_{-\infty}^{+\infty}
+f(-\xi)e^{it\xi}\,\mathrm d\xi\\
+&=\frac1{2\pi}\int_{-\infty}^{+\infty}
+[2\pi f(-\omega)]e^{it\omega}\,\mathrm d\omega.
+\end{aligned}
+\]
+
+Comparison with the inverse transform formula proves the result.
+
+\textbf{Example.} Start from the transform pair for a two-sided
+exponential pulse,
+\[
+e^{-\beta|t|}
+\ \xleftrightarrow{\mathcal F}\
+\frac{2\beta}{\omega^2+\beta^2},
+\qquad \beta>0,
+\]
+
+we obtain
+\[
+\frac{2\beta}{t^2+\beta^2}
+\ \xleftrightarrow{\mathcal F}\
+2\pi e^{-\beta|-\omega|}
+=2\pi e^{-\beta|\omega|}.
+\]
+
+Therefore,
+\[
+\frac1{t^2+\beta^2}
+\ \xleftrightarrow{\mathcal F}\
+\frac{\pi}{\beta}e^{-\beta|\omega|}.
+\]
+
+The two-sided exponential
+pulse is symmetric about the vertical axis, reaches its maximum at the
+origin, and decays in both directions.
+
+\subsection{Differentiation}
+
+\textbf{(1) Differentiation in the time domain}
+
+If \(f(\pm\infty)=0\), then
+\[
+f'(t)\ \xleftrightarrow{\mathcal F}\
+i\omega F(\omega).
+\]
+
+\textbf{Proof.} Integration by parts gives
+\[
+\begin{aligned}
+\int_{-\infty}^{+\infty}f'(t)e^{-i\omega t}\,\mathrm dt
+&=\left.f(t)e^{-i\omega t}\right|_{-\infty}^{+\infty}
+-\int_{-\infty}^{+\infty}(-i\omega)f(t)e^{-i\omega t}\,\mathrm dt\\
+&=0+i\omega\int_{-\infty}^{+\infty}
+f(t)e^{-i\omega t}\,\mathrm dt\\
+&=i\omega F(\omega).
+\end{aligned}
+\]
+
+\textbf{(2) Differentiation in the frequency domain}
+\[
+-itf(t)\ \xleftrightarrow{\mathcal F}\ F'(\omega).
+\]
+
+\textbf{Proof}\par\nopagebreak[4]
+\[
+F(\omega)=\int_{-\infty}^{+\infty}
+f(t)e^{-i\omega t}\,\mathrm dt,
+\]
+\[
+\begin{aligned}
+F'(\omega)
+&=\int_{-\infty}^{+\infty}
+\frac{\partial}{\partial\omega}
+[f(t)e^{-i\omega t}]\,\mathrm dt\\
+&=\int_{-\infty}^{+\infty}
+f(t)(-it)e^{-i\omega t}\,\mathrm dt.
+\end{aligned}
+\]
+
+\textbf{Generalization}\par\nopagebreak[4]
+If
+\[
+f(\pm\infty)=f'(\pm\infty)=\cdots
+=f^{(n-1)}(\pm\infty)=0,
+\]
+
+then
+\[
+f^{(n)}(t)\ \xleftrightarrow{\mathcal F}\
+(i\omega)^nF(\omega).
+\]
+
+On the other hand,
+\[
+(-it)^nf(t)\ \xleftrightarrow{\mathcal F}\
+F^{(n)}(\omega).
+\]
+
+From
+\[
+\mathcal F[(-it)^nf(t)]=F^{(n)}(\omega)
+\]
+
+we obtain
+\[
+\mathcal F[t^nf(t)]=i^nF^{(n)}(\omega).
+\]
+
+In particular,
+\[
+\begin{aligned}
+\mathcal F[t^n\cdot1]
+&=i^n[2\pi\delta(\omega)]^{(n)}\\
+&=2\pi i^n\delta^{(n)}(\omega).
+\end{aligned}
+\]
+
+That is,
+\[
+t^n\ \xleftrightarrow{\mathcal F}\
+2\pi i^n\delta^{(n)}(\omega).
+\]
+
+\subsection{Examples of Generalized Fourier Transform Pairs}
+
+All derivatives in the right-hand column are with respect to \(\omega\).
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.65}
+\everymath{\displaystyle}
+\begin{longtable}{@{}p{0.29\textwidth}p{0.65\textwidth}@{}}
+\toprule
+Function & Fourier transform \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\(u(t-c)\) &
+\(\left[\frac1{i\omega}+\pi\delta(\omega)\right]e^{-ic\omega}\) \\
+\(t\,u(t)\) &
+\(i\frac{\mathrm d}{\mathrm d\omega}\left[\frac1{i\omega}+\pi\delta(\omega)\right]\) \\
+\(t^nu(t)\) &
+\(i^n\frac{\mathrm d^n}{\mathrm d\omega^n}\left[\frac1{i\omega}+\pi\delta(\omega)\right]\) \\
+\(u(t)e^{iat}\) & \(\frac1{i(\omega-a)}+\pi\delta(\omega-a)\) \\
+\(u(t)e^{iat}t^n\) &
+\(i^n\frac{\mathrm d^n}{\mathrm d\omega^n}\left[\frac1{i(\omega-a)}+\pi\delta(\omega-a)\right]\) \\
+\(\delta^{(n)}(t)\) & \((i\omega)^n\) \\
+\(\delta^{(n)}(t-c)\) & \((i\omega)^ne^{-ic\omega}\) \\
+\(t^ne^{iat}\) & \(2\pi i^n\delta^{(n)}(\omega-a)\) \\
+\end{longtable}
+\endgroup
+
+The modulated transform pairs follow from the frequency shift
+\(\omega\mapsto\omega-a\).
+
+\subsection{Integration}
+
+\textbf{(1) Integration in the time domain}
+
+If
+\[
+\int_{-\infty}^{+\infty}f(t)\,\mathrm dt=0,
+\]
+
+then
+\[
+\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau
+\ \xleftrightarrow{\mathcal F}\
+\frac{F(\omega)}{i\omega}.
+\]
+
+\textbf{(2) Integration in the frequency domain}
+
+If \(F\) is sufficiently regular and decays at infinity, with
+\[
+\int_{-\infty}^{+\infty}F(\xi)\,\mathrm d\xi=0,
+\]
+then, under the corresponding transform-existence conditions,
+\[
+\frac{f(t)}{-it}
+\ \xleftrightarrow{\mathcal F}\
+\int_{-\infty}^{\omega}F(\xi)\,\mathrm d\xi.
+\]
+
+\textbf{Proof of (2)}\par\nopagebreak[4]
+Let
+\[
+G(\omega)=\int_{-\infty}^{\omega}F(\xi)\,\mathrm d\xi,
+\]
+
+Differentiation gives \(F(\omega)=G'(\omega)\). By the differentiation
+property,
+\[
+\begin{aligned}
+\mathcal F^{-1}[F(\omega)]
+&=\mathcal F^{-1}[G'(\omega)]\\
+&=-it\,\mathcal F^{-1}[G(\omega)].
+\end{aligned}
+\]
+
+Hence,
+\[
+\mathcal F^{-1}[G(\omega)]
+=\frac{\mathcal F^{-1}[F(\omega)]}{-it}
+=\frac{f(t)}{-it}.
+\]
+
+That is,
+\[
+\mathcal F^{-1}\!\left[
+\int_{-\infty}^{\omega}F(\xi)\,\mathrm d\xi
+\right]
+=\frac{\mathcal F^{-1}[F]}{-it}.
+\]
+
+\textbf{Proof of (1)}\par\nopagebreak[4]
+Let
+\[
+g(t)=\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau,
+\]
+
+Then \(f(t)=g'(t)\). If \(g(\pm\infty)=0\), the differentiation property
+gives
+\[
+\mathcal F[f(t)]
+=\mathcal F[g'(t)]
+=i\omega\mathcal F[g(t)].
+\]
+
+It follows that
+\[
+\mathcal F[g(t)]=\frac{F(\omega)}{i\omega}.
+\]
+
+If
+\[
+\int_{-\infty}^{+\infty}f(t)\,\mathrm dt\ne0,
+\]
+
+then
+\[
+\mathcal F\!\left[
+\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau
+\right]
+=\frac{F(\omega)}{i\omega}
++\pi\delta(\omega)F(0).
+\]
+\end{document}
