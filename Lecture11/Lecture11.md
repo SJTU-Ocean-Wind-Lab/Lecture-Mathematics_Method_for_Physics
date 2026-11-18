@@ -1,0 +1,203 @@
+## From the residue theorem to computation
+
+Lecture 10 showed that a contour integral can be evaluated from the coefficients of $(z-z_0)^{-1}$ at the enclosed singularities. This lecture explains how to obtain those coefficients without expanding an entire Laurent series.
+
+We use $\mathrm{i}^2=-1$ and counterclockwise orientation for a positive finite contour. Every local contour below encloses only the singularity under discussion. Worked exercises and the original practice calculations are retained in the accompanying exercises files.
+
+## Computing a residue from a Laurent series
+
+If $f$ is holomorphic in $0<|z-z_0|<R$, write
+
+$$
+f(z)=\sum_{k=-\infty}^{\infty}C_k(z-z_0)^k,\qquad
+\operatorname{Res}[f,z_0]\coloneqq C_{-1}.
+$$
+
+One needs only the terms that can contribute to exponent $-1$. For a product of convergent Laurent series on a common annulus, a term of degree $p$ in one factor combines with a term of degree $q$ in the other when $p+q=-1$. Absolute convergence on a fixed interior circle justifies collecting those terms.
+
+This approach applies to essential singularities as well as poles. At a removable singularity, there are no negative powers and the residue is zero.
+
+## Residue formulas at poles
+
+### A pole of order n
+
+**Theorem.** Suppose $z_0$ is a pole of order $n\ge1$. Define the holomorphic extension
+
+$$
+h(z)\coloneqq(z-z_0)^nf(z).
+$$
+
+Then
+
+$$
+\operatorname{Res}[f,z_0]
+=\frac{h^{(n-1)}(z_0)}{(n-1)!}
+=\frac1{(n-1)!}\lim_{z\to z_0}
+\frac{\mathrm{d}^{\,n-1}}{\mathrm{d}z^{n-1}}
+\left[(z-z_0)^nf(z)\right].
+$$
+
+**Proof.** The Laurent expansion and the corresponding Taylor expansion of $h$ are
+
+$$
+\begin{aligned}
+f(z)&=\frac{C_{-n}}{(z-z_0)^n}+\cdots+\frac{C_{-1}}{z-z_0}
++C_0+C_1(z-z_0)+\cdots,\\
+h(z)&=C_{-n}+\cdots+C_{-1}(z-z_0)^{n-1}
++C_0(z-z_0)^n+\cdots.
+\end{aligned}
+$$
+
+Differentiate the second line $n-1$ times. Lower-degree terms disappear, and every term of degree at least $n$ still has a factor $z-z_0$. Thus
+
+$$
+h^{(n-1)}(z)=C_{-1}(n-1)!+O(z-z_0).
+$$
+
+Letting $z\to z_0$ gives the formula. The differentiation acts on the entire product $(z-z_0)^nf(z)$.
+
+### Simple and double poles
+
+For $n=1$ and $n=2$, respectively, the theorem becomes
+
+$$
+\begin{aligned}
+\operatorname{Res}[f,z_0]&=\lim_{z\to z_0}(z-z_0)f(z),\\
+\operatorname{Res}[f,z_0]&=\lim_{z\to z_0}
+\frac{\mathrm{d}}{\mathrm{d}z}\left[(z-z_0)^2f(z)\right].
+\end{aligned}
+$$
+
+An equivalent criterion for a simple pole is that $(z-z_0)f(z)$ extends holomorphically and has a nonzero value at $z_0$. Its value is then the residue.
+
+### A quotient with a simple zero in the denominator
+
+Let $f=p/q$, where $p$ and $q$ are holomorphic near $z_0$, $q(z_0)=0$, and $q'(z_0)\ne0$. Taylor expansion gives
+
+$$
+q(z)=q'(z_0)(z-z_0)+O((z-z_0)^2).
+$$
+
+Substitute into the simple-pole limit to obtain
+
+$$
+\operatorname{Res}[p/q,z_0]=\frac{p(z_0)}{q'(z_0)}.
+$$
+
+When $p(z_0)\ne0$, the singularity is a simple pole. When $p(z_0)=0$, cancellation makes it removable and the same expression gives zero. This criterion requires a simple zero of $q$.
+
+### Choosing a calculation method
+
+Identify the local order before choosing a pole formula. Cancellation in a numerator can reduce the order suggested by the denominator. For an essential singularity, use a Laurent expansion or a coefficient identity. For a quotient with a simple denominator zero, the derivative formula above usually avoids unnecessary expansion.
+
+## Residues at infinity
+
+### Exterior expansions and orientation
+
+Assume $f$ is holomorphic for $|z|>R$. Its Laurent expansion on this exterior annulus is
+
+$$
+f(z)=\sum_{n=1}^{\infty}\frac{C_{-n}}{z^n}+C_0+\sum_{n=1}^{\infty}C_nz^n.
+$$
+
+Let $C_\rho^+$ be the counterclockwise circle $|z|=\rho>R$, and let $C_\rho^-$ have the opposite orientation. The coefficient calculation from Lecture 10 gives
+
+$$
+\oint_{C_\rho^+}f(z)\,\mathrm{d}z=2\pi\mathrm{i}C_{-1},
+\qquad
+\oint_{C_\rho^-}f(z)\,\mathrm{d}z=-2\pi\mathrm{i}C_{-1}.
+$$
+
+**Definition.** The residue at infinity is
+
+$$
+\operatorname{Res}[f,\infty]\coloneqq
+\frac1{2\pi\mathrm{i}}\oint_{C_\rho^-}f(z)\,\mathrm{d}z
+=-C_{-1}.
+$$
+
+The coefficient is taken from the exterior expansion. In particular,
+
+$$
+\oint_{C_\rho^+}f(z)\,\mathrm{d}z=-2\pi\mathrm{i}\operatorname{Res}[f,\infty].
+$$
+
+A large clockwise circle is positively oriented around infinity in its local coordinate. Under $\zeta=1/z$, it maps to a small counterclockwise circle around zero. This accounts for the orientation convention.
+
+### Transforming the differential
+
+The local coordinate at infinity is $\zeta=1/z$. Since $z=1/\zeta$, its differential satisfies
+
+$$
+\mathrm{d}z=-\frac1{\zeta^2}\,\mathrm{d}\zeta,
+\qquad
+f(z)\,\mathrm{d}z=-\frac1{\zeta^2}f(1/\zeta)\,\mathrm{d}\zeta.
+$$
+
+Thus residues transform together with the differential. Applying the finite-point residue definition in the $\zeta$ coordinate gives
+
+$$
+\operatorname{Res}[f,\infty]
+=-\operatorname{Res}\left[\zeta^{-2}f(1/\zeta),0\right].
+$$
+
+To check the sign and exponent directly, substitute into the exterior Laurent expansion:
+
+$$
+\begin{aligned}
+f(1/\zeta)&=\cdots+C_{-2}\zeta^2+C_{-1}\zeta+C_0+C_1/\zeta+\cdots,\\
+\zeta^{-2}f(1/\zeta)&=\cdots+C_{-2}+C_{-1}/\zeta+C_0/\zeta^2+\cdots.
+\end{aligned}
+$$
+
+The coefficient of $\zeta^{-1}$ in the second line is $C_{-1}$. The minus sign comes from $\mathrm{d}z=-\zeta^{-2}\mathrm{d}\zeta$.
+
+## The sum of all residues
+
+**Theorem.** Suppose $f$ is holomorphic on $\mathbb C$ except at finitely many isolated singularities $z_1,\ldots,z_N$. Then infinity is isolated and
+
+$$
+\sum_{k=1}^{N}\operatorname{Res}[f,z_k]+\operatorname{Res}[f,\infty]=0.
+$$
+
+**Proof.** Choose a counterclockwise circle $C_\rho^+$ containing all finite singularities. The residue theorem and the definition at infinity evaluate the same contour integral:
+
+$$
+\frac1{2\pi\mathrm{i}}\oint_{C_\rho^+}f(z)\,\mathrm{d}z
+=\sum_{k=1}^{N}\operatorname{Res}[f,z_k]
+=-\operatorname{Res}[f,\infty].
+$$
+
+Rearrangement gives the claim. Essential singularities are allowed as long as they are isolated. The finite set hypothesis ensures that a circle can enclose all finite singularities.
+
+This identity is especially helpful when the exterior expansion is simpler than the individual local expansions. It gives the sum of the finite residues directly.
+
+## A limit formula and its hypotheses
+
+**Proposition.** If $f$ is holomorphic in an exterior region and $\lim_{z\to\infty}zf(z)=A\in\mathbb C$, then
+
+$$
+\operatorname{Res}[f,\infty]=-A.
+$$
+
+**Proof.** Set $H(\zeta)\coloneqq \zeta^{-1}f(1/\zeta)$. The assumed limit means that $H$ has a removable singularity at zero, with Taylor expansion
+
+$$
+H(\zeta)=A+b_1\zeta+b_2\zeta^2+\cdots.
+$$
+
+Consequently,
+
+$$
+f(1/\zeta)=A\zeta+b_1\zeta^2+\cdots,
+\qquad
+f(z)=\frac A z+\frac{b_1}{z^2}+\cdots.
+$$
+
+Hence $C_{-1}=A$, proving the result. This proof also shows that $f(z)\to0$ under the stated hypothesis.
+
+The weaker assumption $f(z)\to L$ only establishes removability at infinity. It does not determine the coefficient of $1/z$. For example, $L+A/z$ has the same finite limit $L$ for every $A$, while its residue at infinity equals $-A$.
+
+## Further reading
+
+For the contour interpretation and finite-point residue theorem, see Mathews and Howell's open textbook. [Complex Analysis, Section 8.1](https://complexanalysis.org/web/sec_residue-thm.html)
