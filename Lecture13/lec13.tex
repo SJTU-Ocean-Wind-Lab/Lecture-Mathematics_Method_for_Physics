@@ -1,0 +1,462 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\usepackage{mathtools,longtable,booktabs,array,graphicx,enumitem}
+\setlength{\emergencystretch}{2em}
+\setlength{\parskip}{0.6em plus 0.15em minus 0.1em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.4em, parsep=0.2em, leftmargin=1.6em, label=\arabic*.}
+\setlist[itemize]{topsep=0.5em, itemsep=0.4em, parsep=0.2em, leftmargin=1.4em}
+\newcommand{\remarkhead}[1]{\par\addvspace{0.6em}\noindent\textbf{#1}\quad\ignorespaces}
+\allowdisplaybreaks[1]
+\raggedbottom
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Mathematics Method for Physics--Lecture 13}} \\[0.6em]
+    {\large Integral Transforms and Fourier Analysis}
+\end{center}
+
+\vspace{-0.5em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.8em}
+
+\section{Introduction to Integral Transforms}
+
+In engineering mathematics and signal analysis, \textbf{integral transforms} constitute a foundational analytical framework, among which the \textbf{Fourier transform} and the \textbf{Laplace transform} are the most prominent.
+
+The central idea of an integral transform is to establish a one-to-one correspondence (denoted by $f(t) \leftrightarrow F(\omega)$) between an original function $f(t)$ in the \textbf{time domain} and its image function $F(\omega)$ in the \textbf{frequency domain} via an integral operator. This correspondence converts complicated integro-differential operations in the time domain into elementary algebraic operations in the frequency domain.
+
+\subsection{Definition of the Fourier Transform}
+
+Let $f(t)$ be a real- or complex-valued function defined on $(-\infty, +\infty)$. Its \textbf{Fourier transform} (or image function) is defined by
+\begin{equation}
+F(\omega) \coloneqq \mathcal{F}[f(t)] = \int_{-\infty}^{+\infty} f(t) e^{-i\omega t} \, \mathrm{d}t.
+\end{equation}
+
+Throughout these notes the time-domain function is denoted by $f(t)$, the frequency-domain transform by $F(\omega)$, and definitional equalities by $\coloneqq$.
+
+\subsection{Theoretical Motivation}
+
+The definition above arises naturally from the \textbf{Fourier integral formula}:
+\begin{equation}
+f(t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \left[ \int_{-\infty}^{+\infty} f(\tau) e^{-i\omega \tau} \, \mathrm{d}\tau \right] e^{i\omega t} \, \mathrm{d}\omega.
+\end{equation}
+The inner bracketed integral defines $F(\omega)$, while the outer integral yields the inverse Fourier transform.
+
+\section{Fourier Series}
+
+\subsection{Trigonometric Form and Convergence Theorem}
+
+\textbf{Theorem 2.1 (Dirichlet's Convergence Theorem for Periodic Functions).} Let $f(t)$ be a periodic function with period $T$, fundamental angular frequency $\omega_1 \coloneqq \dfrac{2\pi}{T}$, and $n$-th harmonic angular frequency $\omega_n \coloneqq n\omega_1 = \dfrac{2\pi n}{T}$. If $f(t)$ satisfies the \textbf{Dirichlet conditions} over one period, then $f(t)$ admits a convergent Fourier series expansion:
+\begin{equation}
+f(t) \sim \frac{a_0}{2} + \sum_{n=1}^{+\infty} \left( a_n \cos \omega_n t + b_n \sin \omega_n t \right).
+\end{equation}
+
+More precisely, for every $t \in (-\infty, +\infty)$, the series converges according to
+\begin{equation}
+\frac{a_0}{2} + \sum_{n=1}^{+\infty} \left( a_n \cos \omega_n t + b_n \sin \omega_n t \right)
+=
+\begin{cases}
+f(t), & \parbox[t]{6.0cm}{if $t$ is a point of continuity of $f(t)$,}\\[6pt]
+\dfrac{f(t^-) + f(t^+)}{2}, & \parbox[t]{6.0cm}{if $t$ is a discontinuity of the first kind of $f(t)$},
+\end{cases}
+\end{equation}
+where the \textbf{Fourier coefficients} are defined by
+\begin{align}
+a_0 &\coloneqq \frac{2}{T} \int_{-T/2}^{T/2} f(t) \, \mathrm{d}t, \\
+a_n &\coloneqq \frac{2}{T} \int_{-T/2}^{T/2} f(t) \cos \omega_n t \, \mathrm{d}t \quad (n = 1, 2, 3, \dots), \\
+b_n &\coloneqq \frac{2}{T} \int_{-T/2}^{T/2} f(t) \sin \omega_n t \, \mathrm{d}t \quad (n = 1, 2, 3, \dots).
+\end{align}
+
+\remarkhead{Remark 2.1 (Dirichlet Conditions).} A $T$-periodic function $f(t)$ satisfies the \textbf{Dirichlet conditions} if, on a single period $\left[-\dfrac{T}{2}, \dfrac{T}{2}\right]$, it fulfills the following two criteria:
+
+\begin{enumerate}
+\item $f(t)$ is continuous, or possesses at most finitely many \textbf{discontinuities of the first kind} (i.e., points at which both the left-hand limit $f(t^-)$ and the right-hand limit $f(t^+)$ exist and are finite);
+\item $f(t)$ has at most finitely many \textbf{local extrema} (maxima and minima).
+\end{enumerate}
+
+\noindent Condition (i) implies that $f(t)$ is bounded and absolutely integrable over one period, i.e., $\int_{-T/2}^{T/2} |f(t)| \, \mathrm{d}t < +\infty$, thereby ensuring the existence of the Fourier coefficients.
+
+\remarkhead{Remark 2.2 (Trigonometric Orthogonal Basis).} The trigonometric system
+\begin{equation}
+\left\{ 1, \, \cos \omega_1 t, \, \sin \omega_1 t, \, \cos \omega_2 t, \, \sin \omega_2 t, \, \dots, \, \cos \omega_n t, \, \sin \omega_n t, \, \dots \right\}
+\end{equation}
+is mutually orthogonal on the interval $\left[-\dfrac{T}{2}, \dfrac{T}{2}\right]$ and forms a complete \textbf{orthogonal basis} for the space of square-integrable functions $L^2\left[-\dfrac{T}{2}, \dfrac{T}{2}\right]$.
+
+\remarkhead{Remark 2.3 (Complex Exponential Form and Orthogonal Basis).} Applying Euler's identity,
+\begin{equation}
+e^{\pm i\omega_n t} \equiv \cos \omega_n t \pm i \sin \omega_n t,
+\end{equation}
+we obtain
+\begin{equation}
+\cos \omega_n t \equiv \frac{e^{i\omega_n t} + e^{-i\omega_n t}}{2},
+\qquad
+\sin \omega_n t \equiv \frac{e^{i\omega_n t} - e^{-i\omega_n t}}{2i}.
+\end{equation}
+Consequently, the complex exponential system $\left\{ e^{i\omega_n t} \right\}_{n=-\infty}^{+\infty}$ also constitutes a complete orthogonal basis on $\left[-\dfrac{T}{2}, \dfrac{T}{2}\right]$.
+
+Substituting these identities into the trigonometric series yields the \textbf{complex exponential Fourier series}:
+\begin{equation}
+f(t) = \sum_{n=-\infty}^{+\infty} c_n e^{i\omega_n t},
+\end{equation}
+where the complex Fourier coefficients $c_n$ are defined by
+\begin{equation}
+c_n \coloneqq \frac{1}{T} \int_{-T/2}^{T/2} f(\tau) e^{-i\omega_n \tau} \, \mathrm{d}\tau \quad (n = 0, \pm 1, \pm 2, \dots).
+\end{equation}
+They are related to the trigonometric coefficients by
+\begin{equation}
+c_0 = \frac{a_0}{2}, \qquad c_n = \frac{a_n - i b_n}{2}, \qquad c_{-n} = \frac{a_n + i b_n}{2} \qquad (n \ge 1).
+\end{equation}
+Substituting $c_n$ back into the series gives
+\begin{equation}
+f(t) = \frac{1}{T} \sum_{n=-\infty}^{+\infty} \left[ \int_{-T/2}^{T/2} f(\tau) e^{-i\omega_n \tau} \, \mathrm{d}\tau \right] e^{i\omega_n t}.
+\end{equation}
+
+\section{The Fourier Integral Theorem and Fourier Integral Formula}
+
+\subsection{From the Fourier Series to the Fourier Integral}
+
+Let $f(t)$ be aperiodic. Fix a period $T$ and let $f_T(t)$ be the $T$-periodic function that agrees with $f(t)$ on one period:
+\begin{equation}
+f_T(t) \equiv f(t), \quad t \in \left(-\frac{T}{2}, \frac{T}{2}\right).
+\end{equation}
+For fixed $t$ this holds as soon as $T > 2|t|$, so $f_T(t) \to f(t)$ as $T \to +\infty$.
+
+The frequencies of $f_T$ are $\omega_n = 2\pi n/T$, spaced by
+\begin{equation}
+\Delta \omega \coloneqq \omega_n - \omega_{n-1} = \frac{2\pi}{T} \implies \frac{1}{T} = \frac{\Delta \omega}{2\pi}.
+\end{equation}
+Replacing $1/T$ in the complex Fourier series (12) of $f_T$ by this expression gives
+\begin{equation}
+f_T(t) = \frac{1}{2\pi} \sum_{n=-\infty}^{+\infty} \left[ \int_{-T/2}^{T/2} f_T(\tau) e^{-i\omega_n \tau} \, \mathrm{d}\tau \right] e^{i\omega_n t} \Delta \omega,
+\end{equation}
+a Riemann sum $\sum_n g(\omega_n)\,\Delta\omega$ on the grid $\omega_n = n\Delta\omega$.
+
+As $T \to +\infty$ the spacing $\Delta\omega = 2\pi/T$ tends to $0$ and the grid fills the real axis, so $\omega_n$ becomes a continuous variable $\omega$ and the Riemann sum becomes an integral:
+\begin{equation}
+f(t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \left[ \int_{-\infty}^{+\infty} f(\tau) e^{-i\omega \tau} \, \mathrm{d}\tau \right] e^{i\omega t} \, \mathrm{d}\omega.
+\end{equation}
+
+\subsection{The Fourier Integral Theorem and Formula}
+
+\textbf{Theorem 3.1 (Fourier Integral Theorem).} Suppose that an aperiodic function $f(t)$ defined on $(-\infty, +\infty)$ satisfies the following two conditions:
+
+\begin{enumerate}
+\item $f(t)$ satisfies the \textbf{Dirichlet conditions} on every finite interval;
+\item $f(t)$ is \textbf{absolutely integrable} on $(-\infty, +\infty)$, that is,
+\begin{equation}
+\int_{-\infty}^{+\infty} |f(t)| \, \mathrm{d}t < +\infty.
+\end{equation}
+\end{enumerate}
+
+Then, for every $t \in (-\infty, +\infty)$, the \textbf{Fourier integral formula} (in complex exponential form) holds:
+\begin{equation}
+\frac{1}{2\pi} \int_{-\infty}^{+\infty} \left[ \int_{-\infty}^{+\infty} f(\tau) e^{-i\omega \tau} \, \mathrm{d}\tau \right] e^{i\omega t} \, \mathrm{d}\omega
+=
+\begin{cases}
+f(t), & \parbox[t]{5.5cm}{if $t$ is a point of continuity of $f(t)$,}\\[10pt]
+\dfrac{f(t^-) + f(t^+)}{2}, & \parbox[t]{5.5cm}{if $t$ is a discontinuity of the first kind of $f(t)$.}
+\end{cases}
+\end{equation}
+
+Moreover, applying Euler's identity $e^{i\omega(t-\tau)} \equiv \cos\omega(t-\tau) + i\sin\omega(t-\tau)$ and noting that $\cos\omega(t-\tau)$ is even in $\omega$ whereas $\sin\omega(t-\tau)$ is odd in $\omega$, we obtain the \textbf{trigonometric form} of the Fourier integral formula at every point of continuity of $f(t)$:
+\begin{equation}
+f(t) = \frac{1}{\pi} \int_{0}^{+\infty} \left[ \int_{-\infty}^{+\infty} f(\tau) \cos\omega(t-\tau) \, \mathrm{d}\tau \right] \mathrm{d}\omega.
+\end{equation}
+
+\subsection{Illustrative Examples}
+
+\subsubsection*{Example 3.1 (Two-Sided Exponential Decay Function)}
+
+Let the two-sided exponential decay function be defined by
+\begin{equation}
+f(t) \coloneqq e^{-\beta |t|} \quad (\beta > 0).
+\end{equation}
+Determine its Fourier integral representation and deduce the value of the parametric improper integral $\int_{-\infty}^{+\infty} \dfrac{2\beta}{\omega^2 + \beta^2} e^{i\omega t} \, \mathrm{d}\omega$.
+
+\textbf{Proof}\par\nopagebreak[4]
+\begin{enumerate}
+\item \textbf{Verification of hypotheses.} The function $f(t) = e^{-\beta |t|}$ is continuous everywhere on $(-\infty, +\infty)$, possesses a single local maximum at $t = 0$, and is absolutely integrable on $(-\infty, +\infty)$:
+\begin{equation}
+\int_{-\infty}^{+\infty} \left| e^{-\beta |t|} \right| \mathrm{d}t = 2 \int_{0}^{+\infty} e^{-\beta t} \, \mathrm{d}t = \frac{2}{\beta} < +\infty.
+\end{equation}
+Hence, the Fourier integral formula holds for all $t \in (-\infty, +\infty)$.
+
+\item \textbf{Evaluation of the inner integral.} Splitting the integral at $t = 0$, we compute
+\begin{align*}
+F(\omega) &= \int_{-\infty}^{+\infty} e^{-\beta |t|} e^{-i\omega t} \, \mathrm{d}t \\
+&= \int_{-\infty}^{0} e^{(\beta - i\omega)t} \, \mathrm{d}t + \int_{0}^{+\infty} e^{(-\beta - i\omega)t} \, \mathrm{d}t.
+\end{align*}
+Since $\beta > 0$ and $\left| e^{\pm i\omega t} \right| \equiv 1$, we have $\lim_{t \to -\infty} e^{(\beta - i\omega)t} = 0$ and $\lim_{t \to +\infty} e^{(-\beta - i\omega)t} = 0$. Consequently,
+\begin{align*}
+F(\omega) &= \left. \frac{e^{(\beta - i\omega)t}}{\beta - i\omega} \right|_{-\infty}^{0} + \left. \frac{e^{(-\beta - i\omega)t}}{-\beta - i\omega} \right|_{0}^{+\infty} \\
+&= \frac{1}{\beta - i\omega} + \frac{1}{\beta + i\omega} = \frac{2\beta}{\omega^2 + \beta^2}.
+\end{align*}
+
+\item \textbf{Application of the Fourier integral formula.} Because $f(t) = e^{-\beta |t|}$ is continuous everywhere, Theorem 3.1 yields
+\begin{equation}
+e^{-\beta |t|} = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \frac{2\beta}{\omega^2 + \beta^2} e^{i\omega t} \, \mathrm{d}\omega.
+\end{equation}
+Multiplying both sides by $2\pi$, we establish the identity
+\begin{equation}
+\int_{-\infty}^{+\infty} \frac{2\beta}{\omega^2 + \beta^2} e^{i\omega t} \, \mathrm{d}\omega = 2\pi e^{-\beta |t|} \quad (\beta > 0).
+\end{equation}
+This improper integral can alternatively be evaluated via the residue theorem in complex analysis.
+\end{enumerate}
+
+\subsubsection*{Example 3.2 (Unit Rectangular Pulse and the Dirichlet Integral)}
+
+Let the unit rectangular pulse function be defined by
+\begin{equation}
+f(t) \coloneqq
+\begin{cases}
+1, & |t| < 1, \\
+0, & |t| > 1.
+\end{cases}
+\end{equation}
+Find the Fourier integral representation of $f(t)$ and exploit its convergence behavior at a point of discontinuity to evaluate the \textbf{Dirichlet integral} $\int_{0}^{+\infty} \dfrac{\sin x}{x} \, \mathrm{d}x$.
+
+\textbf{Proof}\par\nopagebreak[4]
+\begin{enumerate}
+\item \textbf{Evaluation of the inner integral.} Clearly, $f(t)$ satisfies the Dirichlet conditions on every finite interval and is absolutely integrable on $(-\infty, +\infty)$ since $\int_{-\infty}^{+\infty} |f(t)| \, \mathrm{d}t = 2 < +\infty$. For $\omega \neq 0$, we have
+\begin{align*}
+F(\omega) &= \int_{-\infty}^{+\infty} f(t) e^{-i\omega t} \, \mathrm{d}t = \int_{-1}^{1} 1 \cdot e^{-i\omega t} \, \mathrm{d}t \\
+&= \left. \frac{e^{-i\omega t}}{-i\omega} \right|_{-1}^{1} = \frac{e^{-i\omega} - e^{i\omega}}{-i\omega} = \frac{2\sin \omega}{\omega}.
+\end{align*}
+For $\omega = 0$, the integral evaluates directly to $F(0) = \int_{-1}^{1} 1 \, \mathrm{d}t = 2$, which agrees with the removable limit as $\omega \to 0$.
+
+\item \textbf{Fourier integral representation.} By Theorem 3.1, at the points of continuity $t \neq \pm 1$ and at the discontinuities of the first kind $t = \pm 1$, we obtain
+\begin{equation}
+\frac{1}{2\pi} \int_{-\infty}^{+\infty} \frac{2\sin \omega}{\omega} e^{i\omega t} \, \mathrm{d}\omega
+=
+\begin{cases}
+f(t), & t \neq \pm 1, \\[10pt]
+\dfrac{f(1^-) + f(1^+)}{2} = \dfrac{1 + 0}{2} = \dfrac{1}{2}, & t = \pm 1.
+\end{cases}
+\end{equation}
+
+\item \textbf{Evaluation of the Dirichlet integral.} Evaluating the representation at the jump discontinuity $t = 1$ gives
+\begin{equation}
+\frac{1}{2\pi} \int_{-\infty}^{+\infty} \frac{2\sin \omega}{\omega} e^{i\omega} \, \mathrm{d}\omega = \frac{1}{2}.
+\end{equation}
+Expanding $e^{i\omega} \equiv \cos \omega + i\sin \omega$, we observe that $\dfrac{2\sin \omega \cos \omega}{\omega}$ is even in $\omega$, while $\dfrac{2\sin^2 \omega}{\omega}$ is odd in $\omega$ (so its Cauchy principal value integral over $(-\infty, +\infty)$ vanishes). Hence,
+\begin{equation}
+\frac{1}{2\pi} \cdot 2 \int_{0}^{+\infty} \frac{2\sin \omega \cos \omega}{\omega} \, \mathrm{d}\omega = \frac{1}{2} \implies \frac{1}{\pi} \int_{0}^{+\infty} \frac{\sin 2\omega}{\omega} \, \mathrm{d}\omega = \frac{1}{2},
+\end{equation}
+which simplifies to
+\begin{equation}
+\int_{0}^{+\infty} \frac{\sin 2\omega}{\omega} \, \mathrm{d}\omega = \frac{\pi}{2}.
+\end{equation}
+Applying the change of variables $x = 2\omega$ ($\mathrm{d}x = 2\,\mathrm{d}\omega$), we obtain the \textbf{Dirichlet integral}:
+\begin{equation}
+\int_{0}^{+\infty} \frac{\sin x}{x} \, \mathrm{d}x = \frac{\pi}{2}.
+\end{equation}
+\end{enumerate}
+
+\section{The Fourier Transform and Common Transform Pairs}
+
+\subsection{Definitions of the Fourier Transform and Inverse Fourier Transform}
+
+\textbf{Definition 4.1 (Fourier Transform Pair).} Let $f(t)$ satisfy the Dirichlet conditions on every finite interval and be absolutely integrable on $(-\infty, +\infty)$. We define the \textbf{Fourier transform} and \textbf{inverse Fourier transform} as the pair of mutually inverse integral operators:
+\begin{align}
+F(\omega) &\coloneqq \mathcal{F}[f(t)] = \int_{-\infty}^{+\infty} f(t) e^{-i\omega t} \, \mathrm{d}t, \\
+f(t) &\coloneqq \mathcal{F}^{-1}[F(\omega)] = \frac{1}{2\pi} \int_{-\infty}^{+\infty} F(\omega) e^{i\omega t} \, \mathrm{d}\omega.
+\end{align}
+When $f(t)$ and $F(\omega)$ satisfy these relations, they are said to form a \textbf{Fourier transform pair}, written symbolically as
+\begin{equation}
+f(t) \longleftrightarrow F(\omega).
+\end{equation}
+At any discontinuity of the first kind of $f(t)$, the inverse Fourier transform integral converges to the arithmetic mean $\dfrac{f(t^-) + f(t^+)}{2}$.
+
+\subsection{Common Fourier Transform Pairs}
+
+Below is a summary of fundamental Fourier transform pairs frequently encountered in engineering mathematics and signal processing, accompanied by derivations and figures.
+
+\subsubsection*{(1) Rectangular Pulse Function (Gate Function)}
+
+For $E > 0$ and $\tau > 0$,
+\begin{equation}
+f(t) =
+\begin{cases}
+E, & |t| \le \dfrac{\tau}{2}, \\[8pt]
+0, & |t| > \dfrac{\tau}{2},
+\end{cases}
+\qquad \longleftrightarrow \qquad
+F(\omega) =
+\begin{cases}
+2E \dfrac{\sin\left(\dfrac{\omega \tau}{2}\right)}{\omega} = E\tau \, \mathrm{Sa}\left(\dfrac{\omega \tau}{2}\right), & \omega \neq 0, \\[14pt]
+E\tau, & \omega = 0,
+\end{cases}
+\end{equation}
+where the sampling function is defined by $\mathrm{Sa}(x) \coloneqq \dfrac{\sin x}{x}$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{figs/fig13-01-rect-pulse.pdf}
+    \caption{Time-domain waveform of the rectangular pulse $f(t)$ and its frequency spectrum $F(\omega)$.}
+    \label{fig:rect-pulse}
+\end{figure}
+
+\subsubsection*{(2) One-Sided Exponential Decay Functions}
+
+For $\beta > 0$, the causal (right-sided) exponential decay and its transform are
+\begin{equation}
+f(t) =
+\begin{cases}
+e^{-\beta t}, & t > 0, \\
+0, & t < 0,
+\end{cases}
+\qquad \longleftrightarrow \qquad
+F(\omega) = \frac{1}{\beta + i\omega},
+\end{equation}
+and the anti-causal (left-sided) exponential decay and its transform are
+\begin{equation}
+f(t) =
+\begin{cases}
+0, & t > 0, \\
+e^{\beta t}, & t < 0,
+\end{cases}
+\qquad \longleftrightarrow \qquad
+F(\omega) = \frac{1}{\beta - i\omega}.
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{figs/fig13-02-one-sided-exp.pdf}
+    \caption{Time-domain waveforms of the one-sided exponential decay functions $f(t)$ and their magnitude spectrum $|F(\omega)|$.}
+    \label{fig:one-sided-exp}
+\end{figure}
+
+\subsubsection*{(3) Two-Sided Exponential Decay Function}
+
+For $\beta > 0$,
+\begin{equation}
+f(t) = e^{-\beta |t|} \qquad \longleftrightarrow \qquad F(\omega) = \frac{2\beta}{\beta^2 + \omega^2}.
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{figs/fig13-03-two-sided-exp.pdf}
+    \caption{Time-domain waveform of the two-sided exponential decay function $f(t) = e^{-\beta|t|}$ and its frequency spectrum $F(\omega)$.}
+    \label{fig:two-sided-exp}
+\end{figure}
+
+\subsubsection*{(4) Gaussian Pulse Function (Bell-Shaped Pulse)}
+
+For $\beta > 0$,
+\begin{equation}
+f(t) = e^{-\beta t^2} \qquad \longleftrightarrow \qquad F(\omega) = \sqrt{\frac{\pi}{\beta}} e^{-\frac{\omega^2}{4\beta}}.
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{figs/fig13-04-gaussian.pdf}
+    \caption{Time-domain waveform of the Gaussian pulse $f(t) = e^{-\beta t^2}$ and its frequency spectrum $F(\omega)$.}
+    \label{fig:gaussian}
+\end{figure}
+
+\textbf{Proof}\par\nopagebreak[4]
+Completing the square in the exponent of the defining integral gives
+\begin{align*}
+F(\omega) &= \int_{-\infty}^{+\infty} e^{-\beta t^2} e^{-i\omega t} \, \mathrm{d}t \\
+&= \int_{-\infty}^{+\infty} \exp\left\{ -\beta \left[ t^2 + \frac{i\omega}{\beta}t + \left(\frac{i\omega}{2\beta}\right)^2 - \left(\frac{i\omega}{2\beta}\right)^2 \right] \right\} \mathrm{d}t \\
+&= e^{-\frac{\omega^2}{4\beta}} \int_{-\infty}^{+\infty} e^{-\beta \left(t + \frac{i\omega}{2\beta}\right)^2} \, \mathrm{d}t.
+\end{align*}
+By Cauchy's integral theorem in the complex plane, shifting the horizontal contour of integration vertically does not alter the value of the Gaussian integral. Combining this contour invariance with the standard Gaussian integral $\int_{-\infty}^{+\infty} e^{-\beta u^2} \, \mathrm{d}u = \sqrt{\dfrac{\pi}{\beta}}$, we obtain
+\begin{equation}
+\int_{-\infty}^{+\infty} e^{-\beta \left(t + \frac{i\omega}{2\beta}\right)^2} \, \mathrm{d}t = \int_{-\infty}^{+\infty} e^{-\beta u^2} \, \mathrm{d}u = \sqrt{\frac{\pi}{\beta}},
+\end{equation}
+and therefore
+\begin{equation}
+F(\omega) = \sqrt{\frac{\pi}{\beta}} e^{-\frac{\omega^2}{4\beta}}.
+\end{equation}
+
+\subsubsection*{(5) Sampling Function (Impulse Response of an Ideal Low-Pass Filter)}
+
+For $\omega_0 > 0$,
+\begin{equation}
+f(t) = \frac{\sin \omega_0 t}{\pi t}
+\qquad \longleftrightarrow \qquad
+F(\omega) =
+\begin{cases}
+1, & |\omega| < \omega_0, \\[10pt]
+\dfrac{1}{2}, & |\omega| = \omega_0, \\[10pt]
+0, & |\omega| > \omega_0.
+\end{cases}
+\end{equation}
+At the spectral jump discontinuities $\omega = \pm \omega_0$, the Fourier transform integral converges to the midpoint value $\dfrac{1}{2}$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{figs/fig13-05-sampling.pdf}
+    \caption{Time-domain waveform of the sampling function $f(t) = \frac{\sin\omega_0 t}{\pi t}$ and its ideal rectangular spectrum $F(\omega)$.}
+    \label{fig:sampling}
+\end{figure}
+
+\textbf{Proof}\par\nopagebreak[4]
+Expanding $e^{-i\omega t} \equiv \cos \omega t - i\sin \omega t$ in the Fourier transform integral, we have
+\begin{align*}
+F(\omega) &= \int_{-\infty}^{+\infty} \frac{\sin \omega_0 t}{\pi t} e^{-i\omega t} \, \mathrm{d}t \\
+&= \int_{-\infty}^{+\infty} \frac{\sin \omega_0 t}{\pi t} (\cos \omega t - i\sin \omega t) \, \mathrm{d}t.
+\end{align*}
+Since $\dfrac{\sin \omega_0 t}{\pi t} \cos \omega t$ is an even function of $t$ and $\dfrac{\sin \omega_0 t}{\pi t} \sin \omega t$ is an odd function of $t$, applying the product-to-sum identity $\sin \omega_0 t \cos \omega t \equiv \dfrac{1}{2}\left[\sin(\omega_0 + \omega)t + \sin(\omega_0 - \omega)t\right]$ yields
+\begin{align*}
+F(\omega) &= \int_{-\infty}^{+\infty} \frac{\sin \omega_0 t \cos \omega t}{\pi t} \, \mathrm{d}t \\
+&= \frac{1}{2\pi} \int_{-\infty}^{+\infty} \frac{\sin(\omega_0 + \omega)t + \sin(\omega_0 - \omega)t}{t} \, \mathrm{d}t \\
+&= \frac{1}{\pi} \left[ \int_{0}^{+\infty} \frac{\sin(\omega_0 + \omega)t}{t} \, \mathrm{d}t + \int_{0}^{+\infty} \frac{\sin(\omega_0 - \omega)t}{t} \, \mathrm{d}t \right].
+\end{align*}
+Recall the generalized Dirichlet integral formula:
+\begin{equation}
+\int_{0}^{+\infty} \frac{\sin kt}{t} \, \mathrm{d}t =
+\begin{cases}
+\dfrac{\pi}{2}, & k > 0, \\[10pt]
+0, & k = 0, \\[8pt]
+-\dfrac{\pi}{2}, & k < 0.
+\end{cases}
+\end{equation}
+Given $\omega_0 > 0$, we distinguish three cases.
+
+\textbf{Case 1 ($|\omega| < \omega_0$).} Both $\omega_0 + \omega > 0$ and $\omega_0 - \omega > 0$, so
+\begin{equation}
+F(\omega) = \frac{1}{\pi}\left(\frac{\pi}{2} + \frac{\pi}{2}\right) = 1.
+\end{equation}
+
+\textbf{Case 2 ($|\omega| = \omega_0$).} One of $\omega_0 + \omega$ and $\omega_0 - \omega$ equals $0$ while the other equals $2\omega_0 > 0$, so
+\begin{equation}
+F(\omega) = \frac{1}{\pi}\left(\frac{\pi}{2} + 0\right) = \frac{1}{2}.
+\end{equation}
+
+\textbf{Case 3 ($|\omega| > \omega_0$).} The quantities $\omega_0 + \omega$ and $\omega_0 - \omega$ have opposite signs, so
+\begin{equation}
+F(\omega) = \frac{1}{\pi}\left(\frac{\pi}{2} - \frac{\pi}{2}\right) = 0.
+\end{equation}
+
+\end{document}
