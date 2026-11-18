@@ -1,0 +1,2174 @@
+% !TEX program = xelatex
+% Compile with XeLaTeX. Requires the standard ctex/Fandol packages in TeX Live.
+% 中文之后为英文；独立公式共用。Chinese text is followed by English.
+\documentclass[11pt,a4paper]{article}
+
+% --- Page margins and paragraphs (based on the supplied template) ---
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage[UTF8,scheme=plain,fontset=fandol]{ctex}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+
+% --- Basic mathematics and typesetting ---
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array,calc}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{needspace}
+\usepackage[hidelinks,unicode]{hyperref}
+\definecolor{TranslationBlue}{HTML}{36546C}
+\definecolor{NoteGray}{HTML}{505963}
+
+% --- Definition and theorem environments, retained for further editing ---
+\theoremstyle{definition}
+\newtheorem{definition}{定义 / Definition}
+\newtheorem{example}{例 / Example}
+\theoremstyle{plain}
+\newtheorem{theorem}{定理 / Theorem}
+\newtheorem{proposition}{命题 / Proposition}
+\newtheorem{lemma}{引理 / Lemma}
+
+% --- Bilingual paragraph styles ---
+\newenvironment{englishtranslation}
+  {\par\begingroup\small\color{TranslationBlue}\setlength{\parskip}{3pt}}
+  {\par\endgroup}
+\newenvironment{editorialnote}
+  {\par\begingroup\small\color{NoteGray}\setlength{\parskip}{4pt}}
+  {\par\endgroup\medskip}
+\newenvironment{bilingualpair}
+  {\par\noindent\begin{minipage}{\linewidth}\setlength{\parskip}{4pt}\interdisplaylinepenalty=10000}
+  {\end{minipage}\par\addvspace{4pt}}
+\setlength{\parskip}{4pt plus 1pt}
+\setlength{\parindent}{0pt}
+\linespread{1.06}
+\setlength{\emergencystretch}{2em}
+\setlength{\abovedisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\jot}{4pt}
+\allowdisplaybreaks[1]
+\raggedbottom
+\setcounter{secnumdepth}{0}
+\setlist{topsep=4pt,itemsep=3pt,parsep=2pt,leftmargin=1.6em}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+
+\titleformat{\section}{\large\bfseries}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{16pt plus 3pt}{8pt}
+\titlespacing*{\subsection}{0pt}{12pt plus 2pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{10pt plus 2pt}{5pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small 数学物理方法 / Mathematical Methods for Physics}
+\fancyhead[R]{\small Lecture 14}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.3pt}
+\hypersetup{pdftitle={Mathematical Methods for Physics - Lecture 14}}
+
+\begin{document}
+\begin{center}
+  {\LARGE\bfseries 数学物理方法 · 第 14 讲}\\[0.5em]
+  {\Large\bfseries Mathematical Methods for Physics}\\[0.2em]
+  {\large Lecture 14}\\[0.7em]
+  {\normalsize \(\delta\) 函数、广义傅里叶变换及其性质}\\[0.2em]
+  {\small\color{TranslationBlue} The Delta Function, Generalized Fourier Transforms, and Their Properties}
+\end{center}
+\vspace{0.5em}
+
+\Needspace{12\baselineskip}
+
+\section{\texorpdfstring{7.3 \(\delta\)
+函数与广义傅里叶变换\\[2pt]{\normalfont\normalsize\color{TranslationBlue} 7.3
+The Delta Function and Generalized Fourier
+Transforms}}{7.3 \textbackslash delta 函数与广义傅里叶变换7.3 The Delta Function and Generalized Fourier Transforms}}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{1. \(\delta\)
+函数与矩形脉冲近似\\[2pt]{\normalfont\small\color{TranslationBlue} The
+Delta Function and Its Rectangular-Pulse
+Approximation}}{1. \textbackslash delta 函数与矩形脉冲近似The Delta Function and Its Rectangular-Pulse Approximation}}
+
+\begin{bilingualpair}
+
+\(\delta\) 函数又叫单位脉冲函数。下式作直观描述：
+
+\nopagebreak[4]\begin{englishtranslation}
+
+The \(\delta\) function is also called the unit impulse. The original
+notes give the following intuitive description.
+
+\end{englishtranslation}
+
+\[
+\delta(x)=
+\begin{cases}
+0,&x\ne0,\\
+\infty,&x=0,
+\end{cases}
+\qquad
+\int_{-\infty}^{+\infty}\delta(x)\,\mathrm dx=1.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{定义 1}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Definition 1}
+
+\end{englishtranslation}
+
+\[
+\delta(x)=\lim_{\tau\to0}\delta_\tau(x),
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+其中
+
+\nopagebreak[4]\begin{englishtranslation}
+
+where
+
+\end{englishtranslation}
+
+\[
+\delta_\tau(x)=
+\begin{cases}
+\dfrac1{\tau},&|x|\le\dfrac{\tau}{2},\\[4pt]
+0,&|x|>\dfrac{\tau}{2}.
+\end{cases}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{原图说明}：矩形脉冲以原点为中心，宽度为 \(\tau\)，高度为
+\(1/\tau\)，面积为 1；当 \(\tau\to0\)
+时，脉冲越来越窄、越来越高。\(\delta(x)\)
+用原点处的竖直箭头表示，旁标``1''表示单位积分。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Description of the original figure.} The rectangular pulse is
+centered at the origin, has width \(\tau\) and height \(1/\tau\), and
+has unit area. As \(\tau\to0\), it becomes narrower and taller. The
+delta function is represented by a vertical arrow at the origin; the
+label ``1'' denotes its unit integral.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{2. \(\delta\)
+函数的泛函定义\\[2pt]{\normalfont\small\color{TranslationBlue} The Delta
+Function as a
+Functional}}{2. \textbackslash delta 函数的泛函定义The Delta Function as a Functional}}
+
+\begin{bilingualpair}
+
+\textbf{定义 2（数学定义）}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Definition 2 (mathematical definition)}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\(\delta(t)\) 是一个``泛函''，满足
+
+\nopagebreak[4]\begin{englishtranslation}
+
+The delta function \(\delta(t)\) is a functional satisfying
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}
+\delta(t-t_0)\varphi(t)\,\mathrm dt
+=\varphi(t_0),
+\qquad \forall\varphi\in C(\mathbb R).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+其导数满足
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Its derivative satisfies
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}
+\delta'(t-t_0)\varphi(t)\,\mathrm dt
+=-\varphi'(t_0),
+\qquad \forall\varphi\in C^1(\mathbb R).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+其 \(n\) 阶导数满足
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Its \(n\)th derivative satisfies
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}
+\delta^{(n)}(t-t_0)\varphi(t)\,\mathrm dt
+=(-1)^n\varphi^{(n)}(t_0),
+\qquad \forall\varphi\in C^n(\mathbb R).
+\]
+
+\end{bilingualpair}
+
+\begin{editorialnote}
+
+\end{editorialnote}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{3. \(\delta\)
+函数的傅里叶变换与积分表示\\[2pt]{\normalfont\small\color{TranslationBlue} Fourier
+Transform and Integral Representation of the Delta
+Function}}{3. \textbackslash delta 函数的傅里叶变换与积分表示Fourier Transform and Integral Representation of the Delta Function}}
+
+\begin{bilingualpair}
+
+\textbf{例 1}：\(\delta(t)\) 的傅里叶变换称为广义傅里叶变换。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Example 1.} The Fourier transform of \(\delta(t)\) is understood
+as a generalized Fourier transform.
+
+\end{englishtranslation}
+
+\[
+\mathcal F[\delta(t)]
+=\int_{-\infty}^{+\infty}\delta(t)e^{-i\omega t}\,\mathrm dt
+=\left.e^{-i\omega t}\right|_{t=0}
+=1.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+因此 \(\{\delta(t),1\}\) 构成一个傅里叶变换对。由反变换，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Thus \(\{\delta(t),1\}\) is a Fourier transform pair. By the inverse
+transform,
+
+\end{englishtranslation}
+
+\[
+\delta(t)=\frac1{2\pi}
+\int_{-\infty}^{+\infty}1\cdot e^{i\omega t}\,\mathrm d\omega.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{定义 3（\(\delta(t)\) 的积分定义）}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Definition 3 (integral representation of \(\delta(t)\))}
+
+\end{englishtranslation}
+
+\[
+\delta(t)=\frac1{2\pi}
+\int_{-\infty}^{+\infty}e^{i\omega t}\,\mathrm d\omega.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{注}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Note}
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}e^{\pm i\omega t}\,\mathrm dt
+=2\pi\delta(\omega).
+\tag{*}
+\]
+
+\end{bilingualpair}
+
+\begin{editorialnote}
+
+\begin{bilingualpair}
+
+\textbf{整理注}：上述积分等式在广义函数意义下理解。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Editorial note.} These integral identities are interpreted in
+the sense of distributions.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\end{editorialnote}
+
+\begin{bilingualpair}
+
+教材 P.340：常用广义傅里叶变换对。原稿首先列出第 10 对
+\(\{\delta(t),1\}\)，并提示第 12、13、14、15 对。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Textbook, p.~340: common generalized Fourier transform pairs. The
+original notes first list pair 10, \(\{\delta(t),1\}\), and then refer
+to pairs 12, 13, 14, and 15.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{4.
+复指数、余弦和正弦的变换\\[2pt]{\normalfont\small\color{TranslationBlue} Transforms
+of Complex Exponentials, Cosines, and
+Sines}}{4. 复指数、余弦和正弦的变换Transforms of Complex Exponentials, Cosines, and Sines}}
+
+\begin{bilingualpair}
+
+\textbf{例}：求证
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Example.} Prove that
+
+\end{englishtranslation}
+
+\[
+e^{i\omega_0t}
+\ \xleftrightarrow{\mathcal F}\
+2\pi\delta(\omega-\omega_0).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+由式 \((*)\)，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Using identity \((*)\),
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F[e^{i\omega_0t}]
+&=\int_{-\infty}^{+\infty}
+e^{i\omega_0t}e^{-i\omega t}\,\mathrm dt\\
+&=\int_{-\infty}^{+\infty}
+e^{-i(\omega-\omega_0)t}\,\mathrm dt\\
+&=2\pi\delta(\omega-\omega_0).
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+类似地，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Similarly,
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F[\cos\omega_0t]
+&=\mathcal F\!\left[
+\frac{e^{i\omega_0t}+e^{-i\omega_0t}}2
+\right]\\
+&=\frac12\mathcal F[e^{i\omega_0t}]
++\frac12\mathcal F[e^{-i\omega_0t}]\\
+&=\frac12\cdot2\pi\delta(\omega-\omega_0)
++\frac12\cdot2\pi\delta(\omega+\omega_0)\\
+&=\pi\bigl[\delta(\omega+\omega_0)+\delta(\omega-\omega_0)\bigr].
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\[
+\mathcal F[\sin\omega_0t]
+=i\pi\bigl[\delta(\omega+\omega_0)-\delta(\omega-\omega_0)\bigr].
+\]
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{5.
+单位阶跃函数的变换\\[2pt]{\normalfont\small\color{TranslationBlue} Transform
+of the Unit Step
+Function}}{5. 单位阶跃函数的变换Transform of the Unit Step Function}}
+
+\begin{bilingualpair}
+
+\[
+u(t)=
+\begin{cases}
+1,&t>0,\\
+0,&t<0.
+\end{cases}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+可以验证
+
+\nopagebreak[4]\begin{englishtranslation}
+
+We can verify that
+
+\end{englishtranslation}
+
+\[
+u(t)
+\ \xleftrightarrow{\mathcal F}\
+\frac1{i\omega}+\pi\delta(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+从正变换形式上写出
+
+\nopagebreak[4]\begin{englishtranslation}
+
+The forward transform can formally be written as
+
+\end{englishtranslation}
+
+\[
+\mathcal F[u(t)]
+=\int_{-\infty}^{+\infty}u(t)e^{-i\omega t}\,\mathrm dt
+=\int_0^{+\infty}e^{-i\omega t}\,\mathrm dt.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+原稿接着用反变换验证：
+
+\nopagebreak[4]\begin{englishtranslation}
+
+The original notes then verify the result using the inverse transform.
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F^{-1}\!\left[
+\frac1{i\omega}+\pi\delta(\omega)
+\right]
+&=\frac1{2\pi}\int_{-\infty}^{+\infty}
+\left[\frac1{i\omega}+\pi\delta(\omega)\right]
+e^{i\omega t}\,\mathrm d\omega\\
+&=\frac1{2\pi}\left[
+\int_{-\infty}^{+\infty}
+\frac{e^{i\omega t}}{i\omega}\,\mathrm d\omega
++\int_{-\infty}^{+\infty}
+\pi\delta(\omega)e^{i\omega t}\,\mathrm d\omega
+\right]\\
+&=\frac1{2\pi}\left[
+\int_{-\infty}^{+\infty}
+\frac{e^{i\omega t}}{i\omega}\,\mathrm d\omega+\pi
+\right].
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+其中
+
+\nopagebreak[4]\begin{englishtranslation}
+
+where
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\int_{-\infty}^{+\infty}
+\frac{e^{i\omega t}}{i\omega}\,\mathrm d\omega
+&=\int_{-\infty}^{+\infty}
+\frac{\cos\omega t+i\sin\omega t}{i\omega}\,\mathrm d\omega\\
+&=0+\int_{-\infty}^{+\infty}
+\frac{\sin\omega t}{\omega}\,\mathrm d\omega\\
+&=
+\begin{cases}
+\pi,&t>0,\\
+-\pi,&t<0.
+\end{cases}
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{注}：由
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Note.} From
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}\frac{\sin x}{x}\,\mathrm dx=\pi
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+可得
+
+\nopagebreak[4]\begin{englishtranslation}
+
+we obtain
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}\frac{\sin kx}{x}\,\mathrm dx
+=
+\begin{cases}
+\pi,&k>0,\\
+-\pi,&k<0.
+\end{cases}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+代入上式，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Substituting into the preceding expression gives
+
+\end{englishtranslation}
+
+\[
+\mathcal F^{-1}\!\left[
+\frac1{i\omega}+\pi\delta(\omega)
+\right]
+=
+\begin{cases}
+\dfrac1{2\pi}(\pi+\pi)=1,&t>0,\\[4pt]
+\dfrac1{2\pi}(-\pi+\pi)=0,&t<0,
+\end{cases}
+=u(t).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{6.
+直流信号\\[2pt]{\normalfont\small\color{TranslationBlue} A Constant (DC)
+Signal}}{6. 直流信号A Constant (DC) Signal}}
+
+\begin{bilingualpair}
+
+直流信号 \(E\) 的变换对为
+
+\nopagebreak[4]\begin{englishtranslation}
+
+The transform pair for a constant (DC) signal \(E\) is
+
+\end{englishtranslation}
+
+\[
+E\ \xleftrightarrow{\mathcal F}\ 2\pi E\delta(\omega).
+\]
+
+\end{bilingualpair}
+
+\[
+\mathcal F[E]
+=\int_{-\infty}^{+\infty}Ee^{-i\omega t}\,\mathrm dt
+=2\pi E\delta(\omega).
+\]
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{12\baselineskip}
+
+\section{\texorpdfstring{二、傅里叶变换对的性质\\[2pt]{\normalfont\normalsize\color{TranslationBlue} Properties
+of Fourier Transform
+Pairs}}{二、傅里叶变换对的性质Properties of Fourier Transform Pairs}}
+
+\begin{bilingualpair}
+
+\emph{教材 P.190。}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\emph{textbook, p.~190.}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+约定
+
+\nopagebreak[4]\begin{englishtranslation}
+
+We use the notation
+
+\end{englishtranslation}
+
+\[
+f(t)\ \xleftrightarrow{\mathcal F}\ F(\omega),
+\qquad
+g(t)\ \xleftrightarrow{\mathcal F}\ G(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+全文采用
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Throughout these notes, the transform convention is
+
+\end{englishtranslation}
+
+\[
+F(\omega)=\int_{-\infty}^{+\infty}f(t)e^{-i\omega t}\,\mathrm dt,
+\qquad
+f(t)=\frac1{2\pi}\int_{-\infty}^{+\infty}F(\omega)e^{i\omega t}\,\mathrm d\omega.
+\]
+
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{1. 性质
+1：线性性\\[2pt]{\normalfont\small\color{TranslationBlue} Property 1:
+Linearity}}{1. 性质 1：线性性Property 1: Linearity}}
+
+\begin{bilingualpair}
+
+\[
+\begin{aligned}
+\mathcal F[af(t)+bg(t)]
+&=a\mathcal F[f]+b\mathcal F[g]\\
+&=aF(\omega)+bG(\omega).
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+或者
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Alternatively,
+
+\end{englishtranslation}
+
+\[
+\mathcal F^{-1}[aF(\omega)+bG(\omega)]
+=a\mathcal F^{-1}[F]+b\mathcal F^{-1}[G].
+\]
+
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsubsection{\texorpdfstring{例
+7.10\\[2pt]{\normalfont\small\color{TranslationBlue} Example
+7.10}}{例 7.10Example 7.10}}
+
+\[
+\begin{aligned}
+\mathcal F[\sin^2t]
+&=\mathcal F\!\left[\frac{1-\cos2t}{2}\right]\\
+&=\frac12\left\{\mathcal F[1]-\mathcal F[\cos2t]\right\}\\
+&=\frac12\left\{
+2\pi\delta(\omega)
+-\pi[\delta(\omega+2)+\delta(\omega-2)]
+\right\}.
+\end{aligned}
+\]
+
+\Needspace{8\baselineskip}
+
+\subsubsection{\texorpdfstring{例
+7.11\\[2pt]{\normalfont\small\color{TranslationBlue} Example
+7.11}}{例 7.11Example 7.11}}
+
+\begin{bilingualpair}
+
+设
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Let
+
+\end{englishtranslation}
+
+\[
+F(\omega)=\pi\delta(\omega+1)-\frac{i}{\omega+1},
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+求 \(\mathcal F^{-1}[F(\omega)]\)。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Find \(\mathcal F^{-1}[F(\omega)]\).
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{解}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Solution}
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F^{-1}[F(\omega)]
+&=\frac1{2\pi}\int_{-\infty}^{+\infty}
+\left[\pi\delta(\omega+1)-\frac{i}{\omega+1}\right]
+e^{i\omega t}\,\mathrm d\omega\\
+&=\frac1{2\pi}\left[
+\int_{-\infty}^{+\infty}
+\pi\delta(\omega+1)e^{i\omega t}\,\mathrm d\omega
++\int_{-\infty}^{+\infty}
+\frac{-ie^{i\omega t}}{\omega+1}\,\mathrm d\omega
+\right]\\
+&=\frac1{2\pi}\left[
+\pi e^{-it}
++\int_{-\infty}^{+\infty}
+\frac{-ie^{i\omega t}}{\omega+1}\,\mathrm d\omega
+\right].
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+令 \(\omega+1=\xi\)，则
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Let \(\omega+1=\xi\). Then
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\int_{-\infty}^{+\infty}
+\frac{-ie^{i\omega t}}{\omega+1}\,\mathrm d\omega
+&=\int_{-\infty}^{+\infty}
+\frac{-ie^{i(\xi-1)t}}{\xi}\,\mathrm d\xi\\
+&=e^{-it}\int_{-\infty}^{+\infty}
+\frac{-ie^{i\xi t}}{\xi}\,\mathrm d\xi\\
+&=e^{-it}
+\begin{cases}
+\pi,&t>0,\\
+-\pi,&t<0.
+\end{cases}
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+代入得
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Substitution gives
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F^{-1}[F(\omega)]
+&=
+\begin{cases}
+\dfrac1{2\pi}(\pi e^{-it}+\pi e^{-it}),&t>0,\\[4pt]
+\dfrac1{2\pi}(\pi e^{-it}-\pi e^{-it}),&t<0
+\end{cases}\\
+&=
+\begin{cases}
+e^{-it},&t>0,\\
+0,&t<0
+\end{cases}\\
+&=u(t)e^{-it}.
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+即
+
+\nopagebreak[4]\begin{englishtranslation}
+
+That is,
+
+\end{englishtranslation}
+
+\[
+u(t)e^{-it}
+\ \xleftrightarrow{\mathcal F}\
+\pi\delta(\omega+1)-\frac{i}{\omega+1}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+与
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Compare this with
+
+\end{englishtranslation}
+
+\[
+u(t)\ \xleftrightarrow{\mathcal F}\
+\pi\delta(\omega)+\frac1{i\omega}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+对比，频域发生了平移。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+The comparison shows a shift in the frequency domain.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{2. 性质
+2：平移性\\[2pt]{\normalfont\small\color{TranslationBlue} Property 2:
+Shifting}}{2. 性质 2：平移性Property 2: Shifting}}
+
+\begin{bilingualpair}
+
+\[
+f(t-t_0)
+\ \xleftrightarrow{\mathcal F}\
+e^{-it_0\omega}F(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+或者
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Alternatively,
+
+\end{englishtranslation}
+
+\[
+e^{i\omega_0t}f(t)
+\ \xleftrightarrow{\mathcal F}\
+F(\omega-\omega_0).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+由正、逆变换公式可得以上关系。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+These relations follow from the forward and
+inverse transform formulas.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{例}：由于
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Example.} Since
+
+\end{englishtranslation}
+
+\[
+u(t)\ \xleftrightarrow{\mathcal F}\
+\frac1{i\omega}+\pi\delta(\omega),
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+故
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Hence,
+
+\end{englishtranslation}
+
+\[
+u(t-c)\ \xleftrightarrow{\mathcal F}\
+\left[\frac1{i\omega}+\pi\delta(\omega)\right]e^{-ic\omega}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+可进一步化简为
+
+\nopagebreak[4]\begin{englishtranslation}
+
+This can be simplified to
+
+\end{englishtranslation}
+
+\[
+\frac{e^{-ic\omega}}{i\omega}+\pi\delta(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+这里使用了 \(\delta\) 函数的性质
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Here we use the delta-function identity
+
+\end{englishtranslation}
+
+\[
+\delta(x-x_0)\varphi(x)
+=\delta(x-x_0)\varphi(x_0).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+另外，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+In addition,
+
+\end{englishtranslation}
+
+\[
+e^{-it}u(t)\ \xleftrightarrow{\mathcal F}\
+\pi\delta(\omega+1)+\frac1{i(\omega+1)},
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+以及
+
+\nopagebreak[4]\begin{englishtranslation}
+
+and
+
+\end{englishtranslation}
+
+\[
+\mathcal F^{-1}\!\left[
+\pi\delta(\omega-1)+\frac1{i(\omega-1)}
+\right]
+=u(t)e^{it}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{3. 性质
+3：相似性\\[2pt]{\normalfont\small\color{TranslationBlue} Property 3:
+Scaling}}{3. 性质 3：相似性Property 3: Scaling}}
+
+\begin{bilingualpair}
+
+若 \(f(t)\xleftrightarrow{\mathcal F}F(\omega)\)，则
+
+\nopagebreak[4]\begin{englishtranslation}
+
+If \(f(t)\xleftrightarrow{\mathcal F}F(\omega)\), then
+
+\end{englishtranslation}
+
+\[
+f(at)\ \xleftrightarrow{\mathcal F}\
+\frac1{|a|}F\!\left(\frac{\omega}{a}\right),
+\qquad a\ne0.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+并且
+
+\nopagebreak[4]\begin{englishtranslation}
+
+and
+
+\end{englishtranslation}
+
+\[
+\frac1{|a|}f\!\left(\frac{t}{a}\right)
+\ \xleftrightarrow{\mathcal F}\
+F(a\omega).
+\]
+
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsubsection{\texorpdfstring{例：求
+\(\mathcal F[u(5t-2)]\)\\[2pt]{\normalfont\small\color{TranslationBlue} Example:
+Find
+\(\mathcal F[u(5t-2)]\)}}{例：求 \textbackslash mathcal F{[}u(5t-2){]}Example: Find \textbackslash mathcal F{[}u(5t-2){]}}}
+
+\begin{bilingualpair}
+
+\textbf{解（定义法）}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Solution (using the definition)}
+
+\end{englishtranslation}
+
+\[
+\mathcal F[u(5t-2)]
+=\int_{-\infty}^{+\infty}
+u(5t-2)e^{-i\omega t}\,\mathrm dt.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+令 \(5t-2=\tau\)，即 \(t=(\tau+2)/5\)，得
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Let \(5t-2=\tau\), so that \(t=(\tau+2)/5\). We obtain
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F[u(5t-2)]
+&=\int_{-\infty}^{+\infty}
+u(\tau)e^{-i\omega(\tau+2)/5}\frac15\,\mathrm d\tau\\
+&=\frac15e^{-2i\omega/5}
+\int_{-\infty}^{+\infty}
+u(\tau)e^{-i(\omega/5)\tau}\,\mathrm d\tau\\
+&=\frac15e^{-2i\omega/5}
+\left[
+\frac1{i(\omega/5)}+\pi\delta\!\left(\frac{\omega}{5}\right)
+\right]\\
+&=\frac{e^{-2i\omega/5}}{i\omega}
++\frac{\pi}{5}\delta\!\left(\frac{\omega}{5}\right).
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{editorialnote}
+
+\begin{bilingualpair}
+
+\textbf{注}：利用
+\(\delta(\omega/5)=5\delta(\omega)\)，还可将第二项写成
+\(\pi\delta(\omega)\)。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{note.} Using
+\(\delta(\omega/5)=5\delta(\omega)\), the second term can also be
+written as \(\pi\delta(\omega)\).
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\end{editorialnote}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{4. 性质
+4：对称性\\[2pt]{\normalfont\small\color{TranslationBlue} Property 4:
+Duality}}{4. 性质 4：对称性Property 4: Duality}}
+
+\begin{bilingualpair}
+
+若
+
+\nopagebreak[4]\begin{englishtranslation}
+
+If
+
+\end{englishtranslation}
+
+\[
+f(t)\ \xleftrightarrow{\mathcal F}\ F(\omega),
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+则
+
+\nopagebreak[4]\begin{englishtranslation}
+
+then
+
+\end{englishtranslation}
+
+\[
+F(t)\ \xleftrightarrow{\mathcal F}\ 2\pi f(-\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{证明}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Proof}
+
+\end{englishtranslation}
+
+\[
+F(\omega)
+=\int_{-\infty}^{+\infty}f(t)e^{-i\omega t}\,\mathrm dt.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+利用``定积分值与所用哑变量无关''，将上式中的 \(\omega\)、\(t\) 互换：
+
+\nopagebreak[4]\begin{englishtranslation}
+
+A definite integral does not depend on the name of its dummy variable.
+Interchanging \(\omega\) and \(t\) in the notation gives
+
+\end{englishtranslation}
+
+\[
+F(t)=\int_{-\infty}^{+\infty}f(\omega)e^{-it\omega}\,\mathrm d\omega.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+令 \(\omega=-\xi\)，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Let \(\omega=-\xi\).
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+F(t)
+&=\int_{+\infty}^{-\infty}
+f(-\xi)e^{it\xi}\,\mathrm d(-\xi)\\
+&=\int_{-\infty}^{+\infty}
+f(-\xi)e^{it\xi}\,\mathrm d\xi\\
+&=\frac1{2\pi}\int_{-\infty}^{+\infty}
+[2\pi f(-\omega)]e^{it\omega}\,\mathrm d\omega.
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+与反变换式比较，即得结论。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Comparison with the inverse transform formula proves the result.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{例}：由双边指数脉冲的变换对
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Example.} Start from the transform pair for a two-sided
+exponential pulse,
+
+\end{englishtranslation}
+
+\[
+e^{-\beta|t|}
+\ \xleftrightarrow{\mathcal F}\
+\frac{2\beta}{\omega^2+\beta^2},
+\qquad \beta>0,
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+可得
+
+\nopagebreak[4]\begin{englishtranslation}
+
+we obtain
+
+\end{englishtranslation}
+
+\[
+\frac{2\beta}{t^2+\beta^2}
+\ \xleftrightarrow{\mathcal F}\
+2\pi e^{-\beta|-\omega|}
+=2\pi e^{-\beta|\omega|}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+因此
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Therefore,
+
+\end{englishtranslation}
+
+\[
+\frac1{t^2+\beta^2}
+\ \xleftrightarrow{\mathcal F}\
+\frac{\pi}{\beta}e^{-\beta|\omega|}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{原图说明}：双边指数脉冲关于纵轴对称，在原点达到最大值，并向两侧衰减。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Description of the original figure.} The two-sided exponential
+pulse is symmetric about the vertical axis, reaches its maximum at the
+origin, and decays in both directions.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{editorialnote}
+
+\begin{bilingualpair}
+
+\textbf{注}：\(\beta>0\) 是所列衰减指数变换对的适用条件，此处补明。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{note.} The condition \(\beta>0\) has been made
+explicit because it is required for the decaying-exponential transform
+pair.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\end{editorialnote}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{5. 性质
+5：微分性\\[2pt]{\normalfont\small\color{TranslationBlue} Property 5:
+Differentiation}}{5. 性质 5：微分性Property 5: Differentiation}}
+
+\begin{bilingualpair}
+
+\textbf{（1）时域微分}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{(1) Differentiation in the time domain}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+若 \(f(\pm\infty)=0\)，则
+
+\nopagebreak[4]\begin{englishtranslation}
+
+If \(f(\pm\infty)=0\), then
+
+\end{englishtranslation}
+
+\[
+f'(t)\ \xleftrightarrow{\mathcal F}\
+i\omega F(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{证明}：分部积分，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Proof.} Integration by parts gives
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\int_{-\infty}^{+\infty}f'(t)e^{-i\omega t}\,\mathrm dt
+&=\left.f(t)e^{-i\omega t}\right|_{-\infty}^{+\infty}
+-\int_{-\infty}^{+\infty}(-i\omega)f(t)e^{-i\omega t}\,\mathrm dt\\
+&=0+i\omega\int_{-\infty}^{+\infty}
+f(t)e^{-i\omega t}\,\mathrm dt\\
+&=i\omega F(\omega).
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{（2）频域微分}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{(2) Differentiation in the frequency domain}
+
+\end{englishtranslation}
+
+\[
+-itf(t)\ \xleftrightarrow{\mathcal F}\ F'(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{证明}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Proof}
+
+\end{englishtranslation}
+
+\[
+F(\omega)=\int_{-\infty}^{+\infty}
+f(t)e^{-i\omega t}\,\mathrm dt,
+\]
+
+\end{bilingualpair}
+
+\[
+\begin{aligned}
+F'(\omega)
+&=\int_{-\infty}^{+\infty}
+\frac{\partial}{\partial\omega}
+[f(t)e^{-i\omega t}]\,\mathrm dt\\
+&=\int_{-\infty}^{+\infty}
+f(t)(-it)e^{-i\omega t}\,\mathrm dt.
+\end{aligned}
+\]
+
+\begin{bilingualpair}
+
+\textbf{推广}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Generalization}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+若
+
+\nopagebreak[4]\begin{englishtranslation}
+
+If
+
+\end{englishtranslation}
+
+\[
+f(\pm\infty)=f'(\pm\infty)=\cdots
+=f^{(n-1)}(\pm\infty)=0,
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+则
+
+\nopagebreak[4]\begin{englishtranslation}
+
+then
+
+\end{englishtranslation}
+
+\[
+f^{(n)}(t)\ \xleftrightarrow{\mathcal F}\
+(i\omega)^nF(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+另一方面，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+On the other hand,
+
+\end{englishtranslation}
+
+\[
+(-it)^nf(t)\ \xleftrightarrow{\mathcal F}\
+F^{(n)}(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+由
+
+\nopagebreak[4]\begin{englishtranslation}
+
+From
+
+\end{englishtranslation}
+
+\[
+\mathcal F[(-it)^nf(t)]=F^{(n)}(\omega)
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+可得
+
+\nopagebreak[4]\begin{englishtranslation}
+
+we obtain
+
+\end{englishtranslation}
+
+\[
+\mathcal F[t^nf(t)]=i^nF^{(n)}(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+特别地，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+In particular,
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F[t^n\cdot1]
+&=i^n[2\pi\delta(\omega)]^{(n)}\\
+&=2\pi i^n\delta^{(n)}(\omega).
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+即
+
+\nopagebreak[4]\begin{englishtranslation}
+
+That is,
+
+\end{englishtranslation}
+
+\[
+t^n\ \xleftrightarrow{\mathcal F}\
+2\pi i^n\delta^{(n)}(\omega).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{6.
+广义傅里叶变换对举例\\[2pt]{\normalfont\small\color{TranslationBlue} Examples
+of Generalized Fourier Transform
+Pairs}}{6. 广义傅里叶变换对举例Examples of Generalized Fourier Transform Pairs}}
+
+\begin{bilingualpair}
+
+\emph{教材 P.340，第 16---32
+对中的若干项。}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\emph{selected entries from pairs
+16--32 on textbook p.~340.}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+右栏的导数均对 \(\omega\) 求导。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+All derivatives in the right-hand column are with respect to \(\omega\).
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\Needspace{20\baselineskip}\begingroup\small\renewcommand{\arraystretch}{1.65}\everymath{\displaystyle}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2800}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5600}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+原编号 / Original no.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+原函数 / Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+傅里叶变换 / Fourier transform
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+16 & \(u(t-c)\) &
+\(\left[\frac1{i\omega}+\pi\delta(\omega)\right]e^{-ic\omega}\) \\
+17 & \(t\,u(t)\) &
+\(i\frac{\mathrm d}{\mathrm d\omega}\left[\frac1{i\omega}+\pi\delta(\omega)\right]\) \\
+18 & \(t^nu(t)\) &
+\(i^n\frac{\mathrm d^n}{\mathrm d\omega^n}\left[\frac1{i\omega}+\pi\delta(\omega)\right]\) \\
+21 & \(u(t)e^{iat}\) & \(\frac1{i(\omega-a)}+\pi\delta(\omega-a)\) \\
+22 & \(u(t)e^{iat}t^n\) &
+\(i^n\frac{\mathrm d^n}{\mathrm d\omega^n}\left[\frac1{i(\omega-a)}+\pi\delta(\omega-a)\right]\) \\
+26 & \(\delta^{(n)}(t)\) & \((i\omega)^n\) \\
+27 & \(\delta^{(n)}(t-c)\) & \((i\omega)^ne^{-ic\omega}\) \\
+32 & \(t^ne^{iat}\) & \(2\pi i^n\delta^{(n)}(\omega-a)\) \\
+\end{longtable}
+
+\endgroup
+
+\begin{bilingualpair}
+
+第 21、32 对由频域平移 \(\omega\mapsto\omega-a\) 得到。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Pairs 21 and 32 follow from the frequency shift
+\(\omega\mapsto\omega-a\).
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{7. 性质
+7：积分性\\[2pt]{\normalfont\small\color{TranslationBlue} Property 7:
+Integration}}{7. 性质 7：积分性Property 7: Integration}}
+
+\begin{bilingualpair}
+
+\emph{性质编号沿用原稿，原稿此处未出现``性质 6''。}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{（1）时域积分}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{(1) Integration in the time domain}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+若
+
+\nopagebreak[4]\begin{englishtranslation}
+
+If
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}f(t)\,\mathrm dt=0,
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+则
+
+\nopagebreak[4]\begin{englishtranslation}
+
+then
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau
+\ \xleftrightarrow{\mathcal F}\
+\frac{F(\omega)}{i\omega}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{（2）频域积分}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{(2) Integration in the frequency domain}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+\[
+\frac{f(t)}{-it}
+\ \xleftrightarrow{\mathcal F}\
+\int_{-\infty}^{\omega}F(\xi)\,\mathrm d\xi.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{证明（2）}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Proof of (2)}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+令
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Let
+
+\end{englishtranslation}
+
+\[
+G(\omega)=\int_{-\infty}^{\omega}F(\xi)\,\mathrm d\xi,
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+求导得 \(F(\omega)=G'(\omega)\)。由微分性，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Differentiation gives \(F(\omega)=G'(\omega)\). By the differentiation
+property,
+
+\end{englishtranslation}
+
+\[
+\begin{aligned}
+\mathcal F^{-1}[F(\omega)]
+&=\mathcal F^{-1}[G'(\omega)]\\
+&=-it\,\mathcal F^{-1}[G(\omega)].
+\end{aligned}
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+故
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Hence,
+
+\end{englishtranslation}
+
+\[
+\mathcal F^{-1}[G(\omega)]
+=\frac{\mathcal F^{-1}[F(\omega)]}{-it}
+=\frac{f(t)}{-it}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+即
+
+\nopagebreak[4]\begin{englishtranslation}
+
+That is,
+
+\end{englishtranslation}
+
+\[
+\mathcal F^{-1}\!\left[
+\int_{-\infty}^{\omega}F(\xi)\,\mathrm d\xi
+\right]
+=\frac{\mathcal F^{-1}[F]}{-it}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{证明（1）}
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Proof of (1)}
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+令
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Let
+
+\end{englishtranslation}
+
+\[
+g(t)=\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau,
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+则 \(f(t)=g'(t)\)。在 \(g(\pm\infty)=0\) 时，由微分性，
+
+\nopagebreak[4]\begin{englishtranslation}
+
+Then \(f(t)=g'(t)\). If \(g(\pm\infty)=0\), the differentiation property
+gives
+
+\end{englishtranslation}
+
+\[
+\mathcal F[f(t)]
+=\mathcal F[g'(t)]
+=i\omega\mathcal F[g(t)].
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+从而
+
+\nopagebreak[4]\begin{englishtranslation}
+
+It follows that
+
+\end{englishtranslation}
+
+\[
+\mathcal F[g(t)]=\frac{F(\omega)}{i\omega}.
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+\textbf{注}：若
+
+\nopagebreak[4]\begin{englishtranslation}
+
+\textbf{Note.} If
+
+\end{englishtranslation}
+
+\[
+\int_{-\infty}^{+\infty}f(t)\,\mathrm dt\ne0,
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+则
+
+\nopagebreak[4]\begin{englishtranslation}
+
+then
+
+\end{englishtranslation}
+
+\[
+\mathcal F\!\left[
+\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau
+\right]
+=\frac{F(\omega)}{i\omega}
++\pi\delta(\omega)F(0).
+\]
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+
+用``卷积性''易得。
+
+\nopagebreak[4]\begin{englishtranslation}
+
+This follows readily from the convolution property.
+
+\end{englishtranslation}
+
+\end{bilingualpair}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\Needspace{8\baselineskip}
+
+\Needspace{12\baselineskip}
+
+\section{\texorpdfstring{三、作业\\[2pt]{\normalfont\normalsize\color{TranslationBlue} Assignments}}{三、作业记录Assignments}}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{11.22
+作业\\[2pt]{\normalfont\small\color{TranslationBlue} Assignment for
+November 22}}{11.22 作业Assignment for November 22}}
+
+\begin{itemize}
+\item
+  \begin{bilingualpair}
+
+  教材 P.340，第 8 对的推导。
+
+  \nopagebreak[4]\begin{englishtranslation}
+
+  Textbook, p.~340: derive transform pair 8.
+
+  \end{englishtranslation}
+
+  \end{bilingualpair}
+\item
+  \begin{bilingualpair}
+
+  教材 P.203，第 1 题（双）、第 2 题、第 3 题（双）。
+
+  \nopagebreak[4]\begin{englishtranslation}
+
+  Textbook, p.~203: Exercise 1 (even-numbered parts), Exercise 2, and
+  Exercise 3 (even-numbered parts).
+
+  \end{englishtranslation}
+
+  \end{bilingualpair}
+\item
+  \begin{bilingualpair}
+
+  教材 P.203，第 7 题的（4）、（5）、（6）。
+
+  \nopagebreak[4]\begin{englishtranslation}
+
+  Textbook, p.~203: Exercise 7, parts (4), (5), and (6).
+
+  \end{englishtranslation}
+
+  \end{bilingualpair}
+\end{itemize}
+
+\Needspace{8\baselineskip}
+
+\subsection{\texorpdfstring{11.29
+作业\\[2pt]{\normalfont\small\color{TranslationBlue} Assignment for
+November 29}}{11.29 作业Assignment for November 29}}
+
+\begin{itemize}
+\item
+  \begin{bilingualpair}
+
+  教材 P.203，第 4 题（双）。
+
+  \nopagebreak[4]\begin{englishtranslation}
+
+  Textbook, p.~203: Exercise 4 (even-numbered parts).
+
+  \end{englishtranslation}
+
+  \end{bilingualpair}
+\item
+  \begin{bilingualpair}
+
+  教材 P.203，第 7 题的（1）、（2）、（3）。
+
+  \nopagebreak[4]\begin{englishtranslation}
+
+  Textbook, p.~203: Exercise 7, parts (1), (2), and (3).
+
+  \end{englishtranslation}
+
+  \end{bilingualpair}
+\item
+  \begin{bilingualpair}
+
+  教材 P.203，第 6、8 题。
+
+  \nopagebreak[4]\begin{englishtranslation}
+
+  Textbook, p.~203: Exercises 6 and 8.
+
+  \end{englishtranslation}
+
+  \end{bilingualpair}
+\item
+  \nopagebreak[4]\begin{englishtranslation}
+
+  B 套，第 7 题。
+
+  \end{englishtranslation}
+
+  \nopagebreak[4]\begin{englishtranslation}
+
+  Set B, Exercise 7.
+
+  \end{englishtranslation}
+\end{itemize}
+
+\begin{bilingualpair}
+Notes:
+\par
+\vspace*{3cm}
+\end{bilingualpair}
+
+\end{document}
