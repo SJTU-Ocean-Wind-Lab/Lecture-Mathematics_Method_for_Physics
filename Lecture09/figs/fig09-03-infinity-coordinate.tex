@@ -1,0 +1,22 @@
+\documentclass[tikz,border=6pt]{standalone}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,patterns}
+\begin{document}
+\begin{tikzpicture}[>=Stealth,scale=.8]
+ \fill[blue!8,even odd rule] (-2.3,-2.1) rectangle (2.3,2.1)
+                                 (0,0) circle (1.2);
+ \draw[thick] (0,0) circle (1.2);
+ \fill (0,0) circle (1.4pt) node[below]{$0$};
+ \node at (0,1.65) {$|z|>R$};
+ \node at (0,-1.65) {$z$-plane};
+ \draw[->,thick] (2.6,0)--(4.5,0) node[midway,above]{$w=1/z$};
+ \begin{scope}[xshift=6.6cm]
+  \fill[blue!8] (0,0) circle (1.2);
+  \draw[thick] (0,0) circle (1.2);
+  \draw[fill=white] (0,0) circle (2pt);
+  \node[below] at (0,-.06) {$0$};
+  \node at (0,1.65) {$0<|w|<1/R$};
+  \node at (0,-1.65) {$w$-plane};
+ \end{scope}
+\end{tikzpicture}
+\end{document}
