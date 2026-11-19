@@ -1,0 +1,326 @@
+% Standalone source. Main source: 12.27.pdf pp.7--12.
+% The final example follows the fully worked stationary-particular-solution route.
+% The Fourier heat IVP previously here is restored to Lecture 18.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,booktabs,enumitem}
+\usepackage[margin=22mm,headheight=14pt]{geometry}
+\usepackage{tikz,fancyhdr,hyperref}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,patterns}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,
+  pdftitle={Mathematical Methods for Physics -- Lecture 20},pdfauthor={Zhaolong Han}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Mathematical Methods for Physics}
+\fancyhead[R]{\small Lecture 20}\fancyfoot[C]{\thepage}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\setlist{topsep=3pt,itemsep=2pt,parsep=0pt}
+\setlength{\emergencystretch}{1.5em}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+\newif\ifteachernotes\teachernotesfalse
+\newcommand{\teachernote}[1]{\ifteachernotes\par\smallskip
+  \noindent\textit{Instructor note.} #1\par\smallskip\fi}
+\begin{document}
+\begin{center}
+  {\Large\bfseries Mathematical Methods for Physics---Lecture 20}\\[6pt]
+  {\large Nonhomogeneous Boundary Conditions and Forced Problems}\\[10pt]
+  Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University\\
+  \href{mailto:han.arkey@sjtu.edu.cn}{han.arkey@sjtu.edu.cn}
+\end{center}
+\hrule\medskip
+We extend the finite-interval method of Lecture 19. First make the boundary
+conditions homogeneous, then expand in the corresponding spatial eigenfunctions.
+The modal amplitudes satisfy forced ODEs, solved by variation of constants or by
+the Laplace transform recalled from the earlier integral-transform unit.
+For a static source and static boundary data, a suitable stationary particular
+solution may simplify the PDE and the boundary conditions simultaneously.
+
+% Source: 12.27.pdf pp.7--8; textbook p.298.
+\section{Making Boundary Conditions Homogeneous}
+\subsection{Subtract an auxiliary function}
+Suppose first that the endpoint data are constants. Choose a smooth $W=W(x)$
+with the prescribed endpoint values or derivatives and write
+\begin{equation}
+ v(x,t)=u(x,t)-W(x).
+\end{equation}
+For example, if $u(0,t)=\mu_0$, $u(\ell,t)=\mu_\ell$, choose
+\begin{equation}\label{eq:linearlifting}
+ W(x)=\mu_0+\frac{\mu_\ell-\mu_0}{\ell}x.
+\end{equation}
+Then $v(0,t)=v(\ell,t)=0$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=.92]
+ \begin{scope}
+  \draw[->] (-.25,0)--(4.65,0) node[right]{$x$};
+  \draw[->] (0,-.2)--(0,2.8);
+  \draw[red!65!black,thick] (0,.7)--(4,1.8) node[right]{$W$};
+  \draw[blue!65!black,thick,domain=0:4,samples=70]
+    plot (\x,{.7+.275*\x+.7*sin(45*\x)});
+  \node[blue!65!black] at (2.05,2.25) {$u$};
+  \fill (0,.7) circle (1.5pt) node[left]{$\mu_0$};
+  \fill (4,1.8) circle (1.5pt) node[above right]{$\mu_\ell$};
+  \node[below] at (0,0) {$0$};\node[below] at (4,0) {$\ell$};
+ \end{scope}
+ \begin{scope}[shift={(6.2,0)}]
+  \draw[->] (-.25,0)--(4.65,0) node[right]{$x$};
+  \draw[->] (0,-.2)--(0,2.8);
+  \draw[blue!65!black,thick,domain=0:4,samples=70]
+    plot (\x,{.7*sin(45*\x)});
+  \node at (2,1.25) {$v=u-W$};
+  \fill (0,0) circle (1.5pt);\fill (4,0) circle (1.5pt);
+  \node[below] at (0,0) {$0$};\node[below] at (4,0) {$\ell$};
+ \end{scope}
+\end{tikzpicture}
+\end{center}
+Matching boundary data is the purpose of $W$; it need not satisfy the original
+PDE. Its residual must therefore be retained. For a time-independent $W$,
+\begin{align}
+ u_{tt}-a^2u_{xx}=f\quad&\Longrightarrow\quad
+ v_{tt}-a^2v_{xx}=f+a^2W'',\\
+ u_t-\kappa u_{xx}=f\quad&\Longrightarrow\quad
+ v_t-\kappa v_{xx}=f+\kappa W''.
+\end{align}
+The new initial displacement is $\varphi-W$, and for the wave equation the
+initial velocity remains $\psi$. Thus making the boundary homogeneous is
+different from making the source vanish.
+
+\subsection{Four useful choices on an interval}
+Derivatives below are coordinate derivatives $u_x$, not outward normal derivatives.
+\begin{enumerate}
+ \item \textbf{Two prescribed values:}
+ $u(0,t)=\mu_0$, $u(\ell,t)=\mu_\ell$.
+ Take $W=\mu_0+(\mu_\ell-\mu_0)x/\ell$.
+ \item \textbf{Value on the left, derivative on the right:}
+ $u(0,t)=\mu_0$, $u_x(\ell,t)=\nu_\ell$.
+ Take $W=\mu_0+\nu_\ell x$.
+ \item \textbf{Derivative on the left, value on the right:}
+ $u_x(0,t)=\nu_0$, $u(\ell,t)=\mu_\ell$.
+ Take $W=\nu_0(x-\ell)+\mu_\ell$.
+ \item \textbf{Two prescribed derivatives:}
+ $u_x(0,t)=\nu_0$, $u_x(\ell,t)=\nu_\ell$.
+ Interpolate the derivative first:
+ \begin{equation}
+  W'(x)=\nu_0+\frac{\nu_\ell-\nu_0}{\ell}x,
+  \qquad W(x)=\nu_0x+\frac{\nu_\ell-\nu_0}{2\ell}x^2.
+ \end{equation}
+\end{enumerate}
+These choices are not unique. Adding a function that satisfies the associated
+homogeneous endpoint conditions gives another admissible lifting.
+
+\subsection{Extension to time-dependent boundary data}
+If the endpoint data depend on $t$, use the same constructions with those
+time-dependent coefficients. For $v=u-W(x,t)$, the complete transformed wave
+problem has
+\begin{align}
+ v_{tt}-a^2v_{xx}&=f-W_{tt}+a^2W_{xx},\\
+ v(x,0)&=\varphi(x)-W(x,0),\\
+ v_t(x,0)&=\psi(x)-W_t(x,0).
+\end{align}
+For heat conduction the corresponding formulas are
+\begin{equation}
+ v_t-\kappa v_{xx}=f-W_t+\kappa W_{xx},\qquad
+ v(x,0)=\varphi(x)-W(x,0).
+\end{equation}
+This extension requires sufficiently regular endpoint data and compatibility
+with the initial data. It is essential to update the source and initial data
+as well as the boundary conditions.
+
+% Source: 12.27.pdf pp.8--11; textbook p.282.
+\section{A Forced Wave Equation with Homogeneous Endpoints}
+\subsection{Expansion in spatial eigenfunctions}
+After boundary homogenization, consider
+\begin{equation}\label{eq:forcedproblem}
+ \begin{cases}
+ u_{tt}-a^2u_{xx}=f(x,t),&0<x<\ell,\ t>0,\\
+ u(0,t)=u(\ell,t)=0,\\
+ u(x,0)=\varphi(x),\qquad u_t(x,0)=\psi(x).
+ \end{cases}
+\end{equation}
+Here $f,\varphi,\psi$ denote the data \emph{after} any lifting and initial-data
+adjustment. Set $k_n=n\pi/\ell$ and $\omega_n=ak_n$. The complete sine basis gives
+\begin{align}
+ u(x,t)&=\sum_{n=1}^\infty q_n(t)\sin(k_nx),&
+ f(x,t)&=\sum_{n=1}^\infty f_n(t)\sin(k_nx),\\
+ \varphi(x)&=\sum_{n=1}^\infty\varphi_n\sin(k_nx),&
+ \psi(x)&=\sum_{n=1}^\infty\psi_n\sin(k_nx),
+\end{align}
+with
+\begin{align}
+ f_n(t)&=\frac2\ell\int_0^\ell f(x,t)\sin(k_nx)\dd x,\\
+ \varphi_n&=\frac2\ell\int_0^\ell\varphi(x)\sin(k_nx)\dd x,\qquad
+ \psi_n=\frac2\ell\int_0^\ell\psi(x)\sin(k_nx)\dd x.
+\end{align}
+Substitution and orthogonality reduce the PDE to independent modal ODEs:
+\begin{equation}\label{eq:modalode}
+ \boxed{q_n''+\omega_n^2q_n=f_n(t),\qquad
+                 q_n(0)=\varphi_n,\quad q_n'(0)=\psi_n.}
+\end{equation}
+Either of the following ODE methods may be used.
+
+\subsection{Variation of constants and the causal response}
+The homogeneous solutions are $\cos(\omega_nt)$ and $\sin(\omega_nt)$.
+Variation of constants gives the zero-initial-data particular solution
+\begin{equation}
+ q_{n,f}(t)=\frac1{\omega_n}\int_0^t
+                   f_n(\tau)\sin(\omega_n(t-\tau))\dd\tau.
+\end{equation}
+Indeed, differentiation gives
+\begin{align}
+ q_{n,f}'(t)&=\int_0^t f_n(\tau)\cos(\omega_n(t-\tau))\dd\tau,\\
+ q_{n,f}''(t)&=f_n(t)-\omega_n^2q_{n,f}(t),
+\end{align}
+and both initial values of $q_{n,f}$ vanish. Adding the initial-data response,
+\begin{equation}\label{eq:modalresponse}
+ q_n(t)=\varphi_n\cos(\omega_nt)+\frac{\psi_n}{\omega_n}\sin(\omega_nt)
+       +\frac1{\omega_n}\int_0^t f_n(\tau)\sin(\omega_n(t-\tau))\dd\tau.
+\end{equation}
+The forcing acts through the causal kernel $\sin(\omega_nt)/\omega_n$.
+
+\subsection{The same formula from the Laplace transform}
+Recall the one-sided transform, for $\operatorname{Re}p$ sufficiently large,
+\begin{equation}
+ Q_n(p)=\mathcal L[q_n](p)=\int_0^\infty q_n(t)e^{-pt}\dd t,\qquad
+ F_n(p)=\mathcal L[f_n](p).
+\end{equation}
+The derivative identity includes both initial values:
+\begin{equation}
+ \mathcal L[q_n'']=p^2Q_n-p\varphi_n-\psi_n.
+\end{equation}
+Transforming \eqref{eq:modalode} gives
+\begin{equation}
+ Q_n(p)=\frac{F_n(p)+p\varphi_n+\psi_n}{p^2+\omega_n^2}.
+\end{equation}
+Use the inverse pairs
+\begin{equation}
+ \mathcal L^{-1}\!\left[\frac p{p^2+\omega^2}\right]=\cos(\omega t),\qquad
+ \mathcal L^{-1}\!\left[\frac1{p^2+\omega^2}\right]=\frac{\sin(\omega t)}\omega,
+\end{equation}
+and the causal convolution theorem
+\begin{equation}
+ (r*_t s)(t)=\int_0^t r(\tau)s(t-\tau)\dd\tau,\qquad
+ \mathcal L[r*_t s]=\mathcal L[r]\,\mathcal L[s].
+\end{equation}
+This reproduces \eqref{eq:modalresponse}. The first two terms represent initial
+displacement and velocity; the third is the forcing response. Substitute them
+into the spatial sine series to reconstruct $u(x,t)$.
+
+\paragraph{Zero modes for other endpoint pairs.}
+For a Neumann--Neumann pair, the constant spatial mode has zero frequency.
+Instead of dividing by $\omega_0=0$, solve it separately:
+\begin{equation}
+ q_0''=f_0(t),\qquad
+ q_0(t)=\varphi_0+\psi_0t+\int_0^t(t-\tau)f_0(\tau)\dd\tau.
+\end{equation}
+Here $f_0,\varphi_0,\psi_0$ are spatial averages, with normalization $1/\ell$.
+
+% Source: 12.27.pdf pp.11--12, textbook p.286.
+% The W method was fully worked in the notes; it is restored as the main calculation.
+\section{A Static Source and Nonzero Endpoint Values}
+\subsection{Problem statement}
+Consider the problem recorded on textbook p.286:
+\begin{equation}\label{eq:example}
+ \begin{cases}
+ u_{tt}-a^2u_{xx}=\sin(2\pi x/\ell)\cos(2\pi x/\ell),&0<x<\ell,\ t>0,\\
+ u(0,t)=3,\qquad u(\ell,t)=0,\\
+ u(x,0)=3(1-x/\ell),\qquad u_t(x,0)=\sin(4\pi x/\ell).
+ \end{cases}
+\end{equation}
+Put $k=4\pi/\ell$ and $\omega=ak$. The source is
+\begin{equation}
+ \sin(2\pi x/\ell)\cos(2\pi x/\ell)=\tfrac12\sin(kx).
+\end{equation}
+Both the source and the boundary values are time independent. We can therefore
+look for one stationary particular solution that handles them together.
+
+\subsection{Main calculation: a stationary particular solution}
+Find $W=W(x)$ satisfying
+\begin{equation}
+ -a^2W''=\tfrac12\sin(kx),\qquad W(0)=3,\quad W(\ell)=0.
+\end{equation}
+Integrating twice gives
+\begin{equation}
+ W(x)=\frac{\sin(kx)}{2a^2k^2}+C_1x+C_2.
+\end{equation}
+Since $\sin(k\ell)=0$, the endpoint conditions give $C_2=3$ and $C_1=-3/\ell$:
+\begin{equation}\label{eq:stationaryW}
+ \boxed{W(x)=3\left(1-\frac x\ell\right)+\frac{\sin(kx)}{2\omega^2}.}
+\end{equation}
+Set $v=u-W$. The transformed problem is entirely homogeneous in its equation
+and endpoints:
+\begin{equation}
+ \begin{cases}
+ v_{tt}-a^2v_{xx}=0,\\
+ v(0,t)=v(\ell,t)=0,\\
+ v(x,0)=-\sin(kx)/(2\omega^2),\qquad v_t(x,0)=\sin(kx).
+ \end{cases}
+\end{equation}
+Only the fourth fixed-end sine mode is present. From Lecture 19,
+\begin{equation}
+ v(x,t)=\left[-\frac{\cos(\omega t)}{2\omega^2}
+                  +\frac{\sin(\omega t)}\omega\right]\sin(kx).
+\end{equation}
+Adding \eqref{eq:stationaryW} gives the complete solution
+\begin{equation}\label{eq:exampleanswer}
+ \boxed{u(x,t)=3\left(1-\frac x\ell\right)
+       +\left[\frac{1-\cos(\omega t)}{2\omega^2}
+                  +\frac{\sin(\omega t)}\omega\right]\sin(kx).}
+\end{equation}
+The stationary particular solution removes the static source and the nonzero
+endpoint data together; only one homogeneous vibration mode remains.
+
+\subsection{Alternative: boundary lifting followed by modal convolution}
+If we subtract only $L(x)=3(1-x/\ell)$, then $z=u-L$ has homogeneous endpoints
+but still satisfies
+\begin{equation}
+ z_{tt}-a^2z_{xx}=\tfrac12\sin(kx),\qquad z(x,0)=0,\quad z_t(x,0)=\sin(kx).
+\end{equation}
+Writing $z=r(t)\sin(kx)$ gives
+\begin{equation}
+ r''+\omega^2r=\tfrac12,\qquad r(0)=0,\quad r'(0)=1.
+\end{equation}
+Equation \eqref{eq:modalresponse} yields
+\begin{equation}
+ r(t)=\frac{\sin(\omega t)}\omega
+       +\frac1{2\omega}\int_0^t\sin(\omega(t-\tau))\dd\tau
+     =\frac{\sin(\omega t)}\omega+\frac{1-\cos(\omega t)}{2\omega^2}.
+\end{equation}
+Equivalently, its Laplace transform is
+\begin{equation}
+ R(p)=\frac{1+1/(2p)}{p^2+\omega^2}.
+\end{equation}
+Both recover \eqref{eq:exampleanswer}. This alternative illustrates the general
+forced-mode formula; the stationary choice of $W$ is particularly convenient
+for this static example.
+
+\subsection{Check the reconstructed solution}
+Write $u=L+r(t)\sin(kx)$. Since $L''=0$, $\omega=ak$, and $r''+\omega^2r=1/2$,
+\begin{equation}
+ u_{tt}-a^2u_{xx}=(r''+\omega^2r)\sin(kx)
+            =\tfrac12\sin(kx).
+\end{equation}
+The sine vanishes at both endpoints, so the prescribed values $3$ and $0$ hold.
+Finally, $r(0)=0$ and $r'(0)=1$ give exactly the initial displacement and velocity.
+
+\section*{Working Procedure}
+\begin{enumerate}
+ \item Identify the spatial interval, endpoint pair, source, and initial data.
+ \item Make the boundary conditions homogeneous and update the PDE and initial
+       data. When a stationary particular solution also removes a static source,
+       use that simplification.
+ \item Solve the spatial eigenvalue problem, including any zero mode.
+ \item Expand the source and initial data in that same basis.
+ \item Solve the modal ODEs by variation of constants or the Laplace transform,
+       and reconstruct the physical field.
+ \item Verify the PDE, both boundary conditions, and all initial conditions.
+\end{enumerate}
+The regularity of the data determines whether these expansions define classical
+solutions or must be interpreted in an integral or weak sense.
+
+\paragraph{Textbook pointers.}
+Nonhomogeneous boundary conditions: p.298. Forced eigenfunction expansion: p.282.
+The worked example above: p.286. Exercises: p.293,
+Problems 3(2),(3), 4(1), and 6(2),(4).
+% Other trailing homework marks are not silently reconstructed from uncertain handwriting.
+
+\end{document}

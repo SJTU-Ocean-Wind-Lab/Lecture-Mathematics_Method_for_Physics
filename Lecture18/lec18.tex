@@ -1,0 +1,386 @@
+% Standalone source. Compile with pdfLaTeX, XeLaTeX, LuaLaTeX or Tectonic.
+% Revised from lec18.pdf and lec20.pdf against the supplied handwritten notes.
+% Main sources: 12.13.pdf pp.7--13; 12.15.pdf pp.4--17.
+% Earlier integral-transform homework belongs to the preceding course unit.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,booktabs,enumitem}
+\usepackage[margin=22mm,headheight=14pt]{geometry}
+\usepackage{tikz,fancyhdr,hyperref}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,patterns}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,
+  pdftitle={Mathematical Methods for Physics -- Lecture 18},pdfauthor={Zhaolong Han}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Mathematical Methods for Physics}
+\fancyhead[R]{\small Lecture 18}\fancyfoot[C]{\thepage}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\setlist{topsep=3pt,itemsep=2pt,parsep=0pt}
+\setlength{\emergencystretch}{1.5em}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+\newif\ifteachernotes\teachernotesfalse % Change to true for optional instructor remarks.
+\newcommand{\teachernote}[1]{\ifteachernotes\par\smallskip
+  \noindent\textit{Instructor note.} #1\par\smallskip\fi}
+\begin{document}
+\begin{center}
+  {\Large\bfseries Mathematical Methods for Physics---Lecture 18}\\[6pt]
+  {\large Physical Models, Data, and Initial-Value Problems}\\[10pt]
+  Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University\\
+  \href{mailto:han.arkey@sjtu.edu.cn}{han.arkey@sjtu.edu.cn}
+\end{center}
+\hrule\medskip
+We first derive the basic equations and explain their initial and boundary data.
+We then study initial-value problems on the whole line: travelling waves for the
+wave equation, followed by the Fourier-transform method for heat conduction.
+Finite-interval problems will be treated in the next lecture.
+
+Throughout, $a>0$ denotes wave speed and $\kappa>0$ thermal diffusivity.
+The alternative heat-equation notation $a^2=K/(\rho c_p)$ corresponds to
+$\kappa$ here; it is distinct from the squared wave speed.
+
+% Source: 12.13.pdf pp.7--8.
+\section{Three Basic Equations}
+For a scalar field $u=u(\mathbf{x},t)$, the three-dimensional Laplacian is
+\begin{equation}
+  \Delta u=u_{xx}+u_{yy}+u_{zz}.
+\end{equation}
+The principal models are
+\begin{align}
+  u_{tt}-a^2\Delta u&=f(\mathbf{x},t)
+     &&\text{(wave equation)},\\
+  u_t-\kappa\Delta u&=f(\mathbf{x},t)
+     &&\text{(heat equation)},\\
+  \Delta u&=f(\mathbf{x})
+     &&\text{(potential equation)}.
+\end{align}
+The source $f$ has a different physical meaning in each model. When $f=0$ the
+equation is homogeneous. The homogeneous potential equation is Laplace's
+equation, and its solutions are harmonic functions. With a source it is a form
+of Poisson's equation.
+
+% Source: 12.13.pdf pp.8--10. The horizontal balance is restored.
+\section{Derivation of the Equations}
+\subsection{Small transverse vibrations of a string}
+Let $u(x,t)$ be the transverse displacement of a taut string. Its uniform
+reference mass per unit length is $\rho_s>0$. Consider a small element with
+endpoints $A$ and $B$, horizontal separation $\Delta x$, arc length $\Delta s$,
+endpoint tensions $T_A,T_B$, and tangent angles $\alpha_A,\alpha_B$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=.95]
+  \draw[->] (-.5,-.25)--(6,-.25) node[right]{$x$};
+  \draw[->] (-.25,-.4)--(-.25,2.5) node[above]{$u$};
+  \draw[thick] (.1,.25)..controls (1,.6) and (1.8,1.2)..(2.15,1.4)
+    ..controls (2.8,1.8) and (3.7,1.95)..(4.2,2.05)
+    ..controls (4.8,2.15) and (5.1,2.15)..(5.45,2.1);
+  \coordinate (A) at (2.15,1.4);\coordinate (B) at (4.2,2.05);
+  \fill (A) circle (1.7pt) node[above left]{$A$};
+  \fill (B) circle (1.7pt) node[above left]{$B$};
+  \draw[blue!65!black,very thick,->] (A)--(1.15,.8) node[below]{$T_A$};
+  \draw[blue!65!black,very thick,->] (B)--(5.25,2.26) node[right]{$T_B$};
+  \draw[dashed] (A)--(2.15,-.25) node[below]{$x$};
+  \draw[dashed] (B)--(4.2,-.25) node[below]{$x+\Delta x$};
+  \draw[densely dotted] (A)--(3.25,1.4);
+  \draw[densely dotted] (B)--(5.35,2.05);
+  \draw[thin] (2.85,1.4) arc[start angle=0,end angle=31,radius=.7];
+  \draw[thin] (4.9,2.05) arc[start angle=0,end angle=11,radius=.7];
+  \node[below] at (2.92,1.38) {$\alpha_A$};
+  \node[below] at (4.91,2.02) {$\alpha_B$};
+  \draw[red!65!black,->,thick] (3.2,1.85)--(3.2,2.65)
+    node[above]{$F\,\Delta x$};
+\end{tikzpicture}
+\end{center}
+Here $F(x,t)$ is an applied transverse force per unit horizontal length.
+For small transverse motion there is no horizontal acceleration to first order:
+\begin{equation}
+ T_B\cos\alpha_B-T_A\cos\alpha_A=0.
+\end{equation}
+The small-slope approximation gives
+\begin{equation}
+ |u_x|\ll1,\qquad \cos\alpha\simeq1,\qquad
+ \sin\alpha\simeq\tan\alpha=u_x,\qquad \Delta s\simeq\Delta x.
+\end{equation}
+Thus $T_A\simeq T_B=T$, a constant to this order. The transverse force balance is
+\begin{equation}
+ T_B\sin\alpha_B-T_A\sin\alpha_A+F(x,t)\Delta x
+       \simeq\rho_s\Delta x\,u_{tt}.
+\end{equation}
+After division by $\Delta x$ and passage to the limit,
+\begin{equation}
+ \rho_su_{tt}=Tu_{xx}+F,\qquad
+ \boxed{u_{tt}-a^2u_{xx}=f,\quad a^2=\frac{T}{\rho_s},\quad f=\frac{F}{\rho_s}.}
+\end{equation}
+The cases $F=0$ and $F\ne0$ describe free and forced vibration. The analogous
+scalar membrane equation in two spatial dimensions uses $u_{xx}+u_{yy}$.
+
+% Source: 12.13.pdf pp.10--13. Q is the explicit source used in the previous PDF.
+\subsection{Heat conduction and energy conservation}
+Let $u$ denote temperature, $K>0$ thermal conductivity, $\rho>0$ density, and
+$c_p>0$ specific heat. Assume these coefficients are constant. Fourier's law is
+\begin{equation}
+ \mathbf{q}=-K\nabla u.
+\end{equation}
+On the surface of a fixed control volume $\Omega$, let $\mathbf n$ be the
+\emph{outward} unit normal. Then $\mathbf q\cdot\mathbf n=-K\partial_nu$ is the
+outward heat flux, so its negative is the inward heat flux.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=.85]
+  \draw[thick,fill=blue!4] (0,0) ellipse (2 and 1.05);
+  \node at (0,.15) {$\Omega$};\node at (-1.6,.8) {$\partial\Omega$};
+  \fill (1.73,.52) circle (1.7pt);
+  \draw[->,thick] (1.73,.52)--(2.75,1.15) node[right]{$\mathbf n$};
+  \draw[->,blue!65!black,thick] (.6,-1.65)--(.35,-.65)
+    node[above right]{heat flow};
+\end{tikzpicture}
+\end{center}
+If $Q$ is heat generated per unit volume per unit time, conservation of energy
+over $[t_1,t_2]$ states
+\begin{align}
+ &\int_\Omega\rho c_p\,[u(\mathbf{x},t_2)-u(\mathbf{x},t_1)]\dd V\notag\\
+ &\qquad=\int_{t_1}^{t_2}\left[
+       -\int_{\partial\Omega}\mathbf q\cdot\mathbf n\dd S
+       +\int_\Omega Q\dd V\right]\dd t.
+\end{align}
+Use the fundamental theorem of calculus on the left and the divergence theorem
+on the right. Since the volume and time interval are arbitrary,
+\begin{equation}
+ \rho c_pu_t=K\Delta u+Q,\qquad
+ \boxed{u_t-\kappa\Delta u=f,\quad
+   \kappa=\frac{K}{\rho c_p},\quad f=\frac{Q}{\rho c_p}.}
+\end{equation}
+The no-source derivation is recovered by setting $Q=0$.
+\teachernote{For spatially varying $K$, replace $K\Delta u$ by
+ $\nabla\cdot(K\nabla u)$ before dividing by $\rho c_p$.}
+
+\subsection{A stationary temperature field}
+If $u_t=0$, steady heat conduction gives $K\Delta u+Q=0$.
+In particular, a source-free stationary field satisfies $\Delta u=0$.
+This connects a potential problem with the steady version of an evolution problem.
+
+% Source: 12.15.pdf pp.5--7.
+\section{Initial and Boundary Data}
+\subsection{Initial-value and initial-boundary-value problems}
+The equation alone does not select a physical solution. The heat equation needs
+one initial condition; the wave equation needs two:
+\begin{align}
+ &u(\mathbf{x},0)=\varphi(\mathbf{x})
+       &&\text{(initial temperature or displacement)},\\
+ &u_t(\mathbf{x},0)=\psi(\mathbf{x})
+       &&\text{(initial velocity for the wave equation)}.
+\end{align}
+We first study \emph{initial-value problems} on the whole line. On a finite
+interval, the initial data must be combined with endpoint conditions: this is an
+\emph{initial-boundary-value problem}, also called a mixed problem here.
+
+\subsection{Three types of boundary conditions}
+With $\partial_nu=\nabla u\cdot\mathbf n$ and $\mathbf n$ outward, the three standard
+conditions are
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Type & Prescribed quantity & Homogeneous case\\
+\midrule
+Dirichlet & $u=g$ & $u=0$\\
+Neumann & $\partial_nu=g$ & $\partial_nu=0$\\
+Robin & $\partial_nu+\sigma u=g$ & $\partial_nu+\sigma u=0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For heat conduction these describe a prescribed surface temperature, a prescribed
+normal derivative (insulation when zero), or heat exchange with the surroundings.
+Newton cooling to temperature $u_\infty$ gives
+\begin{equation}
+ -K\partial_nu=h(u-u_\infty),\qquad
+ \partial_nu+\frac hK u=\frac hK u_\infty,\quad h\ge0.
+\end{equation}
+For the transverse string model, $u=0$ describes a fixed end and $u_x=0$ a free
+transverse end. A restoring spring of stiffness $k_s$ gives
+$T\partial_nu+k_su=0$. On $0<x<\ell$, this means
+\begin{equation}
+ -Tu_x(0,t)+k_su(0,t)=0,\qquad
+ Tu_x(\ell,t)+k_su(\ell,t)=0.
+\end{equation}
+The opposite signs arise because $\partial_n=-\partial_x$ on the left and
+$\partial_n=\partial_x$ on the right.
+\teachernote{This fixes the endpoint orientation consistently. For smooth fixed-end
+ solutions, $\varphi$ and $\psi$ must also satisfy the endpoint conditions; higher
+ smoothness imposes further compatibility conditions.}
+
+% Source: 12.15.pdf pp.7--11, textbook pp.296--298.
+\section{The Wave Equation on the Whole Line}
+\subsection{Characteristic coordinates and travelling waves}
+Consider
+\begin{equation}
+ u_{tt}-a^2u_{xx}=0,\qquad x\in\R.
+\end{equation}
+Introduce $\xi=x+at$, $\eta=x-at$, and write $u(x,t)=U(\xi,\eta)$.
+The chain rule gives
+\begin{align}
+ u_x&=U_\xi+U_\eta,&u_t&=a(U_\xi-U_\eta),\\
+ u_{xx}&=U_{\xi\xi}+2U_{\xi\eta}+U_{\eta\eta},&
+ u_{tt}&=a^2(U_{\xi\xi}-2U_{\xi\eta}+U_{\eta\eta}).
+\end{align}
+Therefore $u_{tt}-a^2u_{xx}=-4a^2U_{\xi\eta}=0$.
+Integrating once in each characteristic coordinate yields
+\begin{equation}\label{eq:travelling}
+ \boxed{u(x,t)=F(x+at)+G(x-at).}
+\end{equation}
+Following a point of constant phase shows that $F(x+at)$ moves left and
+$G(x-at)$ moves right, both at speed $a$.
+
+\subsection{d'Alembert's formula}
+Impose $u(x,0)=\varphi(x)$ and $u_t(x,0)=\psi(x)$. Then
+\begin{equation}
+ F(x)+G(x)=\varphi(x),\qquad F'(x)-G'(x)=\frac{\psi(x)}a.
+\end{equation}
+If $H'=\psi$, the functions can be chosen as
+\begin{equation}
+ F=\frac{\varphi}{2}+\frac{H}{2a},\qquad
+ G=\frac{\varphi}{2}-\frac{H}{2a}.
+\end{equation}
+Substitution into \eqref{eq:travelling} gives
+\begin{equation}\label{eq:dalembert}
+ \boxed{u(x,t)=\frac{\varphi(x+at)+\varphi(x-at)}2
+           +\frac1{2a}\int_{x-at}^{x+at}\psi(s)\dd s.}
+\end{equation}
+For example, $\varphi\in C^2$ and $\psi\in C^1$ suffice for a classical solution.
+At $(x,t)$ only the initial data in $[x-at,x+at]$ can affect the solution.
+
+\paragraph{Example 11.1 (textbook p.298).}
+For $\varphi(x)=x$ and $\psi(x)=\cos x$,
+\begin{equation}
+ u(x,t)=x+\frac{\sin(x+at)-\sin(x-at)}{2a}
+       =x+\frac{\cos x\sin(at)}a.
+\end{equation}
+\teachernote{This is the mathematical example retained from the notes. Applying it
+ literally to the preceding small-slope string model requires appropriate amplitude
+ and length scales. The formula itself does not require finite total energy.}
+
+% Source: 12.15.pdf pp.11--13. The notes refer to the extension (11-20).
+\subsection{Nonhomogeneous waves and a particular solution}
+For $u_{tt}-a^2u_{xx}=f(x,t)$, the source-term extension is
+\begin{align}
+ u(x,t)={}&\frac{\varphi(x+at)+\varphi(x-at)}2
+       +\frac1{2a}\int_{x-at}^{x+at}\psi(s)\dd s\notag\\
+ &+\frac1{2a}\int_0^t\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(s,\tau)\dd s\dd\tau.
+\end{align}
+The source response has zero initial displacement and velocity. Alternatively,
+find a particular solution $W$ of the source equation and put $v=u-W$:
+\begin{equation}
+ v_{tt}-a^2v_{xx}=0,\quad
+ v(x,0)=\varphi(x)-W(x,0),\quad v_t(x,0)=\psi(x)-W_t(x,0).
+\end{equation}
+
+\paragraph{Example 11.3 (textbook p.303).}
+Solve
+\begin{equation}
+ \begin{cases}
+ u_{tt}-u_{xx}=-\sin t,&x\in\R,\ t>0,\\
+ u(x,0)=\cos x,\qquad u_t(x,0)=e^x.
+ \end{cases}
+\end{equation}
+The forcing depends only on time. Taking $W(t)=\sin t$ gives $W''=-\sin t$.
+Thus $v=u-\sin t$ has initial data $\cos x$ and $e^x-1$. With $a=1$,
+\begin{align}
+ v(x,t)&=\frac{\cos(x+t)+\cos(x-t)}2+\frac12\int_{x-t}^{x+t}(e^s-1)\dd s\\
+       &=\cos x\cos t+e^x\sinh t-t.
+\end{align}
+Consequently,
+\begin{equation}
+ \boxed{u(x,t)=\cos x\cos t+e^x\sinh t-t+\sin t.}
+\end{equation}
+Substitution verifies the PDE and both initial conditions.
+
+% Source: 12.15.pdf pp.13--17. Restored immediately after the wave IVP.
+\section{Heat Conduction on the Whole Line}
+\subsection{Fourier transform in space}
+We next consider heat conduction in an infinitely long rod:
+\begin{equation}
+ \begin{cases}
+ u_t-\kappa u_{xx}=f(x,t),&x\in\R,\ t>0,\\
+ u(x,0)=\varphi(x).
+ \end{cases}
+\end{equation}
+Recall the Fourier-transform convention from the preceding course unit:
+\begin{equation}
+ \widehat v(\xi)=\int_{-\infty}^{\infty}v(x)e^{-i\xi x}\dd x,\qquad
+ v(x)=\frac1{2\pi}\int_{-\infty}^{\infty}\widehat v(\xi)e^{i\xi x}\dd\xi.
+\end{equation}
+These inversion formulas are used for data with sufficient regularity and decay.
+Here $\xi$ is a spatial frequency, and $t$ is held as a parameter. Under conditions
+justifying integration by parts and differentiation under the integral,
+\begin{equation}
+ \mathcal F_x[u_{xx}]=-\xi^2\widehat u,\qquad
+ \mathcal F_x[u_t]=\partial_t\widehat u.
+\end{equation}
+Transform \emph{both} the PDE and its initial condition:
+\begin{equation}
+ \partial_t\widehat u+\kappa\xi^2\widehat u=\widehat f(\xi,t),\qquad
+ \widehat u(\xi,0)=\widehat\varphi(\xi).
+\end{equation}
+For each $\xi$, this is a first-order ODE. The integrating factor
+$e^{\kappa\xi^2t}$ gives
+\begin{equation}\label{eq:heattransformed}
+ \widehat u(\xi,t)=e^{-\kappa\xi^2t}\widehat\varphi(\xi)
+     +\int_0^t e^{-\kappa\xi^2(t-\tau)}\widehat f(\xi,\tau)\dd\tau.
+\end{equation}
+
+\subsection{Gaussian transform pair and the heat kernel}
+Recall the Gaussian transform pair
+\begin{equation}
+ \mathcal F[e^{-\beta x^2}](\xi)=\sqrt{\frac\pi\beta}
+                    e^{-\xi^2/(4\beta)},\qquad \beta>0.
+\end{equation}
+Thus
+\begin{equation}
+ \mathcal F^{-1}[e^{-b\xi^2}](x)=\frac1{\sqrt{4\pi b}}e^{-x^2/(4b)},\qquad b>0.
+\end{equation}
+Set $b=\kappa t$. The \emph{heat kernel}, or fundamental solution, is
+\begin{equation}\label{eq:heatkernel}
+ \boxed{G(x,t)=\frac1{\sqrt{4\pi\kappa t}}
+                    \exp\left(-\frac{x^2}{4\kappa t}\right),\quad t>0.}
+\end{equation}
+For positive time, $G_t-\kappa G_{xx}=0$, $G>0$, and
+$\int_\R G(x,t)\dd x=1$.
+
+\subsection{Inversion and the Poisson integral formula}
+Recall spatial convolution and its transform:
+\begin{equation}
+ (v*_x w)(x)=\int_\R v(x-s)w(s)\dd s,\qquad
+ \mathcal F[v*_x w]=\widehat v\,\widehat w.
+\end{equation}
+Invert \eqref{eq:heattransformed} using \eqref{eq:heatkernel}:
+\begin{equation}
+ u(x,t)=(G(\cdot,t)*_x\varphi)(x)
+       +\int_0^t(G(\cdot,t-\tau)*_x f(\cdot,\tau))(x)\dd\tau.
+\end{equation}
+In full integral form,
+\begin{align}
+ u(x,t)={}&\int_\R\frac{e^{-(x-s)^2/(4\kappa t)}}{\sqrt{4\pi\kappa t}}
+                  \varphi(s)\dd s\notag\\
+ &+\int_0^t\int_\R
+  \frac{e^{-(x-s)^2/[4\kappa(t-\tau)]}}{\sqrt{4\pi\kappa(t-\tau)}}
+                  f(s,\tau)\dd s\dd\tau.
+\end{align}
+The source integral uses the limit as $\tau\uparrow t$. For suitable data this
+limit is understood through the convolution. With $f=0$, the formula becomes
+\begin{equation}
+ \boxed{u(x,t)=\frac1{\sqrt{4\pi\kappa t}}\int_\R
+              e^{-(x-s)^2/(4\kappa t)}\varphi(s)\dd s.}
+\end{equation}
+This is the Poisson integral formula for the heat equation (textbook p.309).
+As $t\downarrow0$, it approaches the initial data at continuity points, or in an
+appropriate integral sense. For any $t>0$ the Gaussian weights all spatial points;
+the wave equation instead has a finite interval of dependence.
+
+\section*{From Initial-Value Problems to Mixed Problems}
+Both problems above are posed on $\R$, with no finite endpoints. On $0<x<\ell$,
+the endpoints restrict the admissible spatial shapes. For example,
+\begin{equation}
+ \sin(kx)\cos(akt)=\frac12\{\sin[k(x+at)]+\sin[k(x-at)]\}
+\end{equation}
+is a standing wave made from two counterpropagating waves. Fixed endpoints require
+$\sin(k\ell)=0$, so only certain wave numbers are allowed. This leads to the
+eigenvalue problems and separation of variables in Lecture 19.
+
+\end{document}
