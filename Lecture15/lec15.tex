@@ -1,0 +1,831 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\usepackage{mathtools,longtable,booktabs,array}
+\setlength{\emergencystretch}{2em}
+\allowdisplaybreaks[1]
+\raggedbottom
+\begin{document}
+
+
+\begin{center}
+    {\LARGE \textbf{Mathematical Methods for Physics--Lecture 15}} \\[0.6em]
+    {\large Convolution, Fourier Applications, and Laplace Transforms}
+\end{center}
+
+\vspace{-0.5em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.8em}
+
+\section{Convolution and Fourier Transforms}
+
+\subsection{Definition and Algebraic Properties of Convolution}
+
+\begin{definition}[Convolution]
+
+For two functions \(f_1(t)\) and \(f_2(t)\) defined on
+\((-\infty,+\infty)\), their convolution is defined by
+\[
+(f_1*f_2)(t)
+=\int_{-\infty}^{+\infty}
+f_1(\tau)f_2(t-\tau)\,\mathrm d\tau.
+\]
+
+\end{definition}
+
+\textbf{Algebraic properties}
+\[
+f_1*f_2=f_2*f_1,
+\]
+\[
+f_1*(f_2*f_3)=(f_1*f_2)*f_3,
+\]
+\[
+f_1*(f_2+f_3)=f_1*f_2+f_1*f_3.
+\]
+
+\subsection{The Convolution Theorem}
+
+Let
+\[
+\mathcal F[f_1(t)]=F_1(\omega),
+\qquad
+\mathcal F[f_2(t)]=F_2(\omega).
+\]
+
+\textbf{(1) The Fourier transform of a convolution is the product of the
+transforms}
+\[
+\mathcal F[(f_1*f_2)(t)]
+=\mathcal F[f_1]\cdot\mathcal F[f_2]
+=F_1(\omega)F_2(\omega).
+\]
+
+That is,
+\[
+f_1*f_2
+\ \xleftrightarrow{\mathcal F}\
+F_1F_2.
+\]
+
+\textbf{(2) Fourier transform of a product}
+\[
+\mathcal F[f_1f_2]
+=\frac1{2\pi}\bigl(\mathcal F[f_1]*\mathcal F[f_2]\bigr)
+=\frac1{2\pi}(F_1*F_2).
+\]
+
+\textbf{Proof of (1)}\par\nopagebreak[4]
+\[
+\begin{aligned}
+\mathcal F[(f_1*f_2)(t)]
+&=\int_{-\infty}^{+\infty}
+(f_1*f_2)(t)e^{-i\omega t}\,\mathrm dt\\
+&=\int_{-\infty}^{+\infty}
+\left[
+\int_{-\infty}^{+\infty}
+f_1(\tau)f_2(t-\tau)\,\mathrm d\tau
+\right]e^{-i\omega t}\,\mathrm dt\\
+&=\int_{-\infty}^{+\infty}
+f_1(\tau)
+\left[
+\int_{-\infty}^{+\infty}
+f_2(t-\tau)e^{-i\omega t}\,\mathrm dt
+\right]\mathrm d\tau.
+\end{aligned}
+\]
+
+By the shifting property,
+\[
+\int_{-\infty}^{+\infty}
+f_2(t-\tau)e^{-i\omega t}\,\mathrm dt
+=e^{-i\tau\omega}F_2(\omega).
+\]
+
+Therefore,
+\[
+\begin{aligned}
+\mathcal F[(f_1*f_2)(t)]
+&=\int_{-\infty}^{+\infty}
+f_1(\tau)e^{-i\tau\omega}F_2(\omega)\,\mathrm d\tau\\
+&=F_2(\omega)
+\int_{-\infty}^{+\infty}
+f_1(\tau)e^{-i\tau\omega}\,\mathrm d\tau\\
+&=F_2(\omega)F_1(\omega).
+\end{aligned}
+\]
+
+\subsection{Example: Proving the Integration Property by Convolution}
+
+If
+\[
+\int_{-\infty}^{+\infty}f(t)\,\mathrm dt\ne0,
+\]
+
+then
+\[
+\mathcal F\!\left[
+\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau
+\right]
+=\frac{F(\omega)}{i\omega}
++\pi\delta(\omega)F(0).
+\]
+
+\textbf{Proof}\par\nopagebreak[4]
+First, we show that
+\[
+\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau
+=(f*u)(t),
+\]
+
+where
+\[
+u(t)=
+\begin{cases}
+1,&t>0,\\
+0,&t<0.
+\end{cases}
+\]
+
+Indeed,
+\[
+(f*u)(t)
+=\int_{-\infty}^{+\infty}
+f(\tau)u(t-\tau)\,\mathrm d\tau.
+\]
+
+Let \(t-\tau=\xi\). Then
+\[
+\begin{aligned}
+(f*u)(t)
+&=\int_{+\infty}^{-\infty}
+f(t-\xi)u(\xi)(-\mathrm d\xi)\\
+&=\int_{-\infty}^{+\infty}
+f(t-\xi)u(\xi)\,\mathrm d\xi\\
+&=\int_{-\infty}^{0}0\,\mathrm d\xi
++\int_0^{+\infty}f(t-\xi)\,\mathrm d\xi.
+\end{aligned}
+\]
+
+Now let \(t-\xi=\tau\). We obtain
+\[
+(f*u)(t)
+=\int_t^{-\infty}f(\tau)(-\mathrm d\tau)
+=\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau.
+\]
+
+By the convolution theorem,
+\[
+\begin{aligned}
+\mathcal F\!\left[
+\int_{-\infty}^{t}f(\tau)\,\mathrm d\tau
+\right]
+&=\mathcal F[(f*u)(t)]\\
+&=\mathcal F[f]\cdot\mathcal F[u]\\
+&=F(\omega)
+\left[\frac1{i\omega}+\pi\delta(\omega)\right]\\
+&=\frac{F(\omega)}{i\omega}
++F(\omega)\pi\delta(\omega)\\
+&=\frac{F(\omega)}{i\omega}
++F(0)\pi\delta(\omega).
+\end{aligned}
+\]
+
+\section{Applications of Fourier Transforms}
+
+Fourier transforms can be used for
+
+\begin{enumerate}
+\item
+  Solving differential equations.
+
+\item
+  Solving integral equations.
+
+\end{enumerate}
+
+\subsection{Example 7.20: Solving a Differential Equation}
+
+Solve
+\[
+x''(t)-x(t)=-f(t),
+\qquad -\infty<t<+\infty.
+\]
+
+Assume the boundary conditions
+\[
+x(\pm\infty)=0,
+\qquad
+x'(\pm\infty)=0.
+\]
+
+\textbf{Solution}\par\nopagebreak[4]
+\textbf{Step 1. Take the Fourier transform.}\par\nopagebreak[4]
+Let
+\[
+\mathcal F[x(t)]=\overline X(\omega),
+\qquad
+\mathcal F[f(t)]=F(\omega).
+\]
+
+Taking the Fourier transform of both sides gives
+\[
+\mathcal F[x''(t)-x(t)]=-\mathcal F[f(t)].
+\]
+
+By the differentiation property,
+\[
+(i\omega)^2\overline X(\omega)-\overline X(\omega)
+=-F(\omega),
+\]
+
+Therefore,
+\[
+\overline X(\omega)=\frac{F(\omega)}{\omega^2+1}.
+\]
+
+\textbf{Step 2. Take the inverse Fourier transform.}\par\nopagebreak[4]
+\[
+\begin{aligned}
+x(t)
+&=\mathcal F^{-1}[\overline X(\omega)]\\
+&=\mathcal F^{-1}\!\left[
+F(\omega)\frac1{\omega^2+1}
+\right]\\
+&=\mathcal F^{-1}[F(\omega)]
+*\mathcal F^{-1}\!\left[\frac1{\omega^2+1}\right]\\
+&=f(t)*\left(\frac12e^{-|t|}\right)\\
+&=\frac12\int_{-\infty}^{+\infty}
+f(\tau)e^{-|t-\tau|}\,\mathrm d\tau.
+\end{aligned}
+\]
+
+The transform pair used here is
+\[
+e^{-\beta|t|}
+\ \xleftrightarrow{\mathcal F}\
+\frac{2\beta}{\omega^2+\beta^2},
+\]
+
+It follows that
+\[
+\mathcal F^{-1}\!\left[\frac1{\omega^2+\beta^2}\right]
+=\frac1{2\beta}e^{-\beta|t|},
+\qquad \beta>0.
+\]
+
+\subsection{Example 7.22: Solving a Convolution Integral Equation}
+
+Solve the integral equation
+\[
+\int_{-\infty}^{+\infty}
+e^{-|t-\xi|}x(\xi)\,\mathrm d\xi
+=f(t),
+\]
+
+where \(f(t)\) is known.
+
+\textbf{Analysis.} The left-hand side is a convolution, so the equation
+can be written as
+\[
+e^{-|t|}*x(t)=f(t).
+\]
+
+\textbf{Step 1. Take the Fourier transform.}\par\nopagebreak[4]
+By the convolution theorem,
+\[
+\mathcal F[e^{-|t|}*x(t)]
+=\mathcal F[f(t)],
+\]
+\[
+\mathcal F[e^{-|t|}]\cdot\mathcal F[x(t)]
+=F(\omega).
+\]
+
+That is,
+\[
+\frac2{\omega^2+1}\overline X(\omega)=F(\omega).
+\]
+
+Therefore,
+\[
+\overline X(\omega)
+=\frac{\omega^2+1}{2}F(\omega).
+\]
+
+\textbf{Step 2. Take the inverse Fourier transform.}\par\nopagebreak[4]
+\[
+\begin{aligned}
+x(t)
+&=\mathcal F^{-1}\!\left[
+\frac{\omega^2+1}{2}F(\omega)
+\right]\\
+&=\frac12\left\{
+\mathcal F^{-1}[\omega^2F(\omega)]
++\mathcal F^{-1}[F(\omega)]
+\right\}\\
+&=\frac12\left\{
+-\mathcal F^{-1}[(i\omega)^2F(\omega)]
++f(t)
+\right\}\\
+&=\frac12[-f''(t)+f(t)].
+\end{aligned}
+\]
+
+The differentiation property used here is
+\[
+f''(t)\ \xleftrightarrow{\mathcal F}\
+(i\omega)^2F(\omega),
+\]
+
+with the boundary conditions
+\[
+f(\pm\infty)=0,
+\qquad
+f'(\pm\infty)=0.
+\]
+
+\textbf{In particular}, let
+\[
+f(t)=e^{-|t|}-\frac12e^{-2|t|},
+\]
+
+Substituting into the formula above gives
+\[
+x(t)=\frac34e^{-2|t|}.
+\]
+
+\subsection{Example 7.21: Solving an Integral Equation with a Sine Kernel}
+
+Solve
+\[
+\int_0^{+\infty}x(\omega)\sin\omega t\,\mathrm d\omega
+=e^{-t},
+\qquad t>0.
+\]
+
+\subsubsection*{Review: The Fourier Integral Formula (Inverse Transform)}
+\[
+f(t)=\frac1{2\pi}
+\int_{-\infty}^{+\infty}
+\left[
+\int_{-\infty}^{+\infty}
+f(\tau)e^{-i\omega\tau}\,\mathrm d\tau
+\right]e^{i\omega t}\,\mathrm d\omega.
+\]
+
+\textbf{Special cases}
+
+\textbf{(I) Even functions}
+
+If \(f(-t)=f(t)\), then
+\[
+f(t)=\frac2\pi
+\int_0^{+\infty}
+\left[
+\int_0^{+\infty}
+f(\tau)\cos\omega\tau\,\mathrm d\tau
+\right]\cos\omega t\,\mathrm d\omega.
+\]
+
+This is called the \textbf{Fourier cosine integral formula}.
+
+\textbf{(II) Odd functions}
+
+If \(f(-t)=-f(t)\), then
+\[
+f(t)=\frac2\pi
+\int_0^{+\infty}
+\left[
+\int_0^{+\infty}
+f(\tau)\sin\omega\tau\,\mathrm d\tau
+\right]\sin\omega t\,\mathrm d\omega.
+\]
+
+This is called the \textbf{Fourier sine integral formula}.
+
+\subsubsection*{Return to the Integral Equation}
+
+From
+\[
+\int_0^{+\infty}x(\omega)\sin\omega t\,\mathrm d\omega=e^{-t},
+\]
+
+we obtain
+\[
+\frac2\pi\int_0^{+\infty}
+x(\omega)\sin\omega t\,\mathrm d\omega
+=\frac2\pi e^{-t}.
+\]
+
+The Fourier sine integral formula gives
+\[
+x(\omega)=\int_0^{+\infty}
+\frac2\pi e^{-t}\sin\omega t\,\mathrm dt.
+\]
+
+The integral can be evaluated in either of two ways.
+
+\begin{enumerate}
+\item
+  Method 1: integrate by parts twice.
+
+\item
+  Method 2: use Euler's formula,
+
+\end{enumerate}
+\[
+\sin\omega t=\frac{e^{i\omega t}-e^{-i\omega t}}{2i}.
+\]
+
+Both methods give
+\[
+\int_0^{+\infty}e^{-t}\sin\omega t\,\mathrm dt
+=\frac{\omega}{1+\omega^2},
+\qquad
+x(\omega)=\frac{2\omega}{\pi(1+\omega^2)}.
+\]
+
+\section{The Laplace Transform}
+
+\subsection{Definition of the Laplace Transform}
+
+\begin{definition}[Laplace transform]
+For a function \(f(t)\) defined on \([0,+\infty)\), define
+\[
+F(p)=\int_0^{+\infty}f(t)e^{-pt}\,\mathrm dt,
+\]
+
+where
+\[
+p=\sigma+i\omega
+\]
+
+is a complex variable.
+
+The pair \(\{f(t),F(p)\}\) is called a Laplace transform pair. We write
+\[
+\mathcal L[f(t)]=F(p),
+\]
+
+or
+\[
+\mathcal L^{-1}[F(p)]=f(t).
+\]
+
+\end{definition}
+
+\subsection{Functions of Exponential Order and the Existence Theorem}
+
+\begin{definition}[Exponential order]
+If there exist constants \(M>0\) and \(\sigma_c\ge0\) such that
+\[
+|f(t)|\le Me^{\sigma_ct},
+\]
+
+then \(f(t)\) is said to be of exponential order, and \(\sigma_c\) is
+its growth exponent. The bound is assumed for \(t\ge0\).
+\end{definition}
+
+\begin{theorem}[Existence of the Laplace transform]
+
+Suppose that \(f(t)\), defined on \([0,+\infty)\), satisfies the
+following conditions.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(f(t)\) satisfies the Dirichlet conditions on every finite interval.
+
+\item
+  \(f(t)\) is of exponential order, that is,
+  \(|f(t)|\le Me^{\sigma_ct}\).
+
+\end{enumerate}
+
+Then the Laplace transform
+\[
+F(p)=\int_0^{+\infty}f(t)e^{-pt}\,\mathrm dt
+\]
+
+exists and is analytic in the right half-plane
+\[
+\operatorname{Re}p>\sigma_c.
+\]
+\end{theorem}
+
+\subsubsection*{Proof: Absolute Convergence}
+
+Since
+\[
+|f(t)|\le Me^{\sigma_ct}
+\]
+
+and
+\[
+|e^{-pt}|
+=|e^{-\sigma t}e^{-i\omega t}|
+=e^{-\sigma t},
+\]
+
+for \(\sigma>\sigma_c\) we have
+\[
+\begin{aligned}
+\int_0^{+\infty}|f(t)e^{-pt}|\,\mathrm dt
+&\le\int_0^{+\infty}Me^{\sigma_ct}|e^{-pt}|\,\mathrm dt\\
+&=\int_0^{+\infty}Me^{-(\sigma-\sigma_c)t}\,\mathrm dt\\
+&=\left.
+M\frac{e^{-(\sigma-\sigma_c)t}}{-(\sigma-\sigma_c)}
+\right|_0^{+\infty}\\
+&=\frac{M}{\sigma-\sigma_c}.
+\end{aligned}
+\]
+
+Therefore, the improper integral
+\[
+\int_0^{+\infty}f(t)e^{-pt}\,\mathrm dt
+\]
+
+exists and converges absolutely.
+
+\subsubsection*{Proof: Analyticity}
+
+Both the defining integral and
+\[
+\int_0^{+\infty}
+f(t)\frac{\partial}{\partial p}(e^{-pt})\,\mathrm dt
+\]
+
+converge locally uniformly in \(\operatorname{Re}p>\sigma_c\), allowing
+differentiation with respect to the parameter \(p\).
+\[
+\begin{aligned}
+F'(p)
+&=\frac{\mathrm d}{\mathrm dp}
+\int_0^{+\infty}f(t)e^{-pt}\,\mathrm dt\\
+&=\int_0^{+\infty}
+f(t)\frac{\partial}{\partial p}(e^{-pt})\,\mathrm dt\\
+&=\int_0^{+\infty}(-t)f(t)e^{-pt}\,\mathrm dt.
+\end{aligned}
+\]
+
+Hence \(F(p)\) is analytic in \(\operatorname{Re}p>\sigma_c\).
+
+\subsection{Common Laplace Transform Pairs}
+
+\subsubsection*{The Unit Step Function}
+\[
+u(t)\ \xleftrightarrow{\mathcal L}\ \frac1p,
+\qquad \operatorname{Re}p>0.
+\]
+
+Since
+\[
+\begin{aligned}
+\mathcal L[u(t)]
+&=\int_0^{+\infty}1\cdot e^{-pt}\,\mathrm dt\\
+&=\left.\frac{e^{-pt}}{-p}\right|_0^{+\infty}\\
+&=\frac1p.
+\end{aligned}
+\]
+
+\subsubsection*{Power Functions}
+
+Similarly,
+\[
+\begin{aligned}
+\mathcal L[t]
+&=\int_0^{+\infty}te^{-pt}\,\mathrm dt\\
+&=\int_0^{+\infty}t\,\mathrm d\!\left(\frac{e^{-pt}}{-p}\right)\\
+&=\left.-\frac{te^{-pt}}p\right|_0^{+\infty}
++\int_0^{+\infty}\frac{e^{-pt}}p\,\mathrm dt\\
+&=0+\left.\frac{e^{-pt}}{-p^2}\right|_0^{+\infty}\\
+&=\frac1{p^2}.
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\mathcal L[t^2]
+&=\int_0^{+\infty}t^2e^{-pt}\,\mathrm dt\\
+&=\left.t^2\frac{e^{-pt}}{-p}\right|_0^{+\infty}
+-\int_0^{+\infty}\frac{e^{-pt}}{-p}\,2t\,\mathrm dt\\
+&=\frac2p\cdot\frac1{p^2}\\
+&=\frac{2!}{p^3}.
+\end{aligned}
+\]
+
+Generalizing gives
+\[
+\mathcal L[t^n]=\frac{n!}{p^{n+1}},
+\]
+
+That is,
+\[
+t^n\ \xleftrightarrow{\mathcal L}\
+\frac{n!}{p^{n+1}},
+\qquad n=0,1,2,\ldots,\quad \operatorname{Re}p>0.
+\]
+
+\subsubsection*{An Exponential Function}
+\[
+e^{at}\ \xleftrightarrow{\mathcal L}\ \frac1{p-a},
+\]
+
+where \(a\) is a constant.
+\[
+\begin{aligned}
+\mathcal L[e^{at}]
+&=\int_0^{+\infty}e^{at}e^{-pt}\,\mathrm dt\\
+&=\left.\frac{e^{(a-p)t}}{a-p}\right|_0^{+\infty}\\
+&=\frac1{p-a},
+\end{aligned}
+\]
+
+The convergence condition is
+\[
+\operatorname{Re}(a-p)<0
+\quad\Longleftrightarrow\quad
+\operatorname{Re}p>\operatorname{Re}a.
+\]
+
+\subsubsection*{Trigonometric and Hyperbolic Functions}
+
+For real \(\beta\), the trigonometric pairs converge for \(\operatorname{Re}p>0\);
+the hyperbolic pairs converge for \(\operatorname{Re}p>|\beta|\).
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.65}
+\everymath{\displaystyle}
+\begin{longtable}{@{}p{0.29\textwidth}p{0.65\textwidth}@{}}
+\toprule
+Function & Laplace transform \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\(\sin\beta t\) & \(\dfrac{\beta}{p^2+\beta^2}\) \\
+\(\cos\beta t\) & \(\dfrac{p}{p^2+\beta^2}\) \\
+\(\sinh\beta t\) & \(\dfrac{\beta}{p^2-\beta^2}\) \\
+\(\cosh\beta t\) & \(\dfrac{p}{p^2-\beta^2}\) \\
+\end{longtable}
+\endgroup
+
+\textbf{Derivation for the sine function}
+\[
+\begin{aligned}
+\mathcal L[\sin\beta t]
+&=\mathcal L\!\left[
+\frac{e^{i\beta t}-e^{-i\beta t}}{2i}
+\right]\\
+&=\frac1{2i}\left\{
+\mathcal L[e^{i\beta t}]
+-\mathcal L[e^{-i\beta t}]
+\right\}\\
+&=\frac1{2i}\left[
+\frac1{p-i\beta}-\frac1{p+i\beta}
+\right]\\
+&=\frac1{2i}\cdot\frac{2i\beta}{p^2+\beta^2}\\
+&=\frac{\beta}{p^2+\beta^2}.
+\end{aligned}
+\]
+
+\section{Properties of the Laplace Transform}
+
+\subsection{Linearity}
+\[
+\mathcal L[af_1+bf_2]
+=a\mathcal L[f_1]+b\mathcal L[f_2].
+\]
+\[
+\mathcal L^{-1}[aF_1+bF_2]
+=a\mathcal L^{-1}[F_1]+b\mathcal L^{-1}[F_2].
+\]
+
+\subsubsection*{Example: Find the Inverse Laplace Transform}
+\[
+\mathcal L^{-1}\!\left[
+\frac{p}{(p-1)(p^2+4)}
+\right].
+\]
+
+First, decompose the expression into partial fractions.
+\[
+\begin{aligned}
+\frac{p}{(p-1)(p^2+4)}
+&=\frac{A}{p-1}+\frac{Bp+C}{p^2+4}\\
+&=\frac{1/5}{p-1}
++\frac{-p/5+4/5}{p^2+4}.
+\end{aligned}
+\]
+
+Therefore,
+\[
+\begin{aligned}
+\mathcal L^{-1}\!\left[
+\frac{p}{(p-1)(p^2+4)}
+\right]
+&=\frac15\mathcal L^{-1}\!\left[\frac1{p-1}\right]
+-\frac15\mathcal L^{-1}\!\left[\frac{p}{p^2+4}\right]\\
+&\quad+\frac45\mathcal L^{-1}\!\left[\frac1{p^2+4}\right]\\
+&=\frac15e^t-\frac15\cos2t+\frac25\sin2t.
+\end{aligned}
+\]
+
+The transform pairs used are
+\[
+e^{at}\ \xleftrightarrow{\mathcal L}\ \frac1{p-a},
+\]
+\[
+\cos at\ \xleftrightarrow{\mathcal L}\ \frac{p}{p^2+a^2},
+\]
+\[
+\sin at\ \xleftrightarrow{\mathcal L}\ \frac{a}{p^2+a^2}.
+\]
+
+\subsection{Scaling}
+
+Let
+\[
+f(t)\ \xleftrightarrow{\mathcal L}\ F(p).
+\]
+
+then
+\[
+f(at)\ \xleftrightarrow{\mathcal L}\
+\frac1aF\!\left(\frac pa\right),
+\qquad a>0.
+\]
+
+and
+\[
+\frac1a f\!\left(\frac ta\right)
+\ \xleftrightarrow{\mathcal L}\
+F(ap).
+\]
+
+\subsection{Time Delay}
+
+For \(t_0\ge0\),
+\[
+f(t-t_0)u(t-t_0)
+\ \xleftrightarrow{\mathcal L}\
+e^{-pt_0}F(p).
+\]
+
+That is,
+\[
+\mathcal L[f(t-t_0)u(t-t_0)]
+=e^{-pt_0}F(p),
+\]
+
+and
+\[
+\mathcal L^{-1}[e^{-pt_0}F(p)]
+=f(t-t_0)u(t-t_0).
+\]
+
+\subsection{Shifting in the Transform Variable}
+\[
+e^{p_0t}f(t)
+\ \xleftrightarrow{\mathcal L}\
+F(p-p_0).
+\]
+
+\textbf{Proof.} From the definition,
+\[
+\begin{aligned}
+\mathcal L[e^{p_0t}f(t)]
+&=\int_0^{+\infty}f(t)e^{p_0t}e^{-pt}\,\mathrm dt\\
+&=\int_0^{+\infty}f(t)e^{-(p-p_0)t}\,\mathrm dt\\
+&=F(p-p_0).
+\end{aligned}
+\]
+\end{document}
