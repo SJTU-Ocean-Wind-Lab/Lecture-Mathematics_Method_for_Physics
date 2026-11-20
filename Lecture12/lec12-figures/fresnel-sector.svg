@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="438" height="224" viewBox="43 34 438 224" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Sector contour for the Fresnel integrals</title>
+  <desc id="dsc">Closed sector contour C = OA + C_R + BO in the first quadrant: O to A along the real axis, the arc C_R of radius R from A to B, then back to O along the ray at angle pi/4.</desc>
+  <rect width="500" height="270" fill="#ffffff"/>
+  <defs>
+    <marker id="aInk" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#1f2a37"/></marker>
+    <marker id="aRef" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#9aa7b4"/></marker>
+  </defs>
+  <style>
+    .c   { fill:none; stroke:#1f2a37; stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round; }
+    .ref { fill:none; stroke:#9aa7b4; stroke-width:1.35; stroke-linecap:round; }
+    .lbl { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:30px; fill:#1f2a37; }
+    .sub { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:23px; fill:#1f2a37; }
+    .mut { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:23px; fill:#7c8a99; }
+  </style>
+
+  <!-- real axis beyond A -->
+  <path class="ref" d="M282,222 H440" marker-end="url(#aRef)"/>
+
+  <!-- ray beyond B -->
+  <path class="ref" d="M220.5,73.5 L246,48" marker-end="url(#aRef)"/>
+
+  <!-- contour: O -> A along the real axis -->
+  <path class="c" d="M72,222 L200,222 L282,222" marker-mid="url(#aInk)"/>
+
+  <!-- contour: arc C_R from A to B (counterclockwise) -->
+  <path class="c" d="M282,222 A210,210 0 0 0 250.1,110.7 A210,210 0 0 0 220.5,73.5"
+        marker-mid="url(#aInk)"/>
+
+  <!-- contour: B -> O along the ray -->
+  <path class="c" d="M220.5,73.5 L146.2,147.7 L72,222" marker-mid="url(#aInk)"/>
+
+  <!-- angle mark -->
+  <path class="ref" d="M127,222 A55,55 0 0 0 110.9,183.1"/>
+
+  <!-- points -->
+  <g fill="#1f2a37">
+    <circle cx="72" cy="222" r="2.6"/>
+    <circle cx="282" cy="222" r="2.6"/>
+    <circle cx="220.5" cy="73.5" r="2.6"/>
+  </g>
+
+  <!-- labels -->
+  <text class="lbl" x="52" y="246" >O</text>
+  <text class="lbl" x="282" y="248" text-anchor="middle">A</text>
+  <text class="lbl" x="208" y="62" text-anchor="end">B</text>
+  <text class="mut" x="134" y="208">&#952; = &#960;/4</text>
+  <text class="sub" x="292" y="128">C<tspan dy="4">R</tspan></text>
+  <text class="mut" x="446" y="229">+&#8734;</text>
+</svg>

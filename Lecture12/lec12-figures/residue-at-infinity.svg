@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="284" height="321" viewBox="73 11 284 321" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Residue at infinity: the same circle traversed in both directions</title>
+  <desc id="dsc">One circle about the origin carrying two arrows that leave the top point in opposite senses: counterclockwise for C and clockwise for C-bar. Isolated singularities lie inside, accumulating at the origin.</desc>
+  <rect x="0" y="0" width="400" height="380" fill="#ffffff"/>
+  <defs>
+    <marker id="aInk" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#1f2a37"/></marker>
+  </defs>
+  <style>
+    .c   { fill:none; stroke:#1f2a37; stroke-width:2.1; stroke-linecap:round; }
+    .lbl { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:20px; fill:#1f2a37; }
+  </style>
+
+  <!-- singularities inside the circle, accumulating at the origin -->
+  <g fill="#1f2a37">
+    <circle cx="230" cy="176" r="2"/>
+    <circle cx="200" cy="182" r="2"/>
+    <circle cx="222" cy="196" r="2"/>
+    <circle cx="188" cy="204" r="2"/>
+    <circle cx="240" cy="210" r="2"/>
+    <circle cx="166" cy="190" r="2"/>
+    <circle cx="210" cy="164" r="2"/>
+    <circle cx="256" cy="196" r="2"/>
+    <circle cx="196" cy="222" r="2"/>
+    <circle cx="232" cy="232" r="2"/>
+  </g>
+
+  <!-- the circle -->
+  <path class="c" d="M85,190 A130,130 0 1 0 345,190 A130,130 0 1 0 85,190"/>
+
+  <!-- counterclockwise: C -->
+  <path class="c" d="M215,60 A130,130 0 0 0 181.4,64.4" marker-end="url(#aInk)"/>
+
+  <!-- clockwise: C-bar -->
+  <path class="c" d="M215,60 A130,130 0 0 1 248.6,64.4" marker-end="url(#aInk)"/>
+
+  <!-- labels -->
+  <text class="lbl" x="152" y="42">C</text>
+  <text class="lbl" x="262" y="42">C</text>
+  <line x1="262" y1="23" x2="278" y2="23" stroke="#1f2a37" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

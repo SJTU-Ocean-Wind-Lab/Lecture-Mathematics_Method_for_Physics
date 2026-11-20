@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="494" height="250" viewBox="33 8 494 250" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Indented upper half-plane contour around the origin</title>
+  <desc id="dsc">Closed contour C = A M + C_r + N B + C_R. Large upper semicircle C_R of radius R runs from B to A; small upper semicircle C_r of radius r runs from M=-r to N=r, bypassing the origin O.</desc>
+  <rect width="560" height="260" fill="#ffffff"/>
+  <defs>
+    <marker id="aInk" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#1f2a37"/></marker>
+    <marker id="aRef" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#9aa7b4"/></marker>
+  </defs>
+  <style>
+    .c   { fill:none; stroke:#1f2a37; stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round; }
+    .ref { fill:none; stroke:#9aa7b4; stroke-width:1.35; stroke-linecap:round; }
+    .lbl { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:26px; fill:#1f2a37; }
+    .sub { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:19px; fill:#1f2a37; }
+    .mut { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:19px; fill:#7c8a99; }
+  </style>
+
+  <!-- real axis, drawn light outside the contour -->
+  <path class="ref" d="M44,180 H140" marker-start="url(#aRef)"/>
+  <path class="ref" d="M258,180 H342"/>
+  <path class="ref" d="M460,180 H516" marker-end="url(#aRef)"/>
+
+  <!-- contour: A -> M, N -> B along the axis -->
+  <path class="c" d="M140,180 L196,180 L258,180" marker-mid="url(#aInk)"/>
+  <path class="c" d="M342,180 L406,180 L460,180" marker-mid="url(#aInk)"/>
+
+  <!-- contour: large arc C_R from B to A (counterclockwise) -->
+  <path class="c" d="M460,180 A160,160 0 0 0 380,41.4 A160,160 0 0 0 220,41.4 A160,160 0 0 0 140,180"
+        marker-mid="url(#aInk)"/>
+
+  <!-- contour: small arc C_r from M to N (clockwise) -->
+  <path class="c" d="M258,180 A42,42 0 0 1 329.7,150.3 A42,42 0 0 1 342,180"
+        marker-mid="url(#aInk)"/>
+
+  <!-- points -->
+  <g fill="#1f2a37">
+    <circle cx="140" cy="180" r="2.6"/>
+    <circle cx="258" cy="180" r="2.6"/>
+    <circle cx="342" cy="180" r="2.6"/>
+    <circle cx="460" cy="180" r="2.6"/>
+    <circle cx="300" cy="180" r="2.6"/>
+  </g>
+
+  <!-- labels -->
+  <text class="lbl" x="140" y="218" text-anchor="middle">A</text>
+  <text class="lbl" x="258" y="218" text-anchor="middle">M</text>
+  <text class="lbl" x="300" y="218" text-anchor="middle">O</text>
+  <text class="lbl" x="342" y="218" text-anchor="middle">N</text>
+  <text class="lbl" x="460" y="218" text-anchor="middle">B</text>
+
+  <text class="mut" x="126" y="248" text-anchor="end">&#8722;R</text>
+  <text class="mut" x="246" y="248" text-anchor="end">&#8722;r</text>
+  <text class="mut" x="354" y="248" text-anchor="start">r</text>
+  <text class="mut" x="474" y="248" text-anchor="start">R</text>
+
+  <text class="sub" x="352" y="140">C<tspan dy="4">r</tspan></text>
+  <text class="sub" x="466" y="62" font-size="12">C<tspan dy="4">R</tspan></text>
+</svg>

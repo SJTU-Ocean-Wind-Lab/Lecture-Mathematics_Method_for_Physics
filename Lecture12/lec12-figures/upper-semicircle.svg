@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="250" viewBox="0 15 540 250" role="img" aria-labelledby="title description">
+  <title id="title">Upper semicircular contour</title>
+  <desc id="description">The directed real segment runs from A at minus R to B at R. The upper semicircle C_R returns from B to A counterclockwise. The upper-half-plane poles z_1 and z_k are inside.</desc>
+  <rect width="540" height="270" fill="#fff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1L10 5L0 9Z" fill="#1f2a37"/>
+    </marker>
+    <marker id="axis-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1L10 5L0 9Z" fill="#8997a5"/>
+    </marker>
+  </defs>
+  <style>
+    .arc { fill:none; stroke:#1f2a37; stroke-width:2.4; stroke-linecap:round; }
+    .axis { fill:none; stroke:#8997a5; stroke-width:1.6; }
+    .label { fill:#1f2a37; font:italic 25px Georgia,"Times New Roman",serif; text-anchor:middle; }
+    .muted { fill:#526576; font-size:22px; }
+    .pole { fill:#aa3629; font-size:23px; }
+  </style>
+  <path class="axis" d="M32 204H120" marker-start="url(#axis-arrow)"/>
+  <path class="axis" d="M420 204H508" marker-end="url(#axis-arrow)"/>
+  <path class="arc" d="M120 204H232H420" marker-mid="url(#arrow)"/>
+  <path class="arc" d="M420 204A150 150 0 0 0 270 54A150 150 0 0 0 120 204" marker-mid="url(#arrow)"/>
+  <g fill="#1f2a37">
+    <circle cx="120" cy="204" r="3"/>
+    <circle cx="270" cy="204" r="3"/>
+    <circle cx="420" cy="204" r="3"/>
+  </g>
+  <g fill="#aa3629">
+    <circle cx="239" cy="101" r="3.5"/>
+    <circle cx="307" cy="144" r="3.5"/>
+  </g>
+  <g class="label">
+    <text x="120" y="228">A</text>
+    <text x="270" y="228">O</text>
+    <text x="420" y="228">B</text>
+    <text x="120" y="255" class="muted">−R</text>
+    <text x="420" y="255" class="muted">R</text>
+    <text x="35" y="228" class="muted">−∞</text>
+    <text x="505" y="228" class="muted">+∞</text>
+    <text x="397" y="98">C<tspan baseline-shift="sub" font-size="16">R</tspan></text>
+    <text x="260" y="105" class="pole">z<tspan baseline-shift="sub" font-size="15">1</tspan></text>
+    <text x="330" y="148" class="pole">z<tspan baseline-shift="sub" font-size="15">k</tspan></text>
+  </g>
+</svg>

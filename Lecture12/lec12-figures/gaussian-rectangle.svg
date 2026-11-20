@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="564" height="314" viewBox="23 44 564 314" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Rectangular contour for shifting the Gaussian integral</title>
+  <desc id="dsc">Rectangle A_R to B_R to M_R to N_R to A_R. Its top side is the segment of the real axis from R to -R traversed leftwards, the bottom side is the line L at Im z = -h.</desc>
+  <rect width="600" height="420" fill="#ffffff"/>
+  <defs>
+    <marker id="aInk" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#1f2a37"/></marker>
+    <marker id="aRef" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#9aa7b4"/></marker>
+    <marker id="aAcc" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#c0392b"/></marker>
+  </defs>
+  <style>
+    .c   { fill:none; stroke:#1f2a37; stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round; }
+    .ref { fill:none; stroke:#9aa7b4; stroke-width:1.35; stroke-linecap:round; }
+    .acc { fill:none; stroke:#c0392b; stroke-width:1.9; stroke-linecap:round; }
+    .lbl { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:31px; fill:#1f2a37; }
+    .mut { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:23px; fill:#7c8a99; }
+    .alp { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:23px; fill:#c0392b; }
+  </style>
+
+  <!-- imaginary axis -->
+  <path class="c" d="M290,292 V56" marker-end="url(#aInk)"/>
+
+  <!-- real axis beyond the rectangle -->
+  <path class="ref" d="M34,180 H114" marker-start="url(#aRef)"/>
+  <path class="ref" d="M466,180 H566" marker-end="url(#aRef)"/>
+
+  <!-- top side: R -> -R -->
+  <path class="c" d="M466,180 L230,180 L114,180" marker-mid="url(#aInk)"/>
+
+  <!-- left side: N -> A (downwards) -->
+  <path class="c" d="M114,180 L114,236 L114,292" marker-mid="url(#aInk)"/>
+
+  <!-- right side: B -> M (upwards) -->
+  <path class="c" d="M466,292 L466,236 L466,180" marker-mid="url(#aInk)"/>
+
+  <!-- line L: light beyond the rectangle, red where it belongs to the contour -->
+  <path class="ref" d="M44,292 H114" marker-start="url(#aRef)"/>
+  <path class="acc" d="M114,292 L390,292 L466,292" marker-mid="url(#aAcc)"/>
+  <path class="ref" d="M466,292 H576" marker-end="url(#aRef)"/>
+
+  <!-- points -->
+  <g fill="#1f2a37">
+    <circle cx="290" cy="180" r="2.6"/>
+    <circle cx="114" cy="180" r="2.6"/>
+    <circle cx="466" cy="180" r="2.6"/>
+    <circle cx="114" cy="292" r="2.6"/>
+    <circle cx="466" cy="292" r="2.6"/>
+  </g>
+
+  <!-- labels -->
+  <text class="lbl" x="114" y="168" text-anchor="middle">N</text>
+  <text class="lbl" x="466" y="168" text-anchor="middle">M</text>
+  <text class="lbl" x="274" y="168" text-anchor="end">O</text>
+
+  <text class="mut" x="102" y="198" text-anchor="end">&#8722;R</text>
+  <text class="mut" x="478" y="198" text-anchor="start">R</text>
+  <text class="mut" x="60" y="170">&#8722;&#8734;</text>
+  <text class="mut" x="556" y="170" text-anchor="end">+&#8734;</text>
+
+  <text class="lbl" x="114" y="318" text-anchor="middle">A</text>
+  <text class="lbl" x="466" y="318" text-anchor="middle">B</text>
+  <text class="alp" x="556" y="318" text-anchor="middle">L</text>
+  <text class="alp" x="44" y="348">Im z = &#8722;h</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="517" height="181" viewBox="32 21 517 181" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Horizontal line L below the real axis, oriented to the right</title>
+  <desc id="dsc">The real axis of the z-plane and, parallel to it below, the line L traversed from left to right.</desc>
+  <rect width="560" height="240" fill="#ffffff"/>
+  <defs>
+    <marker id="aInk" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#1f2a37"/></marker>
+    <marker id="aAcc" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 Z" fill="#c0392b"/></marker>
+  </defs>
+  <style>
+    .c   { fill:none; stroke:#1f2a37; stroke-width:2.1; stroke-linecap:round; }
+    .acc { fill:none; stroke:#c0392b; stroke-width:1.9; stroke-linecap:round; }
+    .lbl { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:26px; fill:#1f2a37; }
+    .alp { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:26px; fill:#c0392b; }
+  </style>
+
+  <!-- imaginary axis -->
+  <path class="c" d="M140,186 V52" marker-end="url(#aInk)"/>
+
+  <!-- real axis -->
+  <path class="c" d="M44,96 H516" marker-end="url(#aInk)"/>
+
+  <!-- line L -->
+  <path class="acc" d="M44,186 H516" marker-end="url(#aAcc)"/>
+
+  <!-- origin -->
+  <circle cx="140" cy="96" r="2.6" fill="#1f2a37"/>
+
+  <!-- labels -->
+  <text class="lbl" x="124" y="90" text-anchor="end">O</text>
+  <text class="lbl" x="524" y="102">x</text>
+  <text class="lbl" x="148" y="44">y</text>
+  <text class="alp" x="524" y="192">L</text>
+</svg>
