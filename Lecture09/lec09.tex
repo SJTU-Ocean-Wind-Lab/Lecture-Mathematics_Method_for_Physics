@@ -1,0 +1,470 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+% --- Page margins and paragraphs ---
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+
+% --- Basic math and typesetting ---
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor} %
+
+% --- Theorem and definition environments ---
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\usepackage{mathtools,booktabs,enumitem,graphicx,url}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\setlist{topsep=4pt,itemsep=3pt,parsep=0pt}
+\raggedbottom
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\C}{\mathbb{C}}
+
+\begin{document}
+
+% ==================================================
+% Title and author information
+% ==================================================
+\begin{center}
+    {\LARGE \textbf{Mathematics Method for Physics--Lecture 9}} \\[0.6em]
+    {\large Laurent Series and Singularities}
+\end{center}
+
+\vspace{-0.5em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.3em}
+
+\begin{center}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University;
+\end{center}
+
+\vspace{-0.6em}
+\noindent Email: han.arkey@sjtu.edu.cn
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.8em}
+
+Taylor series describe holomorphic functions on disks. When the
+center is excluded, negative powers become necessary and the natural
+region is an annulus. Laurent's theorem gives the expansion and its
+unique coefficients. The principal part then distinguishes removable
+singularities, poles and essential singularities. Finally, the local
+coordinate $w=1/z$ brings the point at infinity into the same picture.
+
+\section{Recap: Taylor Expansions and Their Domains}
+If $f$ is holomorphic near $z_0$, then
+\begin{equation}\label{eq:01}
+f(z)=\sum_{n=0}^{\infty}\frac{f^{(n)}(z_0)}{n!}(z-z_0)^n,
+ \qquad
+ \frac{f^{(n)}(z_0)}{n!}
+  =\frac1{2\pi \mathrm{i}}\oint_C
+             \frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\dd\zeta.
+\end{equation}
+Here $C$ is a small counterclockwise circle inside the region of
+holomorphy. The expansion is unique.
+
+\textbf{Remark.} The series represents $f$ throughout any disk centered at $z_0$ in which
+$f$ is holomorphic. For the rational examples below, its exact radius is
+the distance to the nearest pole. In general, the radius is limited by a
+singularity of the holomorphic continuation, not by an arbitrarily chosen
+boundary of the original domain.
+
+\section{From Disks to Annuli}
+A Taylor series contains only nonnegative powers. \begin{definition}[Laurent series]
+An annulus
+\begin{equation}\label{eq:02}
+A\coloneqq\{z:r<|z-z_0|<R\}
+\end{equation}
+need not contain its center, so negative powers are natural:
+\begin{equation}\label{eq:03}
+\sum_{n=-\infty}^{\infty}c_n(z-z_0)^n
+ =\underbrace{\sum_{n=1}^{\infty}\frac{c_{-n}}{(z-z_0)^n}}
+              _{\text{principal part}}
+  +\underbrace{\sum_{n=0}^{\infty}c_n(z-z_0)^n}
+              _{\text{regular part}}.
+\end{equation}
+This means that the two one-sided series converge separately.
+\end{definition}
+
+
+The regular part converges inside some disk $|z-z_0|<R$. For the
+principal part, set $w\coloneqq1/(z-z_0)$:
+\begin{equation}\label{eq:04}
+\sum_{n=1}^{\infty}\frac{c_{-n}}{(z-z_0)^n}
+ =\sum_{n=1}^{\infty}c_{-n}w^n.
+\end{equation}
+If this series has radius $\rho$, it converges for
+$|z-z_0|>1/\rho$. The common region is therefore an annulus
+$r<|z-z_0|<R$, with $r=1/\rho$. It is nonempty only when $r<R$.
+The limiting cases $r=0$ and $R=\infty$ are allowed.
+The sum is holomorphic in that annulus.
+
+\section{Laurent's Theorem}
+\begin{theorem}[Laurent's theorem]
+Let $0\leq r<R\leq\infty$. If $f$ is holomorphic in $r<|z-z_0|<R$, then
+\begin{equation}\label{eq:05}
+\boxed{f(z)=\sum_{n=-\infty}^{\infty}c_n(z-z_0)^n}
+\end{equation}
+throughout that annulus, and this expansion is unique. Its coefficients are
+\begin{equation}\label{eq:06}
+\boxed{c_n\coloneqq \frac1{2\pi \mathrm{i}}\oint_{|\zeta-z_0|=\rho}
+             \frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\dd\zeta,
+       \qquad n\in\mathbb Z,\quad r<\rho<R.}
+\end{equation}
+\end{theorem}
+
+\textbf{Remark.} The circle is counterclockwise. The coefficients do not depend on the
+choice of $\rho$ within the same annulus. The series converges absolutely
+and uniformly on compact subannuli.
+
+\subsection{Proof: the outer and inner boundary contributions}
+Fix $z$ and choose radii $r<r_1<|z-z_0|<R_1<R$. Denote the
+counterclockwise circles of radii $r_1,R_1$ by $C_1,C_2$.
+The positive boundary of the smaller annulus is $C_2-C_1$.
+Cauchy's formula for this region gives
+\begin{equation}\label{eq:07}
+f(z)=\frac1{2\pi \mathrm{i}}\oint_{C_2}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+      -\frac1{2\pi \mathrm{i}}\oint_{C_1}\frac{f(\zeta)}{\zeta-z}\dd\zeta.
+\end{equation}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.42\linewidth]{figs/fig09-01-laurent-annulus.pdf}
+\caption{The two circles used in the proof of Laurent's theorem; both are drawn counterclockwise.}
+\label{fig:fig09-01-laurent-annulus}
+\end{figure}
+
+
+Both drawn circles are counterclockwise; the minus sign supplies the inner
+boundary orientation.
+
+On $C_2$ the ratio $|(z-z_0)/(\zeta-z_0)|<1$, so
+\begin{equation}\label{eq:08}
+\frac1{\zeta-z}
+  =\sum_{n=0}^{\infty}\frac{(z-z_0)^n}{(\zeta-z_0)^{n+1}}.
+\end{equation}
+This produces the regular part with
+\begin{equation}\label{eq:09}
+c_n=\frac1{2\pi \mathrm{i}}\oint_{C_2}
+             \frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\dd\zeta,\quad n\geq0.
+\end{equation}
+On $C_1$, the useful ratio is reversed:
+\begin{equation}\label{eq:10}
+\frac1{\zeta-z}
+   =-\frac1{z-z_0}\frac1{1-(\zeta-z_0)/(z-z_0)}
+   =-\sum_{k=0}^{\infty}\frac{(\zeta-z_0)^k}{(z-z_0)^{k+1}}.
+\end{equation}
+The leading minus sign cancels the inner-boundary minus sign, giving
+\begin{equation}\label{eq:11}
+-\frac1{2\pi \mathrm{i}}\oint_{C_1}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+   =\sum_{n=1}^{\infty}\frac{c_{-n}}{(z-z_0)^n},
+ \quad
+ c_{-n}=\frac1{2\pi \mathrm{i}}\oint_{C_1}
+                  (\zeta-z_0)^{n-1}f(\zeta)\dd\zeta.
+\end{equation}
+Uniform convergence on the two circles justifies the integrations.
+Contour deformation within the original annulus puts both coefficient
+formulas on any intermediate circle. Conversely, integrating a Laurent
+series against $(z-z_0)^{-k-1}$ extracts $c_k$ by the contour-moment
+formula. This proves uniqueness.
+
+\section{Laurent Expansions: Examples}
+The following examples show how the principal part and the annulus
+change with the function and the choice of center. In each case,
+the convergence region is part of the answer.
+
+\subsection{Example 4.18: a puncture with no principal part}
+For $0<|z|<\infty$,
+\begin{equation}\label{eq:12}
+\frac{\sin z}{z}
+ =\sum_{n=0}^{\infty}\frac{(-1)^nz^{2n}}{(2n+1)!}
+ =1-\frac{z^2}{3!}+\frac{z^4}{5!}-\cdots .
+\end{equation}
+All negative-power coefficients vanish. Defining $f(0)=1$ extends this
+function holomorphically through the puncture.
+
+\subsection{Example 4.19: infinitely many negative powers}
+For $0<|z|<\infty$,
+\begin{equation}\label{eq:13}
+e^z+e^{1/z}
+ =\sum_{n=1}^{\infty}\frac{z^n}{n!}
+      +2+\sum_{n=1}^{\infty}\frac1{n!z^n}.
+\end{equation}
+There are infinitely many nonzero negative-power coefficients. The
+constant term is $2$, since each exponential contributes $1$.
+
+\subsection{Example 4.20: a finite principal part}
+Expand $f(z)=1/[z^2(z-1)]$ about $z_0=1$. Put $w\coloneqq z-1$:
+\begin{equation}\label{eq:14}
+f(z)=\frac1w\frac1{(1+w)^2}
+ =\boxed{\sum_{n=0}^{\infty}(-1)^n(n+1)w^{n-1}},
+ \qquad 0<|w|<1.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:15}
+f(z)=\frac1{z-1}-2+3(z-1)-4(z-1)^2+\cdots .
+\end{equation}
+The principal part consists of the single term $1/(z-1)$.
+
+For the same function centered at $0$, in the assigned region
+$1<|z|<2$, use
+\begin{equation}\label{eq:16}
+f(z)=\frac1{z^3}\frac1{1-1/z}
+     =\sum_{n=0}^{\infty}\frac1{z^{n+3}}.
+\end{equation}
+In fact, this expansion is valid throughout $|z|>1$.
+
+\subsection{Example 4.21: three different regions}
+Let
+\begin{equation}\label{eq:17}
+f(z)\coloneqq\frac4{z^2-6z+5}
+     \equiv\frac1{z-5}-\frac1{z-1},
+ \qquad w\coloneqq z-2.
+\end{equation}
+The poles $1$ and $5$ are at distances $1$ and $3$ from the center $2$,
+so the three maximal circular regions are
+\begin{equation}\label{eq:18}
+|w|<1,\qquad 1<|w|<3,\qquad |w|>3.
+\end{equation}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.60\linewidth]{figs/fig09-02-three-regions.pdf}
+\caption{The poles at 1 and 5 determine three circular regions about the center 2.}
+\label{fig:fig09-02-three-regions}
+\end{figure}
+
+
+Since $f(z)=1/(w-3)-1/(w+1)$, choose a geometric series separately
+for each denominator:
+\begin{equation}\label{eq:19}
+\begin{aligned}
+ \text{I:}\quad f(z)
+   &=-\sum_{n=0}^{\infty}
+        \left(\frac1{3^{n+1}}+(-1)^n\right)w^n,
+       &&|w|<1,\\
+ \text{II:}\quad f(z)
+   &=-\sum_{n=0}^{\infty}\frac{w^n}{3^{n+1}}
+     -\sum_{n=0}^{\infty}(-1)^n w^{-n-1},
+       &&1<|w|<3,\\
+ \text{III:}\quad f(z)
+   &=\sum_{n=0}^{\infty}\bigl(3^n-(-1)^n\bigr)w^{-n-1},
+       &&|w|>3.
+\end{aligned}
+\end{equation}
+In region III the $w^{-1}$ coefficient is zero; the leading term is
+$4w^{-2}$. The function is the same in all three regions, but its
+Laurent coefficients depend on the annulus.
+
+\section{Isolated and Nonisolated Singularities}
+\begin{definition}[Isolated and nonisolated singularities]
+A point $z_0$ is an isolated singularity if $f$ is holomorphic on some
+punctured disk $0<|z-z_0|<r$, while not initially holomorphic at $z_0$.
+For a single-valued function, a singular point with no such punctured
+disk is nonisolated.
+\end{definition}
+\textbf{Remark.} An accumulation of isolated poles is one way this
+can occur. A multivalued expression, such as a logarithm at a branch
+point, must first be given a branch and a domain; it is not covered
+by the isolated-singularity classification.
+
+For
+\begin{equation}\label{eq:20}
+f(z)\coloneqq\frac1{(z^2+1)(z^2+4)},
+\end{equation}
+the four poles $\pm \mathrm{i},\pm2\mathrm{i}$ are isolated. Around $\mathrm{i}$, for example,
+$0<|z-\mathrm{i}|<1$ contains no other singularity.
+
+For
+\begin{equation}\label{eq:21}
+g(z)\coloneqq\frac1{\sin(1/z)},
+\end{equation}
+the points
+\begin{equation}\label{eq:22}
+z_k\coloneqq \frac1{k\pi},\qquad k\in\mathbb Z\setminus\{0\},
+\end{equation}
+are isolated simple poles. They accumulate at $0$. Every punctured disk
+about $0$ contains such poles, so $0$ is nonisolated. A Laurent expansion
+on an entire punctured disk about $0$ is therefore unavailable.
+
+\section{Classification by the Principal Part}
+\begin{definition}[Classification of isolated singularities]
+For an isolated singularity, write the Laurent expansion in
+$0<|z-z_0|<r$. There are exactly three possibilities.
+\begin{center}
+\begin{tabular}{@{}p{.24\linewidth}p{.66\linewidth}@{}}
+\toprule
+Type & Principal part\\ \midrule
+Removable & All negative-power coefficients are zero.\\[3pt]
+Pole of order $m$ & Finitely many nonzero negative-power coefficients,
+with $c_{-m}\neq0$ and $c_{-n}=0$ for $n>m$.\\[3pt]
+Essential & Infinitely many nonzero negative-power coefficients.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+Thus $\sin z/z$ has a removable singularity at $0$, whereas $e^{1/z}$
+has an essential singularity there.
+
+\subsection{A rational example}
+For
+\begin{equation}\label{eq:23}
+h(z)\coloneqq\frac1{z^2(z^2+1)},
+\end{equation}
+the origin is a double pole, since
+\begin{equation}\label{eq:24}
+h(z)=\frac1{z^2}\sum_{n=0}^{\infty}(-1)^nz^{2n}
+      =\frac1{z^2}-1+z^2-z^4+\cdots,\quad0<|z|<1.
+\end{equation}
+The points $\pm \mathrm{i}$ are simple poles. Near $\mathrm{i}$, write
+\begin{equation}\label{eq:25}
+h(z)=\frac{q(z)}{z-\mathrm{i}},
+ \qquad q(z)\coloneqq\frac1{z^2(z+\mathrm{i})},\qquad q(\mathrm{i})=-\frac1{2\mathrm{i}}\neq0.
+\end{equation}
+Taylor expansion of $q$ supplies the Laurent expansion of $h$; its
+principal part is $-\frac1{2\mathrm{i}}(z-\mathrm{i})^{-1}$. Near $-\mathrm{i}$ the principal
+part is $\frac1{2\mathrm{i}}(z+\mathrm{i})^{-1}$.
+
+\subsection{Poles and zeros of the reciprocal}
+\begin{proposition}[Poles and reciprocal zeros]
+The point $z_0$ is a pole of $f$ of order $m$ if and only if
+\begin{equation}\label{eq:26}
+f(z)=\frac{q(z)}{(z-z_0)^m},
+ \qquad q\ \hbox{holomorphic near }z_0,\quad q(z_0)\neq0.
+\end{equation}
+Equivalently, $1/f=(z-z_0)^m/q(z)$, extended by $0$ at $z_0$, has a
+zero of order $m$: the factor $1/q$ is holomorphic and nonzero there.
+Conversely, factor a zero of $1/f$ in this way and take the reciprocal.
+\end{proposition}
+
+
+\subsection{Cancellation at the origin}
+For
+\begin{equation}\label{eq:27}
+f(z)\coloneqq\frac z{e^z-1},
+\end{equation}
+the equation $e^z=1$ gives $z_k\coloneqq 2k\pi \mathrm{i}$. At $0$ the numerator and
+denominator both vanish to first order:
+\begin{equation}\label{eq:28}
+\frac z{e^z-1}=\frac1{1+z/2!+z^2/3!+\cdots}\longrightarrow1.
+\end{equation}
+Thus $0$ is removable, with extension $f(0)=1$. At every
+$2k\pi \mathrm{i}$ with $k\neq0$, the denominator has a simple zero and the
+numerator is nonzero, so the point is a simple pole.
+
+\section{Limit Tests for Isolated Singularities}
+\begin{proposition}[Limit tests]
+The following tests require an \emph{isolated} singularity at $z_0$:
+\begin{center}
+\begin{tabular}{@{}p{.51\linewidth}p{.39\linewidth}@{}}
+\toprule
+Behavior as $z\to z_0$ & Type\\ \midrule
+A finite limit $L$ exists & Removable; set $f(z_0)=L$.\\[3pt]
+$\lvert f(z)\rvert\to\infty$ & Pole.\\[3pt]
+Neither a finite limit nor a limit $\infty$ exists & Essential.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{proposition}
+
+
+\subsection{Why the limit tests work}
+If $f$ is bounded by $M$ on a punctured disk, the Laurent coefficient
+formula on a circle of radius $\rho$ gives, for every $n\geq1$,
+\begin{equation}\label{eq:29}
+|c_{-n}|\leq M\rho^n.
+\end{equation}
+Letting $\rho\to0$ shows that every negative-power coefficient vanishes.
+Thus boundedness, and in particular a finite limit, gives a removable
+singularity. Conversely, the holomorphic extension has that finite limit.
+
+If $|f(z)|\to\infty$, then $f$ has no zeros sufficiently close to $z_0$.
+The reciprocal $1/f$ tends to zero and extends holomorphically across
+$z_0$. It is not identically zero, so its zero has a finite order $m$.
+Taking the reciprocal gives a pole of order $m$. The converse follows
+from $f(z)=q(z)/(z-z_0)^m$ with $q(z_0)\neq0$.
+The essential case is the remaining possibility in the Laurent
+classification.
+
+\section{Singularities at Infinity}
+\textbf{Definition (extended complex plane).} The extended complex plane is $\widehat{\C}\coloneqq \C\cup\{\infty\}$.
+A neighborhood of infinity has the form
+$\{|z|>R\}\cup\{\infty\}$. To study $f$ there, set
+\begin{equation}\label{eq:30}
+w\coloneqq\frac1z,\qquad F(w)\coloneqq f(1/w).
+\end{equation}
+Then $|z|>R$ corresponds to $0<|w|<1/R$.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.76\linewidth]{figs/fig09-03-infinity-coordinate.pdf}
+\caption{The coordinate $w=1/z$ maps an exterior region to a punctured disk.}
+\label{fig:fig09-03-infinity-coordinate}
+\end{figure}
+
+
+\begin{definition}[Singularity at infinity]
+If $f$ is holomorphic for all sufficiently large finite $z$, infinity
+is an isolated point to be classified by the singularity of $F$ at $0$.
+In particular:
+\begin{itemize}
+ \item infinity is removable when $F$ extends holomorphically to $0$;
+ \item infinity is a pole of order $m$ when $F$ has a pole of order $m$ at $0$;
+ \item infinity is essential when $F$ has an essential singularity at $0$.
+\end{itemize}
+\end{definition}
+
+\textbf{Remark.} The same limit tests apply as $z\to\infty$, after checking that
+the singularity there is isolated.
+
+If finite singularities $z_k$ tend to infinity, there is no exterior
+region free of singularities; infinity is nonisolated.
+
+\subsection{Examples and a nonisolated finite point}
+\begin{enumerate}
+ \item For $e^{1/(1-z)}$, the transformed function is
+       $F(w)=\exp[w/(w-1)]$. It is holomorphic at $0$ with value $1$,
+       so infinity is removable with value $1$.
+ \item For fixed $a,b\in\C$, the function $1/[(z-a)(z-b)]$ becomes
+       $F(w)=w^2/[(1-aw)(1-bw)]$. Its extension has a zero of order
+       $2$ at $0$, so infinity is removable with value $0$.
+ \item For $1/(e^z-1)$, all $2k\pi \mathrm{i}$, $k\in\mathbb Z$, are simple
+       poles. They are unbounded, so infinity is nonisolated.
+ \item The poles of $1/\sin(1/z)$ at $1/(k\pi)$ accumulate at $0$.
+       Thus $0$ is nonisolated.
+ \item For $\tan[1/(z-1)]$, poles occur at
+       \begin{equation}\label{eq:31}
+z_k\coloneqq 1+\frac1{k\pi+\pi/2},\qquad k\in\mathbb Z.
+\end{equation}
+       Since $z_k\to1$ as $|k|\to\infty$, $1$ is nonisolated.
+       There is no Laurent expansion valid on a full punctured disk
+       $0<|z-1|<r$.
+\end{enumerate}
+
+\subsection{Reading the exterior Laurent series}
+If infinity is isolated, write, for sufficiently large $|z|$,
+\begin{equation}\label{eq:32}
+f(z)=\sum_{n=1}^{\infty}c_{-n}z^{-n}
+              +c_0+\sum_{n=1}^{\infty}c_nz^n.
+\end{equation}
+The positive powers of $z$ become the principal part of $F(w)$ at $0$.
+Therefore infinity is removable if all $c_n$ with $n\geq1$ vanish,
+a pole of order $m$ if the highest nonzero positive power is $z^m$,
+and essential if infinitely many positive-power coefficients are nonzero.
+For example, $e^{1/z}$ is removable at infinity, whereas $e^z$ is
+essential there.
+
+\end{document}
