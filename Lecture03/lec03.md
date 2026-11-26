@@ -2,124 +2,184 @@
 
 ## Functions of a Complex Variable and Elementary Complex Functions
 
-**Instructor:** Zhaolong Han, SOCE, Shanghai Jiao Tong University
+**Instructor:** Zhaolong Han, SOCE, Shanghai Jiao Tong University | **Email:** han.arkey@sjtu.edu.cn
 
-**Email:** han.arkey@sjtu.edu.cn
+*Overview: These lecture notes cover functions of a complex variable as geometric mappings and the five classes of elementary complex functions, including exponential, logarithmic, power, trigonometric, hyperbolic, and inverse trigonometric/hyperbolic functions.*
+
+---
 
 ## 1. Functions of a Complex Variable
 
 ### 1.1 Concept of Complex Functions and Geometric Mappings
 
-> **Definition 1 (Complex Function)**
->
-> Let $D$ be a point set in the complex plane $\mathbb{C}$. If for every complex number $z \in D$, there corresponds one or more complex numbers $w$ according to a rule $f$, then $w$ is called a **function of a complex variable** defined on $D$, denoted by $w = f(z) = u(x,y) + iv(x,y)$.
+**Definition 1 (Complex Function).**
+Let $D$ be a point set in the complex plane $\mathbb{C}$. If for every complex number $z \in D$, there corresponds one or more complex numbers $w$ according to a rule $f$, then $w$ is called a **function of a complex variable** defined on $D$, denoted by
+$$
+w = f(z), \quad z \in D.
+$$
+Here $D$ is the **domain of definition**, and $G = \{ w = f(z) \mid z \in D \}$ is the **range** (image set).
 
-* **Single-valued vs. Multi-valued Functions:** If each $z \in D$ corresponds to a unique value $w$, $f(z)$ is called *single-valued* (e.g., $w = z^2$, $w = \vert{}z\vert{}$); if $z$ corresponds to two or more values, $f(z)$ is called *multi-valued* (e.g., $w = \operatorname{Arg} z$, $w = \sqrt[n]{z}$).
-
+**Structural and Geometric Properties:**
+* **Single-valued vs. Multi-valued Functions:** If each $z \in D$ corresponds to a unique value $w$, $f(z)$ is called *single-valued* (e.g., $w = z^2$, $w = \lvert z \rvert$); if $z$ corresponds to two or more values, $f(z)$ is called *multi-valued* (e.g., $w = \operatorname{Arg} z$, $w = \sqrt[n]{z}$).
+* **Real and Imaginary Decomposition:** Writing $z = x + iy$ and $w = u + iv$, a complex function is equivalent to a pair of real-valued functions of two real variables:
+  $$
+  w = f(z) = u(x, y) + i v(x, y).
+  $$
 * **Inverse Function:** If for each $w \in G$ there exist one or more points $z \in D$ satisfying $w = f(z)$, this correspondence defines the inverse function $z = g(w) = f^{-1}(w)$.
+* **Geometric Interpretation as a Mapping:** Unlike a real function $y = f(x)$ which can be visualized as a curve in $\mathbb{R}^2$, a complex function $w = f(z)$ involves four real dimensions $(x, y, u, v)$ and cannot be plotted as a graph in low dimensions. Instead, we interpret $w = f(z)$ as a **mapping** (or transformation) from a set $D$ in the $z$-plane to its image $G$ in the $w$-plane (which may be injective/one-to-one, surjective/onto, or bijective).
 
-* **Mappings vs. Graphs:** Unlike 1D real functions $y = f(x)$ plotted in $\mathbb{R}^2$, a complex function involves four real dimensions $(x,y,u,v)$ and is visualized as a **mapping** from $D$ in the $z$-plane to $G$ in the $w$-plane (injective, surjective, or bijective).
+**Example 1 (Mapping Properties of $w = z^2$).**
+Let $z = x + iy = r e^{i\theta}$ and $w = u + iv = \rho e^{i\varphi}$. For $w = z^2$, we have
+$$
+u = x^2 - y^2, \quad v = 2xy \qquad \text{and} \qquad \rho = r^2, \quad \varphi = 2\theta + 2k\pi.
+$$
+1. **Image of the Real Axis:** On the real axis $y = 0$, we obtain $u = x^2 \ge 0$ and $v = 0$. Thus, $w = z^2$ maps the real axis of the $z$-plane onto the non-negative real axis $[0, +\infty)$ of the $w$-plane, covering $(0, +\infty)$ twice—once for $x > 0$ and once for $x < 0$. Similarly, the imaginary axis $x = 0$ maps onto the non-positive real axis $(-\infty, 0]$.
+2. **Image of Angular Sectors:** The angular sector $0 < \arg z < \alpha$ ($0 < \alpha \le \pi$) is mapped onto the sector $0 < \arg w < 2\alpha$. In particular, the first quadrant $0 < \arg z < \frac{\pi}{2}$ is mapped one-to-one onto the upper half-plane $0 < \arg w < \pi$.
 
-* **Example 1 ($w = z^2$):** With $z = re^{i\theta}$ and $w = \rho e^{i\varphi}$, we have $u = x^2 - y^2$, $v = 2xy$, $\rho = r^2$, and $\varphi = 2\theta + 2k\pi$:
+---
 
-  * Maps the real axis ($y=0$) onto $[0, +\infty)$ (covered twice, see Figure 1) and the imaginary axis ($x=0$) onto $(-\infty, 0]$.
+### 1.2 Elementary Complex Functions
 
-  * Maps the angular sector $0 < \arg z < \alpha$ onto $0 < \arg w < 2\alpha$ (see Figure 2; e.g., the first quadrant maps onto the upper half-plane).
-
-### 1.2 Elementary Complex Functions (Five Major Categories)
+Elementary functions of a complex variable are grouped into **five major categories**, extending real elementary functions to $\mathbb{C}$ while preserving algebraic identities.
 
 #### 1. Exponential Function
 
-> **Definition 2 (Complex Exponential Function)**
->
-> For any complex number $z = x + iy$, the exponential function is defined by
->
-> $$
-> w = e^z = \exp(z) = e^{x+iy} = e^x(\cos y + i\sin y).
-> $$
+**Definition 2 (Complex Exponential Function).**
+For any complex number $z = x + iy$, the exponential function is defined by
+$$
+w = e^z = \exp(z) = e^{x + iy} = e^x (\cos y + i \sin y).
+$$
 
-* **Modulus & Argument:** $\vert{}e^z\vert{} = e^x > 0$ ($e^z \neq 0$), $\operatorname{Arg} e^z = y + 2k\pi$.
-
-* **Conjugate & Addition:** $\overline{e^z} = e^{\overline{z}}$, and $e^{z_1} \cdot e^{z_2} = e^{z_1 + z_2}$.
-
-* **Periodicity:** Periodic with fundamental period $T = 2\pi i$ ($e^{z + 2k\pi i} = e^z$).
-
-* **Analyticity:** Entire on $\mathbb{C}$ with $(e^z)' = e^z$; $\lim_{z\to\infty} e^z$ does not exist.
+**Properties of $e^z$:**
+1. **Modulus and Argument:** $\lvert e^z \rvert = e^x > 0$ (hence $e^z \neq 0$ for all $z \in \mathbb{C}$), and $\operatorname{Arg}(e^z) = y + 2k\pi$ ($k \in \mathbb{Z}$).
+2. **Real, Imaginary, and Conjugate Parts:**
+   $$
+   \operatorname{Re}(e^z) = e^x \cos y, \quad \operatorname{Im}(e^z) = e^x \sin y, \quad \overline{e^z} = e^x(\cos y - i\sin y) = e^{\overline{z}}.
+   $$
+3. **Addition Property:** For all $z_1, z_2 \in \mathbb{C}$, $e^{z_1} \cdot e^{z_2} = e^{z_1 + z_2}$. *(Note: $(e^{z_1})^{z_2} = e^{z_1 z_2}$ does not hold in general due to multi-valuedness.)*
+4. **Periodicity:** Since $e^{2k\pi i} = 1$, $e^z$ is periodic with fundamental period $T = 2\pi i$:
+   $$
+   e^{z + 2k\pi i} = e^z \quad (k = 0, \pm 1, \pm 2, \dots).
+   $$
+5. **Analyticity and Behavior at $\infty$:** $e^z$ is analytic on the entire complex plane $\mathbb{C}$ with $(e^z)' = e^z$, and $\lim_{z \to \infty} e^z$ does not exist.
 
 #### 2. Logarithmic Function
 
-> **Definition 3 (Complex Logarithmic Function)**
->
-> For $z \neq 0, \infty$, any complex number $w$ satisfying $e^w = z$ is called the logarithm of $z$, denoted by
->
-> $$
-> w = \operatorname{Ln} z = \ln\vert{}z\vert{} + i\operatorname{Arg} z = \ln z + 2k\pi i \quad (k = 0, \pm 1, \pm 2, \dots).
-> $$
+**Definition 3 (Complex Logarithmic Function).**
+For $z \neq 0, \infty$, any complex number $w$ satisfying $e^w = z$ is called the logarithm of $z$, denoted by $w = \operatorname{Ln} z$. Writing $z = r e^{i\theta}$ and $w = u + iv$, we obtain
+$$
+w = \operatorname{Ln} z = \ln\lvert z \rvert + i\operatorname{Arg} z = \ln\lvert z \rvert + i(\arg z + 2k\pi) \quad (k = 0, \pm 1, \pm 2, \dots).
+$$
 
-* **Principal Value:** $\ln z = \ln\vert{}z\vert{} + i\arg z$ ($-\pi < \arg z \le \pi$).
-
-* **Example:** $\operatorname{Ln}(-1) = (2k+1)\pi i$, with principal value $\ln(-1) = \pi i$.
-
-* **Properties:** $\operatorname{Ln}(z_1 z_2) = \operatorname{Ln} z_1 + \operatorname{Ln} z_2$ and $\operatorname{Ln}(z_1/z_2) = \operatorname{Ln} z_1 - \operatorname{Ln} z_2$ hold as set equalities, whereas $\ln(z_1 z_2) = \ln z_1 + \ln z_2$ **does not always hold** for principal values.
-
-* **Analyticity:** Each branch is analytic on $\mathbb{C} \setminus (-\infty, 0]$ with $(\operatorname{Ln} z)' = \frac{1}{z}$.
+**Properties of $\operatorname{Ln} z$:**
+1. **Principal Value and Branches:** Fixing $k$ yields a single-valued branch. For $k = 0$, we obtain the **principal value**:
+   $$
+   \ln z = \ln\lvert z \rvert + i\arg z \quad (-\pi < \arg z \le \pi),
+   $$
+   where $\operatorname{Re}(\ln z) = \ln\lvert z \rvert$ and $\operatorname{Im}(\ln z) = \arg z$. Thus $\operatorname{Ln} z = \ln z + 2k\pi i$.
+2. **Example:** $\operatorname{Ln}(-1) = \ln\lvert -1 \rvert + i(\pi + 2k\pi) = (2k + 1)\pi i$, with principal value $\ln(-1) = \pi i$.
+3. **Algebraic Identities:** For $z_1, z_2 \neq 0$, as equalities between sets of values:
+   $$
+   \operatorname{Ln}(z_1 z_2) = \operatorname{Ln} z_1 + \operatorname{Ln} z_2, \qquad \operatorname{Ln}\left(\frac{z_1}{z_2}\right) = \operatorname{Ln} z_1 - \operatorname{Ln} z_2.
+   $$
+   *Warning:* For principal values, $\ln(z_1 z_2) = \ln z_1 + \ln z_2$ **does not always hold** (e.g., when $\arg z_1 + \arg z_2 \notin (-\pi, \pi]$).
+4. **Analyticity:** Every branch of $\operatorname{Ln} z$ is analytic on the slit plane $\mathbb{C} \setminus (-\infty, 0]$ with derivative $(\operatorname{Ln} z)' = \frac{1}{z}$.
 
 #### 3. Power Function and General Exponential Function
 
-> **Definition 4 (Complex Power Function)**
->
-> For any complex exponent $a \in \mathbb{C}$ and $z \neq 0$, the power function is defined by
->
-> $$
-> w = z^a = e^{a \operatorname{Ln} z} = e^{a \ln z} \cdot e^{2k\pi a i} \quad (k \in \mathbb{Z}), \qquad a^z = e^{z \operatorname{Ln} a}.
-> $$
+**Definition 4 (Complex Power Function).**
+For any complex exponent $a \in \mathbb{C}$ and $z \neq 0$, the power function is defined via the exponential and logarithmic functions as
+$$
+w = z^a = e^{a \operatorname{Ln} z} = e^{a(\ln\lvert z \rvert + i\arg z + 2k\pi i)} = e^{a \ln z} \cdot e^{2k\pi a i} \quad (k = 0, \pm 1, \pm 2, \dots).
+$$
+Similarly, for $a \neq 0$, the general exponential function is defined as $w = a^z = e^{z \operatorname{Ln} a}$ (which is multi-valued when $a \neq e$).
 
-* **Special Cases:**
+**Classification by Exponent $a$:**
+* $a = n \in \mathbb{Z}^+$: $w = z^n = r^n e^{in\theta}$ is single-valued and entire on $\mathbb{C}$.
+* $a = -n$ ($n \in \mathbb{Z}^+$): $w = z^{-n} = \frac{1}{z^n}$ is single-valued and analytic on $\mathbb{C} \setminus \{0\}$.
+* $a = \frac{1}{n}$ ($n \in \mathbb{Z}^+$): $w = z^{1/n} = \sqrt[n]{z} = \sqrt[n]{r} e^{i\frac{\theta + 2k\pi}{n}}$ ($k = 0, 1, \dots, n-1$) is $n$-valued.
+* $a = \frac{m}{n}$ (reduced fraction, $n > 1$): $w = z^{m/n}$ is $n$-valued.
+* Other $a$ (irrational or non-real complex): $w = z^a$ is infinitely many-valued.
 
-  * $a = n \in \mathbb{Z}^+$: $z^n = r^n e^{in\theta}$ (single-valued, entire).
-
-  * $a = \frac{1}{n}$ ($n \in \mathbb{Z}^+$): $z^{1/n} = \sqrt[n]{r} e^{i\frac{\theta + 2k\pi}{n}}$ ($k = 0, 1, \dots, n-1$, $n$-valued).
-
-  * $a = \frac{m}{n}$ (reduced fraction): $n$-valued; irrational or non-real complex $a$: infinitely many-valued.
-
-* **Example 2:** $i^i = e^{i \operatorname{Ln} i} = e^{-\frac{\pi}{2} - 2k\pi}$ ($k \in \mathbb{Z}$), yielding infinitely many positive real values.
+**Example 2 (Evaluation of $i^i$).**
+Compute all values of the multi-valued power $i^i$:
+$$
+i^i = e^{i \operatorname{Ln} i} = e^{i\left[\ln\lvert i \rvert + i\left(\frac{\pi}{2} + 2k\pi\right)\right]} = e^{-\frac{\pi}{2} - 2k\pi} \quad (k = 0, \pm 1, \pm 2, \dots).
+$$
+Notice that all infinitely many values of $i^i$ are positive real numbers!
 
 #### 4. Trigonometric and Hyperbolic Functions
 
-> **Definition 5 (Complex Trigonometric Functions)**
->
-> Extending Euler's formula $e^{ix} = \cos x + i\sin x$ ($x \in \mathbb{R}$) to $z \in \mathbb{C}$, the sine and cosine functions are defined as
->
-> $$
-> \sin z = \frac{e^{iz} - e^{-iz}}{2i}, \quad \cos z = \frac{e^{iz} + e^{-iz}}{2}, \quad \tan z = \frac{\sin z}{\cos z}, \quad \cot z = \frac{\cos z}{\sin z}.
-> $$
+**Definition 5 (Complex Trigonometric Functions).**
+Extending Euler's formula $e^{ix} = \cos x + i\sin x$ ($x \in \mathbb{R}$) to any complex number $z \in \mathbb{C}$, the complex sine and cosine functions are defined as
+$$
+\sin z = \frac{e^{iz} - e^{-iz}}{2i}, \qquad \cos z = \frac{e^{iz} + e^{-iz}}{2}.
+$$
+The remaining trigonometric functions are defined analogously:
+$$
+\tan z = \frac{\sin z}{\cos z}, \quad \cot z = \frac{\cos z}{\sin z}, \quad \sec z = \frac{1}{\cos z}, \quad \csc z = \frac{1}{\sin z}.
+$$
 
-* Entire on $\mathbb{C}$ (for $\sin z, \cos z$), $2\pi$-periodic, satisfy Euler's formula $e^{iz} = \cos z + i\sin z$ and real trig identities, and have only real zeros ($\sin z = 0 \iff z = k\pi$; $\cos z = 0 \iff z = k\pi + \frac{\pi}{2}$).
+**Properties of Complex Trigonometric Functions:**
+1. **Euler's Formula:** $e^{iz} = \cos z + i\sin z$ holds for all $z \in \mathbb{C}$.
+2. **Periodicity and Parity:** Both $\sin z$ and $\cos z$ are periodic with fundamental period $2\pi$:
+   $$
+   \sin(z + 2\pi) = \sin z, \qquad \cos(z + 2\pi) = \cos z.
+   $$
+   Moreover, $\sin(-z) = -\sin z$ (odd) and $\cos(-z) = \cos z$ (even).
+3. **Analyticity and Trigonometric Identities:** $\sin z$ and $\cos z$ are entire functions with $(\sin z)' = \cos z$ and $(\cos z)' = -\sin z$. Standard identities from real analysis remain valid for all $z, z_1, z_2 \in \mathbb{C}$, such as the Pythagorean identity
+   $$
+   \sin^2 z + \cos^2 z = 1,
+   $$
+   and the sum/difference formulas $\sin(z_1 \pm z_2) = \sin z_1 \cos z_2 \pm \cos z_1 \sin z_2$ and $\cos(z_1 \pm z_2) = \cos z_1 \cos z_2 \mp \sin z_1 \sin z_2$.
+4. **Zeros:** All zeros lie on the real axis: $\sin z = 0 \iff z = k\pi$, and $\cos z = 0 \iff z = k\pi + \frac{\pi}{2}$ ($k \in \mathbb{Z}$).
+5. **Failure of Boundedness:** Unlike real sine and cosine, the inequalities $\lvert \sin z \rvert \le 1$ and $\lvert \cos z \rvert \le 1$ **no longer hold** in the complex plane. In fact, $\lvert \sin z \rvert$ and $\lvert \cos z \rvert$ are **unbounded** on $\mathbb{C}$ (for instance, $\lvert \cos(iy) \rvert = \cosh y \to +\infty$ as $\lvert y \rvert \to \infty$).
 
-* **Key Difference:** $\vert{}\sin z\vert{}$ and $\vert{}\cos z\vert{}$ are **unbounded** in $\mathbb{C}$.
+**Example 3 (Solving a Complex Trigonometric Equation).**
+Solve the equation $\sin z = 2$ in $\mathbb{C}$.
 
-> **Definition 6 (Complex Hyperbolic Functions)**
->
-> The hyperbolic sine, cosine, and tangent functions are defined for $z \in \mathbb{C}$ by
->
-> $$
-> \sinh z = \frac{e^z - e^{-z}}{2}, \quad \cosh z = \frac{e^z + e^{-z}}{2}, \quad \tanh z = \frac{\sinh z}{\cosh z}.
-> $$
+*Solution:* Using the exponential definition of $\sin z$, we write
+$$
+\sin z = \frac{e^{iz} - e^{-iz}}{2i} = 2 \implies e^{iz} - e^{-iz} - 4i = 0.
+$$
+Multiplying through by $e^{iz}$ yields a quadratic equation in $X = e^{iz}$:
+$$
+(e^{iz})^2 - 4i(e^{iz}) - 1 = 0.
+$$
+Applying the quadratic formula ($aX^2 + bX + c = 0$ with $a = 1$, $b = -4i$, and $c = -1$):
+$$
+e^{iz} = \frac{-(-4i) \pm \sqrt{(-4i)^2 - 4(1)(-1)}}{2(1)} = \frac{4i \pm \sqrt{-16 + 4}}{2} = \frac{4i \pm 2\sqrt{3}i}{2} = (2 \pm \sqrt{3})i.
+$$
+Taking the complex logarithm on both sides gives
+$$
+\begin{aligned}
+iz &= \operatorname{Ln}\bigl[(2 \pm \sqrt{3})i\bigr] = \ln\bigl\lvert (2 \pm \sqrt{3})i \bigr\rvert + i\operatorname{Arg}\bigl[(2 \pm \sqrt{3})i\bigr] \\
+   &= \ln(2 \pm \sqrt{3}) + i\left(\frac{\pi}{2} + 2k\pi\right) \quad (k = 0, \pm 1, \pm 2, \dots).
+\end{aligned}
+$$
+Multiplying both sides by $-i$ and noting that $\ln(2 - \sqrt{3}) = -\ln(2 + \sqrt{3})$, we obtain
+$$
+z = \frac{\pi}{2} + 2k\pi - i\ln(2 \pm \sqrt{3}) = \frac{\pi}{2} + 2k\pi \mp i\ln(2 + \sqrt{3}) \quad (k = 0, \pm 1, \pm 2, \dots).
+$$
 
-* Related via $\sinh z = -i\sin(iz)$, $\cosh z = \cos(iz)$, and $\cosh^2 z - \sinh^2 z = 1$.
+**Definition 6 (Complex Hyperbolic Functions).**
+The hyperbolic sine, cosine, and tangent functions are defined for $z \in \mathbb{C}$ by
+$$
+\sinh z = \frac{e^z - e^{-z}}{2}, \qquad \cosh z = \frac{e^z + e^{-z}}{2}, \qquad \tanh z = \frac{\sinh z}{\cosh z}.
+$$
+
+They satisfy $\sinh z = -i\sin(iz)$, $\cosh z = \cos(iz)$, $\cosh^2 z - \sinh^2 z = 1$, $(\sinh z)' = \cosh z$, and $(\cosh z)' = \sinh z$, with fundamental period $2\pi i$.
 
 #### 5. Inverse Trigonometric and Inverse Hyperbolic Functions
 
-All are infinitely many-valued functions:
+**Definition 7 (Inverse Trigonometric and Inverse Hyperbolic Functions).**
+Defined as the inverse relations of the complex trigonometric and hyperbolic functions (such as $w = \operatorname{Arcsin} z \iff \sin w = z$), these functions are all infinitely many-valued and are expressed in terms of the complex logarithm as follows:
+$$
+\begin{aligned}
+\operatorname{Arcsin} z &= -i\operatorname{Ln}\left(iz \pm \sqrt{1 - z^2}\right), & \operatorname{Arccos} z &= -i\operatorname{Ln}\left(z \pm \sqrt{z^2 - 1}\right), \\[6pt]
+\operatorname{Arctan} z &= -\frac{i}{2}\operatorname{Ln}\frac{1 + iz}{1 - iz} \quad (z \neq \pm i), & \operatorname{Arccot} z &= \frac{i}{2}\operatorname{Ln}\frac{z - i}{z + i} \quad (z \neq \pm i), \\[6pt]
+\operatorname{Arcsinh} z &= \operatorname{Ln}\left(z \pm \sqrt{z^2 + 1}\right), & \operatorname{Arccosh} z &= \operatorname{Ln}\left(z \pm \sqrt{z^2 - 1}\right).
+\end{aligned}
+$$
 
-* $\operatorname{Arcsin} z = -i\operatorname{Ln}(iz \pm \sqrt{1 - z^2})$, $\quad \operatorname{Arccos} z = -i\operatorname{Ln}(z \pm \sqrt{z^2 - 1})$
-
-* $\operatorname{Arctan} z = -\frac{i}{2}\operatorname{Ln}\frac{1 + iz}{1 - iz}$ ($z \neq \pm i$), $\quad \operatorname{Arccot} z = \frac{i}{2}\operatorname{Ln}\frac{z - i}{z + i}$ ($z \neq \pm i$)
-
-* $\operatorname{Arcsinh} z = \operatorname{Ln}(z \pm \sqrt{z^2 + 1})$, $\quad \operatorname{Arccosh} z = \operatorname{Ln}(z \pm \sqrt{z^2 - 1})$
-
-## Assigned Homework Reference
-
-* **Textbook P.20 (Exercise 1):** Set A: Problems 8 (even), 9, 12; \quad Set B: Problems 5, 6.
-
-* **Textbook P.55 (Exercise 2):** Set A: Problem 13 (even).
+*Derivation sketch for $\operatorname{Arcsin} z$:* From $z = \sin w = \frac{e^{iw} - e^{-iw}}{2i}$, multiplying both sides by $2ie^{iw}$ yields $e^{2iw} - 2ize^{iw} - 1 = 0$. Solving this quadratic equation for $e^{iw}$ gives $e^{iw} = iz \pm \sqrt{1 - z^2}$, and taking $\operatorname{Ln}$ produces $w = -i\operatorname{Ln}(iz \pm \sqrt{1 - z^2})$.

@@ -1,163 +1,113 @@
 \documentclass[11pt,a4paper]{article}
 
-% --- Page margins, line spacing (20pt), and paragraph spacing ---
-\usepackage[margin=1in]{geometry}
-\usepackage{setspace}
-\setstretch{1.4706} % 13.6pt (11pt default leading) * 1.4706 = 20pt line spacing
+% --- Page Margins ---
+\usepackage[a4paper, top=2.4cm, bottom=2.4cm, left=2.2cm, right=2.2cm]{geometry}
+
+% --- Font Configuration: Times New Roman ---
+\usepackage{iftex}
+\ifTUTeX
+    \usepackage{fontspec}
+    \IfFontExistsTF{Times New Roman}{
+        \setmainfont{Times New Roman}
+    }{
+        \setmainfont{TeX Gyre Termes}
+    }
+\else
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage{mathptmx}
+\fi
+
+% --- Line Spacing: 20 pt (11pt default baselineskip is 13.6pt; 13.6 * 1.47 = 20pt) ---
+\linespread{1.47}
+
+% --- Math, Typography, Graphics, and Layout Packages ---
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{parskip}
 \usepackage{enumitem}
-\setlist{itemsep=3pt, parsep=2pt, topsep=4pt}
-
-% --- Basic math, graphics, and typesetting ---
-\usepackage{amsmath,amssymb,amsthm}
 \usepackage{xcolor}
-\usepackage{tikz}
 \usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, decorations.markings}
 
-% --- Custom math operators for clean spacing ---
-\DeclareMathOperator{\Arg}{Arg}
-\DeclareMathOperator{\Ln}{Ln}
-\DeclareMathOperator{\Arcsin}{Arcsin}
-\DeclareMathOperator{\Arccos}{Arccos}
-\DeclareMathOperator{\Arctan}{Arctan}
-\DeclareMathOperator{\Arccot}{Arccot}
-\renewcommand{\Re}{\operatorname{Re}}
-\renewcommand{\Im}{\operatorname{Im}}
+% --- List Spacing Refinement ---
+\setlist[itemize]{itemsep=2pt, topsep=3pt, parsep=2pt, leftmargin=1.6em}
+\setlist[enumerate]{itemsep=2pt, topsep=3pt, parsep=2pt, leftmargin=1.8em}
 
-% --- Theorem and definition environments (content starts on a new line) ---
-\newtheoremstyle{breakdef}
-  {10pt}       % Space above
-  {10pt}       % Space below
-  {\normalfont}% Body font
-  {0pt}        % Indent amount
-  {\bfseries}  % Head font
-  {.}          % Punctuation after head
-  {\newline}   % Line break after head so content starts on the next line
-  {}           % Head spec
+% --- Custom Theorem & Definition Styles (Header on its own line) ---
+\newtheoremstyle{definitionbreak}
+  {10pt}        % Space above
+  {10pt}        % Space below
+  {\normalfont} % Body font
+  {0pt}         % Indent amount
+  {\bfseries\color{blue!60!black}} % Theorem head font
+  {.}           % Punctuation after theorem head
+  {\newline}    % Space after theorem head (starts body on a new line)
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ \textnormal{\textbf{(#3)}}}}
 
-\newtheoremstyle{breakthm}
-  {10pt}       % Space above
-  {10pt}       % Space below
-  {\itshape}   % Body font
-  {0pt}        % Indent amount
-  {\bfseries}  % Head font
-  {.}          % Punctuation after head
-  {\newline}   % Line break after head so content starts on the next line
-  {}           % Head spec
+\newtheoremstyle{examplebreak}
+  {10pt}        % Space above
+  {10pt}        % Space below
+  {\normalfont} % Body font
+  {0pt}         % Indent amount
+  {\bfseries\color{teal!65!black}} % Theorem head font
+  {.}           % Punctuation after theorem head
+  {\newline}    % Space after theorem head (starts body on a new line)
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ \textnormal{\textbf{(#3)}}}}
 
-\theoremstyle{breakdef}
+\newtheoremstyle{theorembreak}
+  {10pt}        % Space above
+  {10pt}        % Space below
+  {\itshape}    % Body font
+  {0pt}         % Indent amount
+  {\bfseries}   % Theorem head font
+  {.}           % Punctuation after theorem head
+  {\newline}    % Space after theorem head (starts body on a new line)
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ \textnormal{\textbf{(#3)}}}}
+
+\theoremstyle{definitionbreak}
 \newtheorem{definition}{Definition}
+
+\theoremstyle{examplebreak}
 \newtheorem{example}{Example}
 
-\theoremstyle{breakthm}
+\theoremstyle{theorembreak}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
 
+% --- Hyperref (Must be loaded last) ---
+\usepackage[colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black]{hyperref}
+
 \begin{document}
 
 % ==================================================
-% Title and author information
+% Title and Instructor Information
 % ==================================================
 \begin{center}
-    {\LARGE \textbf{Mathematics Method for Physics -- Lecture 04}} \\[0.6em]
-    {\large Trigonometric/Inverse Trigonometric Functions, Limits, Continuity, and Differentiability}
+    {\LARGE \textbf{Mathematics Method for Physics -- Lecture 4}} \\[0.4em]
+    {\large Limits, Continuity, and Differentiability of Complex Functions}
 \end{center}
 
-\vspace{-0.3em}
-\noindent\rule{\textwidth}{0.5pt}
-\vspace{0.2em}
+\vspace{-0.4em}
+\noindent\rule{\textwidth}{0.6pt}
+\vspace{0.1em}
 
 \begin{center}
-    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University \\
-    Email: \texttt{han.arkey@sjtu.edu.cn}
+    Instructor: Zhaolong Han, SOCE, Shanghai Jiao Tong University \quad|\quad Email: \texttt{han.arkey@sjtu.edu.cn}
 \end{center}
 
-\vspace{0.2em}
-\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.1em}
+\noindent\rule{\textwidth}{0.6pt}
 
-\vspace{0.6em}
-\noindent \textit{Lecture notes covering complex trigonometric and inverse trigonometric functions, limits and continuity of complex functions, and differentiability with the Cauchy--Riemann conditions.}
+\vspace{0.5em}
+\noindent \textit{Overview: These lecture notes cover limits and continuity of complex functions, differentiability and differentials, and the Cauchy--Riemann conditions.}
 
-\vspace{1.0em}
-
-% ==================================================
-% Section 1: Elementary Complex Functions (Continued)
-% ==================================================
-\section{Elementary Complex Functions (Continued)}
-
-\subsection{Trigonometric Functions}
-
-\begin{definition}[Complex Sine and Cosine Functions]
-Extending Euler's formula $e^{ix} = \cos x + i\sin x$ ($x \in \mathbb{R}$) to any complex number $z \in \mathbb{C}$, the complex sine and cosine functions are defined as
-\[
-    \sin z = \frac{e^{iz} - e^{-iz}}{2i}, \qquad \cos z = \frac{e^{iz} + e^{-iz}}{2}.
-\]
-The remaining trigonometric functions are defined analogously:
-\[
-    \tan z = \frac{\sin z}{\cos z}, \quad \cot z = \frac{\cos z}{\sin z}, \quad \sec z = \frac{1}{\cos z}, \quad \csc z = \frac{1}{\sin z}.
-\]
-\end{definition}
-
-\textbf{Key Properties:}
-\begin{enumerate}
-    \item \textbf{Periodicity and Parity}: Both $\sin z$ and $\cos z$ are periodic with fundamental period $2\pi$:
-    \[
-        \sin(z + 2\pi) = \sin z, \qquad \cos(z + 2\pi) = \cos z.
-    \]
-    Moreover, $\sin(-z) = -\sin z$ (odd) and $\cos(-z) = \cos z$ (even).
-    \item \textbf{Trigonometric Identities}: Standard identities from real analysis remain valid for all $z, z_1, z_2 \in \mathbb{C}$, including Euler's formula $e^{iz} = \cos z + i\sin z$, the Pythagorean identity
-    \[
-        \sin^2 z + \cos^2 z = 1,
-    \]
-    and the sum/difference formulas $\sin(z_1 \pm z_2) = \sin z_1 \cos z_2 \pm \cos z_1 \sin z_2$ and $\cos(z_1 \pm z_2) = \cos z_1 \cos z_2 \mp \sin z_1 \sin z_2$.
-    \item \textbf{Zeros}: $\sin z = 0 \iff z = k\pi$, and $\cos z = 0 \iff z = k\pi + \frac{\pi}{2}$ ($k \in \mathbb{Z}$). All zeros lie on the real axis.
-    \item \textbf{Failure of Boundedness}: Unlike real sine and cosine, the inequalities $|\sin z| \le 1$ and $|\cos z| \le 1$ \textbf{no longer hold} in the complex plane. In fact, $|\sin z|$ and $|\cos z|$ are unbounded on $\mathbb{C}$ (for instance, $|\cos(iy)| = \cosh y \to +\infty$ as $|y| \to \infty$).
-\end{enumerate}
-
-\begin{example}[Solving a Complex Trigonometric Equation]
-Solve the equation $\sin z = 2$ in $\mathbb{C}$.
-
-\textbf{Solution:} Using the exponential definition of $\sin z$, we write
-\[
-    \sin z = \frac{e^{iz} - e^{-iz}}{2i} = 2 \implies e^{iz} - e^{-iz} - 4i = 0.
-\]
-Multiplying through by $e^{iz}$ yields a quadratic equation in $X = e^{iz}$:
-\[
-    (e^{iz})^2 - 4i(e^{iz}) - 1 = 0.
-\]
-Applying the quadratic formula ($aX^2 + bX + c = 0$ with $a = 1$, $b = -4i$, and $c = -1$):
-\[
-    e^{iz} = \frac{-(-4i) \pm \sqrt{(-4i)^2 - 4(1)(-1)}}{2(1)} = \frac{4i \pm \sqrt{-16 + 4}}{2} = \frac{4i \pm 2\sqrt{3}i}{2} = (2 \pm \sqrt{3})i.
-\]
-Taking the complex logarithm on both sides gives
-\begin{align*}
-    iz &= \Ln\bigl[(2 \pm \sqrt{3})i\bigr] = \ln\bigl|(2 \pm \sqrt{3})i\bigr| + i\Arg\bigl[(2 \pm \sqrt{3})i\bigr] \\
-       &= \ln(2 \pm \sqrt{3}) + i\left(\frac{\pi}{2} + 2k\pi\right) \quad (k = 0, \pm 1, \pm 2, \dots).
-\end{align*}
-Multiplying both sides by $-i$ and noting that $\ln(2 - \sqrt{3}) = -\ln(2 + \sqrt{3})$, we obtain
-\[
-    z = \frac{\pi}{2} + 2k\pi - i\ln(2 \pm \sqrt{3}) = \frac{\pi}{2} + 2k\pi \mp i\ln(2 + \sqrt{3}) \quad (k = 0, \pm 1, \pm 2, \dots).
-\]
-\end{example}
-
-\subsection{Inverse Trigonometric Functions}
-
-\begin{definition}[Inverse Trigonometric Functions]
-Defined as the inverse relations of the complex trigonometric functions (such as $w = \Arcsin z \iff \sin w = z$), the inverse trigonometric functions are infinitely many-valued and are expressed in terms of the complex logarithm as follows:
-\begin{align*}
-    w &= \Arcsin z = -i\Ln\left(iz \pm \sqrt{1 - z^2}\right), \\
-    w &= \Arccos z = -i\Ln\left(z \pm \sqrt{z^2 - 1}\right), \\
-    w &= \Arctan z = -\frac{i}{2}\Ln\frac{1 + iz}{1 - iz} \quad (z \neq \pm i), \\
-    w &= \Arccot z = \frac{i}{2}\Ln\frac{z - i}{z + i} \quad (z \neq \pm i).
-\end{align*}
-\end{definition}
-
-\textit{Derivation sketch for $\Arcsin z$}: From $z = \sin w = \frac{e^{iw} - e^{-iw}}{2i}$, we obtain $e^{2iw} - 2ize^{iw} - 1 = 0$. Solving this quadratic equation for $e^{iw}$ yields $e^{iw} = iz \pm \sqrt{1 - z^2}$, and taking $\Ln$ gives $w = -i\Ln(iz \pm \sqrt{1 - z^2})$.
+\vspace{0.8em}
 
 % ==================================================
-% Section 2: Limits and Continuity of Complex Functions
+% Section 1: Limits and Continuity of Complex Functions
 % ==================================================
 \section{Limits and Continuity of Complex Functions}
 
@@ -221,21 +171,24 @@ Discuss the continuity of the principal argument function $w = \arg z \in (-\pi,
 \]
 \begin{itemize}
     \item At $z = 0$, $\arg z$ is undefined, so it is discontinuous at the origin.
-    \item Let $z_0 = x_0 < 0$ be any point on the negative real axis. Approaching $x_0$ from the upper half-plane ($\Im z > 0$) versus the lower half-plane ($\Im z < 0$) yields different directional limits:
+    \item Let $z_0 = x_0 < 0$ be any point on the negative real axis. Approaching $x_0$ from the upper half-plane ($\operatorname{Im} z > 0$) versus the lower half-plane ($\operatorname{Im} z < 0$) yields different directional limits:
     \[
-        \lim_{\substack{z \to x_0 \\ \Im z > 0}} \arg z = \pi, \qquad \lim_{\substack{z \to x_0 \\ \Im z < 0}} \arg z = -\pi.
+        \lim_{\substack{z \to x_0 \\ \operatorname{Im} z > 0}} \arg z = \pi, \qquad \lim_{\substack{z \to x_0 \\ \operatorname{Im} z < 0}} \arg z = -\pi.
     \]
     \item Since these limits do not agree, $\lim_{z \to x_0} \arg z$ does not exist, proving that $\arg z$ is discontinuous at every point on the negative real axis.
 \end{itemize}
 \textbf{Conclusion}: $w = \arg z$ is continuous everywhere on the \textbf{slit complex plane} $\mathbb{C} \setminus (-\infty, 0]$ (the complex plane cut along the non-positive real axis).
 \end{example}
 
+% --- Figure 1: Jump Discontinuity of arg z ---
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=1.1]
+\begingroup
+\linespread{1.0}\selectfont
+\begin{tikzpicture}[scale=1.1, >=Stealth]
     % Axes
-    \draw[->] (-3.4, 0) -- (3.4, 0) node[right] {$x$};
-    \draw[->] (0, -1.6) -- (0, 1.6) node[above] {$y$};
+    \draw[->, gray] (-3.4, 0) -- (3.4, 0) node[right, black] {$x$};
+    \draw[->, gray] (0, -1.6) -- (0, 1.6) node[above, black] {$y$};
 
     % Branch cut along negative real axis (-infty, 0]
     \draw[ultra thick, red!75!black] (-3.2, 0) -- (0, 0);
@@ -249,19 +202,20 @@ Discuss the continuity of the principal argument function $w = \arg z \in (-\pi,
 
     % Upper approach
     \draw[->, thick, blue!75!black] (-1.2, 0.9) to[bend right=25] (-1.58, 0.12);
-    \node[blue!75!black, right, font=\small] at (-1.15, 0.85) {$z \to x_0 \, (\Im z > 0) \implies \arg z \to \pi$};
+    \node[blue!75!black, right, font=\small] at (-1.15, 0.85) {$z \to x_0 \, (\operatorname{Im} z > 0) \implies \arg z \to \pi$};
 
     % Lower approach
     \draw[->, thick, teal!75!black] (-1.2, -0.9) to[bend left=25] (-1.58, -0.12);
-    \node[teal!75!black, right, font=\small] at (-1.15, -0.85) {$z \to x_0 \, (\Im z < 0) \implies \arg z \to -\pi$};
+    \node[teal!75!black, right, font=\small] at (-1.15, -0.85) {$z \to x_0 \, (\operatorname{Im} z < 0) \implies \arg z \to -\pi$};
 
     \node[red!75!black, above left, font=\footnotesize] at (-1.9, 0.08) {Branch Cut $(-\infty, 0]$};
 \end{tikzpicture}
 \caption{Jump discontinuity of $\arg z$ across the branch cut $(-\infty, 0]$.}
+\endgroup
 \end{figure}
 
 % ==================================================
-% Section 3: Differentiability and Cauchy-Riemann Conditions
+% Section 2: Differentiability and Cauchy-Riemann Conditions
 % ==================================================
 \section{Differentiability and Cauchy--Riemann Conditions}
 
@@ -286,7 +240,7 @@ Here $A = f'(z_0)$, and the principal linear part $df = A \Delta z = f'(z_0)\Del
 \textbf{Remarks}:
 \begin{itemize}
     \item Because $\Delta z \to 0$ must yield the same limit along \emph{all} paths in $\mathbb{C}$, complex differentiability is far more restrictive than real differentiability.
-    \item If $f(z)$ is differentiable at $z_0$, it is necessarily continuous at $z_0$; the converse is false (e.g., $f(z) = \overline{z}$ and $f(z) = \Im z$ are continuous everywhere but differentiable nowhere; $f(z) = |z|^2$ is differentiable only at $z = 0$).
+    \item If $f(z)$ is differentiable at $z_0$, it is necessarily continuous at $z_0$; the converse is false (e.g., $f(z) = \overline{z}$ and $f(z) = \operatorname{Im} z$ are continuous everywhere but differentiable nowhere; $f(z) = |z|^2$ is differentiable only at $z = 0$).
     \item Standard differentiation rules (linearity, product rule, quotient rule, chain rule, and inverse function rule) hold identically to real calculus.
 \end{itemize}
 
@@ -331,11 +285,14 @@ is independent of how $\Delta z \to 0$:
 Equating the real and imaginary parts of these two expressions yields $u_x = v_y$ and $u_y = -v_x$ at $(x_0, y_0)$.
 \end{proof}
 
+% --- Figure 2: Approach Paths for C-R Equations ---
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=1.15]
-    \draw[->] (-1.6, 0) -- (3.8, 0) node[right] {$x$};
-    \draw[->] (0, -0.6) -- (0, 2.8) node[above] {$y$};
+\begingroup
+\linespread{1.0}\selectfont
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    \draw[->, gray] (-1.6, 0) -- (3.8, 0) node[right, black] {$x$};
+    \draw[->, gray] (0, -0.6) -- (0, 2.8) node[above, black] {$y$};
 
     \coordinate (z0) at (1.2, 0.8);
     \coordinate (z1) at (2.8, 0.8);
@@ -354,6 +311,7 @@ Equating the real and imaginary parts of these two expressions yields $u_x = v_y
     \fill[black] (z) circle (1.5pt) node[above right] {$z = z_0 + \Delta z$};
 \end{tikzpicture}
 \caption{Horizontal and vertical approach paths used to derive the Cauchy--Riemann equations.}
+\endgroup
 \end{figure}
 
 \textit{Remark (Polar Form)}: In polar coordinates $z = re^{i\theta}$, the Cauchy--Riemann equations take the form
@@ -408,13 +366,5 @@ This holds if and only if $u(x, y)$ and $v(x, y)$ are real-differentiable at $(x
 \begin{corollary}[Sufficient Condition for Differentiability]
 If $u(x, y)$ and $v(x, y)$ have \textbf{continuous} first-order partial derivatives at $(x, y)$ and satisfy the Cauchy--Riemann equations there, then $f(z) = u(x, y) + iv(x, y)$ is differentiable at $z = x + iy$.
 \end{corollary}
-
-% ==================================================
-% Assigned Exercises Reference
-% ==================================================
-\section*{Assigned Homework Reference}
-\begin{itemize}
-    \item \textbf{Textbook P.53 (Exercise 2)}: Set A: Problems 1 (even), 2, 3, 4, 13 (even), 15.
-\end{itemize}
 
 \end{document}
